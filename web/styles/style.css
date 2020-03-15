@@ -25,7 +25,7 @@
     color:#727272;
 }
 .infoContatos h3{
-    color: #505050;
+    color: #363C73;
     display: flex;
     font-size: 23px ;
     justify-content: center;
@@ -47,7 +47,18 @@
     margin: 10px 15px 0 0;
     width: 35px;  
 }
-
+.borderForm{
+    border: 3.5px solid #737FF3;
+    border-radius: 12px;
+    bottom: 53px;
+    position: absolute ;
+    height: 468px;
+    width: 350px;
+    right:13px;
+    bottom: 13px;
+    z-index:-1;
+    
+}
 .contatos form{
     background-color: #F0F0F0;
     display: flex;
@@ -55,11 +66,19 @@
     height: 468px;
     width: 350px;
     border-radius: 12px;
-    padding: 15px;
+    padding: 20px;
     margin-left: 25px;
-
+    position: relative;
+    z-index:3;
 }
 
+.textoNegrito{
+    color: #363C73 ;
+    font-weight: 750;
+}
+.textoCinza{
+    color: rgb(136, 136, 136);
+}
 .dadosUsuario{
     display: flex;
     flex-direction: column;
@@ -67,11 +86,14 @@
 .dadosUsuario input{
     background-color: #F0F0F0;
     border: none;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 2px solid #ccc;
     padding:5px; 
+    width: 90%;
 }
+
 #formMsg{
     background-color: #F0F0F0;
+    width: 90%;
 }
 #prefEmail{
     margin-left: 25px;
@@ -85,8 +107,14 @@
     display: flex;
     justify-content: flex-end;
 }
-.containerBtn button{
-width: 80px;
+.containerBtn input{
+    border: 2px solid #737FF3;
+    border-radius: 15px;
+    color: #737FF3;
+    font-weight: 750;
+    width: 80px;
+    margin-right: 30px;
+    padding: 5px;
 
 }
 
