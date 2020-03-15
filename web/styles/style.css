@@ -5,6 +5,49 @@
     padding:0; 
 }
 
+.contatos{
+    display: flex;
+    justify-content: center;
+}
+
+
+.bannerContatos {
+    height: 180px;
+    width: 350px;
+}
+.infoContatos{
+    width: 350px;
+}
+.infoContatos p{
+    color:#727272;
+}
+.infoContatos h3{
+    color: #505050;
+    display: flex;
+    font-size: 23px ;
+    justify-content: center;
+}
+.infoContatos h4{
+    color:#363C73 ;
+    margin-bottom: 25px;
+}
+
+.infoContatos :last-child{
+    display: flex;
+}
+#textoClaro{
+    color: #B6B6B6;
+}
+
+.redesSociais img{
+    height: 35px;
+    margin: 10px 15px 0 0;
+    width: 35px;
+    
+}
+
+
+
 footer {
     align-items: center;
     background-color: #ECECEC;
