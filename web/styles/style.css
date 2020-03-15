@@ -6,8 +6,10 @@
 }
 
 .contatos{
+    align-items: center;
     display: flex;
     justify-content: center;
+    height: 700px;
 }
 
 
@@ -17,6 +19,7 @@
 }
 .infoContatos{
     width: 350px;
+    margin-right: 25px;
 }
 .infoContatos p{
     color:#727272;
@@ -46,11 +49,46 @@
 }
 
 .contatos form{
+    background-color: #F0F0F0;
+    display: flex;
+    flex-direction: column;
+    height: 468px;
+    width: 350px;
+    border-radius: 12px;
+    padding: 15px;
+    margin-left: 25px;
+
+}
+
+.dadosUsuario{
     display: flex;
     flex-direction: column;
 }
+.dadosUsuario input{
+    background-color: #F0F0F0;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    padding:5px; 
+}
+#formMsg{
+    background-color: #F0F0F0;
+}
+#prefEmail{
+    margin-left: 25px;
+}
+.textoForm{
+    display:flex;
+    flex-direction: column;
+}
 
+.containerBtn{
+    display: flex;
+    justify-content: flex-end;
+}
+.containerBtn button{
+width: 80px;
 
+}
 
 footer {
     align-items: center;

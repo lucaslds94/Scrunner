@@ -40,25 +40,31 @@
         </div>
 
         <form action="" method="POST">
-            <p>Nos envie uma mensagem</p><br>
-            <div>
-                <input type="text" name="nome" placeholder="Nome">
-                <input type="email" name="email" placeholder="Email">
-                <input type="tel" name="tel" placeholder="Telefone">
+            
+            <br><p>Nos envie uma mensagem.</p><br>
+            <div class="dadosUsuario">
+                <input type="text" name="nome" placeholder="Nome"><br>
+                <input type="email" name="email" placeholder="Email"><br>
+                <input type="tel" name="tel" placeholder="Telefone"><br>
             </div>
             <div>
-                <p>Preferência de comunicação por:</p>
+                <p>Preferência de comunicação por:</p><br>
                 <input type="radio" name="prefComunic" id="prefTel" value="prefTel">
                 <label for="prefTel">Telefone</label>
                 <input type="radio" name="prefComunic" id="prefEmail" value="prefEmail">
                 <label for="prefEmail">Email</label>
-                <br>
-                <label for="formMsg">Como podemos ajudar?</label>
+                <br><br>
+            </div>
+            <div class="textoForm">
+                <label for="formMsg">Como podemos ajudar?</label><br>
                 <textarea name="" id="formMsg" cols="30" rows="2">
                 </textarea>
             </div>
-
-
+            <br>
+            <div class="containerBtn">
+                <button type="submit">Enviar</button>
+            </div>
+            
         </form>
 
 
