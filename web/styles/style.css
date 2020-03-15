@@ -42,8 +42,12 @@
 .redesSociais img{
     height: 35px;
     margin: 10px 15px 0 0;
-    width: 35px;
-    
+    width: 35px;  
+}
+
+.contatos form{
+    display: flex;
+    flex-direction: column;
 }
 
 
