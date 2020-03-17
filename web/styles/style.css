@@ -5,12 +5,6 @@
     padding:0; 
 }
 
-body{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
 .scrunner{
     display: flex;
     flex: 1;
@@ -18,6 +12,7 @@ body{
     justify-content: center;
     align-items: center;
     align-self: center;
+    text-rendering: optimizeLegibility;
 }
 
 .scrunner>div:first-child{
