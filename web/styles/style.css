@@ -49,6 +49,7 @@
     font-size: 16px;
     color: #505050;
     text-align: left;
+    line-height: 23px;
 }
 
 .informacaoScrunner p:last-child{
@@ -88,6 +89,103 @@
     width: 35%;
     align-self: flex-start;
 }
+
+.metodologias{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    text-rendering: optimizeLegibility;
+    margin-top: 50px;
+}
+
+.metodologias>div:first-child{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.informacaoMetodologias{
+    max-width: 380px;
+    margin-right: -70px;
+}
+
+#quadroScrum{
+    width: 60%;
+    align-self: center;
+    margin-left: 10px;
+}
+
+.informacaoMetodologias>h1{ 
+    color: #505050;
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.informacaoMetodologias>p{
+    font-size: 16px;
+    color: #505050;
+    text-align: left;
+    line-height: 23px;
+}
+
+.containerArtigos{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 950px;
+}
+
+.containerArtigos>h3{
+    color: #505050;
+    font-weight: bold;
+    text-align: left;
+    margin: 30px 0 30px 0;
+}
+
+.artigos{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.artigo{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 450px;
+    margin: 0 100px 5px 0;
+    padding: 20px 20px 20px 20px;
+    border: 3px solid #737FF3;
+}
+
+.artigo:first-child{
+    margin: 0 50px 5px 0;
+}
+
+.artigo>h3{
+    color: #505050;
+    text-align: left;
+    margin: 5px 0 15px 0;
+}
+
+.artigo>p{
+    font-size: 14px;
+    color: #505050;
+}
+
+.artigo>a{
+    text-align: right;
+    align-self: flex-end;
+    font-size: 13px;
+    margin: 10px 0 0 0;
+    color: #328CC1;
+    text-decoration: none;
+}
+
 
 .contatos{
     align-items: center;
