@@ -2,16 +2,20 @@
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
     margin: 0;
-    padding:0; 
+    padding:0;
 }
 
 nav {
     align-items: center;
     background-color:#737FF3;
     display: flex;
+    position: fixed;
+    z-index: 4;
+    width: 100%;
     height: 75px;
     justify-content: space-around;
     font-size: 18px;
+    overflow: hidden;
 }
 
 nav div {
@@ -32,10 +36,13 @@ nav a {
     display: flex;
 }
 
+nav a:hover{
+    color: rgba(46, 3, 87, 0.911);
+}
+
 .logoNav {
     height: 70px;
-    width: auto;
-    margin-right: -20%;  
+    width: auto; 
 }
 
 .logon {
@@ -50,7 +57,54 @@ nav a {
     font-weight: bold;
 }
 
-footer 
+.scrunnerSec1{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    text-rendering: optimizeLegibility;
+    margin-bottom: 30px;
+}
+
+.scrunnerSec1 div:first-child{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#teamSpirit{
+    width: 60%;
+    align-self: center;
+    margin-left: 10px;
+}
+
+.infoScrum{
+    max-width: 380px;
+    margin-right: -70px;
+}
+
+.infoScrum>h1{ 
+    color: #505050;
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.infoScrum>p{
+    font-size: 16px;
+    color: #505050;
+    text-align: left;
+    line-height: 23px;
+}
+
+.infoScrum>p:last-child{
+    font-size: 16px;
+    color: #505050;
+    text-align: left;
+    line-height: 23px;
+}
+
 .scrunner{
     display: flex;
     flex: 1;
@@ -65,7 +119,6 @@ footer
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
 #bannerTrabalho{
@@ -101,6 +154,8 @@ footer
 .informacaoScrunner p:last-child{
     color: #737FF3;
     margin-top: 30px;
+    font-weight: bold;
+    border-radius: 50px;
 }
 
 .containerIcons{
