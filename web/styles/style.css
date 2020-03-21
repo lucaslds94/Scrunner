@@ -242,6 +242,64 @@ footer
     margin: 5px 0 -1px 5px
 }
 
+.sessao4{
+    width: 100%;
+    margin-top: 80px; 
+}
+
+.divSessao4{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.agilSessao4{
+    position: absolute;
+    top: 25%;
+    font-size: 40px;
+    font-weight: bolder;
+    font-family: sans-serif;
+    color: #3a3a3a;
+}
+
+.textoSessao4{
+    position: absolute;
+    top: 42%;
+    height: 40%;
+    width: 35%; 
+    font-size: 1.8em;
+    font-family: sans-serif;
+    text-align: center;
+    color: #3a3a3a;
+}
+
+.divBotaoSessao4{
+    position: absolute;
+    align-self: center;
+    top: 65%;
+    background-color: #303a97;
+    font-weight: bold;
+    border-radius: 50px;
+    height: 60px;
+    width: 190px;
+}
+
+.botaoSessao4{
+    text-align: center;
+    display: flex;
+    padding: 18px;
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+}
+
+
+.imgSessao4{
+    width: 100%;
+    height: 100%;
+}
+
 
 .contatos{
     align-items: center;
