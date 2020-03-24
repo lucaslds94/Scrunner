@@ -5,24 +5,42 @@
     padding:0;
 }
 
+header {
+    background-color:#737FF3;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    top:0;
+    position: sticky;
+    z-index: 111;
+}
+
 nav {
     align-items: center;
     background-color:#737FF3;
     display: flex;
-    position: fixed;
-    z-index: 4;
     width: 100%;
-    height: 75px;
-    justify-content: space-around;
-    font-size: 18px;
+    height: 60px;
+    z-index: 4;
+    justify-content: space-between;
+    font-size: 16px;
     overflow: hidden;
+    max-width: 1024px;
 }
 
 nav div {
-    align-items: center;
+    display:flex;
+    height: 60px;
     justify-content: space-between;
 }
 
+nav li {
+    align-items: center;
+    display: flex;
+    align-content: center;
+}
+    
 nav ul {
     display: flex;
     list-style: none;
@@ -31,8 +49,7 @@ nav ul {
 nav a {
     color: white;
     text-decoration: none;
-    margin: 25px;
-    padding: 15px;
+    padding: 8px 17px;
     display: flex;
 }
 
@@ -41,12 +58,16 @@ nav a:hover{
 }
 
 .logoNav {
-    height: 70px;
+    height: 60px;
     width: auto; 
 }
 
+.loginOpt{
+    display: flex;
+    justify-content: space-around;
+}
+
 .logon {
-    margin-right: 25px;
     background-color: white;
     color: #737ff3;
     font-weight: bold;
@@ -55,6 +76,11 @@ nav a:hover{
 
 .login {
     font-weight: bold;
+}
+
+main {
+    max-width: 1024px;
+    margin: auto;
 }
 
 .scrunnerSec1{
@@ -84,7 +110,7 @@ nav a:hover{
     position: relative;
     z-index: 2;
     flex-direction: column;
-    text-align: center;
+    text-align: left;
     max-width: 380px;
     margin-right: -70px;
 }
@@ -93,6 +119,7 @@ nav a:hover{
     color: #505050;
     font-size: 40px;
     font-weight: bold;
+    text-align: left;
     margin-bottom: 20px;
 }
 
@@ -103,11 +130,18 @@ nav a:hover{
     line-height: 23px;
 }
 
-.infoScrum>p:last-child{
+.infoScrum>button{
+    display: flex;
     font-size: 16px;
-    color: #505050;
-    text-align: left;
+    color:#737ff3;
+    background-color: transparent;
+    font-weight: bold;
+    border: 3px  solid #737ff3;
+    padding: 5px 10px;
+    border-radius: 30px;
+    align-self: flex-start;
     line-height: 23px;
+    cursor: pointer;
 }
 
 .scrunner{
@@ -302,62 +336,69 @@ nav a:hover{
     margin: 5px 0 -1px 5px
 }
 
-.sessao4{
+.sessao4 {
     width: 100%;
-    margin-top: 80px; 
+    margin-top: 80px;
+    height: 400px;
 }
 
-.divSessao4{
+.divSessao4 {
     align-items: center;
     display: flex;
+    height: 400px;
+    flex-direction: column;
     justify-content: center;
-    position: relative;
+    position: static;
 }
 
-.agilSessao4{
+.imgSessao4 {
+    width: 100%;
+    height: 400px;
     position: absolute;
-    top: 25%;
+}
+
+.agilSessao4 {
+    z-index: 1;
+    margin-bottom: 20px;
     font-size: 40px;
     font-weight: bolder;
     font-family: sans-serif;
     color: #3a3a3a;
 }
 
-.textoSessao4{
-    position: absolute;
-    top: 42%;
-    height: 40%;
-    width: 35%; 
+.textoSessao4 {
+    width: 44%;
+    margin-bottom: 20px;
+    z-index: 1;
     font-size: 1.8em;
     font-family: sans-serif;
     text-align: center;
     color: #3a3a3a;
 }
 
-.divBotaoSessao4{
-    position: absolute;
+.divBotaoSessao4 {
+    align-items: center;
     align-self: center;
-    top: 65%;
     background-color: #303a97;
     font-weight: bold;
+    display: flex;
+    z-index: 1;
+    justify-content: center;
     border-radius: 50px;
     height: 60px;
     width: 190px;
 }
 
-.botaoSessao4{
+.botaoSessao4 {
     text-align: center;
     display: flex;
-    padding: 18px;
-    font-size: 20px;
+    font-size: 18px;
     color: white;
     text-decoration: none;
 }
 
-
 .imgSessao4{
     width: 100%;
-    height: 100%;
 }
 
 
@@ -489,26 +530,27 @@ footer {
     height: 90px;
     justify-content: space-around;
 }
+
 footer div {
+    max-width: 1024px;
     align-items: center;
     display: flex;
     justify-content: space-between;
 }
 
-footer ul{
+footer ul {
+    font-size: 14px;
     display: flex;
-    list-style: none;    
+    list-style: none;
 }
 
-footer a{
-    margin: 25px;
+footer a {
     padding: 15px;
     text-decoration: none;
-    color:#505050;
+    color: #505050;
 }
 
-footer p{
-    color:#505050;
-    margin-right: 25px;
-
+footer p {
+    color: #505050;
+    font-size: 14px;
 }
