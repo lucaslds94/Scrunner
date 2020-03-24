@@ -71,11 +71,11 @@ nav a {
     text-decoration: none;
     padding: 8px 17px;
     display: flex;
-    transition: all .4s;
+    transition: all .6s;
 }
 
 nav a:hover{
-    color: rgba(46, 3, 87, 0.911);
+    color: #363C73;
 }
 
 .logoNav {
@@ -452,7 +452,7 @@ main {
 .divBotaoSessao4 {
     align-items: center;
     align-self: center;
-    background-color: #303a97;
+    background-color: #363C73;
     /* font-weight: bold; */
     display: flex;
     z-index: 1;
@@ -471,7 +471,7 @@ main {
 .botaoSessao4 {
     text-align: center;
     display: flex;
-    font-size: 18px;
+    font-size: 16px;
     color: white;
     text-decoration: none;
 }
@@ -608,7 +608,7 @@ main {
     margin-top: 20px;
 }
 .containerBtn input{
-    border: 2px solid #737FF3;
+    border: 3px solid #737FF3;
     border-radius: 36px;
     color: #737FF3;
     font-weight: 750;
@@ -617,6 +617,7 @@ main {
     margin-right: 30px;
     padding: 5px;
     cursor: pointer;
+    font-size: 16px;
     transition: all .4s;
 }
 
