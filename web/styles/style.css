@@ -7,7 +7,7 @@
 
 /* Isso deixa o scroll mais leve */
 html {
-    scroll-behavior: smooth;
+    scroll-behavior: smooth;    
 }
 
 
@@ -81,7 +81,13 @@ nav a:hover{
 .logoNav {
     height: 60px;
     width: auto; 
+
 }
+.linkLogo{
+    display: flex;
+    align-items: center;
+}
+
 
 .loginOpt{
     display: flex;
@@ -128,7 +134,6 @@ main {
     right: -100px;
     width: 820px;
     align-self: center;
-    /* margin-left: 10px; */
 }
 
 .infoScrum{
@@ -211,7 +216,6 @@ main {
 
 .informacaoScrunner{
     max-width: 391px;
-    /* margin-right: 65px; */
 }
 
 
@@ -247,7 +251,6 @@ main {
     width: 950px;
     height: 400px;
     padding-top: 150px;
-    /* margin: 20px 0 0 35px;  */
 }
 
 .containerIcons>div{
@@ -308,7 +311,6 @@ main {
     color: #505050;
     font-size: 40px;
     font-weight: bold;
-    /* margin-bottom: 20px; */
 }
 
 .informacaoMetodologias>p{
@@ -345,9 +347,7 @@ main {
     flex-direction: column;
     justify-content: space-between;
     max-width: 450px;
-    /* margin: 0 100px 5px 0; */
-    padding: 20px 20px 20px 20px;
-    /* border: 3px solid #737FF3; */
+    padding: 20px;
     transition: all .4s;
     position: relative;
     border-radius: 4px;
@@ -453,7 +453,6 @@ main {
     align-items: center;
     align-self: center;
     background-color: #363C73;
-    /* font-weight: bold; */
     display: flex;
     z-index: 1;
     justify-content: center;
@@ -496,9 +495,8 @@ main {
     width: 350px;
 }
 .infoContatos{
-    width: 350px;
-    /* margin-right: 25px; */
     text-align: justify;
+    width: 350px;
 }
 .infoContatos p{
     color:#727272;
@@ -509,16 +507,12 @@ main {
     display: flex;
     font-size: 38px ;
     font-weight: bold;
-    /* justify-content: center; */
 }
 .infoContatos h4{
     color:#363C73 ;
     margin-bottom: 25px;
 }
 
-/* .infoContatos :last-child{
-    display: flex;
-} */
 #textoClaro{
     color: #B6B6B6;
 }
@@ -532,18 +526,15 @@ main {
     height: 35px;
     margin-right: 15px;
     transition: all .4s;
-    /* width: 35px;   */
 }
 
 .redesSociais img:hover {
     transform: scale(1.05);
 }
 
-
 .borderForm{
     border: 3.5px solid #737FF3;
     border-radius: 4px;
-    /* bottom: 53px; */
     position: absolute;
     height: 596px;
     width: 487px;
@@ -561,7 +552,6 @@ main {
     width: 487px;
     border-radius: 4px;
     padding: 20px;
-    /* margin-left: 25px; */
     position: relative;
     z-index:3;
 }
@@ -601,11 +591,14 @@ main {
     flex-direction: column;
     margin-top: 20px;
 }
+.textoForm textarea{
+    resize: none;
+}
 
 .containerBtn{
     display: flex;
     justify-content: flex-end;
-    margin-top: 20px;
+   
 }
 .containerBtn input{
     border: 3px solid #737FF3;
@@ -631,12 +624,13 @@ footer {
     align-items: center;
     background-color: #ECECEC;
     display: flex;
-    height: 90px;
+    height: 60px;
     justify-content: space-around;
 }
 
 .footer-largura {
     width: 1024px;
+    height: 60px;
 }
 footer div {
     
@@ -655,6 +649,11 @@ footer a {
     padding: 15px;
     text-decoration: none;
     color: #505050;
+}
+
+footer a:hover{
+    color: #363C73;
+    font-weight: 800;
 }
 
 footer p {
