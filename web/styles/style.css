@@ -44,7 +44,7 @@ nav {
     height: 60px;
     z-index: 4;
     justify-content: space-between;
-    font-size: 16px;
+    font-size: 1em;
     overflow: hidden;
     max-width: 1200px;
 }
@@ -148,14 +148,14 @@ main {
 
 .infoScrum>h1{ 
     color: #505050;
-    font-size: 44px;
+    font-size: 2.75em;
     font-weight: bold;
     text-align: left;
     margin-bottom: 30px;
 }
 
 .infoScrum>p{
-    font-size: 18px;
+    font-size: 1.12em;
     color: #505050;
     text-align: left;
     line-height: 23px;
@@ -163,7 +163,7 @@ main {
 
 .infoScrum>button{
     display: flex;
-    font-size: 16px;
+    font-size: 1em;
     color:#737ff3;
     background-color: transparent;
     font-weight: bold;
@@ -221,7 +221,7 @@ main {
 
 .informacaoScrunner h1{
     color: #505050;
-    font-size: 44px;
+    font-size: 2.75em;
     font-weight: bold;
 }
 
@@ -231,7 +231,7 @@ main {
 }
 
 .informacaoScrunner p{
-    font-size: 16px;
+    font-size: 1em;
     color: #505050;
     text-align: left;
     line-height: 23px;
@@ -260,14 +260,14 @@ main {
 }
 
 .tituloIcone{
-    font-size: 19px;
+    font-size: 1.18em;
     align-self: flex-start;
     margin: 10px 0 10px 0;
     color: #505050;
 }
 
 .containerIcons div p{
-    font-size: 15px;
+    font-size: 0.93em;
     margin: 0 27px 0 0;
     color: #505050;
     max-width: 170px;
@@ -309,12 +309,12 @@ main {
 
 .informacaoMetodologias>h1{ 
     color: #505050;
-    font-size: 40px;
+    font-size: 2.5em;
     font-weight: bold;
 }
 
 .informacaoMetodologias>p{
-    font-size: 16px;
+    font-size: 1em;
     color: #505050;
     text-align: left;
     margin-top: 30px;
@@ -384,7 +384,7 @@ main {
 }
 
 .artigo>p{
-    font-size: 14px;
+    font-size: 0.87em;
     color: #505050;
 }
 
@@ -397,7 +397,7 @@ main {
 }
 
 .artigo>div>a{
-    font-size: 13px;
+    font-size: 0.81em;
     margin: 10px 0 0 0;
     color: #328CC1;
     text-decoration: none;
@@ -433,7 +433,7 @@ main {
 .agilSessao4 {
     z-index: 1;
     margin-bottom: 20px;
-    font-size: 35px;
+    font-size: 2.18em;
     font-weight: bolder;
     font-family: sans-serif;
     color: #3a3a3a;
@@ -443,7 +443,7 @@ main {
     width: 44%;
     margin-bottom: 20px;
     z-index: 1;
-    font-size: 22px;
+    font-size: 1.37em;
     font-family: sans-serif;
     text-align: center;
     color: #3a3a3a;
@@ -470,7 +470,7 @@ main {
 .botaoSessao4 {
     text-align: center;
     display: flex;
-    font-size: 16px;
+    font-size: 1em;
     color: white;
     text-decoration: none;
 }
@@ -505,7 +505,7 @@ main {
 .infoContatos h3{
     color: #505050;
     display: flex;
-    font-size: 38px ;
+    font-size: 2.37em ;
     font-weight: bold;
 }
 .infoContatos h4{
@@ -559,7 +559,7 @@ main {
 .textoNegrito{
     color: #505050 ;
     font-weight: 750;
-    font-size: 20px;
+    font-size: 1.25em;
 }
 .textoCinza{
     color: rgb(136, 136, 136);
@@ -575,7 +575,7 @@ main {
     border-bottom: 2px solid #ccc;
     padding: 10px 0; 
     width: 90%;
-    font-size: 17px;
+    font-size: 1.06em;
     outline: none;
 }
 
@@ -610,7 +610,7 @@ main {
     margin-right: 30px;
     padding: 5px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1em;
     transition: all .4s;
 }
 
@@ -640,7 +640,7 @@ footer div {
 }
 
 footer ul {
-    font-size: 14px;
+    font-size: 0.87em;
     display: flex;
     list-style: none;
 }
@@ -658,5 +658,5 @@ footer a:hover{
 
 footer p {
     color: #505050;
-    font-size: 14px;
+    font-size: 0.87em;
 }
