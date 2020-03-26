@@ -46,7 +46,7 @@ nav {
     justify-content: space-between;
     font-size: 16px;
     overflow: hidden;
-    max-width: 1024px;
+    max-width: 1200px;
 }
 
 nav div {
@@ -629,7 +629,7 @@ footer {
 }
 
 .footer-largura {
-    width: 1024px;
+    width: 1200px;
     height: 60px;
 }
 footer div {
@@ -646,7 +646,7 @@ footer ul {
 }
 
 footer a {
-    padding: 15px;
+    padding: 0 15px;
     text-decoration: none;
     color: #505050;
 }
