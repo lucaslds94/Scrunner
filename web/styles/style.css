@@ -44,7 +44,7 @@ nav {
     height: 60px;
     z-index: 4;
     justify-content: space-between;
-    font-size: 1em;
+    font-size: 18px;
     overflow: hidden;
     max-width: 1200px;
 }
@@ -59,6 +59,7 @@ nav li {
     align-items: center;
     display: flex;
     align-content: center;
+    transition: all .4s;
 }
     
 nav ul {
@@ -67,15 +68,16 @@ nav ul {
 }
 
 nav a {
-    color: white;
+    color: #ffffff;
     text-decoration: none;
     padding: 8px 17px;
     display: flex;
     transition: all .6s;
 }
 
-nav a:hover{
-    color: #363C73;
+nav li:hover a{
+    font-weight: bold;
+    transform:scale(1.05);
 }
 
 .logoNav {
@@ -87,7 +89,6 @@ nav a:hover{
     display: flex;
     align-items: center;
 }
-
 
 .loginOpt{
     display: flex;
