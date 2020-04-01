@@ -48,6 +48,17 @@ nav {
     overflow: hidden;
     max-width: 1200px;
 }
+#burger {
+    display: none;
+    margin-left: 10px ;
+}
+.line1, .line2, .line3 {
+    width:25px;
+    height:3px;
+    background-color:#F1F1F1;
+    margin: 5px;
+    transition: all 0.3s ease;
+}
 
 nav div {
     display:flex;
@@ -656,6 +667,21 @@ footer p {
 }
 
 @media (max-width:970px) {
+    nav ul{
+        display:none;
+    }
+
+    #burger {
+        display:block;
+    }
+
+    .loginOpt {
+        display:none;
+    }
+
+    main {
+        overflow-x:hidden;
+    }
     .scrunnerSec1 {
         flex-direction: column;
         height:690px;
@@ -667,9 +693,9 @@ footer p {
     }
 
     #teamSpirit {
-        top:255px;
-        right:0;
-        width:665px;
+        top:275px;
+        right:70px;
+        width:80%;
     }
 
     #porqueScrunner{
@@ -684,12 +710,13 @@ footer p {
     .scrunner>div:first-child{
         flex-direction: column-reverse;
         height:100%;
+        max-width: 361px;
     }
 
     #bannerTrabalho{
-        left:130px;
-        top:370px;
-        width:560px;
+        left:-20px;
+        top:400px;
+        width:120%;
     }
 
     .informacaoScrunner {
@@ -701,7 +728,7 @@ footer p {
         height: 870px;
         flex-wrap:wrap;
         padding-top:425px;
-        width:90%;
+        width:100%;
     }
     .containerIcons>div{
         
@@ -728,7 +755,7 @@ footer p {
 
     .metodologias>div:first-child {
         flex-direction: column;
-        margin-top: 70px;
+        margin-top: 120px;
     }
 
     .containerArtigos>h3 {
@@ -741,11 +768,51 @@ footer p {
         width:90%;
     }
     .artigos {
+        height: 345px;
         flex-direction: column;
     }
 
     .artigo:first-child{
         margin: 0 0 30px 0;
     }
+    #quadroScrum {
+        width: 70%;
+    }
+
+    .contatos {
+        flex-direction:column;
+        height:1200px;
+        width:90%;
+    }
+
+    .contatos form {
+        width :90%;
+    }
     
+    .borderForm {
+        height:100%;
+        width:100%;
+    }
+}
+
+@media (max-width:510px) {
+    #teamSpirit {
+        top: 355px;
+        right:20px;
+        width:100%;
+    
+    }
+
+    .scrunnerSec1 {
+        height:620px;
+    }
+
+    #bannerTrabalho {
+        left: 15px;
+    }
+
+    .containerIcons {
+        height:630px;
+        padding-top:200px;
+    }
 }
