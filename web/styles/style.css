@@ -337,7 +337,6 @@ main {
 
 .artigos{
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
 }
 
@@ -474,11 +473,6 @@ main {
     color: white;
     text-decoration: none;
 }
-
-.imgSessao4{
-    width: 100%;
-}
-
 
 .contatos{
     align-items: center;
@@ -673,7 +667,7 @@ footer p {
     }
 
     #teamSpirit {
-        top:215px;
+        top:255px;
         right:0;
         width:665px;
     }
@@ -693,13 +687,18 @@ footer p {
     }
 
     #bannerTrabalho{
-        left:85px;
-        top:290px;
+        left:130px;
+        top:370px;
         width:560px;
     }
 
+    .informacaoScrunner {
+        margin-top:40px;
+    }
+
     .containerIcons{
-        height: 810px;
+        justify-content: center;
+        height: 870px;
         flex-wrap:wrap;
         padding-top:425px;
         width:90%;
@@ -707,7 +706,7 @@ footer p {
     .containerIcons>div{
         
         margin-top:15px;
-        width: calc( (100% - 20px) / 2 );
+        width: calc( (100% - 80px) / 2 );
     }
     
     .containerIcons div p {
@@ -722,4 +721,31 @@ footer p {
     .tituloIcone{ 
         align-self: center;
     }
+
+    .metodologias {
+        height: 1100px;
+    }
+
+    .metodologias>div:first-child {
+        flex-direction: column;
+        margin-top: 70px;
+    }
+
+    .containerArtigos>h3 {
+        text-align:center;
+    }
+
+    .containerArtigos {
+        align-items:center;
+        justify-content: space-between;
+        width:90%;
+    }
+    .artigos {
+        flex-direction: column;
+    }
+
+    .artigo:first-child{
+        margin: 0 0 30px 0;
+    }
+    
 }
