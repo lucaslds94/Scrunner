@@ -755,7 +755,7 @@ footer p {
 
     .metodologias>div:first-child {
         flex-direction: column;
-        margin-top: 120px;
+        margin-top: 350px;
     }
 
     .containerArtigos>h3 {
@@ -779,6 +779,10 @@ footer p {
         width: 70%;
     }
 
+    .sessao4{
+        margin-top: 230px;
+    }
+
     .contatos {
         flex-direction:column;
         height:1200px;
@@ -792,6 +796,13 @@ footer p {
     .borderForm {
         height:100%;
         width:100%;
+    }
+    footer ul {
+        display:none;
+    }
+    
+    footer p {
+        padding-right: 20px;
     }
 }
 
@@ -808,11 +819,11 @@ footer p {
     }
 
     #bannerTrabalho {
-        left: 15px;
+        left: 0px;
     }
 
     .containerIcons {
         height:630px;
-        padding-top:200px;
+        padding-top:390px;
     }
 }
