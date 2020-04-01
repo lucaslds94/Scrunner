@@ -134,17 +134,16 @@ main {
     position: absolute;
     right: -100px;
     width: 820px;
-    align-self: center;
 }
 
 .infoScrum{
     display: flex;
-    position: relative;
     z-index: 2;
     flex-direction: column;
     text-align: left;
     margin-top: -30px;
     max-width: 361px;
+    width:100%;
 }
 
 .infoScrum>h1{ 
@@ -192,7 +191,6 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    align-self: center;
     height: 927px;
     width: 950px;
     padding: 150px 0 0;
@@ -217,6 +215,7 @@ main {
 
 .informacaoScrunner{
     max-width: 391px;
+    z-index:2;
 }
 
 
@@ -660,4 +659,67 @@ footer a:hover{
 footer p {
     color: #505050;
     font-size: 0.87em;
+}
+
+@media (max-width:970px) {
+    .scrunnerSec1 {
+        flex-direction: column;
+        height:690px;
+        width:90%;
+    }
+
+    .infoScrum {
+        margin-top:20px;
+    }
+
+    #teamSpirit {
+        top:215px;
+        right:0;
+        width:665px;
+    }
+
+    #porqueScrunner{
+        width:90%;
+        padding:0;
+    }
+
+    .scrunner{
+        height: 100%;
+    }
+
+    .scrunner>div:first-child{
+        flex-direction: column-reverse;
+        height:100%;
+    }
+
+    #bannerTrabalho{
+        left:85px;
+        top:290px;
+        width:560px;
+    }
+
+    .containerIcons{
+        height: 810px;
+        flex-wrap:wrap;
+        padding-top:425px;
+        width:90%;
+    }
+    .containerIcons>div{
+        
+        margin-top:15px;
+        width: calc( (100% - 20px) / 2 );
+    }
+    
+    .containerIcons div p {
+        margin:0;
+        text-align: center;
+    }
+
+    .icon {
+        align-self: center;
+    }
+
+    .tituloIcone{ 
+        align-self: center;
+    }
 }
