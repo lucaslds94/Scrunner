@@ -44,7 +44,7 @@ nav {
     height: 60px;
     z-index: 4;
     justify-content: space-between;
-    font-size: 18px;
+    font-size: 1.12em;
     overflow: hidden;
     max-width: 1200px;
 }
