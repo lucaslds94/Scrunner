@@ -41,7 +41,7 @@
 }
 
 /* Lado esquerdo do modal */
-.containerLeft {
+.containerRight {
     width: 460px;
     max-width: 460px;
     height: 100%;
@@ -51,7 +51,7 @@
     padding: 40px 50px;
 }
 
-.containerLeft>img{
+.containerRight>img{
     position: absolute;
     top: 0px;
     left: 0px;
@@ -61,17 +61,17 @@
 }
 
 /* Lado direito do modal */
-.containerRight {
+.containerLeft {
     width: 460px;
     max-width: 460px;
     height: 100%;
     border-radius: 0 4px 4px 0;
     position: relative;
     background-color: #fff;
-    padding: 40px 50px;
+    padding: 30px 50px;
 }
 
-.containerRight>img{
+.containerLeft>img{
     position: relative;
     right: 15px;
     width: 20%;
@@ -88,21 +88,22 @@
     font-size: 19px;
 }
 
-.containerRight>h1{
+
+.containerLeft>h1{
     font-size: 20px;
     font-weight: bold;
     color: #505050;
     margin: 20px 0 10px;
 }
 
-.containerRight>h2{
+.containerLeft>h2{
     font-size: 17px;
     font-weight: normal;
-    color: #505050;
-    margin: 10px 0 20px 0;
+    color: #9b9b9b;
+    margin: 5px 0 30px 0;
 }
 
-.containerRight>form{
+.containerLeft>form{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -131,6 +132,29 @@
 .email>input:focus{
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
 }
+
+.nomeEmpresa{
+    font-size: 14px;
+    font-weight: bold;
+    transition: box-shadow 0.3s;
+}
+
+.nomeEmpresa>input{
+    margin: 5px 0 15px;
+    border: 2px solid #ccc;
+    padding: 10px ;
+    border-radius:4px;
+    width: 100%;
+    font-size: 1.06em;
+}
+
+.nomeEmpresa>input:focus{
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
 
 .senha{
     font-size: 14px;
@@ -177,11 +201,18 @@
     justify-content: space-between;
     flex-direction: row;
     align-items: center;
+    margin-top: 15px;
+    margin-bottom: 10px;
 }
 
 .checkBox>div{
     display: flex;
     align-items: center;
+}
+
+.checkBox>div>label>a {
+    text-decoration: none;
+    color: #737FF3;
 }
 
 #manterConec{
@@ -208,6 +239,6 @@
     font-weight: bold;
     color: #fff;
     cursor: pointer;
-    margin-top: 50px;
+    margin-top: 20px;
   }
   
