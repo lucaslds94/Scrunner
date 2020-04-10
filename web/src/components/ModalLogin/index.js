@@ -24,9 +24,9 @@ export default function ModalLogin({ handleModalLogin }) {
         </div>
 
         <div className="containerRight">
-          <a onClick={handleModalLogin} href="#">
+          <button id="closeModal" type="button" onClick={handleModalLogin}>
             <FaTimes size={20} color={"#737FF3"} />
-          </a>
+          </button>
           <img src={logo_roxo} alt="Logo Scrunner" />
           <h1>Bem vindo novamente</h1>
           <h2>Entre usando um email</h2>
@@ -44,10 +44,10 @@ export default function ModalLogin({ handleModalLogin }) {
                 name="password"
                 id="senha"
               />
-              <a onClick={showPassword} id="fotoOlho" href="#">
+              <button type="button" onClick={showPassword} id="fotoOlho">
                 {showPass && <FaEyeSlash size={20} color={"#737FF3"} />}
                 {!showPass && <FaEye size={20} color={"#c3c3c3"} />}
-              </a>
+              </button>
             </div>
             <div className="checkBox">
               <div>
@@ -59,12 +59,14 @@ export default function ModalLogin({ handleModalLogin }) {
                 />
                 <label htmlFor="manterConec">Manter conectado</label>
               </div>
-              <a id="esqSenha" href="#">
+              <button type="button" id="esqSenha">
                 Esqueceu a senha?
-              </a>
+              </button>
             </div>
           </form>
-          <h3 id="btnContinue">Continuar</h3>
+          <button type="submit" id="btnContinue">
+            Continuar
+          </button>
         </div>
       </div>
     </div>

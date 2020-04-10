@@ -71,7 +71,7 @@
   width: 20%;
 }
 
-.containerRight-cadastro-empresa>a{
+.containerRight-cadastro-empresa>button{
   position: absolute;
   right: 15px;
   top: 15px;
@@ -80,6 +80,9 @@
   color: #737FF3;
   font-weight: bold;
   font-size: 19px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
 
 
@@ -168,7 +171,7 @@
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
 }
 
-#fotoOlho{
+#iconOlho{
   display: flex;
   position: absolute;
   justify-content: flex-end;
@@ -177,6 +180,10 @@
   bottom: 45px;
   right: 10px;
   top: 34px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
 }
 
 

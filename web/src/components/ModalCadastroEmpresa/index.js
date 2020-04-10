@@ -7,7 +7,7 @@ import "./styles.css";
 import logo_roxo from "../../assets/logo_roxo_100.png";
 import bannerEscolha from "../../assets/modalEscolha.png";
 
-export default function ModalCadastroEmpresa({handleModalEmpresa}) {
+export default function ModalCadastroEmpresa({ handleModalEmpresa }) {
   const [showPass, setShowPass] = useState(false);
 
   function showPassword() {
@@ -42,10 +42,10 @@ export default function ModalCadastroEmpresa({handleModalEmpresa}) {
                 name="password"
                 id="senha"
               />
-              <a onClick={showPassword} id="fotoOlho" href="#">
+              <button type="button" onClick={showPassword} id="iconOlho">
                 {showPass && <FaEyeSlash size={20} color={"#737FF3"} />}
                 {!showPass && <FaEye size={20} color={"#c3c3c3"} />}
-              </a>
+              </button>
             </div>
             <div className="checkBox">
               <div>
@@ -56,18 +56,19 @@ export default function ModalCadastroEmpresa({handleModalEmpresa}) {
                   id="manterConec"
                 />
                 <label htmlFor="manterConec">
-                  Eu concordo com os <a href="#">Termos e Condições</a>
+                  Eu concordo com os{" "}
+                  <a href="#abrirModalTermos">Termos e Condições</a>
                 </label>
               </div>
             </div>
           </form>
-          <h3 id="btnContinue">Continuar</h3>
+          <button id="btnContinue">Continuar</button>
         </div>
 
         <div className="containerRight-cadastro-empresa">
-          <a onClick={handleModalEmpresa} href="#">
+          <button onClick={handleModalEmpresa} href="#">
             <FaTimes size={20} color={"#737FF3"} />
-          </a>
+          </button>
           <img src={bannerEscolha} alt="Banner Modal Cadastro Empresa" />
         </div>
       </div>

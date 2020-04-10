@@ -69,7 +69,7 @@
   width: 20%;
 }
 
-.containerRight>a{
+#closeModal{
   position: absolute;
   right: 15px;
   top: 15px;
@@ -78,6 +78,9 @@
   color: #737FF3;
   font-weight: bold;
   font-size: 19px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
 
 .containerRight>h1{
@@ -148,13 +151,17 @@
 
 #fotoOlho{
   display: flex;
-  position: absolute;
   justify-content: flex-end;
+  position: absolute;
   height: 20px;
   width: auto;
   bottom: 45px;
   right: 10px;
-  top: 34px;
+  top: 30px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
 }
 
 .checkBox {
@@ -181,6 +188,9 @@
   align-self: flex-end;
   color: #737FF3;
   text-decoration: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
 
 #btnContinue{

@@ -65,6 +65,7 @@ export default function LandingPage() {
       {showModalEmpresa && (
         <ModalCadastroEmpresa handleModalEmpresa={handleModalEmpresa} />
       )}
+      {showModalColaborador && <h2>Modal colaborador aqui</h2>}
       <header>
         <nav>
           <aside id="burger">
@@ -73,9 +74,9 @@ export default function LandingPage() {
             <div className="line3"></div>
           </aside>
           <div>
-            <a className="linkLogo" href="#">
+            <button className="linkLogo">
               <img className="logoNav" src={LogoV2} alt="Logo Scrunner" />
-            </a>
+            </button>
 
             <ul>
               <li>
@@ -94,14 +95,22 @@ export default function LandingPage() {
           </div>
           <ul className="loginOpt">
             <li>
-              <a className="logon" onClick={handleModalEscolha} href="#">
+              <button
+                type="button"
+                className="logon"
+                onClick={handleModalEscolha}
+              >
                 Criar Conta
-              </a>
+              </button>
             </li>
             <li>
-              <a className="login" onClick={handleModalLogin} href="#">
+              <button
+                type="button"
+                className="login"
+                onClick={handleModalLogin}
+              >
                 Logar-se
-              </a>
+              </button>
             </li>
           </ul>
         </nav>
@@ -264,18 +273,20 @@ export default function LandingPage() {
               Mande-nos um email através do formulário ou diretamente para:
               <br />
               <br />
-              <h4>scrunner@contato.com.br</h4>
+              <a id="linkEmail" href="mailto: scrunner@contato.com.br">
+                scrunner@contato.com.br
+              </a>
             </p>
 
             <p id="textoClaro">Nossas redes sociais:</p>
             <div className="redesSociais">
-              <a href="#">
+              <a href="http://facebook.com">
                 <img src={facebook_icon} alt="Logo Facebook" />
               </a>
-              <a href="#">
+              <a href="http://linkedin.com">
                 <img src={linkedin_icon} alt="Logo linkedin" />
               </a>
-              <a href="#">
+              <a href="#http://instagram.com">
                 <img src={instagram_icon} alt="Logo instagram" />
               </a>
             </div>
@@ -337,9 +348,9 @@ export default function LandingPage() {
       <footer>
         <div className="footer-largura">
           <div>
-            <a className="linkLogo" href="#">
+            <button className="linkLogo" href="#">
               <img className="logoNav" src={logo2} alt="Logo Scrunner" />
-            </a>
+            </button>
             <ul>
               <li>
                 <a href="#porqueScrunner">Por que usar Scrunner ?</a>

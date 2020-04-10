@@ -1,18 +1,17 @@
-
 header {
-  background-color:#737FF3;
+  background-color: #737ff3;
   width: 100%;
   height: 60px;
   display: flex;
   justify-content: center;
-  top:0;
+  top: 0;
   position: sticky;
   z-index: 111;
 }
 
 nav {
   align-items: center;
-  background-color:#737FF3;
+  background-color: #737ff3;
   display: flex;
   width: 100%;
   height: 60px;
@@ -24,18 +23,20 @@ nav {
 }
 #burger {
   display: none;
-  margin-left: 10px ;
+  margin-left: 10px;
 }
-.line1, .line2, .line3 {
-  width:25px;
-  height:3px;
-  background-color:#F1F1F1;
+.line1,
+.line2,
+.line3 {
+  width: 25px;
+  height: 3px;
+  background-color: #f1f1f1;
   margin: 5px;
   transition: all 0.3s ease;
 }
 
 nav div {
-  display:flex;
+  display: flex;
   height: 60px;
   justify-content: space-between;
 }
@@ -44,9 +45,9 @@ nav li {
   align-items: center;
   display: flex;
   align-content: center;
-  transition: all .4s;
+  transition: all 0.4s;
 }
-  
+
 nav ul {
   display: flex;
   list-style: none;
@@ -57,25 +58,28 @@ nav a {
   text-decoration: none;
   padding: 19px 17px;
   display: flex;
-  transition: all .6s;
+  transition: all 0.6s;
 }
 
-nav li:hover a{
+nav li:hover a {
   font-weight: bold;
-  transform:scale(1.05);
+  transform: scale(1.05);
 }
 
 .logoNav {
   height: 60px;
-  width: auto; 
-
+  width: auto;
 }
-.linkLogo{
+.linkLogo {
   display: flex;
   align-items: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
 }
 
-.loginOpt{
+.loginOpt {
   display: flex;
   justify-content: space-around;
 }
@@ -85,8 +89,11 @@ nav li:hover a{
   color: #737ff3;
   font-weight: bold;
   border-radius: 50px;
-  transition: all .4s;
+  transition: all 0.4s;
   padding: 8px 17px;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
 }
 
 .logon:hover {
@@ -95,6 +102,10 @@ nav li:hover a{
 
 .login {
   font-weight: bold;
+  color: #fff;
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
 
 main {
@@ -102,7 +113,7 @@ main {
   margin: auto;
 }
 
-.scrunnerSec1{
+.scrunnerSec1 {
   display: flex;
   flex: 1;
   justify-content: left;
@@ -116,23 +127,23 @@ main {
   margin: auto;
 }
 
-#teamSpirit{
+#teamSpirit {
   position: absolute;
   right: -100px;
   width: 820px;
 }
 
-.infoScrum{
+.infoScrum {
   display: flex;
   z-index: 2;
   flex-direction: column;
   text-align: left;
   margin-top: -30px;
   max-width: 361px;
-  width:100%;
+  width: 100%;
 }
 
-.infoScrum>h1{ 
+.infoScrum > h1 {
   color: #505050;
   font-size: 2.75em;
   font-weight: bold;
@@ -140,20 +151,20 @@ main {
   margin-bottom: 30px;
 }
 
-.infoScrum>p{
+.infoScrum > p {
   font-size: 1.12em;
   color: #505050;
   text-align: left;
   line-height: 23px;
 }
 
-.infoScrum>button{
+.infoScrum > button {
   display: flex;
   font-size: 1em;
-  color:#737ff3;
+  color: #737ff3;
   background-color: transparent;
   font-weight: bold;
-  border: 3px  solid #737ff3;
+  border: 3px solid #737ff3;
   width: 155px;
   height: 45px;
   justify-content: center;
@@ -161,17 +172,17 @@ main {
   align-self: flex-start;
   line-height: 23px;
   cursor: pointer;
-  transition: all .4s;
+  transition: all 0.4s;
   margin-bottom: 20px;
 }
 
-.infoScrum>button:hover {
+.infoScrum > button:hover {
   transform: scale(1.05);
   background-color: #737ff3;
-  color: white
+  color: white;
 }
 
-.scrunner{
+.scrunner {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -184,7 +195,7 @@ main {
   text-rendering: optimizeLegibility;
 }
 
-.scrunner>div:first-child{
+.scrunner > div:first-child {
   display: flex;
   justify-content: flex-end;
   width: 100%;
@@ -192,45 +203,44 @@ main {
   align-items: center;
 }
 
-#bannerTrabalho{
+#bannerTrabalho {
   width: 680px;
   align-self: center;
   left: -100px;
   position: absolute;
 }
 
-.informacaoScrunner{
+.informacaoScrunner {
   max-width: 391px;
-  z-index:2;
+  z-index: 2;
 }
 
-
-.informacaoScrunner h1{
+.informacaoScrunner h1 {
   color: #505050;
   font-size: 2.75em;
   font-weight: bold;
 }
 
-.informacaoScrunner h1:nth-child(2){
+.informacaoScrunner h1:nth-child(2) {
   margin-bottom: 30px;
   text-align: left;
 }
 
-.informacaoScrunner p{
+.informacaoScrunner p {
   font-size: 1em;
   color: #505050;
   text-align: left;
   line-height: 23px;
 }
 
-.informacaoScrunner p:last-child{
-  color: #737FF3;
+.informacaoScrunner p:last-child {
+  color: #737ff3;
   margin-top: 30px;
   font-weight: bold;
   border-radius: 50px;
 }
 
-.containerIcons{
+.containerIcons {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -239,32 +249,32 @@ main {
   padding-top: 150px;
 }
 
-.containerIcons>div{
+.containerIcons > div {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.tituloIcone{
+.tituloIcone {
   font-size: 1.18em;
   align-self: flex-start;
   margin: 10px 0 10px 0;
   color: #505050;
 }
 
-.containerIcons div p{
+.containerIcons div p {
   font-size: 0.93em;
   margin: 0 27px 0 0;
   color: #505050;
   max-width: 170px;
 }
 
-.icon{
+.icon {
   width: 35%;
   align-self: flex-start;
 }
 
-.metodologias{
+.metodologias {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -276,30 +286,30 @@ main {
   box-sizing: border-box;
 }
 
-.metodologias>div:first-child{
+.metodologias > div:first-child {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.informacaoMetodologias{
+.informacaoMetodologias {
   max-width: 380px;
   margin-right: -70px;
 }
 
-#quadroScrum{
+#quadroScrum {
   width: 60%;
   align-self: center;
   margin-left: 10px;
 }
 
-.informacaoMetodologias>h1{ 
+.informacaoMetodologias > h1 {
   color: #505050;
   font-size: 2.5em;
   font-weight: bold;
 }
 
-.informacaoMetodologias>p{
+.informacaoMetodologias > p {
   font-size: 1em;
   color: #505050;
   text-align: left;
@@ -307,43 +317,43 @@ main {
   line-height: 23px;
 }
 
-.containerArtigos{
+.containerArtigos {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   max-width: 950px;
 }
 
-.containerArtigos>h3{
+.containerArtigos > h3 {
   color: #505050;
   font-weight: bold;
   text-align: left;
   margin: 30px 0 30px 0;
 }
 
-.artigos{
+.artigos {
   display: flex;
   justify-content: space-between;
 }
 
-.artigo{
+.artigo {
   cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   max-width: 450px;
   padding: 20px;
-  transition: all .4s;
+  transition: all 0.4s;
   position: relative;
   border-radius: 4px;
   height: 170px;
   top: 10px;
   left: 10px;
-  background-color: #F0F0F0;
+  background-color: #f0f0f0;
 }
 
 .artigo-border {
-  border: 3px solid #737FF3;
+  border: 3px solid #737ff3;
   border-radius: 4px;
   position: absolute;
   width: 100%;
@@ -352,28 +362,27 @@ main {
   left: -10px;
 }
 
-
 .artigo:hover {
-  box-shadow: 0px 0px 4px rgba(0,0,0,0.2);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
   transform: scale(1.05);
 }
 
-.artigo:first-child{
+.artigo:first-child {
   margin: 0 50px 5px 0;
 }
 
-.artigo>h3{
+.artigo > h3 {
   color: #505050;
   text-align: left;
   margin: 5px 0 15px 0;
 }
 
-.artigo>p{
+.artigo > p {
   font-size: 0.87em;
   color: #505050;
 }
 
-.artigo>div{
+.artigo > div {
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -381,17 +390,17 @@ main {
   padding: 0 10px 10px 0;
 }
 
-.artigo>div>a{
+.artigo > div > a {
   display: flex;
   font-size: 0.81em;
   margin: 10px 0 0 0;
-  color: #328CC1;
+  color: #328cc1;
   text-decoration: none;
   align-items: center;
   z-index: 1;
 }
 
-.artigo>div svg{
+.artigo > div svg {
   margin-left: 10px;
 }
 
@@ -438,14 +447,14 @@ main {
 .divBotaoSessao4 {
   align-items: center;
   align-self: center;
-  background-color: #363C73;
+  background-color: #363c73;
   display: flex;
   z-index: 1;
   justify-content: center;
   border-radius: 50px;
   height: 45px;
   width: 155px;
-  transition: all .4s;
+  transition: all 0.4s;
 }
 
 .divBotaoSessao4:hover {
@@ -461,7 +470,7 @@ main {
   text-decoration: none;
 }
 
-.contatos{
+.contatos {
   align-items: center;
   display: flex;
   justify-content: space-between;
@@ -470,43 +479,44 @@ main {
   margin: 30px auto 80px;
 }
 
+#linkEmail {
+  color: #363c73;
+  text-decoration: none;
+  margin-bottom: 25px;
+  font-weight: bold;
+}
 
 .bannerContatos {
   height: 180px;
   width: 350px;
 }
-.infoContatos{
+.infoContatos {
   text-align: justify;
   width: 350px;
 }
-.infoContatos p{
-  color:#727272;
+.infoContatos p {
+  color: #727272;
   margin-top: 40px;
 }
-.infoContatos h3{
+.infoContatos h3 {
   color: #505050;
   display: flex;
-  font-size: 2.37em ;
+  font-size: 2.37em;
   font-weight: bold;
 }
-.infoContatos h4{
-  color:#363C73 ;
-  margin-bottom: 25px;
-}
 
-#textoClaro{
-  color: #B6B6B6;
+#textoClaro {
+  color: #b6b6b6;
 }
 
 .redesSociais {
   margin-top: 10px;
 }
 
-
-.redesSociais img{
+.redesSociais img {
   height: 35px;
   margin-right: 15px;
-  transition: all .4s;
+  transition: all 0.4s;
 }
 
 .redesSociais img:hover {
@@ -514,19 +524,18 @@ main {
   opacity: 0.7;
 }
 
-.borderForm{
-  border: 3.5px solid #737FF3;
+.borderForm {
+  border: 3.5px solid #737ff3;
   border-radius: 4px;
   position: absolute;
   height: 596px;
   width: 487px;
-  right:13px;
+  right: 13px;
   bottom: 13px;
-  z-index:-1;
-  
+  z-index: -1;
 }
-.contatos form{
-  background-color: #F0F0F0;
+.contatos form {
+  background-color: #f0f0f0;
   display: flex;
   flex-direction: column;
   margin-top: 70px;
@@ -535,57 +544,56 @@ main {
   border-radius: 4px;
   padding: 20px;
   position: relative;
-  z-index:3;
+  z-index: 3;
 }
 
-.textoNegrito{
-  color: #505050 ;
+.textoNegrito {
+  color: #505050;
   font-weight: 750;
   font-size: 1.25em;
 }
-.textoCinza{
+.textoCinza {
   color: rgb(136, 136, 136);
 }
-.dadosUsuario{
+.dadosUsuario {
   margin: 20px 0 20px;
   display: flex;
   flex-direction: column;
 }
-.dadosUsuario input{
-  background-color: #F0F0F0;
+.dadosUsuario input {
+  background-color: #f0f0f0;
   border: none;
   border-bottom: 2px solid #ccc;
-  padding: 10px 0; 
+  padding: 10px 0;
   width: 90%;
   font-size: 1.06em;
   outline: none;
 }
 
-#formMsg{
-  background-color: #F0F0F0;
+#formMsg {
+  background-color: #f0f0f0;
   width: 90%;
 }
-#prefEmail{
+#prefEmail {
   margin-left: 25px;
 }
-.textoForm{
-  display:flex;
+.textoForm {
+  display: flex;
   flex-direction: column;
   margin-top: 20px;
 }
-.textoForm textarea{
+.textoForm textarea {
   resize: none;
 }
 
-.containerBtn{
+.containerBtn {
   display: flex;
   justify-content: flex-end;
- 
 }
-.containerBtn input{
-  border: 3px solid #737FF3;
+.containerBtn input {
+  border: 3px solid #737ff3;
   border-radius: 36px;
-  color: #737FF3;
+  color: #737ff3;
   font-weight: 750;
   width: 100px;
   height: 40px;
@@ -593,18 +601,18 @@ main {
   padding: 5px;
   cursor: pointer;
   font-size: 1em;
-  transition: all .4s;
+  transition: all 0.4s;
 }
 
-.containerBtn input:hover{
-  background-color: #737FF3;
+.containerBtn input:hover {
+  background-color: #737ff3;
   color: white;
   transform: scale(1.05);
 }
 
 footer {
   align-items: center;
-  background-color: #ECECEC;
+  background-color: #ececec;
   display: flex;
   height: 60px;
   justify-content: space-around;
@@ -615,7 +623,6 @@ footer {
   height: 60px;
 }
 footer div {
-  
   align-items: center;
   display: flex;
   justify-content: space-between;
@@ -633,8 +640,8 @@ footer a {
   color: #505050;
 }
 
-footer a:hover{
-  color: #363C73;
+footer a:hover {
+  color: #363c73;
   font-weight: 800;
 }
 
@@ -643,168 +650,166 @@ footer p {
   font-size: 0.87em;
 }
 
-@media (max-width:970px) {
-  nav ul{
-      display:none;
+@media (max-width: 970px) {
+  nav ul {
+    display: none;
   }
 
   #burger {
-      display:block;
+    display: block;
   }
 
   .loginOpt {
-      display:none;
+    display: none;
   }
 
   main {
-      overflow-x:hidden;
+    overflow-x: hidden;
   }
   .scrunnerSec1 {
-      flex-direction: column;
-      height:690px;
-      width:90%;
+    flex-direction: column;
+    height: 690px;
+    width: 90%;
   }
 
   .infoScrum {
-      margin-top:20px;
+    margin-top: 20px;
   }
 
   #teamSpirit {
-      top:275px;
-      right:70px;
-      width:80%;
+    top: 275px;
+    right: 70px;
+    width: 80%;
   }
 
-  #porqueScrunner{
-      width:90%;
-      padding:0;
+  #porqueScrunner {
+    width: 90%;
+    padding: 0;
   }
 
-  .scrunner{
-      height: 100%;
+  .scrunner {
+    height: 100%;
   }
 
-  .scrunner>div:first-child{
-      flex-direction: column-reverse;
-      height:100%;
-      max-width: 361px;
-  }
-
-  #bannerTrabalho{
-      left:-20px;
-      top:400px;
-      width:120%;
-  }
-
-  .informacaoScrunner {
-      margin-top:40px;
-  }
-
-  .containerIcons{
-      justify-content: center;
-      height: 870px;
-      flex-wrap:wrap;
-      padding-top:425px;
-      width:100%;
-  }
-  .containerIcons>div{
-      
-      margin-top:15px;
-      width: calc( (100% - 80px) / 2 );
-  }
-  
-  .containerIcons div p {
-      margin:0;
-      text-align: center;
-  }
-
-  .icon {
-      align-self: center;
-  }
-
-  .tituloIcone{ 
-      align-self: center;
-  }
-
-  .metodologias {
-      height: 1100px;
-  }
-
-  .metodologias>div:first-child {
-      flex-direction: column;
-      margin-top: 350px;
-  }
-
-  .containerArtigos>h3 {
-      text-align:center;
-  }
-
-  .containerArtigos {
-      align-items:center;
-      justify-content: space-between;
-      width:90%;
-  }
-  .artigos {
-      height: 345px;
-      flex-direction: column;
-  }
-
-  .artigo:first-child{
-      margin: 0 0 30px 0;
-  }
-  #quadroScrum {
-      width: 70%;
-  }
-
-  .sessao4{
-      margin-top: 230px;
-  }
-
-  .contatos {
-      flex-direction:column;
-      height:1200px;
-      width:90%;
-  }
-
-  .contatos form {
-      width :70%;
-  }
-  
-  .borderForm {
-      height:100%;
-      width:100%;
-  }
-  footer ul {
-      display:none;
-  }
-  
-  footer p {
-      padding-right: 20px;
-  }
-}
-
-@media (max-width:510px) {
-  #teamSpirit {
-      top: 355px;
-      right:20px;
-      width:100%;
-  
-  }
-
-  .scrunnerSec1 {
-      height:620px;
+  .scrunner > div:first-child {
+    flex-direction: column-reverse;
+    height: 100%;
+    max-width: 361px;
   }
 
   #bannerTrabalho {
-      left: 0px;
+    left: -20px;
+    top: 400px;
+    width: 120%;
+  }
+
+  .informacaoScrunner {
+    margin-top: 40px;
   }
 
   .containerIcons {
-      height:630px;
-      padding-top:390px;
+    justify-content: center;
+    height: 870px;
+    flex-wrap: wrap;
+    padding-top: 425px;
+    width: 100%;
+  }
+  .containerIcons > div {
+    margin-top: 15px;
+    width: calc((100% - 80px) / 2);
+  }
+
+  .containerIcons div p {
+    margin: 0;
+    text-align: center;
+  }
+
+  .icon {
+    align-self: center;
+  }
+
+  .tituloIcone {
+    align-self: center;
+  }
+
+  .metodologias {
+    height: 1100px;
+  }
+
+  .metodologias > div:first-child {
+    flex-direction: column;
+    margin-top: 350px;
+  }
+
+  .containerArtigos > h3 {
+    text-align: center;
+  }
+
+  .containerArtigos {
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+  }
+  .artigos {
+    height: 345px;
+    flex-direction: column;
+  }
+
+  .artigo:first-child {
+    margin: 0 0 30px 0;
+  }
+  #quadroScrum {
+    width: 70%;
+  }
+
+  .sessao4 {
+    margin-top: 230px;
+  }
+
+  .contatos {
+    flex-direction: column;
+    height: 1200px;
+    width: 90%;
   }
 
   .contatos form {
-      width :90%;
+    width: 70%;
+  }
+
+  .borderForm {
+    height: 100%;
+    width: 100%;
+  }
+  footer ul {
+    display: none;
+  }
+
+  footer p {
+    padding-right: 20px;
+  }
+}
+
+@media (max-width: 510px) {
+  #teamSpirit {
+    top: 355px;
+    right: 20px;
+    width: 100%;
+  }
+
+  .scrunnerSec1 {
+    height: 620px;
+  }
+
+  #bannerTrabalho {
+    left: 0px;
+  }
+
+  .containerIcons {
+    height: 630px;
+    padding-top: 390px;
+  }
+
+  .contatos form {
+    width: 90%;
   }
 }

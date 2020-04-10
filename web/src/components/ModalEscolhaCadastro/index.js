@@ -9,7 +9,10 @@ import bannerEscolha from "../../assets/modalEscolha.png";
 import empresa_icon from "../../assets/empresa_icon.png";
 import colaborador_icon from "../../assets/colaborador_icon.png";
 
-export default function ModalEscolhaCadastro({ handleModalEscolha, handleSubmited }) {
+export default function ModalEscolhaCadastro({
+  handleModalEscolha,
+  handleSubmited,
+}) {
   const [empresa, setEmpresa] = useState(false);
   const [colaborador, setColaborador] = useState(false);
 
@@ -21,13 +24,13 @@ export default function ModalEscolhaCadastro({ handleModalEscolha, handleSubmite
       setColaborador(true);
       setEmpresa(false);
     }
-  }
+  };
 
   const handleSubmit = () => {
-    if(empresa){
-      handleSubmited('empresa');
-    }else{
-      handleSubmited('colaborador');
+    if (empresa) {
+      handleSubmited("empresa");
+    } else {
+      handleSubmited("colaborador");
     }
   };
 
@@ -42,7 +45,10 @@ export default function ModalEscolhaCadastro({ handleModalEscolha, handleSubmite
           <h5>Escolha o seu perfil</h5>
 
           <div className="containerOptions">
-            <div className={`empresa ${empresa && 'selected'}`} onClick={() => selectOption(`empresa`)}>
+            <div
+              className={`empresa ${empresa && "selected"}`}
+              onClick={() => selectOption(`empresa`)}
+            >
               <img src={empresa_icon} alt="Empresa icon" />
               <div className="description">
                 <h3>Sou uma empresa</h3>
@@ -53,7 +59,7 @@ export default function ModalEscolhaCadastro({ handleModalEscolha, handleSubmite
             </div>
 
             <div
-              className={`colaborador ${colaborador && 'selected'}`}
+              className={`colaborador ${colaborador && "selected"}`}
               onClick={() => selectOption(`colaborador`)}
             >
               <img src={colaborador_icon} alt="Colaborador icon" />
@@ -74,9 +80,9 @@ export default function ModalEscolhaCadastro({ handleModalEscolha, handleSubmite
 
         <div className="containerRight-escolha">
           <img src={bannerEscolha} alt="Banner modal" />
-          <a onClick={handleModalEscolha} href="#">
+          <button type="button" onClick={handleModalEscolha}>
             <FaTimes size={20} color={"#737FF3"} />
-          </a>
+          </button>
         </div>
       </div>
     </div>

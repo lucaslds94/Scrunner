@@ -121,7 +121,7 @@
   height: 100%;
 }
 
-.containerRight-escolha a {
+.containerRight-escolha>button{
   position: absolute;
   right: 15px;
   top: 15px;
@@ -130,6 +130,9 @@
   color: #737FF3;
   font-weight: bold;
   font-size: 19px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
 
 #btnContinue{
