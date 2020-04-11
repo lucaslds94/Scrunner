@@ -106,6 +106,7 @@ nav li:hover a {
   border: none;
   background: transparent;
   cursor: pointer;
+  margin-right: 10px;
 }
 
 main {
@@ -129,7 +130,7 @@ main {
 
 #teamSpirit {
   position: absolute;
-  right: -100px;
+  left: 155px;
   width: 820px;
 }
 
