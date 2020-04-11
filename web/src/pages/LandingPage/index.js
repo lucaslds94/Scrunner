@@ -89,7 +89,7 @@ export default function LandingPage() {
                 <a href="#metodologias">Metodologias Ágeis</a>
               </li>
               <li>
-                <a href="#contato">Contato</a>
+                <a href="#contato">Contatos</a>
               </li>
             </ul>
           </div>
@@ -100,7 +100,7 @@ export default function LandingPage() {
                 className="logon"
                 onClick={handleModalEscolha}
               >
-                Criar Conta
+                Cadastrar-se
               </button>
             </li>
             <li>
@@ -109,7 +109,7 @@ export default function LandingPage() {
                 className="login"
                 onClick={handleModalLogin}
               >
-                Logar-se
+                Fazer Login
               </button>
             </li>
           </ul>

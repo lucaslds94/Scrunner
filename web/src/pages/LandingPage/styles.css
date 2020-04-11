@@ -54,16 +54,27 @@ nav ul {
 }
 
 nav a {
-  color: #ffffff;
+  color: #FFF;
   text-decoration: none;
   padding: 19px 17px;
-  display: flex;
-  transition: all 0.6s;
+  display: inline-block;
 }
 
-nav li:hover a {
-  font-weight: bold;
-  transform: scale(1.05);
+nav li a::after {
+  content: '';
+  display:flex;
+  width:0;
+  height:2.2px;
+  background:#FFF;
+  transition:width .3s;
+}
+nav li a:hover::after {
+  width:100%;
+  transition: width .3s;
+
+}
+nav li a:hover {
+  font-weight: 500;
 }
 
 .logoNav {
@@ -97,7 +108,8 @@ nav li:hover a {
 }
 
 .logon:hover {
-  transform: scale(1.02);
+  background-color:rgb(76, 86, 179);
+  color:#FFF;
 }
 
 .login {
@@ -106,12 +118,19 @@ nav li:hover a {
   border: none;
   background: transparent;
   cursor: pointer;
-  margin-right: 10px;
+  padding: 8px 17px;
+  transition: all 0.4s;
 }
+.login:hover {
+  border-radius: 50px;
+  background-color:rgb(76, 86, 179);
+}
+
 
 main {
   max-width: 1024px;
   margin: auto;
+  overflow-x: hidden;
 }
 
 .scrunnerSec1 {
@@ -130,7 +149,7 @@ main {
 
 #teamSpirit {
   position: absolute;
-  left: 155px;
+  left: 220px;
   width: 820px;
 }
 
@@ -679,7 +698,7 @@ footer p {
 
   #teamSpirit {
     top: 275px;
-    right: 70px;
+    left: 70px;
     width: 80%;
   }
 
@@ -792,9 +811,9 @@ footer p {
 
 @media (max-width: 510px) {
   #teamSpirit {
-    top: 355px;
-    right: 20px;
-    width: 100%;
+    top: 305px;
+    left: -10px;
+    width: 110%;
   }
 
   .scrunnerSec1 {

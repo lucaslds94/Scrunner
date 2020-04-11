@@ -1,5 +1,4 @@
 
-/*  Div que contem o Fade e o container do modal */
 .modal-cadastro-empresa {
   height: 100%;
   width: 100%;
@@ -11,7 +10,6 @@
   z-index: 11;
 }
 
-/* Background com certa transparência */
 .modalFade-cadastro-empresa {
   position: fixed;
   width: 100%;
@@ -20,7 +18,6 @@
   z-index: 10;
 }
 
-/* Container do modal */
 .modalContainer-cadastro-empresa {
   width: 70%;
   max-width: 920px;
@@ -33,11 +30,9 @@
   display: flex; 
   justify-content: center;
   align-items: center;
-  position: absolut;
-  top:0;
+  position: relative;
 }
 
-/* Lado esquerdo do modal */
 .containerRight-cadastro-empresa {
   width: 460px;
   max-width: 460px;
@@ -57,7 +52,6 @@
   border-radius: 4px 0 0 4px;
 }
 
-/* Lado direito do modal */
 .containerLeft-cadastro-empresa {
   width: 460px;
   max-width: 460px;
