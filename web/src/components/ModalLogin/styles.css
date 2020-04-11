@@ -1,10 +1,12 @@
 .modal {
   height: 100vh;
   width: 100%;
-  position: relative;
+  position: fixed;
+  top:0;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 11;
 }
 
 /* Background com certa transparência */
@@ -12,13 +14,13 @@
   position: fixed;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0, 0.8);
-  z-index: 0;
+  background-color: rgba(0,0,0, 0.5);
+  z-index: 10;
 }
 
 /* Container do modal */
 .modalContainer {
-  width: 920px;
+  width: 70%;
   max-width: 920px;
   height: 580px;
 

@@ -6,7 +6,7 @@ header {
   justify-content: center;
   top: 0;
   position: sticky;
-  z-index: 111;
+  z-index: 10;
 }
 
 nav {
