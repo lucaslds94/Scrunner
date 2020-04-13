@@ -1,0 +1,35 @@
+.graph-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 370px;
+  height: 380px;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.17);
+  border-radius: 20px;
+  margin: 10px;
+  padding: 20px;
+}
+
+.graph-title{
+  font-size: 22px;
+  align-self: flex-start;
+  color: #595959;
+  margin: 0;
+  padding: 0;
+}
+
+.graph{
+  width: 320px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.graph-description{
+  font-size: 17px;
+  text-align: center;
+  color: #737FF3;
+  padding: 0 40px 0 40px;
+}
