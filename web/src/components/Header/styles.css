@@ -1,0 +1,28 @@
+.dashboardHeader {
+  background-color: #F8F8F8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 90px;
+  width: 100%;
+  position: fixed;
+  z-index: 2;
+  
+}
+
+.logoContainer {
+  display:flex;
+  align-items: center;
+}
+
+.logoContainer img {
+  height:40px;
+}
+
+.logoContainer span {
+  color: #737FF3;
+  font-size: 20px;
+  font-weight: 500;
+  margin-left: 10px;
+}

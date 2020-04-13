@@ -1,0 +1,15 @@
+.dashboardLider {
+  background-color: #F8F8F8;
+  height: 100vh;
+  width: 100vw;
+}
+
+.mainContainer {
+  background-color: #F8F8F8;
+  position: absolute;
+  max-width: 1096px;
+  width: calc(100% - 344px);
+  height: calc(100% - 124px);
+  left: 232px;
+  top: 124px;
+}

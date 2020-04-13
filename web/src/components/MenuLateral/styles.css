@@ -1,0 +1,55 @@
+.menuLateral {
+  position: fixed;
+  width: 130px;
+  height: 100vh;
+  left: 0px;
+  top: 91px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  z-index: 2;
+
+  background: #737FF3;
+  box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.08);
+  border-radius: 0px 50px 0px 0px;
+}
+
+.btnMenuLateral:first-child {
+  margin-top: 50px;
+}
+
+.btnMenuLateral {
+  border: none;
+  background: none;
+  color: #FFF;
+  cursor: pointer;
+  width: 100%;
+  height: 50px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19px;
+  transition: all .2s;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.iconMenuLateral {
+  width: 25px;
+  color: #FFF;
+  margin-right: 10px;
+}
+
+.btnMenuLateral:hover {
+  background-color: #FFF;
+  color: #737FF3;
+}
+
+.btnMenuLateral:hover .iconMenuLateral {
+  color: #737FF3;
+}
+
+
