@@ -42,7 +42,7 @@ export default function BurndownGraph({
         align: "left",
         style: {
           fontSize: 20,
-          color: "#595959",
+          color: "#505050",
         },
       },
       grid: {

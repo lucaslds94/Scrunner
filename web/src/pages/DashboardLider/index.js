@@ -9,6 +9,7 @@ import SelectReport from "../../components/SelectReport";
 import BurndownGraph from "../../components/BurndownGraph";
 
 import UsersList from "../../components/UsersList";
+import RoundGraph from "../../components/RoundGraph";
 
 import "./styles.css";
 
@@ -81,7 +82,7 @@ export default function DashboardLider() {
               buttonText="Cadastrados na plataforma"
             />
             <CardInformation
-              cardTitle="Foram completados"
+              cardTitle="Foram completadas"
               subTitle="Tarefas"
               number={21}
               buttonText="Somando todos os times"
@@ -103,7 +104,14 @@ export default function DashboardLider() {
             complete={ReportComplete}
           />
         </div>
-        <UsersList/>
+        <div className="colab-area">
+          <UsersList />
+          <RoundGraph
+            title="Dailys"
+            description="dos colaboradores estão registrando suas Dailys"
+            complete={67}
+          />
+        </div>
       </Container>
     </div>
   );

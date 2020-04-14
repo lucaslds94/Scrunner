@@ -57,7 +57,7 @@ export default function RoundGraph({
           options={OPTIONS_GRAPH.options}
           series={OPTIONS_GRAPH.series}
           type="radialBar"
-          width={325}
+          width={300}
         />
       </div>
       <p className="graph-description">{description}</p>
