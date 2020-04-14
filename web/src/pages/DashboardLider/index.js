@@ -8,6 +8,8 @@ import CardInformation from "../../components/CardInformation";
 import SelectReport from "../../components/SelectReport";
 import BurndownGraph from "../../components/BurndownGraph";
 
+import UsersList from "../../components/UsersList";
+
 import "./styles.css";
 
 export default function DashboardLider() {
@@ -101,6 +103,7 @@ export default function DashboardLider() {
             complete={ReportComplete}
           />
         </div>
+        <UsersList/>
       </Container>
     </div>
   );
