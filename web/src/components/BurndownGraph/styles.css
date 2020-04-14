@@ -1,0 +1,19 @@
+.burndown-area{
+  width: calc((100% - 30px) / 1.5);
+  height: 340px;
+  background: #ffffff;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.11);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  margin: 30px auto 30px;
+}
+
+.burndown-graph{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
