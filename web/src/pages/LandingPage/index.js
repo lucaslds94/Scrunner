@@ -7,6 +7,8 @@ import { FaAngleRight } from "react-icons/fa";
 import ModalLogin from "../../components/ModalLogin";
 import ModalEscolhaCadastro from "../../components/ModalEscolhaCadastro";
 import ModalCadastroEmpresa from "../../components/ModalCadastroEmpresa";
+import ModalCodigoColaborador from "../../components/ModalCodigoColaborador";
+import ModalCadastroColaborador from "../../components/ModalCadastroColaborador";
 
 import LogoV2 from "../../assets/Logo_v2.png";
 import logo2 from "../../assets/logo2.png";
@@ -30,6 +32,7 @@ export default function LandingPage() {
   const [showModalEscolha, setShowModalEscolha] = useState(false);
   const [showModalEmpresa, setShowModalEmpresa] = useState(false);
   const [showModalColaborador, setShowModalColaborador] = useState(false);
+  const [showModalCodigo, setShowModalCodigo] = useState(false);
 
   const handleModalLogin = () => {
     setShowModalLogin(!showModalLogin);
@@ -45,7 +48,7 @@ export default function LandingPage() {
     if (op === "empresa") {
       setShowModalEmpresa(true);
     } else {
-      setShowModalColaborador(true);
+      setShowModalCodigo(true);
     }
   };
 
@@ -53,6 +56,18 @@ export default function LandingPage() {
     setShowModalEmpresa(false);
   };
 
+  const handleModalCodigo = () => {
+    setShowModalCodigo(false);
+  }
+
+  const handleModalCodigoContinue = () => {
+    setShowModalCodigo(false);
+    setShowModalColaborador(true);
+  }
+
+  const handleModalColaborador = () => {
+    setShowModalColaborador(false);
+  }
   return (
     <>
       {showModalLogin && <ModalLogin handleModalLogin={handleModalLogin} />}
@@ -65,7 +80,12 @@ export default function LandingPage() {
       {showModalEmpresa && (
         <ModalCadastroEmpresa handleModalEmpresa={handleModalEmpresa} />
       )}
-      {showModalColaborador && <h2>Modal colaborador aqui</h2>}
+      {showModalCodigo && (
+        <ModalCodigoColaborador handleModalCodigo={handleModalCodigo} handleModalCodigoContinue={handleModalCodigoContinue} />
+      )}
+      {showModalColaborador && (
+        <ModalCadastroColaborador handleModalColaborador={handleModalColaborador} />
+      )}
       <header>
         <nav>
           <aside id="burger">

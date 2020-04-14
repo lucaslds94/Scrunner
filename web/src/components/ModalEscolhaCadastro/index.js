@@ -12,7 +12,9 @@ import colaborador_icon from "../../assets/colaborador_icon.png";
 export default function ModalEscolhaCadastro({
   handleModalEscolha,
   handleSubmited,
-}) {
+}) 
+
+{
   const [empresa, setEmpresa] = useState(false);
   const [colaborador, setColaborador] = useState(false);
 
