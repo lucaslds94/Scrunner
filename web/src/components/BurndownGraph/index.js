@@ -42,7 +42,9 @@ export default function BurndownGraph({
         align: "left",
         style: {
           fontSize: 20,
-          color: "#505050",
+          color: "#595959",
+          fontFamily: "Roboto",
+          fontWeight: "bold",
         },
       },
       grid: {
@@ -57,11 +59,17 @@ export default function BurndownGraph({
           text: "Tempo",
           style: {
             fontSize: 17,
+            fontFamily: "Roboto",
+            color: "#595959",
+            fontWeight: "bold",
           },
         },
         labels: {
           style: {
             fontSize: 14,
+            fontFamily: "Roboto",
+            color: "#595959",
+            fontWeight: "bold",
           },
         },
       },
@@ -70,11 +78,17 @@ export default function BurndownGraph({
           text: "Demanda",
           style: {
             fontSize: 16,
+            fontFamily: "Roboto",
+            color: "#595959",
+            fontWeight: "bold",
           },
         },
         labels: {
           style: {
             fontSize: 14,
+            fontFamily: "Roboto",
+            color: "#595959",
+            fontWeight: "bold",
           },
         },
       },
