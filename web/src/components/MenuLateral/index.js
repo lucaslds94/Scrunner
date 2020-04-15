@@ -6,9 +6,10 @@ import { TiGroup } from "react-icons/ti";
 import './styles.css';
 
 export default function MenuLateral() {
+
   return (
     <aside className="menuLateral">
-    <button className ="btnMenuLateral">
+    <button className ="btnMenuLateral" to>
       < FaHome className="iconMenuLateral" size= {22}/>Início
     </button>
     <button className ="btnMenuLateral">

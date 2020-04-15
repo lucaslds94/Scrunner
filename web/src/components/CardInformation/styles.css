@@ -1,20 +1,21 @@
 .card{
-  margin-right: 10px;
+  /* margin-right: 10px; */
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  width: calc((100% - 30px) / 3);
-  padding: 18px;
+  /* width: calc((100% - 30px) / 3); */
+  width: 350px;
+  padding: 20px 25px;
   border-radius: 10px;
   background: linear-gradient(90deg, #B1B9FF 0%, #9EA8FF 0.01%, #737FF3 100%);
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.10);
   transition: all 0.2s ease-in-out;
   cursor: pointer;
 }
-
+/* 
 .card + .card{
   margin: 10px;
-}
+} */
 
 .card:hover{
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
@@ -28,27 +29,27 @@
   align-items: flex-start;
 }
 
-.card-title{
-  font-size: 17px;
-  font-weight: bold;
+.card-information p:last-of-type {
+  margin: 5px 0;
+  font-size: 18px;
+  font-weight: 500;
   color: #fff;
 }
 
-.card-information p {
-  font-size: 16px;
-  font-weight: bold;
+.card-title{
+  font-size: 17px;
+  font-weight: 500 !important;
   color: #fff;
 }
 
 .card-information strong {
-  font-size: 23px;
+  font-size: 32px;
 }
 
 .card-information button {
   border: none;
   background: transparent;
   font-size: 13px;
-  margin-top: 10px;
   cursor: pointer;
   color: #E4E4E4;
 }

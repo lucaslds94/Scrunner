@@ -9,4 +9,5 @@
    max-width: 1096px;
    width: 100%;
    margin: auto;
+   /* padding: 0 10px; ->> colocar isso só no responsivo :) */
 }

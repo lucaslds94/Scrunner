@@ -1,6 +1,6 @@
 import React from "react";
 
-import { FaUserFriends, FaCrown } from "react-icons/fa";
+import { FaUsers , FaCrown } from "react-icons/fa";
 
 import "./styles.css";
 
@@ -23,7 +23,7 @@ export default function CardInformation({
       {crown ? (
         <FaCrown size={25} color={"#fff"} />
       ) : (
-        <FaUserFriends size={25} color={"#fff"} />
+        <FaUsers size={25} color={"#fff"} />
       )}
     </div>
   );
