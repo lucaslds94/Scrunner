@@ -1,7 +1,8 @@
 .container-component {
   background-color: #F8F8F8;
   max-width: 1096px;
-  width: 100%;
+  width: calc(100% - 300px);
   margin: 0 auto;
   overflow: hidden;
 }
+

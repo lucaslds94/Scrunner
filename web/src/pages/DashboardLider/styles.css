@@ -40,3 +40,32 @@
   justify-content: space-between;
   margin-bottom: 20px;
 }
+
+@media(max-width:1300px) {
+  .burndown-area {
+    margin-left: 20px;
+    width: 70%;
+  }
+}
+
+@media(max-width: 1220px) {
+  .container-report {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .report {
+    width: 80%;
+    margin: 20px;
+  }
+
+  .burndown-area{
+    width: 95%;
+  }
+
+  .graph-description {
+    font-size: 15px;
+    padding: 0;
+  }
+}

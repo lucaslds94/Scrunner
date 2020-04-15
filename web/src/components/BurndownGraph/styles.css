@@ -17,3 +17,11 @@
   justify-content: center;
   align-items: center;
 }
+
+.apexcharts-menu-icon {
+  position: absolute;
+  right:35px;
+  top:0;
+  ;
+}
+
