@@ -22,28 +22,6 @@
     background: #E4E4E4;
   }
 
-.action-button {
-    width: 145px;
-    height: 40px;
-    border-radius: 25px;
-    background: linear-gradient( to right, #9EA8FF, #737FF3);
-    border: none;
-    outline: none;
-    color: white;
-    font-size: 16px;
-    display: flex;
-    padding: 0 22px;
-    box-sizing: border-box;
-    justify-content: space-around;
-    align-items: center;
-    transition: transform .3s;
-    cursor: pointer;
-}
-
-.action-button:hover {
-    transform: scale(1.05);
-}
-
 .container-teams {
     padding: 5px 0;
     width: 100%;

@@ -4,6 +4,7 @@ import Header from "../../components/Header";
 import MenuLaretal from "../../components/MenuLateral";
 import Container from "../../components/Container";
 import CardTeam from "../../components/CardTeam";
+import ButtonAction from "../../components/ButtonAction"
 
 import { FaPlus } from 'react-icons/fa'
 
@@ -18,7 +19,11 @@ export default function TimesLider() {
             <Container>
                 <div className="container-title">
                     <h1> Times </h1>
-                    <button className="action-button"> <FaPlus/> Criar Time </button>
+
+                    <ButtonAction 
+                        ButtonText="Criar Time" 
+                        ButtonIcon={FaPlus} />
+                    
                 </div>
                 <div className="teams-divider"></div>
 
@@ -30,6 +35,7 @@ export default function TimesLider() {
                         teamCode="E98H36"
                         teamMembers={ ["Ana Fonseca", "José Afonso", "Mais alguem3", "Mais alguem4", "Mais alguem5"] }
                     />
+                    <CardTeam />
                     <CardTeam />
                     
                     
