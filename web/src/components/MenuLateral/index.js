@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 import { FaHome, } from "react-icons/fa";
 import { TiGroup } from "react-icons/ti";
@@ -9,12 +10,12 @@ export default function MenuLateral() {
 
   return (
     <aside className="menuLateral">
-    <button className ="btnMenuLateral" to>
-      < FaHome className="iconMenuLateral" size= {22}/>Início
-    </button>
-    <button className ="btnMenuLateral">
-      < TiGroup className="iconMenuLateral" size= {22}/>Times
-    </button>
+    <Link to="/lider/dashboard" className="btnMenuLateral">
+      <FaHome className="iconMenuLateral" size= {22}/>Início
+    </Link >
+    <Link to="/lider/times" className ="btnMenuLateral">
+      <TiGroup className="iconMenuLateral" size= {22}/>Times
+    </Link>
     </aside>
   );
 };
