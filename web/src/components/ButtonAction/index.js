@@ -6,12 +6,13 @@ import './styles.css';
 
 export default function ButtonAction({
     ButtonText = "None",
-    ButtonIcon = FaPlus 
+    ButtonIcon = FaPlus,
+    onClick 
 }) {
 
     return (
         <div>
-            <button className="action-button"> 
+            <button onClick={onClick} className="action-button"> 
                 <ButtonIcon /> 
                 <span> {ButtonText} </span>
             </button>

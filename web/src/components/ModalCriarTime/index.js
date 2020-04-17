@@ -3,14 +3,14 @@ import { FaTimes } from "react-icons/fa";
 import "./styles.css";
 
 
-export default function ModalLogin({ handleModalLogin }) {
+export default function ModalCriarTime({ handleModalCreate }) {
 
   return (
-    <div className="modal">
-      <div className="modalFade"></div>
-      <div className="modalContainer">
-        <div className="containerCenter">
-          <button id="closeModal" type="button" onClick={handleModalLogin}>
+    <div className="modal-createTime">
+      <div className="modalFade-createTime"></div>
+      <div className="modalContainer-createTime">
+        <div className="containerCenter-createTime">
+          <button id="closeModal" type="button" onClick={handleModalCreate}>
             <FaTimes size={20} color={"#737FF3"} />
           </button>
           <h1>Novo Time</h1>
