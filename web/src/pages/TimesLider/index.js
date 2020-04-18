@@ -37,7 +37,7 @@ export default function TimesLider() {
           <div className="container-teams">
             <CardTeam
               teamName="Alpha"
-              teamCategory="Desenvolvimento"
+              teamCategory="Development"
               teamCode="E98H36"
               teamMembers={[
                 { id: 1, nome: "Ana Fonseca" },

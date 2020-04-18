@@ -1,3 +1,7 @@
+.cardTeam-link {
+    text-decoration: none;
+}
+
 .cardTeam-container{
     width: 350px;
     height: 420px;
@@ -11,7 +15,9 @@
 }
 
 .cardTeam-container:hover {
-    transform: scale(1.008);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
+    transform: scale(0.98);
+    opacity: 0.9;
 }
 
 .cardTeam-container h2 {
