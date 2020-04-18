@@ -42,8 +42,8 @@ export default function TimesLider() {
               teamMembers={[
                 { id: 1, nome: "Ana Fonseca" },
                 { id: 2, nome: "José Afonso" },
-                { id: 3, nome: "Lucas Lima" },
-                { id: 4, nome: "Lucas Lima" },
+                { id: 3, nome: "Lucas" },
+                { id: 4, nome: "Lucas" },
               ]}
             />
             <CardTeam />

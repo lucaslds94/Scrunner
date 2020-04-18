@@ -1,8 +1,8 @@
-.modal-createTime{
+.modal-configTime {
   height: 100vh;
   width: 100%;
   position: fixed;
-  top:0;
+  top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,30 +10,30 @@
 }
 
 /* Background com certa transparência */
-.modalFade-createTime {
+.modalFade-configTime {
   position: fixed;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 10;
 }
 
 /* Container do modal */
-.modalContainer-createTime {
+.modalContainer-configTime {
   width: 30%;
   max-width: 490px;
-  height: 490px;
+  height: 520px;
   background-color: white;
   z-index: 10;
   border-radius: 4px;
-  display: flex; 
+  display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
 }
 
 /* Lado direito do modal */
-.containerCenter-createTime {
+.containerCenter-configTime {
   width: 460px;
   max-width: 460px;
   height: 100%;
@@ -43,67 +43,57 @@
   padding: 40px 40px;
 }
 
-.containerCenter-createTime>img{
-  position: relative;
-  right: 15px;
-  width: 20%;
-}
-
-#closeModal{
+#closeModal {
   position: absolute;
   right: 50px;
   top: 45px;
   z-index: 1;
   text-decoration: none;
-  color: #737FF3;
+  color: #737ff3;
   font-weight: bold;
   font-size: 19px;
   border: none;
   background: transparent;
   cursor: pointer;
+  outline: none;
 }
 
-.containerCenter-createTime>h1{
-    margin-bottom: 25px;
-    font-size: 25px;
-    color: #737FF3;
+.containerCenter-configTime > h1 {
+  margin-bottom: 25px;
+  font-size: 25px;
+  color: #737ff3;
 }
 
-.containerCenter-createTime>hr{
-  margin-bottom: 30px;
-  border: 1px solid #d8d8d8;;
+.containerCenter-configTime > hr {
+  margin-bottom: 50px;
+  border: 1px solid #d8d8d8;
 }
 
-
-
-.containerCenter-createTime>form{
+.containerCenter-configTime > form {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  font-size:14px;
+  font-size: 14px;
   font-weight: normal;
   color: #505050;
   display: flex;
-
 }
 
-
-.defaultField{
+.defaultField {
   font-size: 14px;
   font-weight: bold;
   transition: box-shadow 0.3s;
 }
 
-.defaultField>label{
-  color: #898989;;
+.defaultField > label {
+  color: #898989;
 }
 
-
-.containerCenter-createTime>form{
+.containerCenter-configTime > form {
   margin-top: 20px;
 }
 
-.defaultField>input{
+.defaultField > input {
   width: 100%;
   height: 45px;
   background: #ffffff;
@@ -117,43 +107,17 @@
   color: #b2b2b2;
 }
 
-.defaultField>input:focus{
+.defaultField:first-child{
+  margin-top: -30px;
+}
+
+.defaultField:last-child{
+  margin-bottom: 20px;
+}
+
+.defaultField > input:focus {
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
 }
-
-.divBotao{
-  display: flex;
-  justify-content: flex-end;
-}
-
-.btnCriarTime{
-  width: fit-content;
-  height: 40px;
-  border-radius: 25px;
-  margin-top: 20px;
-  background: linear-gradient( to right, #9EA8FF, #737FF3);
-  border: none;
-  outline: none;
-  color: white;
-  font-size: 16px;
-  display: flex;
-  padding: 0 22px;
-  box-sizing: border-box;
-  justify-content: space-around;
-  align-items: center;
-  transition: transform .3s;
-  cursor: pointer;
-}
-
-.btnCriarTime:hover {
-  transform: scale(1.02);
-}
-
-.btnCriarTime span {
-  margin-left: 10px;
-}
-
-
 
 .select-lider {
   width: 100%;
@@ -170,8 +134,7 @@
   cursor: pointer;
 }
 
-
-.select-lider:focus{
+.select-lider:focus {
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
 }
 
@@ -192,4 +155,19 @@
 .select-lider option:checked {
   color: #737ff3;
 }
+
+.buttonArea {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btnDeleteTime{
+  border: none;
+  background: transparent;
+  outline: none;
+  cursor: pointer;
+  font-size: 15px;
+  color: #CC818C;
+}
+
 
