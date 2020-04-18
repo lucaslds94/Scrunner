@@ -11,6 +11,20 @@
   margin-bottom: 20px;
 }
 
+.container-card-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.button-config-time{
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
 .container-cards h1{
   color: #737FF3;
   font-size: 30px;
