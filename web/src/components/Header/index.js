@@ -12,7 +12,10 @@ export default function Header() {
       <img src={logoRoxo} alt="Logo Scrunner"/>
       <span>Scrunner</span>
       </div>
-      <p>Nome do Indivíduo</p>
+      <div className="headerUserName">
+        <p>Estevan Gomes</p>
+      <div className="userAvatar"/>
+      </div>
     </div>
   
   );

@@ -18,7 +18,8 @@
 
 
 .action-button:hover {
-    transform: scale(1.02);
+    transform: scale(0.97);
+    opacity: 0.9;
 }
 
 .action-button span {

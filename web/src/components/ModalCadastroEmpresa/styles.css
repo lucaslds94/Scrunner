@@ -231,4 +231,10 @@
   color: #fff;
   cursor: pointer;
   margin-top: 20px;
+  transition: all .2s;
+}
+
+#btnContinue:hover {
+  transform: scale(0.97);
+  opacity: 0.9;
 }

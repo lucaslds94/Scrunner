@@ -12,6 +12,16 @@
   
 }
 
+.headerUserName {
+  display: flex;
+  align-items: center;
+}
+
+.headerUserName p {
+  margin-right: 10px;
+}
+
+
 .logoContainer {
   display:flex;
   align-items: center;
