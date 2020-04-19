@@ -68,7 +68,7 @@ export default function ModalEscolhaCadastro({
               <div className="description">
                 <h3>Sou um colaborador</h3>
                 <p>
-                  A empresa onde trabalho usa Srunner e eu possuo um código de
+                  A empresa onde trabalho usa Scrunner e eu possuo um código de
                   acesso.
                 </p>
               </div>

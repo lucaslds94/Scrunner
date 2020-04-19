@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaSlackHash as Hash, FaCog } from "react-icons/fa";
+import { FaHashtag as Hash, FaCog } from "react-icons/fa";
 
 import Header from "../../components/Header";
 import MenuLateral from "../../components/MenuLateral";
@@ -13,7 +13,7 @@ import ModalConfigTime from "../../components/ModalConfigTime";
 
 import "./styles.css";
 
-export default function DetailedTeam() {
+export default function DetalhesTime() {
   const [showModalConfig, setShowModalConfig] = useState(false);
 
   const handleShowModalConfig = () => {

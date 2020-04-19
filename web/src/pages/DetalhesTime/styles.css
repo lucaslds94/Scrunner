@@ -25,6 +25,11 @@
   cursor: pointer;
 }
 
+.button-config-time:hover {
+  transform: scale(0.96);
+  opacity: 0.9;
+}
+
 .container-cards h1{
   color: #737FF3;
   font-size: 30px;

@@ -2,7 +2,7 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 
-import { FaSlackHash as Hash } from "react-icons/fa";
+import { FaHashtag as Hash } from "react-icons/fa";
 
 import "./styles.css";
 

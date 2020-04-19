@@ -1,6 +1,6 @@
 import React from "react";
 
-import { FaPlus } from 'react-icons/fa'
+import { FaPlus } from 'react-icons/fa';
 
 import './styles.css';
 
@@ -11,11 +11,11 @@ export default function ButtonAction({
 }) {
 
     return (
-        <div>
+        <>
             <button onClick={onClick} className="action-button"> 
                 <ButtonIcon /> 
                 <span> {ButtonText} </span>
             </button>
-        </div>
+        </>
     )
 }

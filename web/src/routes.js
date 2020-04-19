@@ -4,7 +4,8 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import DashboardLider from "./pages/DashboardLider";
 import TimesLider from "./pages/TimesLider";
-import DetailedTeam from "./pages/DetailedTeam";
+import TimesColaborador from "./pages/TimesColaborador";
+import DetalhesTime from "./pages/DetalhesTime";
 
 export default function Routes() {
   return (
@@ -13,7 +14,8 @@ export default function Routes() {
         <Route path="/" exact component={LandingPage} />
         <Route path="/dashboard" component={DashboardLider} />
         <Route path="/times" exact component={TimesLider} />
-        <Route path="/times/detalhes/:id/:name" component={DetailedTeam} />
+        <Route path="/times/detalhes/:id/:name" component={DetalhesTime} />
+        <Route path="/times/colaborador" component={TimesColaborador} />
       </Switch>
     </BrowserRouter>
   );
