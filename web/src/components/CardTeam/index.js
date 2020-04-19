@@ -12,12 +12,11 @@ export default function CardTeam({
   teamCode = "No code",
   teamMembers = [],
 }) {
-  // createListUsers = () => {
-
-  // }
-
+  /**
+   * O número 2 ali significa o id do time :)
+   */
   return (
-    <Link to="/lider/times/detalhes" className="cardTeam-link">
+    <Link to={`/times/detalhes/2/${teamName}`} className="cardTeam-link">
       <div className="cardTeam-container">
         <h2> {teamName} </h2>
         <div className="cardteam-divider"></div>
@@ -45,8 +44,6 @@ export default function CardTeam({
             return <p key={member.id}> {member.nome} </p>;
           })}
 
-          {/* <p> Ana Fonseca </p>
-                  <p> José Afonso </p> */}
           {teamMembers.length !== 0 ? (
             <span> E mais {teamMembers.length - 2} outros... </span>
           ) : (

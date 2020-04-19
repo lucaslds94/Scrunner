@@ -37,7 +37,7 @@ export default function RoundGraph({
               fontSize: "35px",
               fontWeight: "bold",
               color: "#737FF3",
-              formatter: (val) => (isPercent ? `${val}%` : complete),
+              formatter: (val) => (isPercent ? `${val}%` : `${complete}/${total}`),
             },
           },
         },

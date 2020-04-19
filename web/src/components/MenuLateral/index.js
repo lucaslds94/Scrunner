@@ -10,10 +10,10 @@ export default function MenuLateral() {
 
   return (
     <aside className="menuLateral">
-    <Link to="/lider/dashboard" className="btnMenuLateral">
+    <Link to="/dashboard" className="btnMenuLateral">
       <FaHome className="iconMenuLateral" size= {22}/>Início
     </Link >
-    <Link to="/lider/times" className ="btnMenuLateral">
+    <Link to="/times" className ="btnMenuLateral">
       <TiGroup className="iconMenuLateral" size= {22}/>Times
     </Link>
     </aside>
