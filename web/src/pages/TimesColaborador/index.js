@@ -38,6 +38,7 @@ export default function TimesColaborador() {
 
           <div className="container-teams">
             <CardTeam
+              isLeader={false}
               teamName="Alpha"
               teamCategory="Desenvolvimento"
               teamCode="E98H36"
@@ -49,6 +50,7 @@ export default function TimesColaborador() {
               ]}
             />
             <CardTeam
+              isLeader={false}
               teamName="Ômega"
               teamCategory="UX/UI"
               teamCode="U18F57"

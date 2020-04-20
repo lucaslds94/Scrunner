@@ -1,0 +1,90 @@
+.table-members-container {
+  height: 340px;
+  width: 100%;
+  max-width: 723px;
+  background: #ffffff;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.11);
+  border-radius: 10px;
+  padding: 30px; 
+  overflow: hidden;
+}
+
+.table-members-header h1{
+  display: flex;
+  justify-content: flex-start;
+  color: #595959;
+  font-size: 22px;
+}
+
+.table-title-members {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  margin: 30px 0 10px 0px;
+  color: #B2B2B2;
+}
+
+.table-title-members p {
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+.table-title-members p:last-child{
+  margin-left: 20%;
+}
+
+.table-list{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100%;
+  height: 70%;
+  overflow-y: scroll;
+}
+
+.table-row{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.table-row ul {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+
+.list-item{
+  display: flex;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.17);
+  margin-bottom: 10px;
+}
+
+.list-item:last-child{
+  border: none;
+}
+
+.list-item li {
+  width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+  color:#898989;
+}
+
+.list-item li:last-child{
+  margin-left: 20%;
+}
+
+.user-image{
+  width: 40px;
+  height: 40px;
+  background: #737FF3;
+  border-radius: 50%;
+  margin-right: 10px;
+}
