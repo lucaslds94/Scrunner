@@ -1,0 +1,45 @@
+.dashboard-colaborador {
+  background-color: #f8f8f8;
+  height: 100vh;
+}
+
+.colaborador-container-cards {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.colaborador-divider {
+  width: 100%;
+  height: 1px;
+  margin: 10px 0 20px 0;
+  background: #e4e4e4;
+}
+
+.colaborador-container-cards h1 {
+  color: #737ff3;
+  font-size: 30px;
+  align-self: flex-start;
+}
+
+.colaborador-cards-area {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.colaborador-graph-area {
+  display: flex;
+  align-items: center;
+}
+
+.colaborador-image-area {
+  display: flex;
+  justify-content: flex-end;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+}

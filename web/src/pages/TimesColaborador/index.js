@@ -18,11 +18,13 @@ export default function TimesColaborador() {
   return (
     <>
       {showModalEnterTeam && (
-        <ModalEntrarTime handleModalEnterTeam={() => setShowModalEnterTeam(false)} />
+        <ModalEntrarTime
+          handleModalEnterTeam={() => setShowModalEnterTeam(false)}
+        />
       )}
       <div className="teamsColaborador">
-        <Header />
-        <MenuLaretal />
+        <Header userName="Ana Fonseca" />
+        <MenuLaretal isLeader={false} />
         <Container>
           <div className="container-title">
             <h1> Times </h1>
@@ -47,15 +49,15 @@ export default function TimesColaborador() {
               ]}
             />
             <CardTeam
-            teamName="Ômega"
-            teamCategory="UX/UI"
-            teamCode="U18F57"
-            teamMembers={[
-              { id: 1, nome: "Ana Fonseca" },
-              { id: 2, nome: "José Afonso" },
-              { id: 3, nome: "Lucas" },
-              { id: 4, nome: "Lucas" },
-            ]}
+              teamName="Ômega"
+              teamCategory="UX/UI"
+              teamCode="U18F57"
+              teamMembers={[
+                { id: 1, nome: "Ana Fonseca" },
+                { id: 2, nome: "José Afonso" },
+                { id: 3, nome: "Lucas" },
+                { id: 4, nome: "Lucas" },
+              ]}
             />
           </div>
         </Container>
