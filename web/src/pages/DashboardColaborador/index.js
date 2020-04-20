@@ -70,6 +70,7 @@ export default function DashboardColaborador() {
               subTitle="Dailys"
               number={10}
               buttonText="No total"
+              crown
             />
             <CardInformation
               cardTitle="Você completou"
