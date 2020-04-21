@@ -1,27 +1,27 @@
-.colaborador-detalhes-time{
-  background-color: #F8F8F8;
+.colaborador-detalhes-time {
+  background-color: #f8f8f8;
   height: 100vh;
 }
 
-.colaborador-cards-header{
+.colaborador-cards-header {
   display: flex;
   width: 100%;
   justify-content: space-between;
   align-items: center;
 }
 
-.colaborador-header-buttons{
+.colaborador-header-buttons {
   display: flex;
 }
 
-.colaborador-area-cards{
+.colaborador-area-cards {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
 }
 
-.colaborador-graph-area{
+.colaborador-graph-area {
   display: flex;
   justify-content: space-between;
   align-items: center;

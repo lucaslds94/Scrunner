@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 
+import "./styles.css";
+
+import { FiLogIn } from "react-icons/fi";
+
 import Header from "../../components/Header";
 import MenuLaretal from "../../components/MenuLateral";
 import Container from "../../components/Container";
@@ -7,10 +11,6 @@ import CardTeam from "../../components/CardTeam";
 import ButtonAction from "../../components/ButtonAction";
 
 import ModalEntrarTime from "../../components/ModalEntrarTime";
-
-import { FiLogIn } from "react-icons/fi";
-
-import "./styles.css";
 
 export default function TimesColaborador() {
   const [showModalEnterTeam, setShowModalEnterTeam] = useState(false);

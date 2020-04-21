@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+
+import "./styles.css";
+
 import { FaHashtag as Hash, FaCog } from "react-icons/fa";
 
 import Header from "../../components/Header";
@@ -10,8 +13,6 @@ import TeamMembersList from "../../components/TeamMembersList";
 import RoundGraph from "../../components/RoundGraph";
 
 import ModalConfigTime from "../../components/ModalConfigTime";
-
-import "./styles.css";
 
 export default function DetalhesTime() {
   const [showModalConfig, setShowModalConfig] = useState(false);

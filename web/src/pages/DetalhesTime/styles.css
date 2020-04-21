@@ -1,9 +1,9 @@
 .detailedTeam {
-  background-color: #F8F8F8;
+  background-color: #f8f8f8;
   height: 100vh;
 }
 
-.container-cards{
+.container-cards {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -11,14 +11,14 @@
   margin-bottom: 20px;
 }
 
-.container-card-header{
+.container-card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
 }
 
-.button-config-time{
+.button-config-time {
   background: transparent;
   border: none;
   outline: none;
@@ -30,39 +30,34 @@
   opacity: 0.9;
 }
 
-.container-cards h1{
-  color: #737FF3;
+.container-cards h1 {
+  color: #737ff3;
   font-size: 30px;
   align-self: flex-start;
 }
 
-.divider{
+.divider {
   width: 100%;
   height: 1px;
   margin: 10px 0 20px 0;
-  background: #E4E4E4;
+  background: #e4e4e4;
 }
 
-.cards-area{
+.cards-area {
   display: flex;
   width: 100%;
   justify-content: space-between;
   align-items: center;
 }
 
-.container-report{
+.container-report {
   display: flex;
   align-items: center;
 }
 
-.colab-area{
+.colab-area {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 50px;
 }
-
-  
-
-
-

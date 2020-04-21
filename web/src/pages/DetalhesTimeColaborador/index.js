@@ -1,4 +1,9 @@
 import React from "react";
+import { useParams } from "react-router-dom";
+
+import "./styles.css";
+
+import { FaHashtag as Hash } from "react-icons/fa";
 
 import Header from "../../components/Header";
 import MenuLateral from "../../components/MenuLateral";
@@ -9,11 +14,9 @@ import ButtonChangeScreen from "../../components/ButtonChangeScreen";
 import RoundGraph from "../../components/RoundGraph";
 import MembersList from "../../components/MembersList";
 
-import { FaHashtag as Hash } from "react-icons/fa";
+export default function DetalhesTimeColaborador() {
+  let { name } = useParams();
 
-import "./styles.css";
-
-export default function DetalhesTimeColaborador({ match }) {
   return (
     <div className="colaborador-detalhes-time">
       <Header userName={"Ana Fonseca"} />
@@ -22,7 +25,7 @@ export default function DetalhesTimeColaborador({ match }) {
       <Container>
         <div className="colaborador-container-cards">
           <div className="colaborador-cards-header">
-            <h1>{match.params.name}</h1>
+            <h1>{name}</h1>
             <div className="colaborador-header-buttons">
               <ButtonChangeScreen titleButton={"Dailys"} />
               <ButtonChangeScreen titleButton={"Tarefas"} />
