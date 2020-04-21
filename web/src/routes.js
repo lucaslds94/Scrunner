@@ -9,6 +9,7 @@ import DetalhesTime from "./pages/DetalhesTime";
 import DashboardColaborador from "./pages/DashboardColaborador";
 import TimesColaborador from "./pages/TimesColaborador";
 import DetalhesTimeColaborador from "./pages/DetalhesTimeColaborador";
+import DeatalhesTimeColaboradorTarefa from "./pages/DetalhesTimeColaboradorTarefa"
 
 export default function Routes() {
   return (
@@ -24,10 +25,14 @@ export default function Routes() {
         />
 
         <Route path="/dashboard/colaborador" component={DashboardColaborador} />
-        <Route path="/times/colaborador" component={TimesColaborador} />
+        <Route path="/times/colaborador" component={TimesColaborador} exact />
         <Route
           path="/times/detalhes/:id/:name/colaborador"
           component={DetalhesTimeColaborador}
+        />
+        <Route
+          path="/times/colaborador/tarefa/:name"
+          component={DeatalhesTimeColaboradorTarefa}
         />
       </Switch>
     </BrowserRouter>

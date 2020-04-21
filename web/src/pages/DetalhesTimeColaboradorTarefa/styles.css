@@ -1,0 +1,57 @@
+.colaborador-tarefa {
+  background-color: #f8f8f8;
+  height: 100vh;
+}
+
+.container-bloco-tarefa {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+.bloco-header-tarefa{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: flex-end;
+  flex-direction: row;
+}
+
+.bloco-header-titles{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  position: relative;
+}
+
+.bloco-header-titles p{
+  flex-direction: row;
+  align-self:flex-end;
+  margin-right: 20px;
+  color: #737FF3;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.bloco-header-titles a{
+  align-self:flex-end;
+  color: #898989;
+  font-size: 17px;
+  margin-bottom: 3px;
+  text-decoration: none;
+}
+
+.colaborador-header-buttons {
+  display: flex;
+}
+
+.bloco-tarefa {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+}
+

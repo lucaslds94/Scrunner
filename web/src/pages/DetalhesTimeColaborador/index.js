@@ -28,7 +28,7 @@ export default function DetalhesTimeColaborador() {
             <h1>{name}</h1>
             <div className="colaborador-header-buttons">
               <ButtonChangeScreen titleButton={"Dailys"} />
-              <ButtonChangeScreen titleButton={"Tarefas"} />
+              <ButtonChangeScreen titleButton={"Tarefas"} to={`/times/colaborador/tarefa/${name}`} />
             </div>
           </div>
           <div className="divider" />
