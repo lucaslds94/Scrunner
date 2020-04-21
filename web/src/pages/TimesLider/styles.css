@@ -1,33 +1,33 @@
-.teamsLider{
-    background-color: #F8F8F8;
-    height: 100vh;
+.teamsLider {
+  background-color: #f8f8f8;
+  height: 100vh;
 }
 
 .container-title {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .container-title h1 {
-    font-size: 30px;
-    color: #737FF3;
+  font-size: 30px;
+  color: #737ff3;
 }
 
-.teams-divider{
-    width: 100%;
-    height: 1px;
-    margin: 10px 0 20px 0;
-    background: #E4E4E4;
-  }
+.teams-divider {
+  width: 100%;
+  height: 1px;
+  margin: 10px 0 20px 0;
+  background: #e4e4e4;
+}
 
 .container-teams {
-    padding: 5px 0;
-    width: 100%;
-    height: calc(100vh - 200px);
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    overflow-y: auto;
+  padding: 5px 0;
+  width: 100%;
+  height: calc(100vh - 200px);
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  overflow-y: auto;
 }

@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 
+import "./styles.css";
+
+import { FaPlus } from "react-icons/fa";
+
 import Header from "../../components/Header";
 import MenuLaretal from "../../components/MenuLateral";
 import Container from "../../components/Container";
@@ -7,10 +11,6 @@ import CardTeam from "../../components/CardTeam";
 import ButtonAction from "../../components/ButtonAction";
 
 import ModalCriarTime from "../../components/ModalCriarTime";
-
-import { FaPlus } from "react-icons/fa";
-
-import "./styles.css";
 
 export default function TimesLider() {
   const [showModalCreate, setShowModalCreate] = useState(false);

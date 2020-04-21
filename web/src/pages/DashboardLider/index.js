@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import "./styles.css";
+
 import Header from "../../components/Header";
 import MenuLateral from "../../components/MenuLateral";
 import Container from "../../components/Container";
@@ -10,8 +12,6 @@ import BurndownGraph from "../../components/BurndownGraph";
 
 import UsersList from "../../components/UsersList";
 import RoundGraph from "../../components/RoundGraph";
-
-import "./styles.css";
 
 export default function DashboardLider() {
   const [MonthReport, setMonthReport] = useState(0);

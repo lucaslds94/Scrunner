@@ -52,22 +52,11 @@ export default function LandingPage() {
     }
   };
 
-  const handleModalEmpresa = () => {
-    setShowModalEmpresa(false);
-  };
-
-  const handleModalCodigo = () => {
-    setShowModalCodigo(false);
-  }
-
   const handleModalCodigoContinue = () => {
     setShowModalCodigo(false);
     setShowModalColaborador(true);
-  }
+  };
 
-  const handleModalColaborador = () => {
-    setShowModalColaborador(false);
-  }
   return (
     <>
       {showModalLogin && <ModalLogin handleModalLogin={handleModalLogin} />}
@@ -78,13 +67,20 @@ export default function LandingPage() {
         />
       )}
       {showModalEmpresa && (
-        <ModalCadastroEmpresa handleModalEmpresa={handleModalEmpresa} />
+        <ModalCadastroEmpresa
+          handleModalEmpresa={() => setShowModalEmpresa(false)}
+        />
       )}
       {showModalCodigo && (
-        <ModalCodigoColaborador handleModalCodigo={handleModalCodigo} handleModalCodigoContinue={handleModalCodigoContinue} />
+        <ModalCodigoColaborador
+          handleModalCodigo={() => setShowModalCodigo(false)}
+          handleModalCodigoContinue={handleModalCodigoContinue}
+        />
       )}
       {showModalColaborador && (
-        <ModalCadastroColaborador handleModalColaborador={handleModalColaborador} />
+        <ModalCadastroColaborador
+          handleModalColaborador={() => setShowModalColaborador(false)}
+        />
       )}
       <header>
         <nav>

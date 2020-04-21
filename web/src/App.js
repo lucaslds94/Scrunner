@@ -1,11 +1,9 @@
-import React from 'react';
+import React from "react";
 
-import Routes from './routes';
+import Routes from "./routes";
 
-import './styles/StylesGlobal.css';
+import "./styles/StylesGlobal.css";
 
 export default function App() {
-  return (
-    <Routes />
-  );
+  return <Routes />;
 }
