@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import Header from "../../components/Header";
-import MenuLaretal from "../../components/MenuLateral";
+import MenuLateral from "../../components/MenuLateral";
 import Container from "../../components/Container";
 import CardTeam from "../../components/CardTeam";
 import ButtonAction from "../../components/ButtonAction";
@@ -22,7 +22,7 @@ export default function TimesLider() {
       )}
       <div className="teamsLider">
         <Header />
-        <MenuLaretal />
+        <MenuLateral homeActive= {false}/>
         <Container>
           <div className="container-title">
             <h1> Times </h1>

@@ -24,7 +24,7 @@ export default function TimesColaborador() {
       )}
       <div className="teamsColaborador">
         <Header userName="Ana Fonseca" />
-        <MenuLaretal isLeader={false} />
+        <MenuLaretal isLeader={false} homeActive= {false}/>
         <Container>
           <div className="container-title">
             <h1> Times </h1>

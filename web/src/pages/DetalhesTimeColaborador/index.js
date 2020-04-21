@@ -17,7 +17,7 @@ export default function DetalhesTimeColaborador({ match }) {
   return (
     <div className="colaborador-detalhes-time">
       <Header userName={"Ana Fonseca"} />
-      <MenuLateral isLeader={false} />
+      <MenuLateral isLeader={false} homeActive= {false} />
 
       <Container>
         <div className="colaborador-container-cards">

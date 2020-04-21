@@ -51,4 +51,14 @@
   color: #737FF3;
 }
 
+.active {
+  background-color: #FFF;
+  color: #737FF3;
+}
+
+.active .iconMenuLateral {
+  color: #737FF3;
+}
+
+
 

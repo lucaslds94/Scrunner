@@ -27,7 +27,7 @@ export default function DetalhesTime() {
       )}
       <div className="detailedTeam">
         <Header />
-        <MenuLateral />
+        <MenuLateral homeActive= {false}/>
         <Container>
           <div className="container-cards">
             <div className="container-card-header">
