@@ -22,10 +22,8 @@
   width: 70%;
   max-width: 920px;
   height: 580px;
-
   background-color: white;
   z-index: 10;
-
   border-radius: 4px;
   display: flex; 
   justify-content: center;

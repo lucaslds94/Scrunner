@@ -9,7 +9,6 @@
   z-index: 13;
 }
 
-/* Background com certa transparência */
 .modalFade-configTime {
   position: fixed;
   width: 100%;
@@ -18,7 +17,6 @@
   z-index: 10;
 }
 
-/* Container do modal */
 .modalContainer-configTime {
   width: 30%;
   max-width: 490px;
@@ -32,7 +30,6 @@
   position: relative;
 }
 
-/* Lado direito do modal */
 .containerCenter-configTime {
   width: 460px;
   max-width: 460px;

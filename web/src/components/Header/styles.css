@@ -9,7 +9,6 @@
   position: sticky;
   top: 0px;
   z-index: 12;
-  
 }
 
 .headerUserName {
@@ -20,7 +19,6 @@
 .headerUserName p {
   margin-right: 10px;
 }
-
 
 .logoContainer {
   display:flex;

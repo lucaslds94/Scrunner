@@ -9,7 +9,6 @@
   z-index: 11;
 }
 
-/* Background com certa transparência */
 .modalFade {
   position: fixed;
   width: 100%;
@@ -18,15 +17,12 @@
   z-index: 10;
 }
 
-/* Container do modal */
 .modalContainer {
   width: 70%;
   max-width: 920px;
   height: 580px;
-
   background-color: white;
   z-index: 10;
-
   border-radius: 4px;
   display: flex; 
   justify-content: center;
@@ -34,7 +30,6 @@
   position: relative;
 }
 
-/* Lado esquerdo do modal */
 .containerLeft {
   width: 460px;
   max-width: 460px;
@@ -54,7 +49,6 @@
   border-radius: 4px 0 0 4px;
 }
 
-/* Lado direito do modal */
 .containerRight {
   width: 460px;
   max-width: 460px;
@@ -107,7 +101,6 @@
   font-weight: normal;
   color: #505050;
   display: flex;
-
 }
 
 .email{
