@@ -5,30 +5,36 @@ import "./styles.css";
 
 import { FaHashtag as Hash } from "react-icons/fa";
 
-import Header from "../../components/Header";
-import MenuLateral from "../../components/MenuLateral";
-import Container from "../../components/Container";
-import CardInformation from "../../components/CardInformation";
-import ButtonChangeScreen from "../../components/ButtonChangeScreen";
+import Header from "../../../components/Header";
+import MenuLateral from "../../../components/MenuLateral";
+import Container from "../../../components/Container";
+import CardInformation from "../../../components/CardInformation";
+import ButtonChangeScreen from "../../../components/ButtonChangeScreen";
 
-import RoundGraph from "../../components/RoundGraph";
-import MembersList from "../../components/MembersList";
+import RoundGraph from "../../../components/RoundGraph";
+import MembersList from "../../../components/MembersList";
 
-export default function DetalhesTimeColaborador() {
+export default function DetailsTeamColab() {
   let { name } = useParams();
 
   return (
     <div className="colaborador-detalhes-time">
       <Header userName={"Ana Fonseca"} />
-      <MenuLateral isLeader={false} homeActive= {false} />
+      <MenuLateral isLeader={false} homeActive={false} />
 
       <Container>
         <div className="colaborador-container-cards">
           <div className="colaborador-cards-header">
             <h1>{name}</h1>
             <div className="colaborador-header-buttons">
-              <ButtonChangeScreen titleButton={"Dailys"} />
-              <ButtonChangeScreen titleButton={"Tarefas"} to={`/times/colaborador/tarefa/${name}`} />
+              <ButtonChangeScreen
+                titleButton={"Dailys"}
+                to={`/times/colaborador/daily/${name}`}
+              />
+              <ButtonChangeScreen
+                titleButton={"Tarefas"}
+                to={`/times/colaborador/tarefa/${name}`}
+              />
             </div>
           </div>
           <div className="divider" />

@@ -11,7 +11,7 @@
   flex-direction: column;
 }
 
-.bloco-header-tarefa{
+.bloco-header-tarefa {
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -19,32 +19,29 @@
   flex-direction: row;
 }
 
-.bloco-header-titles{
+.bloco-header-titles {
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-end;
-  position: relative;
+  align-items: baseline;
+  justify-content: space-between;
+  width: 15%;
 }
 
-.bloco-header-titles p{
+.bloco-header-titles p {
   flex-direction: row;
-  align-self:flex-end;
-  margin-right: 20px;
-  color: #737FF3;
+  color: #737ff3;
   font-weight: bold;
   font-size: 30px;
 }
 
-.bloco-header-titles a{
-  align-self:flex-end;
+.bloco-header-titles a {
   color: #898989;
   font-size: 17px;
-  margin-bottom: 3px;
   text-decoration: none;
 }
 
 .colaborador-header-buttons {
   display: flex;
+  align-items: center;
 }
 
 .bloco-tarefa {
@@ -54,4 +51,3 @@
   align-items: center;
   width: 100%;
 }
-

@@ -4,15 +4,15 @@ import "./styles.css";
 
 import { FiLogIn } from "react-icons/fi";
 
-import Header from "../../components/Header";
-import MenuLaretal from "../../components/MenuLateral";
-import Container from "../../components/Container";
-import CardTeam from "../../components/CardTeam";
-import ButtonAction from "../../components/ButtonAction";
+import Header from "../../../components/Header";
+import MenuLaretal from "../../../components/MenuLateral";
+import Container from "../../../components/Container";
+import CardTeam from "../../../components/CardTeam";
+import ButtonAction from "../../../components/ButtonAction";
 
-import ModalEntrarTime from "../../components/ModalEntrarTime";
+import ModalEntrarTime from "../../../components/ModalEntrarTime";
 
-export default function TimesColaborador() {
+export default function TeamsColab() {
   const [showModalEnterTeam, setShowModalEnterTeam] = useState(false);
 
   return (

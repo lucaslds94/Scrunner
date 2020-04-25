@@ -2,7 +2,7 @@ import React from "react";
 
 import "./styles.css";
 
-export default function TarefasInformation({
+export default function CardTask({
   title,
   date,
 }) {

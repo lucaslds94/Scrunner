@@ -4,15 +4,15 @@ import "./styles.css";
 
 import { FaPlus } from "react-icons/fa";
 
-import Header from "../../components/Header";
-import MenuLateral from "../../components/MenuLateral";
-import Container from "../../components/Container";
-import CardTeam from "../../components/CardTeam";
-import ButtonAction from "../../components/ButtonAction";
+import Header from "../../../components/Header";
+import MenuLateral from "../../../components/MenuLateral";
+import Container from "../../../components/Container";
+import CardTeam from "../../../components/CardTeam";
+import ButtonAction from "../../../components/ButtonAction";
 
-import ModalCriarTime from "../../components/ModalCriarTime";
+import ModalCriarTime from "../../../components/ModalCriarTime";
 
-export default function TimesLider() {
+export default function TeamsLeader() {
   const [showModalCreate, setShowModalCreate] = useState(false);
 
   return (

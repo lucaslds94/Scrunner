@@ -2,16 +2,16 @@ import React, { useState, useEffect } from "react";
 
 import "./styles.css";
 
-import MenuLateral from "../../components/MenuLateral";
-import Header from "../../components/Header";
+import MenuLateral from "../../../components/MenuLateral";
+import Header from "../../../components/Header";
 
-import undraw_remotely from "../../assets/undraw_remotely.png";
+import undraw_remotely from "../../../assets/undraw_remotely.png";
 
-import Container from "../../components/Container";
-import CardInformation from "../../components/CardInformation";
-import BurndownGraph from "../../components/BurndownGraph";
+import Container from "../../../components/Container";
+import CardInformation from "../../../components/CardInformation";
+import BurndownGraph from "../../../components/BurndownGraph";
 
-export default function DashboardColaborador() {
+export default function DashboardColab() {
   const [ReportDate, setReportDate] = useState([]);
   const [ReportPlanned, setReportPlanned] = useState([]);
   const [ReportComplete, setReportComplete] = useState([]);

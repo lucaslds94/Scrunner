@@ -2,18 +2,18 @@ import React, { useState } from "react";
 
 import "./styles.css";
 
-import Header from "../../components/Header";
-import MenuLateral from "../../components/MenuLateral";
-import Container from "../../components/Container";
-import CardInformation from "../../components/CardInformation";
+import Header from "../../../components/Header";
+import MenuLateral from "../../../components/MenuLateral";
+import Container from "../../../components/Container";
+import CardInformation from "../../../components/CardInformation";
 
-import SelectReport from "../../components/SelectReport";
-import BurndownGraph from "../../components/BurndownGraph";
+import SelectReport from "../../../components/SelectReport";
+import BurndownGraph from "../../../components/BurndownGraph";
 
-import UsersList from "../../components/UsersList";
-import RoundGraph from "../../components/RoundGraph";
+import UsersList from "../../../components/UsersList";
+import RoundGraph from "../../../components/RoundGraph";
 
-export default function DashboardLider() {
+export default function DashboardLeader() {
   const [MonthReport, setMonthReport] = useState(0);
   const [TimeReport, setTimeReport] = useState(0);
   const [ReportDate, setReportDate] = useState([]);

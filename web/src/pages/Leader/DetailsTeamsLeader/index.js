@@ -4,17 +4,17 @@ import "./styles.css";
 
 import { FaHashtag as Hash, FaCog } from "react-icons/fa";
 
-import Header from "../../components/Header";
-import MenuLateral from "../../components/MenuLateral";
-import Container from "../../components/Container";
-import CardInformation from "../../components/CardInformation";
+import Header from "../../../components/Header";
+import MenuLateral from "../../../components/MenuLateral";
+import Container from "../../../components/Container";
+import CardInformation from "../../../components/CardInformation";
 
-import TeamMembersList from "../../components/TeamMembersList";
-import RoundGraph from "../../components/RoundGraph";
+import TeamMembersList from "../../../components/TeamMembersList";
+import RoundGraph from "../../../components/RoundGraph";
 
-import ModalConfigTime from "../../components/ModalConfigTime";
+import ModalConfigTime from "../../../components/ModalConfigTime";
 
-export default function DetalhesTime() {
+export default function DetailsTeamsLeader() {
   const [showModalConfig, setShowModalConfig] = useState(false);
 
   const handleShowModalConfig = () => {
