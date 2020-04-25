@@ -1,0 +1,98 @@
+.kanbanContainer {
+  display: flex;
+  place-content: center;
+  margin-top: 30px;
+  position: relative;
+}
+
+.kanbanGrid1 {
+  border-top: 1px solid #B2B2B2;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.11);
+  width: calc(100% - 50px);
+  position: absolute;
+  left: 25px;
+  top: 90px;
+}
+
+.kanbanGrid2 {
+  border-right: 1px solid #B2B2B2;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.11);
+  height: 100%;
+  position: absolute;
+  left: 364px;
+  top: 0px;
+}
+
+.kanbanGrid3 {
+  border-right: 1px solid #B2B2B2;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.11);
+  height: 100%;
+  position: absolute;
+  left: 728px;
+  top: 0px;
+}
+
+.columnContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #FFFFFF;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.17);
+  border-radius: 5px;
+ 
+}
+.columnContainer h2 {
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+  color: #737FF3;
+  height: 90px;
+  width:100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+.marginContainer {
+  margin:8px;
+}
+.droppableColumn {
+  padding: 15px 4px;
+  width: 350px;
+  min-height: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.kanbanCard {
+  user-select: none;
+  padding: 16px;
+  margin-bottom: 8px;
+  min-height: 100px;
+  color: #595959;
+  width: 90%;
+  background: #FFFFFF;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.17);
+  border-radius: 5px;
+
+
+  display: flex;
+  flex-direction: column;
+  place-content: center;
+}
+
+.kanbanCard h3 {
+  text-align: center;
+  margin-bottom: 6px;
+  font-size: 16px;
+  line-height: 19px;
+  color: #595959;
+  font-weight: normal;
+
+}
+
+.kanbanCard p {
+  text-align: center;
+  color: #898989
+}

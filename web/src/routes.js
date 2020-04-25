@@ -12,6 +12,7 @@ import TeamsColab from "./pages/Collaborator/TeamsColab";
 import DetailsTeamColab from "./pages/Collaborator/DetailsTeamColab";
 import TasksColab from "./pages/Collaborator/TasksColab";
 import DailyColab from "./pages/Collaborator/DailyColab";
+import TeamKanban from "./pages/Collaborator/TeamKanban";
 
 export default function Routes() {
   return (
@@ -34,6 +35,7 @@ export default function Routes() {
         />
         <Route path="/times/colaborador/tarefa/:name" component={TasksColab} />
         <Route path="/times/colaborador/daily/:name" component={DailyColab} />
+        <Route path="/kanban" component={TeamKanban} />
       </Switch>
     </BrowserRouter>
   );
