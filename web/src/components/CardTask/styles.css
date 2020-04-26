@@ -11,6 +11,7 @@
   transition: all 0.2s ease-in-out;
   cursor: pointer;
   margin: 0 10px 10px 0;
+  text-decoration: none;
 }
 
 .card-tarefa:hover{

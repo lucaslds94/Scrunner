@@ -40,9 +40,21 @@ export default function TasksColab() {
           </div>
           <div className="divider" />
           <div className="bloco-tarefa">
-            <CardTask title="NomeQuadro1" date="10/04/2020" />
-            <CardTask title="NomeQuadro2" date="10/04/2020" />
-            <CardTask title="NomeQuadro3" date="10/04/2020" />
+            <CardTask 
+              title="NomeQuadro1" 
+              date="10/04/2020" 
+              to={`/times/colaborador/kanban/${name}/NomeQuadro1/10-04-2020`}
+              />
+            <CardTask 
+              title="NomeQuadro2" 
+              date="10/04/2020" 
+              to={`/times/colaborador/kanban/${name}/NomeQuadro2/10-04-2020`}
+            />
+            <CardTask 
+              title="NomeQuadro3" 
+              date="10/04/2020" 
+              to={`/times/colaborador/kanban/${name}/NomeQuadro3/10-04-2020`}
+            />
           </div>
         </div>
       </Container>

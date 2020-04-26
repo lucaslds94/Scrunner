@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import uuid from "uuid/v4";
 
+import { BsTrash } from "react-icons/bs";
+import { FaPlus } from "react-icons/fa";
+
 import "./styles.css";
 
 const itemsFromBackend = [
@@ -9,12 +12,6 @@ const itemsFromBackend = [
   { id: uuid(), title:"Title2" , content: "Second task" },
   { id: uuid(), title:"Title3" , content: "Third task" },
   { id: uuid(), title:"Title4" , content: "Fourth task" },
-  { id: uuid(), title:"Title5" , content: "Fifth task" },
-  { id: uuid(), title:"Title5" , content: "Fifth task" },
-  { id: uuid(), title:"Title5" , content: "Fifth task" },
-  { id: uuid(), title:"Title5" , content: "Fifth task" },
-  { id: uuid(), title:"Title5" , content: "Fifth task" },
-  { id: uuid(), title:"Title5" , content: "Fifth task" },
   { id: uuid(), title:"Title5" , content: "Fifth task" },
 ];
 
@@ -119,15 +116,22 @@ function Kanban() {
                                       ...provided.draggableProps.style
                                     }}
                                   >
+                                    <button className="trashBtn">
+                                    <BsTrash size={18} color ={"#BBB"}/>
+                                    </button>
                                     <h3>{item.title}</h3>
-                                    <p>{item.content}</p>
+                                    <p>{item.content}</p>  
                                   </div>
                                 );
                               }}
+                              
                             </Draggable>
                           );
                         })}
                         {provided.placeholder}
+                        <button className="addTask">
+                          <FaPlus size={22}/>Adicionar tarefa
+                        </button>
                       </div>
                     );
                   }}

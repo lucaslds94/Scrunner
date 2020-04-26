@@ -1,13 +1,14 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 import "./styles.css";
 
 export default function CardTask({
   title,
   date,
+  to = '#'
 }) {
   return (
-    <div className="card-tarefa">
+    <Link to={to} className="card-tarefa">
       <div className="card-information-tarefa">
         <p className="card-title-tarefa">{title}</p>
         <div className="divider" />
@@ -16,6 +17,6 @@ export default function CardTask({
           <strong>{date}</strong>
         </p>
       </div>
-    </div>
+    </Link>
   );
 }

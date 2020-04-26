@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link , useParams } from "react-router-dom";
 import { MdArrowBack } from "react-icons/md";
 
 import "./styles.css";
@@ -12,39 +12,38 @@ import Kanban from "../../../components/Kanban";
 import ButtonChangeScreen from "../../../components/ButtonChangeScreen";
 
 
-function TeamKanban({
-  boardTitle,
-  boardDate
-}) {
+export default function TeamKanban() {
+  const {boardTitle, name, boardDate} = useParams();
+  
   return (
-    <>
-      <Header/>
-      <MenuLateral homeActive= {false}/>
+    <div className="containerKanbanTeam">
+      <Header userName = {"Ana Fonseca"}/>
+      <MenuLateral homeActive= {false} isLeader ={false}/>
       <Container>
         <div className="colaborador-cards-header">
-          <h1>Colocar nome</h1>
+          <div className="bloco-header-titles">
+            <p>Tarefas</p>
+            <Link to={`/times/detalhes/2/${name}/colaborador`}>{name}</Link>
+          </div>
           <div className="colaborador-header-buttons">
-            <ButtonChangeScreen titleButton={"Dailys"} />
-            <ButtonChangeScreen titleButton={"Tarefas"}/>
-            {/* Lembrar de linkar o botão tarefas */}
+            <ButtonChangeScreen titleButton={"Dailys"} to= {`/times/colaborador/daily/${name}`}/>
+            <ButtonChangeScreen titleButton={"Tarefas"} active/>
           </div>
         </div>
         <div className="teams-divider"/>
         <div className="boardInfo-container">
-          <Link to ={""} ><MdArrowBack/> Voltar</Link>
-        </div>
-        <div 
-        className="boardInfo"
-        boardTitle = "NomeQuadro1"
-        boardDate = "25/04/2020"
-        >
-          <h2>{boardTitle}</h2>
-          <h4>Criado em {boardDate}</h4>
+          <Link className ="backBtn" to ={`/times/colaborador/tarefa/${name}`} >
+            <MdArrowBack size={30} color={"#737FF3"}/> Voltar
+          </Link>
+          <div 
+          className="boardInfo"
+          >
+            <h2>{boardTitle}</h2>
+            <h4>Criado em {boardDate}</h4>
+          </div>
         </div>
         <Kanban/>
       </Container>
-    </>
+    </div>
   );
 }
-
-export default TeamKanban;

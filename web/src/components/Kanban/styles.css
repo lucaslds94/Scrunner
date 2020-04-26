@@ -1,8 +1,9 @@
 .kanbanContainer {
   display: flex;
   place-content: center;
-  margin-top: 30px;
+  margin: 30px 0;
   position: relative;
+
 }
 
 .kanbanGrid1 {
@@ -75,7 +76,7 @@
   background: #FFFFFF;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.17);
   border-radius: 5px;
-
+  position: relative;
 
   display: flex;
   flex-direction: column;
@@ -95,4 +96,52 @@
 .kanbanCard p {
   text-align: center;
   color: #898989
+}
+
+
+.trashBtn {
+  /* color: rgb(187, 187, 187); */
+  background: none;
+  border: none;
+  position: absolute;
+  right:10px;
+  top:10px;
+  cursor: pointer;
+}
+
+.trashBtn:hover svg {
+  color:#dc3545 !important;
+}
+
+.addTask {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFF;
+  color: #B2B2B2;
+  cursor: pointer;
+  margin-top:10px;
+  font-size: 17px;
+  line-height: 20px;
+
+  width: 90%;
+  height: 60px;
+  border: 1px solid #B2B2B2;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.11);
+  border-radius: 5px;
+
+  transition: all .1s;
+}
+
+.addTask svg {
+  margin-right: 5px;
+}
+
+.addTask:hover {
+  border: 2px solid #B2B2B2;
+  color: #898989;
+}
+
+.addTask:hover svg {
+  color: #898989;
 }

@@ -1,0 +1,45 @@
+.backBtn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  width: 75px;
+  font-size: 17px;
+  line-height: 20px;
+  color: #737FF3;
+}
+
+.backBtn:hover {
+  opacity: .8;
+}
+
+.boardInfo-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.containerKanbanTeam{
+  background-color: #f8f8f8;
+  height: 100vh;
+}
+
+.boardInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.boardInfo h2 {
+  margin-right: 15px;
+  font-size: 24px;
+  line-height: 28px;
+  color: #898989; 
+}
+
+.boardInfo h4 {
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 19px;
+  color: #898989;
+}
