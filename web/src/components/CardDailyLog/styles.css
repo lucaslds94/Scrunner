@@ -1,0 +1,57 @@
+.cardDailyLog-container {
+    width: 538px;
+    padding: 30px;
+    box-sizing: border-box;
+    background-color: white;
+    box-shadow: 0px 0px 12px rgba(0,0,0,0.17);
+    border-radius: 10px;
+    min-height: 150px;
+    height: fit-content;
+    margin-bottom: 30px;
+}
+
+.avatarLog {
+    width: 45px;
+    height: 45px;
+}
+
+.dailyLog-header {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-bottom: 24px;
+}
+
+.dailyLog-header p {
+    color: #595959;
+}
+
+.dailyLog-body {
+    color: #595959;
+}
+
+.answer-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.answer-blocks {
+    margin-bottom: 20px;
+}
+
+.answer-blocks:last-of-type{
+    margin-bottom: 0;
+}
+
+.answer-blocks span {
+    color: #898989;
+    font-size: 14px;
+}
+
+.answer-blocks p {
+    color: #595959;
+}
+
+.LeaderCrown {
+    margin: 0 0 0 auto;
+}

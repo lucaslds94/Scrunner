@@ -11,9 +11,10 @@ export default function CardDaily({
   isComplete = false,
   yourDaily = false,
   leaderDaily = false,
+  to = '#'
 }) {
   return (
-    <Link to="#" className="component-board-daily">
+    <Link to={to} className="component-board-daily">
       <div className="board-daily-header">
         <h3>{date}</h3>
         {isComplete ? (

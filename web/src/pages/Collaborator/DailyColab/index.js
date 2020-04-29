@@ -37,12 +37,15 @@ export default function DailyColab() {
         </div>
         <div className="divider" />
         <div className="container-boards">
-          <CardDaily date={"01/04"} />
+          <CardDaily 
+            date={"01/04"}   
+            to={`/times/colaborador/dailylog/${name}/01-04`}/>
           <CardDaily
             date={"26/03"}
             isComplete={true}
             yourDaily={true}
             leaderDaily={true}
+            to={`/times/colaborador/dailylog/${name}/26-03`}
           />
         </div>
       </Container>

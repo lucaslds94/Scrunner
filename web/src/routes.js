@@ -10,8 +10,9 @@ import DetailsTeamsLeader from "./pages/Leader/DetailsTeamsLeader";
 import DashboardColab from "./pages/Collaborator/DashboardColab";
 import TeamsColab from "./pages/Collaborator/TeamsColab";
 import DetailsTeamColab from "./pages/Collaborator/DetailsTeamColab";
-import TasksColab from "./pages/Collaborator/TasksColab";
 import DailyColab from "./pages/Collaborator/DailyColab";
+import DailyLog from "./pages/Collaborator/DailyLog";
+import TasksColab from "./pages/Collaborator/TasksColab";
 import TeamKanban from "./pages/Collaborator/TeamKanban";
 
 export default function Routes() {
@@ -33,8 +34,11 @@ export default function Routes() {
           path="/times/detalhes/:id/:name/colaborador"
           component={DetailsTeamColab}
         />
-        <Route path="/times/colaborador/tarefa/:name" component={TasksColab} />
+
         <Route path="/times/colaborador/daily/:name" component={DailyColab} />
+        <Route path="/times/colaborador/dailylog/:name/:dailyDate" component={DailyLog} />
+
+        <Route path="/times/colaborador/tarefa/:name" component={TasksColab} />
         <Route 
           path="/times/colaborador/kanban/:name/:boardTitle/:boardDate" 
           component={TeamKanban}
