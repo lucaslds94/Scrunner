@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { useParams, Link } from "react-router-dom";
 import { MdArrowBack } from "react-icons/md";
 import { FaPlus } from "react-icons/fa";
@@ -10,15 +10,17 @@ import MenuLateral from "../../../components/MenuLateral";
 import Container from "../../../components/Container";
 import ButtonChangeScreen from "../../../components/ButtonChangeScreen";
 import CardDailyLog from "../../../components/CardDailyLog";
+import ModalCriarDaily from "../../../components/ModalCriarDaily";
 
 
 export default function DailyLog() {
-
+    const [showModal,setShowModal] = useState(false)
     const { name, dailyDate } = useParams();
 
     return (
         <div className="dailyLog">
 
+            {showModal&&<ModalCriarDaily handleModalCreateDaily={()=>setShowModal(false)}/>}
             <Header userName={"Ana Fonseca"} />
             <MenuLateral isLeader={false} homeActive={false} />
             
@@ -69,7 +71,7 @@ export default function DailyLog() {
 
                     <div className="dailyLog-colabText">
 
-                        <button className="buttonAddDaily">
+                        <button onClick={()=>setShowModal(true)}  className="buttonAddDaily">
                             <FaPlus size={20} color={"#B2B2B2"} />
                             <span> Adicionar registro daily </span>
                         </button>
