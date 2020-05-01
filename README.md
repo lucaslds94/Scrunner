@@ -87,11 +87,12 @@ Santander Coders é um programa educacional promovido pelo Santander em parceria
 Você precisa clonar o repositório e pode fazer isso digitando em seu terminal `$ git clone https://github.com/lucaslds94/Scrunner.git`.
 
 
-### **:crystal_ball: Web**
+**:crystal_ball: Web**
 
 Após seguir os passos acima vá para pasta  `$ cd web/`  e execute  `$ yarn install`  ou  `$ npm install`.
 
 Depois das dependências terminarem de instalar execute o comando  `$ yarn start`  ou  `$ npm run start`.
+
 
 ## :mortar_board: Autores 
 
