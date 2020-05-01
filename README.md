@@ -27,8 +27,6 @@ Santander Coders é um programa educacional promovido pelo Santander em parceria
 
 -  [MySQL](https://www.mysql.com/);
 
-- [MongoDB](https://www.mongodb.com/);
-
 -  [GIT](https://git-scm.com/);
 
 - [HTML](https://developer.mozilla.org/pt-BR/docs/Web/HTML);
@@ -55,7 +53,7 @@ Santander Coders é um programa educacional promovido pelo Santander em parceria
 
 ## :telescope: Projeto
 
-// objetivo do projeto 
+O Scrunner tem como objetivo incentivar e facilitar a utilização de metodologias ágeis através de uma interface intuitiva e dinâmica. Assim, seus usuários poderão se organizar em conjunto com seu time utilizando a plataforma para otimizar o processo de criação ou andamento de um projeto com ferramentas utilizadas no Scrum, como o Kanban e o processo de Dailys, além de gráficos estatísticos que mostram o progresso do time durante as sprints.
 
 ## :computer: Tecnologias
 
