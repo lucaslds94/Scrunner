@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "start": "nodemon src/index.js",
-    "migrate": "yarn sequelize db:migrate"
+    "dbCreate": "yarn sequelize db:create",
+    "dbMigrate": "yarn sequelize db:migrate"
   },
   "dependencies": {
     "bcrypt": "^4.0.1",
