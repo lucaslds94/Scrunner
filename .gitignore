@@ -17,3 +17,6 @@ web/.env.local
 web/.env.development.local
 web/.env.test.local
 web/.env.production.local
+
+# Env
+backend/.env
