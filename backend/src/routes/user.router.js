@@ -4,6 +4,6 @@ const routes = Router();
 
 const userController = require('../controllers/user.controller');
 
-routes.get('/', userController.index);
+routes.post('/', userController.index);
 
 module.exports = routes;

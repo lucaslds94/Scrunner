@@ -1,7 +1,15 @@
-const connection = require('../database/');
+// const User = require('../models/User');
+// const Teams = require('../models/Teams');
+const UserTeams = require('../models/UserTeams');
 
 module.exports = {
-  index(req, res) {
-    res.json({ scrunner: "TOP" });
+  async index(req, res) {
+    const {is_leader = 'T', users_id = 1, teams_id = 1} = req.body;
+
+    const user = await UserTeams.create({
+      is_leader,users_id,teams_id,
+    })
+
+    return res.json(user);
   },
 };

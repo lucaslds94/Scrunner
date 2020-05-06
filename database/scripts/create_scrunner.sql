@@ -28,11 +28,13 @@ CREATE TABLE teams(
 
 
 CREATE TABLE user_teams(
+    id INT NOT NULL AUTO_INCREMENT,
     is_leader ENUM('F','T') NOT NULL,
     users_id INT NOT NULL,
     teams_id INT NOT NULL,
     created_at timestamp not null,
     updated_at timestamp not null,
+    CONSTRAINT pk_user_teams PRIMARY KEY (id),
     CONSTRAINT fk_user_teams_users FOREIGN KEY(users_id) REFERENCES users(id),
     CONSTRAINT fk_user_teams_teams FOREIGN KEY(teams_id) REFERENCES teams(id)
 );
