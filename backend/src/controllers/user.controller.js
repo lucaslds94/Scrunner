@@ -1,6 +1,6 @@
 // const User = require('../models/User');
-// const Teams = require('../models/Teams');
-const UserTeams = require('../models/UserTeams');
+// const Team = require('../models/Team');
+const UserTeam = require('../models/UserTeam');
 
 module.exports = {
   async index(req, res) {

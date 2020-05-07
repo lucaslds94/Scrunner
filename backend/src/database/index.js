@@ -1,17 +1,20 @@
 const Sequelize = require('sequelize');
 const dbConfig = require('../config/database');
 
-const Users = require('../models/Users');
-const Teams = require('../models/Teams');
-const UserTeams = require('../models/UserTeams');
+const User = require('../models/User');
+const Team = require('../models/Team');
+const UserTeam = require('../models/UserTeam');
+const DailyBoard = require('../models/DailyBoard');
 
 const connection = new Sequelize(dbConfig);
 
-Users.init(connection);
-Teams.init(connection);
-UserTeams.init(connection);
+User.init(connection);
+Team.init(connection);
+UserTeam.init(connection);
+DailyBoard.init(connection);
 
-UserTeams.associate(connection.models);
+UserTeam.associate(connection.models);
+DailyBoard.associate(connection.models);
 
 
 module.exports = connection;

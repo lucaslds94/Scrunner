@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 
-class UserTeams extends Model {
+class UserTeam extends Model {
   static init(sequelize){
     super.init({
       is_leader: {
@@ -26,13 +26,13 @@ class UserTeams extends Model {
   }
 
   static associate(models){
-    this.belongsTo(models.Users, 
+    this.belongsTo(models.User, 
     {
       foreignKey:'users_id',
       as: 'fk_user_teams_users' 
     });
        
-    this.belongsTo(models.Teams,
+    this.belongsTo(models.Team,
     { 
       foreignKey:'teams_id',
       as: 'fk_user_teams_teams' 
@@ -40,4 +40,4 @@ class UserTeams extends Model {
   }
 }
 
-module.exports = UserTeams;
+module.exports = UserTeam;
