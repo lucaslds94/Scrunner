@@ -1,14 +1,20 @@
+const bcrypt = require("bcrypt");
 const User = require("../models/User");
 
 module.exports = {
   async store(req, res) {
-    const { email, password, name, is_owner } = req.body;
+    let { email, password, name, is_owner } = req.body;
 
     let user = await User.findOne({ where: { email } });
 
     if (!user) {
+      password = bcrypt.hashSync(password, 10);
+
       user = await User.create({ email, password, name, is_owner });
-      return res.json(user);
+
+      delete user.dataValues.password;
+
+      return res.json(user.dataValues);
     }
 
     return res.status(409).json({ error: "Email is already in use" });

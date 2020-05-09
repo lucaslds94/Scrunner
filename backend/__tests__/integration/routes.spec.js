@@ -11,7 +11,7 @@ const MOCK_USER = {
 let ID_MOCK_USER = "";
 
 describe("Route Users", () => {
-  it("Should create a new user", async () => {
+  it("Should be able to create a new user", async () => {
     const response = await request(app).post("/user").send(MOCK_USER);
 
     ID_MOCK_USER = response.body.id;
@@ -20,14 +20,14 @@ describe("Route Users", () => {
     expect(response.body).toHaveProperty("id");
   });
 
-  it("Should not create an account when it already exists", async () => {
+  it("Should not be able to create an account when it already exists", async () => {
     const response = await request(app).post("/user").send(MOCK_USER);
 
     expect(response.status).toEqual(409);
     expect(response.body).toHaveProperty("error");
   });
 
-  it("Should delete a user", async () => {
+  it("Should not be able to delete a user", async () => {
     const response = await request(app).delete(`/user/${ID_MOCK_USER}`);
 
     expect(response.status).toEqual(204);
