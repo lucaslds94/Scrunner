@@ -4,9 +4,12 @@
   "main": "src/server.js",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon src/server.js",
+    "start": "nodemon src/server.js --ignore __tests__",
     "dbCreate": "yarn sequelize db:create",
-    "dbMigrate": "yarn sequelize db:migrate"
+    "dbMigrate": "yarn sequelize db:migrate",
+    "pretest": "NODE_ENV=test sequelize db:migrate",
+    "test": "NODE_ENV=test jest",
+    "posttest": "NODE_ENV=test sequelize db:migrate:undo:all"
   },
   "dependencies": {
     "bcrypt": "^4.0.1",
@@ -21,6 +24,7 @@
     "jest": "^26.0.1",
     "nodemon": "^2.0.3",
     "sequelize-cli": "^5.5.1",
+    "sqlite3": "^4.2.0",
     "supertest": "^4.0.2"
   }
 }

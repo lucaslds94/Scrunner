@@ -20,3 +20,6 @@ web/.env.production.local
 
 # Env
 backend/.env
+
+#Sqlite
+backend/__tests__/database.sqlite
