@@ -4,6 +4,7 @@ const routes = Router();
 
 const userController = require('../controllers/user.controller');
 
-routes.post('/', userController.index);
+routes.post('/user', userController.store);
+routes.delete('/user/:id', userController.delete);
 
 module.exports = routes;
