@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-
+import api from '../../services/api';
 import "./styles.css";
 
 import { FaAngleRight } from "react-icons/fa";
+
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import ModalLogin from "../../components/ModalLogin";
 import ModalEscolhaCadastro from "../../components/ModalEscolhaCadastro";
@@ -57,6 +60,30 @@ export default function LandingPage() {
     setShowModalColaborador(true);
   };
 
+  const registerCompany = async (companyData) => {
+    setShowModalEmpresa(false);
+
+    const companyModel = {
+      name: companyData.companyName,
+      email: companyData.email,
+      password: companyData.password,
+      is_owner: 'T'
+    }
+
+    try{
+      await api.post('/user', companyModel);
+      
+      toast.success("Cadastro realizado com sucesso!");
+    }catch(error){
+
+      if(error.response.data.err){
+        return toast.error('Email já cadastrado');
+      }
+      
+      toast.error('Ocorreu um error inesperado');
+    } 
+  }
+
   return (
     <>
       {showModalLogin && <ModalLogin handleModalLogin={handleModalLogin} />}
@@ -69,6 +96,7 @@ export default function LandingPage() {
       {showModalEmpresa && (
         <ModalCadastroEmpresa
           handleModalEmpresa={() => setShowModalEmpresa(false)}
+          registerCompany={registerCompany}
         />
       )}
       {showModalCodigo && (
@@ -385,6 +413,7 @@ export default function LandingPage() {
           <p>Todos os direitos reservados 2020 &copy; | Scrunner</p>
         </div>
       </footer>
+      <ToastContainer />
     </>
   );
 }

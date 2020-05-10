@@ -1,6 +1,6 @@
 import React from "react";
 
-import { FaCrown as Hash, FaCrown } from "react-icons/fa";
+import { FaCrown } from "react-icons/fa";
 import "./styles.css";
 
 export default function CardDailyLog({

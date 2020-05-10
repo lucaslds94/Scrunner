@@ -27,9 +27,17 @@ describe("Route Users", () => {
     expect(response.body).toHaveProperty("error");
   });
 
-  it("Should not be able to delete a user", async () => {
+  it("Should be able to delete a user", async () => {
     const response = await request(app).delete(`/user/${ID_MOCK_USER}`);
 
     expect(response.status).toEqual(204);
+  }); 
+
+  it("Should not be able to find a user with an invalid ID", async () => {
+    const response = await request(app).delete("/user/231hk2g4k2h");
+
+    expect(response.status).toEqual(409);
   });
+
+
 });

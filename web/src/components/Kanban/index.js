@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import uuid from "uuid/v4";
+import { v4 as uuid } from "uuid";
+
 
 import { BsTrash } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa";

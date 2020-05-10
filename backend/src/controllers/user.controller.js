@@ -17,7 +17,7 @@ module.exports = {
       return res.json(user.dataValues);
     }
 
-    return res.status(409).json({ error: "Email is already in use" });
+    return res.status(409).json({ err: "Email is already in use" });
   },
 
   async delete(req, res) {
@@ -26,7 +26,7 @@ module.exports = {
     let user = await User.findByPk(id);
 
     if (!user) {
-      return res.status(404).json({ error: "User not found" });
+      return res.status(409).json({ err: "User not found" });
     }
 
     await user.destroy({

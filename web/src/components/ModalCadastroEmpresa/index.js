@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { FaTimes, FaEye, FaEyeSlash } from "react-icons/fa";
 
 import "./styles.css";
@@ -7,11 +10,47 @@ import "./styles.css";
 import logo_roxo from "../../assets/logo_roxo_100.png";
 import bannerEscolha from "../../assets/modalEscolha.png";
 
-export default function ModalCadastroEmpresa({ handleModalEmpresa }) {
+export default function ModalCadastroEmpresa({ handleModalEmpresa, registerCompany }) {
   const [showPass, setShowPass] = useState(false);
+  const [companyName, setCompanyName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [checkTerms, setCheckTerms] = useState(false);
+  
 
-  function showPassword() {
+  const showPassword = () => { 
     setShowPass(!showPass);
+  }
+
+  const handleRegisterCompany = () => {
+
+    if(companyName.trim().length === 0){
+      toast.error('Insira um nome válido');
+      return;
+    }
+    
+    if(!email.includes('@')){
+      toast.error('O email precisa ter o formato exemplo@email.com');
+      return
+    }
+
+    if(password.length < 8){
+      toast.error('A senha precisa de no mínimo 8 caracteres');
+      return;
+    }
+
+    if(!checkTerms){
+      toast.error('Você precisa concordar com os termos de uso');
+      return;
+    } 
+
+    if(companyName && email && password && checkTerms){
+      registerCompany({companyName, email, password});
+
+      setCompanyName("");
+      setEmail("");
+      setPassword("");
+    }
   }
 
   return (
@@ -27,20 +66,32 @@ export default function ModalCadastroEmpresa({ handleModalEmpresa }) {
             <div className="nomeEmpresa">
               <label htmlFor="nomeEmpesa">Nome da Empresa</label>
               <br />
-              <input type="inputbox" name="nomeEmpresa" id="nomeEmpresa" />
+              <input
+                value={companyName}
+                type="inputbox"
+                name="nomeEmpresa"
+                id="nomeEmpresa"
+                onChange = {e => setCompanyName(e.target.value)} />
             </div>
             <div className="email">
               <label htmlFor="Email">Email</label>
               <br />
-              <input type="email" name="email" id="email" />
+              <input
+                value={email}
+                type="email"
+                name="email"
+                id="email" 
+                onChange={e => setEmail(e.target.value)} />
             </div>
             <div className="senha">
               <label htmlFor="password">Senha</label>
               <br />
               <input
                 type={showPass ? "text" : "password"}
+                value={password}
                 name="password"
                 id="senha"
+                onChange = {e => setPassword(e.target.value)}
               />
               <button type="button" onClick={showPassword} id="iconOlho">
                 {showPass && <FaEyeSlash size={20} color={"#737FF3"} />}
@@ -50,10 +101,11 @@ export default function ModalCadastroEmpresa({ handleModalEmpresa }) {
             <div className="checkBox">
               <div>
                 <input
-                  value="1"
+                  value={checkTerms}
                   type="checkbox"
                   name="manterConec"
                   id="manterConec"
+                  onChange = {() => setCheckTerms(!checkTerms)}
                 />
                 <label htmlFor="manterConec">
                   Eu concordo com os{" "}
@@ -62,7 +114,7 @@ export default function ModalCadastroEmpresa({ handleModalEmpresa }) {
               </div>
             </div>
           </form>
-          <button id="btnContinue">Continuar</button>
+          <button id="btnContinue" onClick={handleRegisterCompany} >Continuar</button>
         </div>
 
         <div className="containerRight-cadastro-empresa">
@@ -71,7 +123,9 @@ export default function ModalCadastroEmpresa({ handleModalEmpresa }) {
           </button>
           <img src={bannerEscolha} alt="Banner Modal Cadastro Empresa" />
         </div>
+        
       </div>
+      <ToastContainer />
     </div>
   );
 }
