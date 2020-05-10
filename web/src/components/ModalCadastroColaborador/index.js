@@ -16,7 +16,7 @@ export default function ModalCadastrocolaborador({ handleModalColaborador }) {
 
   return (
     <div className="modal-cadastro-colaborador">
-      <div className="modalFade-cadastro-colaborador"></div>
+      <div className="modal-fade"></div>
 
       <div className="modalContainer-cadastro-colaborador">
         <div className="containerLeft-cadastro-colaborador">

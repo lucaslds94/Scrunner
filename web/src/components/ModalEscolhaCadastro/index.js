@@ -31,14 +31,14 @@ export default function ModalEscolhaCadastro({
   const handleSubmit = () => {
     if (empresa) {
       handleSubmited("empresa");
-    } else {
+    } else if(colaborador) {
       handleSubmited("colaborador");
-    }
+    } 
   };
 
   return (
     <div className="modal-escolha">
-      <div className="modalFade-escolha"></div>
+      <div className="modal-fade"></div>
 
       <div className="modalContainer-escolha">
         <div className="containerLeft-escolha">

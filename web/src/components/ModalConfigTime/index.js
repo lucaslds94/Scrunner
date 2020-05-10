@@ -26,52 +26,51 @@ export default function ModalConfigTime({
         />
       )}
       <div className="modal-configTime">
-        <div className="modalFade-configTime"></div>
+        <div className="modal-fade"></div>
         <div className="modalContainer-configTime">
           <div className="containerCenter-configTime">
             <button id="closeModal" type="button" onClick={handleModalConfig}>
               <FaTimes size={20} color={"#737FF3"} />
             </button>
             <h1>Configurar Time</h1>
-            <hr />
-            <form id="configTime" action="" method="POST">
-              <div className="defaultField">
-                <label htmlFor="nomeTime">Nome</label>
-                <input
-                  type="input"
-                  name="nomeTime"
-                  id="nomeTime"
-                  defaultValue={nameTime}
-                />
-              </div>
-              <div className="defaultField">
-                <label htmlFor="categoria">Categoria</label>
-                <input
-                  type="input"
-                  name="categoria"
-                  id="categoria"
-                  defaultValue={categoryTime}
-                />
-              </div>
-              <div className="defaultField">
-                <label htmlFor="selectLider">Líder</label>
+            <div className="divider" />
 
-                <select
-                  className="select-lider"
-                  name="selectLider"
-                  id="selectLider"
-                >
-                  <option className="item-default" defaultValue hidden>
-                    {leaderMember}
+            <div className="config-text-field">
+              <label htmlFor="nomeTime">Nome</label>
+              <input
+                type="input"
+                name="nomeTime"
+                id="nomeTime"
+                defaultValue={nameTime}
+              />
+            </div>
+            <div className="config-text-field">
+              <label htmlFor="categoria">Categoria</label>
+              <input
+                type="input"
+                name="categoria"
+                id="categoria"
+                defaultValue={categoryTime}
+              />
+            </div>
+            <div className="config-text-field">
+              <label htmlFor="selectLider">Líder</label>
+
+              <select
+                className="select-lider"
+                name="selectLider"
+                id="selectLider"
+              >
+                <option className="item-default" defaultValue hidden>
+                  {leaderMember}
+                </option>
+                {members.map((member) => (
+                  <option key={member.id} value={member.id}>
+                    {member.nome}
                   </option>
-                  {members.map((member) => (
-                    <option key={member.id} value={member.id}>
-                      {member.nome}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </form>
+                ))}
+              </select>
+            </div>
             <div className="buttonArea">
               <button
                 onClick={() => setShowModalConfirm(!showModalConfirm)}

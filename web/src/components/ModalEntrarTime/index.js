@@ -15,7 +15,7 @@ export default function ModalEntrarTime({
   return (
     <>
       <div className="modal-codigo">
-        <div className="modalFade-codigo"></div>
+        <div className="modal-fade"></div>
 
         <div className="modalContainer-codigo-EntrarTime">
           <div className="mainContainer-codigo">

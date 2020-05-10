@@ -22,7 +22,7 @@ export default function ModalConfirmDelTime({
 
   return (
     <div className="modal-confirmDelTime">
-      <div className="modalFade-confirmDelTime"></div>
+      <div className="modal-fade"></div>
       <div className="modalContainer-confirmDelTime">
         <div className="containerCenter-confirmDelTime">
           <div className="containerCenter-confirmDelTime-header">

@@ -16,13 +16,6 @@
   align-self: flex-start;
 }
 
-.divider {
-  width: 100%;
-  height: 1px;
-  margin: 10px 0 20px 0;
-  background: #e4e4e4;
-}
-
 .cards-area {
   display: flex;
   width: 100%;

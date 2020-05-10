@@ -9,7 +9,7 @@ export default function ModalCriarDaily({ handleModalCreateDaily }) {
 
   return (
     <div className="modal-createDaily">
-      <div className="modalFade-createDaily"></div>
+      <div className="modal-fade"></div>
       <div className="modalContainer-createDaily">
         <div className="containerCenter-createDaily">
           <button id="closeModal" type="button" onClick={handleModalCreateDaily}>
