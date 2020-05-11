@@ -139,7 +139,7 @@ export default function LandingPage() {
                   spy={false}
                   smooth={true}
                   offset={-70}
-                  duration={500}>
+                  duration={350}>
                 Por que usar Scrunner?
                 </Link>
               </li>
@@ -150,7 +150,7 @@ export default function LandingPage() {
                   spy={false}
                   smooth={true}
                   offset={-70}
-                  duration={500}>
+                  duration={350}>
                 Aplicações
                 </Link>
               </li>
@@ -161,7 +161,7 @@ export default function LandingPage() {
                   spy={false}
                   smooth={true}
                   offset={-20}
-                  duration={500}>
+                  duration={350}>
                 Metodologias Ágeis
                 </Link>
               </li>
@@ -172,7 +172,7 @@ export default function LandingPage() {
                   spy={false}
                   smooth={true}
                   offset={-120}
-                  duration={500}>
+                  duration={350}>
                 Contatos
                 </Link>
               </li>
@@ -442,7 +442,7 @@ export default function LandingPage() {
       <footer>
         <div className="footer-largura">
           <div>
-            <button className="linkLogo" href="#">
+            <button className="linkLogo" onClick={scrollToTop}>
               <img className="logoNav" src={logo2} alt="Logo Scrunner" />
             </button>
             <ul>
@@ -453,8 +453,8 @@ export default function LandingPage() {
                   spy={false}
                   smooth={true}
                   offset={-70}
-                  duration={500}>
-                <a href="#porquescrunner">Por que usar Scrunner?</a>
+                  duration={350}>
+                Por que usar Scrunner?
                 </Link>
               </li>
               <li>
@@ -464,8 +464,8 @@ export default function LandingPage() {
                   spy={false}
                   smooth={true}
                   offset={-70}
-                  duration={500}>
-                <a href="#aplicacoes">Aplicações</a>
+                  duration={350}>
+                Aplicações
                 </Link>
               </li>
               <li>
@@ -475,8 +475,8 @@ export default function LandingPage() {
                   spy={false}
                   smooth={true}
                   offset={-20}
-                  duration={500}>
-                <a href="#metodologias">Metodologias ágeis</a>
+                  duration={350}>
+                Metodologias ágeis
                 </Link>
                 
               </li>
@@ -487,8 +487,8 @@ export default function LandingPage() {
                   spy={false}
                   smooth={true}
                   offset={-120}
-                  duration={500}>
-                <a href="#contato">Contato</a>
+                  duration={350}>
+                Contato
                 </Link>
               </li>
             </ul>
