@@ -55,19 +55,19 @@ export default function ModalCadastroEmpresa({
   };
 
   return (
-    <div className="modal-cadastro-empresa">
+    <div className="modal-area">
       <div className="modal-fade"></div>
 
-      <div className="modalContainer-cadastro-empresa">
-        <div className="containerLeft-cadastro-empresa">
-          <button className="close" onClick={handleModalEmpresa} href="#">
+      <div className="modal-main-container">
+        <div className="main-left-container">
+          <button className="responsive-close" onClick={handleModalEmpresa} href="#">
             <FaTimes size={20} color={"#737FF3"} />
           </button>
 
           <img src={logo_roxo} alt="Logo Scrunner" />
           <h1>Bem vindo ao Scrunner</h1>
           <h2>Cadastre-se usando um email</h2>
-          
+
           <div className="nomeEmpresa">
             <label htmlFor="companyName">Nome da Empresa</label>
 
@@ -119,7 +119,6 @@ export default function ModalCadastroEmpresa({
                 <a href="#abrirModalTermos">Termos e Condições</a>
               </label>
             </div>
-           
           </div>
 
           <button id="btnContinue" onClick={handleRegisterCompany}>
@@ -127,7 +126,7 @@ export default function ModalCadastroEmpresa({
           </button>
         </div>
 
-        <div className="containerRight-cadastro-empresa">
+        <div className="main-right-container">
           <button onClick={handleModalEmpresa} href="#">
             <FaTimes size={20} color={"#737FF3"} />
           </button>

@@ -12,9 +12,7 @@ import colaborador_icon from "../../assets/colaborador_icon.png";
 export default function ModalEscolhaCadastro({
   handleModalEscolha,
   handleSubmited,
-}) 
-
-{
+}) {
   const [empresa, setEmpresa] = useState(false);
   const [colaborador, setColaborador] = useState(false);
 
@@ -31,20 +29,25 @@ export default function ModalEscolhaCadastro({
   const handleSubmit = () => {
     if (empresa) {
       handleSubmited("empresa");
-    } else if(colaborador) {
+    } else if (colaborador) {
       handleSubmited("colaborador");
-    } 
+    }
   };
 
   return (
-    <div className="modal-escolha">
-      <div className="modal-fade"><button onClick={handleModalEscolha}></button></div> 
+    <div className="modal-area">
+      <div className="modal-fade">
+        <button onClick={handleModalEscolha}></button>
+      </div>
 
-      <div className="modalContainer-escolha">
-        <div className="containerLeft-escolha">
+      <div className="modal-main-container">
+        <div className="main-left-container">
+          <button className="responsive-close" onClick={handleModalEscolha} href="#">
+            <FaTimes size={20} color={"#737FF3"} />
+          </button>
           <img src={logo_roxo} alt="Logo Scrunner" />
-          <h1>Bem vindo ao Scrunner</h1>
-          <h5>Escolha o seu perfil</h5>
+          <h1 className="title-choice">Bem vindo ao Scrunner</h1>
+          <h5 className="subtitle-choice">Escolha o seu perfil</h5>
 
           <div className="containerOptions">
             <div
@@ -80,7 +83,7 @@ export default function ModalEscolhaCadastro({
           </button>
         </div>
 
-        <div className="containerRight-escolha">
+        <div className="main-right-container">
           <img src={bannerEscolha} alt="Banner modal" />
           <button type="button" onClick={handleModalEscolha}>
             <FaTimes size={20} color={"#737FF3"} />

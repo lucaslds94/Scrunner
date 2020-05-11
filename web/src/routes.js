@@ -36,11 +36,14 @@ export default function Routes() {
         />
 
         <Route path="/times/colaborador/daily/:name" component={DailyColab} />
-        <Route path="/times/colaborador/dailylog/:name/:dailyDate" component={DailyLog} />
+        <Route
+          path="/times/colaborador/dailylog/:name/:dailyDate"
+          component={DailyLog}
+        />
 
         <Route path="/times/colaborador/tarefa/:name" component={TasksColab} />
-        <Route 
-          path="/times/colaborador/kanban/:name/:boardTitle/:boardDate" 
+        <Route
+          path="/times/colaborador/kanban/:name/:boardTitle/:boardDate"
           component={TeamKanban}
         />
       </Switch>

@@ -15,10 +15,10 @@ export default function ModalLogin({ handleModalLogin }) {
   }
 
   return (
-    <div className="modal">
+    <div className="modal-area">
       <div className="modal-fade"><button onClick={handleModalLogin}></button></div>
 
-      <div className="modalContainer">
+      <div className="modal-main-container">
         <div className="containerLeft">
           <img src={bannerLogin} alt="Banner Modal Login" />
         </div>
@@ -64,7 +64,7 @@ export default function ModalLogin({ handleModalLogin }) {
               </button>
             </div>
           </form>
-          <button type="submit" id="btnContinue">
+          <button className="btn-continue-login">
             Continuar
           </button>
         </div>

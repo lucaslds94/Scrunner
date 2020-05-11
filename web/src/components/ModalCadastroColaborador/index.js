@@ -15,11 +15,14 @@ export default function ModalCadastrocolaborador({ handleModalColaborador }) {
   }
 
   return (
-    <div className="modal-cadastro-colaborador">
+    <div className="modal-area">
       <div className="modal-fade"></div>
 
-      <div className="modalContainer-cadastro-colaborador">
-        <div className="containerLeft-cadastro-colaborador">
+      <div className="modal-main-container">
+        <div className="main-left-container">
+          <button className="responsive-close" onClick={handleModalColaborador} href="#">
+            <FaTimes size={20} color={"#737FF3"} />
+          </button>
           <img src={logo_roxo} alt="Logo Scrunner" />
           <h1>Bem vindo ao Scrunner</h1>
           <h2>Cadastre-se usando um email</h2>
@@ -65,7 +68,7 @@ export default function ModalCadastrocolaborador({ handleModalColaborador }) {
           <button id="btnContinue">Continuar</button>
         </div>
 
-        <div className="containerRight-cadastro-colaborador">
+        <div className="main-right-container">
           <button onClick={handleModalColaborador} href="#">
             <FaTimes size={20} color={"#737FF3"} />
           </button>
