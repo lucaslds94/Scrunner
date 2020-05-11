@@ -9,6 +9,7 @@ header {
   z-index: 10;
 }
 
+
 nav {
   align-items: center;
   background-color: #737ff3;
@@ -17,7 +18,7 @@ nav {
   height: 60px;
   z-index: 4;
   justify-content: space-between;
-  font-size: 1.12em;
+  font-size: 1.08em;
   overflow: hidden;
   max-width: 1200px;
 }
@@ -46,6 +47,7 @@ nav li {
   display: flex;
   align-content: center;
   transition: all 0.4s;
+  cursor: pointer;
 }
 
 nav ul {
@@ -226,12 +228,12 @@ main {
 #bannerTrabalho {
   width: 680px;
   align-self: center;
-  left: -100px;
+  left: -30px;
   position: absolute;
 }
 
 .informacaoScrunner {
-  max-width: 391px;
+  max-width: 350px;
   z-index: 2;
 }
 
@@ -356,6 +358,11 @@ main {
   justify-content: space-between;
 }
 
+
+.artigos a {
+  text-decoration: none;
+}
+
 .artigo {
   cursor: pointer;
   display: flex;
@@ -384,7 +391,7 @@ main {
 
 .artigo:hover {
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
 .artigo:first-child {
@@ -410,7 +417,7 @@ main {
   padding: 0 10px 10px 0;
 }
 
-.artigo > div > a {
+.artigo > div > p {
   display: flex;
   font-size: 0.81em;
   margin: 10px 0 0 0;
@@ -482,12 +489,16 @@ main {
   transform: scale(1.05);
 }
 
+
 .botaoSessao4 {
   text-align: center;
   display: flex;
   font-size: 1em;
   color: white;
   text-decoration: none;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .contatos {
@@ -604,6 +615,7 @@ main {
 }
 .textoForm textarea {
   resize: none;
+  outline: none;
 }
 
 .containerBtn {
@@ -654,10 +666,16 @@ footer ul {
   list-style: none;
 }
 
+footer li {
+  cursor: pointer;
+  width: fit-content;
+}
+
 footer a {
-  padding: 0 15px;
+  padding: 0 10px;
   text-decoration: none;
   color: #505050;
+  transition: all .2s;
 }
 
 footer a:hover {
@@ -669,6 +687,52 @@ footer p {
   color: #505050;
   font-size: 0.87em;
 }
+
+.preferences-choice {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.preferences-choice:after {
+  content: "";
+  clear: both;
+}
+
+.preference {
+  box-sizing: border-box;
+  float: left;
+  height: 40px;
+  position: relative;
+  width: 120px;
+}
+
+
+.preferences-choice input{
+  display: none;
+}
+
+.preferences-choice input + label:before {
+    border: 1px solid #737ff3;
+    content: "";
+    display: inline-block;
+    font: 16px/1em sans-serif;
+    height: 14px;
+    margin: 0 .60em 0 0;
+    padding: 0;
+    vertical-align: top;
+    width: 14px;
+    border-radius: 2px;
+}
+
+.preferences-choice input:checked + label:before {
+  background: transparent;
+  color: #737ff3;
+  content: "\2713";
+  text-align: center;
+  font-weight: bold;
+}
+
 
 @media (max-width: 970px) {
   nav ul {
@@ -774,6 +838,7 @@ footer p {
     height: 345px;
     flex-direction: column;
   }
+
 
   .artigo:first-child {
     margin: 0 0 30px 0;

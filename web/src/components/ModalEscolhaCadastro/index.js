@@ -38,7 +38,7 @@ export default function ModalEscolhaCadastro({
 
   return (
     <div className="modal-escolha">
-      <div className="modal-fade"></div>
+      <div className="modal-fade"><button onClick={handleModalEscolha}></button></div> 
 
       <div className="modalContainer-escolha">
         <div className="containerLeft-escolha">

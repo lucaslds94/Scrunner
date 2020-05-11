@@ -176,6 +176,7 @@
 
 #manterConec{
   margin-right: 5px;
+  
 }
 
 #esqSenha{
@@ -184,8 +185,14 @@
   color: #737FF3;
   text-decoration: none;
   border: none;
+  outline: none;
   background: transparent;
   cursor: pointer;
+  transition: transform .2s;
+}
+
+#esqSenha:hover {
+  transform: scale(1.01);
 }
 
 #btnContinue{

@@ -7,6 +7,8 @@ import { FaAngleRight } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { Link, animateScroll as scroll } from 'react-scroll';
+
 import ModalLogin from "../../components/ModalLogin";
 import ModalEscolhaCadastro from "../../components/ModalEscolhaCadastro";
 import ModalCadastroEmpresa from "../../components/ModalCadastroEmpresa";
@@ -36,6 +38,11 @@ export default function LandingPage() {
   const [showModalEmpresa, setShowModalEmpresa] = useState(false);
   const [showModalColaborador, setShowModalColaborador] = useState(false);
   const [showModalCodigo, setShowModalCodigo] = useState(false);
+
+
+  const scrollToTop = () => {
+    scroll.scrollToTop();
+  }
 
   const handleModalLogin = () => {
     setShowModalLogin(!showModalLogin);
@@ -105,11 +112,13 @@ export default function LandingPage() {
           handleModalCodigoContinue={handleModalCodigoContinue}
         />
       )}
+
       {showModalColaborador && (
         <ModalCadastroColaborador
           handleModalColaborador={() => setShowModalColaborador(false)}
         />
       )}
+      
       <header>
         <nav>
           <aside id="burger">
@@ -118,22 +127,54 @@ export default function LandingPage() {
             <div className="line3"></div>
           </aside>
           <div>
-            <button className="linkLogo">
+            <button className="linkLogo" onClick={scrollToTop}>
               <img className="logoNav" src={LogoV2} alt="Logo Scrunner" />
             </button>
 
             <ul>
               <li>
-                <a href="#porqueScrunner">Por que usar Scrunner?</a>
+                <Link 
+                  activeClass="active"
+                  to="porqueScrunner"
+                  spy={false}
+                  smooth={true}
+                  offset={-70}
+                  duration={500}>
+                Por que usar Scrunner?
+                </Link>
               </li>
               <li>
-                <a href="#aplicacoes">Aplicações</a>
+                <Link 
+                  activeClass="active"
+                  to="aplicacoes"
+                  spy={false}
+                  smooth={true}
+                  offset={-70}
+                  duration={500}>
+                Aplicações
+                </Link>
               </li>
               <li>
-                <a href="#metodologias">Metodologias Ágeis</a>
+                <Link 
+                  activeClass="active"
+                  to="metodologias"
+                  spy={false}
+                  smooth={true}
+                  offset={-20}
+                  duration={500}>
+                Metodologias Ágeis
+                </Link>
               </li>
               <li>
-                <a href="#contato">Contatos</a>
+                <Link 
+                  activeClass="active"
+                  to="contato"
+                  spy={false}
+                  smooth={true}
+                  offset={-120}
+                  duration={500}>
+                Contatos
+                </Link>
               </li>
             </ul>
           </div>
@@ -167,10 +208,10 @@ export default function LandingPage() {
             <p>
               Finalize projetos, atinja metas e
               <br />
-              organize time com mais <strong>agilidade</strong> e autonomia.
+              organize times com mais <strong>agilidade</strong> e autonomia.
             </p>
             <br />
-            <button>Começar a usar</button>
+            <button onClick={handleModalEscolha} >Começar a usar</button>
           </div>
           <img
             id="teamSpirit"
@@ -183,13 +224,13 @@ export default function LandingPage() {
             <img id="bannerTrabalho" src={trabalho} alt="Imagem Trabalho" />
             <div className="informacaoScrunner">
               <h1>Por que</h1>
-              <h1>usar Scrunner ?</h1>
+              <h1>usar Scrunner?</h1>
               <p>
                 Observando a tendência do uso de metodologias ágeis na gestão de
                 times e projetos, o Scrunner visa incentivar e facilitar a
                 aplicação do <strong>Scrum</strong>, uma das mais importantes e
-                utilizadas metodologias de gerenciamento de projetos do mercado.
-                De forma prática e intuitiva, reunindo conceitos e ferramentas
+                utilizadas metodologias de gerenciamento de projetos do mercado,
+                de forma prática e intuitiva reunindo conceitos e ferramentas
                 em um só lugar.
               </p>
               <p>
@@ -241,43 +282,43 @@ export default function LandingPage() {
             </div>
             <img id="quadroScrum" src={quadroScrum} alt="Quadro Scrum" />
           </div>
+          
           <div className="containerArtigos">
             <h3>Artigos sobre:</h3>
             <div className="artigos">
-              <div className="artigo">
-                <div className="artigo-border"></div>
-                <h3>O que é Scrum ?</h3>
-                <p>
-                  No Scrum, os projetos são divididos em ciclos (tipicamente
-                  mensais) chamados de Sprints...
-                </p>
-                <div>
-                  <a
-                    target="__blank"
-                    href="https://www.desenvolvimentoagil.com.br/scrum/"
-                  >
-                    Leia mais
-                    <FaAngleRight size={20} color={"#328CC1"} />
-                  </a>
+
+              <a target="__blank" href="https://www.desenvolvimentoagil.com.br/scrum/">
+                <div className="artigo">
+                  <div className="artigo-border"></div>
+                  <h3>O que é Scrum?</h3>
+                  <p>
+                    No Scrum, os projetos são divididos em ciclos (tipicamente
+                    mensais) chamados de Sprints...
+                  </p>
+                  <div>
+                      <p> Leia mais
+                      <FaAngleRight size={20} color={"#328CC1"} />
+                      </p>
+                  </div>
                 </div>
-              </div>
-              <div className="artigo">
-                <div className="artigo-border"></div>
-                <h3>Daily Scrum</h3>
-                <p>
-                  A cada dia do Sprint a equipe faz uma reunião diária, chamada
-                  Daily Scrum...
-                </p>
-                <div>
-                  <a
-                    target="__blank"
-                    href="https://www.desenvolvimentoagil.com.br/scrum/daily_scrum"
-                  >
-                    Leia mais
-                    <FaAngleRight size={20} color={"#328CC1"} />
-                  </a>
+              </a>
+              
+              <a target="__blank" href="https://www.desenvolvimentoagil.com.br/scrum/daily_scrum">
+                <div className="artigo">
+                  <div className="artigo-border"></div>
+                  <h3>Daily Scrum</h3>
+                  <p>
+                    A cada dia do Sprint a equipe faz uma reunião diária, chamada
+                    Daily Scrum...
+                  </p>
+                  <div>
+                    <p>
+                      Leia mais
+                      <FaAngleRight size={20} color={"#328CC1"} />
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </a>
             </div>
           </div>
         </section>
@@ -294,9 +335,9 @@ export default function LandingPage() {
               Desenvolva projetos e gerencie times de forma ágil com Scrunner!
             </div>
             <div className="divBotaoSessao4">
-              <a className="botaoSessao4" href="criarConta.html">
+              <button onClick={handleModalEscolha} className="botaoSessao4">
                 Começar a usar
-              </a>
+              </button>
             </div>
           </div>
         </section>
@@ -310,7 +351,7 @@ export default function LandingPage() {
             />
             <p>
               Possui alguma dúvida sobre como o sistema funciona, ou até mesmo
-              sobre metodologias ágeis ? Sinta-se à vontade para falar sobre com
+              sobre metodologias ágeis? Sinta-se à vontade para falar sobre com
               a gente.
               <br />
               <br />
@@ -330,7 +371,7 @@ export default function LandingPage() {
               <a href="http://linkedin.com">
                 <img src={linkedin_icon} alt="Logo linkedin" />
               </a>
-              <a href="#http://instagram.com">
+              <a href="http://instagram.com">
                 <img src={instagram_icon} alt="Logo instagram" />
               </a>
             </div>
@@ -352,24 +393,33 @@ export default function LandingPage() {
             <div>
               <p className="textoCinza">Preferência de comunicação por:</p>
               <br />
-              <input
-                type="radio"
-                name="prefComunic"
-                id="prefTel"
-                value="prefTel"
-              />
-              <label className="textoCinza" htmlFor="prefTel">
-                Telefone
-              </label>
-              <input
-                type="radio"
-                name="prefComunic"
-                id="prefEmail"
-                value="prefEmail"
-              />
-              <label className="textoCinza" htmlFor="prefEmail">
-                Email
-              </label>
+              <ul className="preferences-choice">
+                <li className="preference">
+                  <input
+                    type="radio"
+                    name="prefComunic"
+                    id="prefTel"
+                    value="prefTel"
+                  />
+                  <label className="textoCinza" htmlFor="prefTel">
+                    Telefone
+                  </label>
+                </li>
+
+                <li className="preference">
+                  <input
+                    type="radio"
+                    name="prefComunic"
+                    id="prefEmail"
+                    value="prefEmail"
+                  />
+                  <label className="textoCinza" htmlFor="prefEmail">
+                    Email
+                  </label>
+                </li>
+              </ul>
+              
+              
 
               <br />
               <br />
@@ -397,16 +447,49 @@ export default function LandingPage() {
             </button>
             <ul>
               <li>
-                <a href="#porqueScrunner">Por que usar Scrunner ?</a>
+                <Link 
+                  activeClass="active"
+                  to="porqueScrunner"
+                  spy={false}
+                  smooth={true}
+                  offset={-70}
+                  duration={500}>
+                <a href="#porquescrunner">Por que usar Scrunner?</a>
+                </Link>
               </li>
               <li>
+                <Link 
+                  activeClass="active"
+                  to="aplicacoes"
+                  spy={false}
+                  smooth={true}
+                  offset={-70}
+                  duration={500}>
                 <a href="#aplicacoes">Aplicações</a>
+                </Link>
               </li>
               <li>
+                <Link 
+                  activeClass="active"
+                  to="metodologias"
+                  spy={false}
+                  smooth={true}
+                  offset={-20}
+                  duration={500}>
                 <a href="#metodologias">Metodologias ágeis</a>
+                </Link>
+                
               </li>
               <li>
+                <Link 
+                  activeClass="active"
+                  to="contato"
+                  spy={false}
+                  smooth={true}
+                  offset={-120}
+                  duration={500}>
                 <a href="#contato">Contato</a>
+                </Link>
               </li>
             </ul>
           </div>

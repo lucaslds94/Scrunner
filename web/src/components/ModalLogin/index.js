@@ -16,7 +16,7 @@ export default function ModalLogin({ handleModalLogin }) {
 
   return (
     <div className="modal">
-      <div className="modalFade"></div>
+      <div className="modal-fade"><button onClick={handleModalLogin}></button></div>
 
       <div className="modalContainer">
         <div className="containerLeft">
