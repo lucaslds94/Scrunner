@@ -41,7 +41,7 @@ export default function ModalCadastroEmpresa({
       return;
     }
 
-    if(confirmPassword != password){
+    if(confirmPassword !== password){
       toast.error("As senhas devem ser iguais")
       return;
     }

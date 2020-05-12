@@ -1,0 +1,68 @@
+#burger {
+  display: none;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.line1,
+.line2,
+.line3 {
+  width: 25px;
+  height: 3px;
+  background-color: #f1f1f1;
+  margin: 5px;
+  transition: all 0.3s ease;
+}
+
+.menu-options-burger {
+  position: absolute;
+  top: 60px;
+  left: -100vw;
+  height: 100vh;
+  width: 70%;
+  transition: left 0.3s ease-in-out;
+}
+
+.active-burger {
+  left: 0;
+}
+
+.menu-list {
+  display: flex;
+  flex-direction: column;
+  background-color: #737ff3;
+
+  width: 100%;
+  padding-top: 50px;
+
+  z-index: 11;
+}
+
+.menu-list a {
+  height: 80px;
+  width: 100%;
+
+  padding-left: 45px;
+}
+
+.burger-fade {
+  position: absolute;
+  top: 60px;
+  left: 0px;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.burger-fade button {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+}
+
+@media (max-width: 970px) {
+  #burger {
+    display: block;
+  }
+}

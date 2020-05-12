@@ -22,19 +22,6 @@ nav {
   overflow: hidden;
   max-width: 1200px;
 }
-#burger {
-  display: none;
-  margin-left: 10px;
-}
-.line1,
-.line2,
-.line3 {
-  width: 25px;
-  height: 3px;
-  background-color: #f1f1f1;
-  margin: 5px;
-  transition: all 0.3s ease;
-}
 
 nav div {
   display: flex;

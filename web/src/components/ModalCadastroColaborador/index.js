@@ -47,7 +47,7 @@ export default function ModalCadastrocolaborador({ handleModalColaborador }) {
                 name="password"
                 id="senha"
               />
-              <button type="button" onClick={showPassword} id="iconOlho">
+              <button type="button" onClick={showPassword} className="iconOlho">
                 {showPass && <FaEyeSlash size={20} color={"#737FF3"} />}
                 {!showPass && <FaEye size={20} color={"#c3c3c3"} />}
               </button>
@@ -61,7 +61,7 @@ export default function ModalCadastrocolaborador({ handleModalColaborador }) {
                 name="confirmPassword"
                 id="confirmPassword"
               />
-              <button type="button" onClick={showPassword} id="iconOlho">
+              <button type="button" onClick={showPassword} className="iconOlho">
                 {showPass && <FaEyeSlash size={20} color={"#737FF3"} />}
                 {!showPass && <FaEye size={20} color={"#c3c3c3"} />}
               </button>

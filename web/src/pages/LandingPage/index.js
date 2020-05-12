@@ -9,6 +9,8 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { Link, animateScroll as scroll } from 'react-scroll';
 
+import BurgerMenu from '../../components/BurgerMenu';
+
 import ModalLogin from "../../components/ModalLogin";
 import ModalEscolhaCadastro from "../../components/ModalEscolhaCadastro";
 import ModalCadastroEmpresa from "../../components/ModalCadastroEmpresa";
@@ -121,11 +123,7 @@ export default function LandingPage() {
       
       <header>
         <nav>
-          <aside id="burger">
-            <div className="line1"></div>
-            <div className="line2"></div>
-            <div className="line3"></div>
-          </aside>
+          <BurgerMenu />
           <div>
             <button className="linkLogo" onClick={scrollToTop}>
               <img className="logoNav" src={LogoV2} alt="Logo Scrunner" />
