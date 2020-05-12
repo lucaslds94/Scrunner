@@ -1,3 +1,20 @@
+.title-container {
+  display: flex;
+}
+
+.title-container img {
+  position: relative;
+  right: 10px;
+  width: 20%;
+}
+
+.title-container h1 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #505050;
+  margin: 20px 0 10px;
+}
+
 .email{
   font-size: 14px;
   font-weight: bold;
@@ -82,7 +99,6 @@
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
-  margin-top: 15px;
   margin-bottom: 10px;
 }
 

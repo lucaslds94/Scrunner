@@ -107,12 +107,15 @@ nav li a:hover {
   border: none;
   cursor: pointer;
   margin-right: 10px;
+  outline: none;
+
+  border: 1.5px solid transparent;
 }
 
 .logon:hover {
   background-color:rgb(76, 86, 179);
   color:#FFF;
-  border:1px solid #FFF;
+  border:1.5px solid #FFF;
   
 }
 
@@ -123,12 +126,14 @@ nav li a:hover {
   background: transparent;
   cursor: pointer;
   padding: 8px 17px;
+  outline: none;
   transition: all 0.2s;
+  border: 1.5px solid transparent;
 }
 .login:hover {
   border-radius: 50px;
   background-color:rgb(76, 86, 179);
-  border:1px solid #FFF;
+  border:1.5px solid #FFF;
 }
 
 

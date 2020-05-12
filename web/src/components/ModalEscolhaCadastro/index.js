@@ -45,9 +45,12 @@ export default function ModalEscolhaCadastro({
           <button className="responsive-close" onClick={handleModalEscolha} href="#">
             <FaTimes size={20} color={"#737FF3"} />
           </button>
-          <img src={logo_roxo} alt="Logo Scrunner" />
-          <h1 className="title-choice">Bem vindo ao Scrunner</h1>
-          <h5 className="subtitle-choice">Escolha o seu perfil</h5>
+          <div className="title-container">
+            <img src={logo_roxo} alt="Logo Scrunner" />
+            <h1 className="title-choice">Bem vindo ao Scrunner</h1>
+          </div>
+
+          <h2 className="subtitle-choice">Escolha o seu perfil</h2>
 
           <div className="containerOptions">
             <div
@@ -78,7 +81,7 @@ export default function ModalEscolhaCadastro({
             </div>
           </div>
 
-          <button onClick={handleSubmit} id="btnContinue">
+          <button onClick={handleSubmit} className="botaoEscolha" id="btnContinue">
             Continuar
           </button>
         </div>

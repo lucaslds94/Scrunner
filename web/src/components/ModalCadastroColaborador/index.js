@@ -23,8 +23,10 @@ export default function ModalCadastrocolaborador({ handleModalColaborador }) {
           <button className="responsive-close" onClick={handleModalColaborador} href="#">
             <FaTimes size={20} color={"#737FF3"} />
           </button>
-          <img src={logo_roxo} alt="Logo Scrunner" />
-          <h1>Bem vindo ao Scrunner</h1>
+          <div className="title-container">
+            <img src={logo_roxo} alt="Logo Scrunner" />
+            <h1>Bem vindo ao Scrunner</h1>
+          </div>
           <h2>Cadastre-se usando um email</h2>
           <form action="" method="POST">
             <div className="nomecolaborador">
@@ -50,6 +52,21 @@ export default function ModalCadastrocolaborador({ handleModalColaborador }) {
                 {!showPass && <FaEye size={20} color={"#c3c3c3"} />}
               </button>
             </div>
+
+            <div className="senha">
+              <label htmlFor="confirmPassword">Confirmar senha</label>
+              <br />
+              <input
+                type={showPass ? "text" : "password"}
+                name="confirmPassword"
+                id="confirmPassword"
+              />
+              <button type="button" onClick={showPassword} id="iconOlho">
+                {showPass && <FaEyeSlash size={20} color={"#737FF3"} />}
+                {!showPass && <FaEye size={20} color={"#c3c3c3"} />}
+              </button>
+            </div>
+
             <div className="checkBox">
               <div>
                 <input

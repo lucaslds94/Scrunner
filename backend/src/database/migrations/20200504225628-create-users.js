@@ -32,7 +32,7 @@ module.exports = {
       is_active: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
-        defaultValue: 1
+        defaultValue: true
       },
       created_at: {
         type: Sequelize.DATE,

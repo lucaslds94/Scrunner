@@ -18,6 +18,7 @@ export default function ModalCadastroEmpresa({
   const [companyName, setCompanyName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [checkTerms, setCheckTerms] = useState(false);
 
   const showPassword = () => {
@@ -40,17 +41,24 @@ export default function ModalCadastroEmpresa({
       return;
     }
 
+    if(confirmPassword != password){
+      toast.error("As senhas devem ser iguais")
+      return;
+    }
+
     if (!checkTerms) {
       toast.error("Você precisa concordar com os termos de uso!");
       return;
     }
 
-    if (companyName && email && password && checkTerms) {
+    if ( companyName && email && password && confirmPassword && checkTerms) {
       registerCompany({ companyName, email, password });
 
       setCompanyName("");
       setEmail("");
       setPassword("");
+      setConfirmPassword("");
+
     }
   };
 
@@ -63,9 +71,10 @@ export default function ModalCadastroEmpresa({
           <button className="responsive-close" onClick={handleModalEmpresa} href="#">
             <FaTimes size={20} color={"#737FF3"} />
           </button>
-
-          <img src={logo_roxo} alt="Logo Scrunner" />
-          <h1>Bem vindo ao Scrunner</h1>
+          <div className="title-container">
+            <img src={logo_roxo} alt="Logo Scrunner" />
+            <h1>Bem vindo ao Scrunner</h1>
+          </div>
           <h2>Cadastre-se usando um email</h2>
 
           <div className="nomeEmpresa">
@@ -105,6 +114,23 @@ export default function ModalCadastroEmpresa({
               {!showPass && <FaEye size={20} color={"#c3c3c3"} />}
             </button>
           </div>
+
+          <div className="senha">
+            <label htmlFor="confirmPassword">Confirmar Senha</label>
+
+            <input
+              type={showPass ? "text" : "password"}
+              value={confirmPassword}
+              name="confirmPassword"
+              id="confirmPassword"
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+            <button type="button" onClick={showPassword} id="iconOlho">
+              {showPass && <FaEyeSlash size={20} color={"#737FF3"} />}
+              {!showPass && <FaEye size={20} color={"#c3c3c3"} />}
+            </button>
+          </div>
+
           <div className="checkBox">
             <div>
               <input

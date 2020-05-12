@@ -1,15 +1,22 @@
+.title-container{
+  display:flex;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
 .title-choice{
   font-size: 20px;
   font-weight: bold;
   color: #505050;
-  margin: 15px 0;
 }
 
 .subtitle-choice {
-  font-size: 17px;
-  font-weight: normal;
-  color: #505050;
-  margin: 20px 0;
+  
+  margin: 15px 0 35px !important;
 }
 
 .containerOptions {
@@ -27,7 +34,7 @@
   max-height: 110px;
   border-radius: 5px;
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   cursor: pointer;
   transition: all 0.1s;
 }
@@ -95,5 +102,9 @@
   font-weight: bold;
   color: #fff;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 15px !important;
 }
+
+/* .botaoEscolha {
+  margin-top: 30px !important;
+} */

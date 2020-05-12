@@ -39,7 +39,6 @@
 
 .modal-main-container label {
   font-size: 14px;
-  font-weight: bold;
   color: #505050;
 }
 
@@ -71,7 +70,7 @@
   font-size: 17px;
   font-weight: normal;
   color: #9b9b9b;
-  margin: 5px 0 30px 0;
+  margin: 10px 0 20px 0;
 }
 
 .main-left-container > form {
