@@ -102,7 +102,7 @@ nav li a:hover {
   color: #737ff3;
   font-weight: bold;
   border-radius: 50px;
-  transition: all 0.4s;
+  transition: all 0.2s;
   padding: 8px 17px;
   border: none;
   cursor: pointer;
@@ -112,6 +112,8 @@ nav li a:hover {
 .logon:hover {
   background-color:rgb(76, 86, 179);
   color:#FFF;
+  border:1px solid #FFF;
+  
 }
 
 .login {
@@ -121,11 +123,12 @@ nav li a:hover {
   background: transparent;
   cursor: pointer;
   padding: 8px 17px;
-  transition: all 0.4s;
+  transition: all 0.2s;
 }
 .login:hover {
   border-radius: 50px;
   background-color:rgb(76, 86, 179);
+  border:1px solid #FFF;
 }
 
 
@@ -486,7 +489,8 @@ main {
 
 .divBotaoSessao4:hover {
   cursor: pointer;
-  transform: scale(1.05);
+  transform: scale(1.02);
+  opacity:0.8;
 }
 
 
@@ -814,6 +818,10 @@ footer p {
 
   .tituloIcone {
     align-self: center;
+  }
+
+  .informacaoMetodologias {
+    margin: 0 10px;
   }
 
   .metodologias {

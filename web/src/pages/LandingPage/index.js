@@ -139,7 +139,7 @@ export default function LandingPage() {
                   spy={false}
                   smooth={true}
                   offset={-70}
-                  duration={350}>
+                  duration={300}>
                 Por que usar Scrunner?
                 </Link>
               </li>
@@ -150,7 +150,7 @@ export default function LandingPage() {
                   spy={false}
                   smooth={true}
                   offset={-70}
-                  duration={350}>
+                  duration={300}>
                 Aplicações
                 </Link>
               </li>
@@ -161,7 +161,7 @@ export default function LandingPage() {
                   spy={false}
                   smooth={true}
                   offset={-20}
-                  duration={350}>
+                  duration={300}>
                 Metodologias Ágeis
                 </Link>
               </li>
@@ -172,7 +172,7 @@ export default function LandingPage() {
                   spy={false}
                   smooth={true}
                   offset={-120}
-                  duration={350}>
+                  duration={300}>
                 Contatos
                 </Link>
               </li>

@@ -2,8 +2,8 @@ const request = require("supertest");
 const app = require("../../src/app");
 
 const MOCK_USER = {
-  name: "Lucas",
-  email: "lucas@santander.com",
+  name: "Example",
+  email: "example@email.com",
   password: "123456",
   is_owner: "T",
 };

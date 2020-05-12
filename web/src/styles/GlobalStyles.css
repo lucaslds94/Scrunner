@@ -20,3 +20,7 @@ html {
 ::-webkit-scrollbar-thumb {
   background: rgb(76, 86, 179);
 }
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
