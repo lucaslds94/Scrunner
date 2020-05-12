@@ -4,7 +4,7 @@ class UserTeam extends Model {
   static init(sequelize){
     super.init({
       is_leader: {
-        type: DataTypes.ENUM("F","T")
+        type: DataTypes.BOOLEAN
       },
       users_id: {
         type: DataTypes.INTEGER,

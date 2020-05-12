@@ -4,12 +4,6 @@ class DailyContent extends Model {
     
     static init(sequelize) {
         super.init({
-            id: {
-                type: DataTypes.INTEGER,
-                primaryKey: true,
-                autoIncrement: true,
-                allowNull: false
-            },
             did_yesterday: {
                 type: DataTypes.STRING(255)
             },

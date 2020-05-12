@@ -5,7 +5,7 @@ const MOCK_USER = {
   name: "Example",
   email: "example@email.com",
   password: "123456",
-  is_owner: "T",
+  is_owner: 1,
 };
 
 let ID_MOCK_USER = "";
@@ -24,17 +24,17 @@ describe("Route Users", () => {
     const response = await request(app).post("/user").send(MOCK_USER);
 
     expect(response.status).toEqual(409);
-    expect(response.body).toHaveProperty("error");
+    expect(response.body).toHaveProperty("err");
   });
 
-  it("Should be able to delete a user", async () => {
-    const response = await request(app).delete(`/user/${ID_MOCK_USER}`);
+  it("Should be able to disable a user", async () => {
+    const response = await request(app).put(`/user/${ID_MOCK_USER}`);
 
     expect(response.status).toEqual(204);
   }); 
 
   it("Should not be able to find a user with an invalid ID", async () => {
-    const response = await request(app).delete("/user/231hk2g4k2h");
+    const response = await request(app).put("/user/231hk2g4k2h");
 
     expect(response.status).toEqual(409);
   });

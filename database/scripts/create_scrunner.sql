@@ -8,7 +8,8 @@ CREATE TABLE users(
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
     password VARCHAR(350) NOT NULL,
-    is_owner ENUM('F','T') NOT NULL,
+    is_owner BOOLEAN NOT NULL,
+    is_active BOOLEAN NOT NULL DEFAULT 1,
     image VARCHAR(500),
     created_at timestamp not null,
     updated_at timestamp not null,
@@ -29,7 +30,7 @@ CREATE TABLE teams(
 
 CREATE TABLE user_teams(
     id INT NOT NULL AUTO_INCREMENT,
-    is_leader ENUM('F','T') NOT NULL,
+    is_leader BOOLEAN NOT NULL,
     users_id INT NOT NULL,
     teams_id INT NOT NULL,
     created_at timestamp not null,

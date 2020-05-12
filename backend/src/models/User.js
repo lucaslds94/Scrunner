@@ -13,10 +13,13 @@ class User extends Model {
         type: DataTypes.STRING(255)
       },
       is_owner: {
-        type: DataTypes.ENUM("F", "T")
+        type: DataTypes.BOOLEAN
       },
       image: {
         type: DataTypes.STRING(500)
+      },
+      is_active: {
+        type: DataTypes.BOOLEAN
       },
     },{
       sequelize,

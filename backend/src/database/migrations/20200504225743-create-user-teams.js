@@ -10,7 +10,7 @@ module.exports = {
         allowNull: false,
       },
       is_leader: {
-        type: Sequelize.ENUM("F", "T"),
+        type: Sequelize.BOOLEAN,
         allowNull: false,
       },
       created_at: {

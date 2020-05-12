@@ -20,19 +20,22 @@ module.exports = {
     return res.status(409).json({ err: "Email is already in use" });
   },
 
-  async delete(req, res) {
+  async disable(req, res) {
     const { id } = req.params;
 
     let user = await User.findByPk(id);
 
+    console.log(id);
     if (!user) {
       return res.status(409).json({ err: "User not found" });
     }
 
-    await user.destroy({
+    await user.update({
+     is_active: 0
+    }, {
       where: {
         id,
-      },
+      }
     });
 
     return res.status(204).send();

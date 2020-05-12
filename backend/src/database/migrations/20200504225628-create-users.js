@@ -22,12 +22,17 @@ module.exports = {
         allowNull: false,
       },
       is_owner: {
-        type: Sequelize.ENUM("F", "T"),
+        type: Sequelize.BOOLEAN,
         allowNull: false,
       },
       image: {
         type: Sequelize.STRING(500),
         allowNull: true,
+      },
+      is_active: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: 1
       },
       created_at: {
         type: Sequelize.DATE,
