@@ -43,7 +43,6 @@ CREATE TABLE user_teams(
 
 CREATE TABLE daily_boards(
     id INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(100) NOT NULL,
     teams_id INT NOT NULL,
     created_at timestamp not null,
     updated_at timestamp not null,

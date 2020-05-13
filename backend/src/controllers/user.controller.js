@@ -10,7 +10,7 @@ module.exports = {
     if (!user) {
       password = bcrypt.hashSync(password, 10);
 
-      user = await User.create({ email, password, name, is_owner, is_active: 1 });
+      user = await User.create({ email, password, name, is_owner, is_active: true });
 
       delete user.dataValues.password;
 
@@ -31,7 +31,7 @@ module.exports = {
     }
 
     await user.update({
-     is_active: 0
+     is_active: false
     }, {
       where: {
         id,

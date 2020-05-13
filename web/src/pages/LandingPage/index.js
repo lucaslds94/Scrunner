@@ -76,7 +76,7 @@ export default function LandingPage() {
       name: companyData.companyName,
       email: companyData.email,
       password: companyData.password,
-      is_owner: 1
+      is_owner: true
     };
 
     try{
@@ -100,7 +100,7 @@ export default function LandingPage() {
       name: colabData.colabName,
       email: colabData.email,
       password: colabData.password,
-      is_owner: 0
+      is_owner: false
     };
 
     try {
