@@ -76,8 +76,8 @@ export default function LandingPage() {
       name: companyData.companyName,
       email: companyData.email,
       password: companyData.password,
-      is_owner: 'T'
-    }
+      is_owner: 1
+    };
 
     try{
       await api.post('/user', companyModel);
@@ -86,11 +86,36 @@ export default function LandingPage() {
     }catch(error){
 
       if(error.response.data.err){
-        return toast.error('Email já cadastrado');
+        return toast.error('Email já cadastrado como empresa!');
       }
       
-      toast.error('Ocorreu um error inesperado');
+      toast.error('Ocorreu um erro inesperado.');
     } 
+  }
+
+  const registerColab = async (colabData) => {
+    setShowModalColaborador(false);
+
+    const colabModel = {
+      name: colabData.colabName,
+      email: colabData.email,
+      password: colabData.password,
+      is_owner: 0
+    };
+
+    try {
+      await api.post('/user', colabModel);
+
+      toast.success('Cadastro realizado com sucesso!');
+    } 
+    catch(error){
+        
+        if(error.response.data.err){
+          return toast.error('Email já cadastrado como colaborador!');
+        }
+
+        toast.error('Ocorreu um erro inesperado.');
+    }
   }
 
   return (
@@ -118,6 +143,7 @@ export default function LandingPage() {
       {showModalColaborador && (
         <ModalCadastroColaborador
           handleModalColaborador={() => setShowModalColaborador(false)}
+          registerColab={registerColab}
         />
       )}
       

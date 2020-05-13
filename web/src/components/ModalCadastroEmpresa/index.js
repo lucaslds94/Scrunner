@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 import { FaTimes, FaEye, FaEyeSlash } from "react-icons/fa";
 
@@ -164,7 +163,6 @@ export default function ModalCadastroEmpresa({
           <img src={bannerEscolha} alt="Banner Modal Cadastro Empresa" />
         </div>
       </div>
-      <ToastContainer />
     </div>
   );
 }
