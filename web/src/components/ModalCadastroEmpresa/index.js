@@ -15,6 +15,7 @@ export default function ModalCadastroEmpresa({
   registerCompany,
 }) {
   const [showPass, setShowPass] = useState(false);
+  const [showConfirmPass, setShowConfirmPass] = useState(false);
   const [companyName, setCompanyName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,6 +25,10 @@ export default function ModalCadastroEmpresa({
   const showPassword = () => {
     setShowPass(!showPass);
   };
+
+  const showConfirmPassword = () => {
+    setShowConfirmPass(!showConfirmPass);
+  }
 
   const handleRegisterCompany = () => {
     if (companyName.trim().length === 0) {
@@ -119,15 +124,15 @@ export default function ModalCadastroEmpresa({
             <label htmlFor="confirmPassword">Confirmar Senha</label>
 
             <input
-              type={showPass ? "text" : "password"}
+              type={showConfirmPass ? "text" : "password"}
               value={confirmPassword}
               name="confirmPassword"
               id="confirmPassword"
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
-            <button type="button" onClick={showPassword} id="iconOlho">
-              {showPass && <FaEyeSlash size={20} color={"#737FF3"} />}
-              {!showPass && <FaEye size={20} color={"#c3c3c3"} />}
+            <button type="button" onClick={showConfirmPassword} id="iconOlho">
+              {showConfirmPass && <FaEyeSlash size={20} color={"#737FF3"} />}
+              {!showConfirmPass && <FaEye size={20} color={"#c3c3c3"} />}
             </button>
           </div>
 

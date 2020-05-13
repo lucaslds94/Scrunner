@@ -10,7 +10,7 @@ module.exports = {
     if (!user) {
       password = bcrypt.hashSync(password, 10);
 
-      user = await User.create({ email, password, name, is_owner });
+      user = await User.create({ email, password, name, is_owner, is_active: 1 });
 
       delete user.dataValues.password;
 
@@ -25,7 +25,7 @@ module.exports = {
 
     let user = await User.findByPk(id);
 
-    console.log(id);
+    
     if (!user) {
       return res.status(409).json({ err: "User not found" });
     }

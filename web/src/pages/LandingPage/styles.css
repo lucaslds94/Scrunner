@@ -116,6 +116,7 @@ nav li a:hover {
   outline: none;
   transition: all 0.2s;
   border: 1.5px solid transparent;
+  margin-right: 10px;
 }
 .login:hover {
   border-radius: 50px;
