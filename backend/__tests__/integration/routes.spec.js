@@ -4,13 +4,18 @@ const app = require("../../src/app");
 const MOCK_USER = {
   name: "Example",
   email: "example@email.com",
-  password: "123456",
+  password: "12345678",
   is_owner: 1,
 };
 
 let ID_MOCK_USER = "";
 
-describe("Route Users", () => {
+const USER_DB = {
+  email: "johnDoe@test.com",
+  password: "12345678"
+};
+
+describe("Users routes", () => {
   it("Should be able to create a new user", async () => {
     const response = await request(app).post("/user").send(MOCK_USER);
 
@@ -39,5 +44,35 @@ describe("Route Users", () => {
     expect(response.status).toEqual(409);
   });
 
-
 });
+
+describe("Sessions routes", () => {
+  it("Should be able to login", async () => {
+    const response = await request(app).post('/login').send(USER_DB);
+    
+    expect(response.status).toEqual(200);
+    expect(response.body).toHaveProperty("token");
+  });
+
+  it("Should not be able to login with an invalid email", async () => {
+    const INVALID_USER =  {
+      email: "mairoasdsa@teste.com",
+      password: "1132211"
+    }
+
+    const response = await request(app).post('/login').send(INVALID_USER);
+    
+    expect(response.status).toEqual(400);
+  });
+
+  it("Should not be able to login with an invalid password", async () => {
+    const INVALID_USER =  {
+      email: "johnDoe@test.com",
+      password: "1132211"
+    }
+
+    const response = await request(app).post('/login').send(INVALID_USER);
+    
+    expect(response.status).toEqual(401);
+  });
+})
