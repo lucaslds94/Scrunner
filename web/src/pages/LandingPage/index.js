@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import api from '../../services/api';
 import "./styles.css";
 
+import { useHistory } from 'react-router-dom';
+
 import { FaAngleRight } from "react-icons/fa";
 
 import { toast, ToastContainer } from "react-toastify";
@@ -34,12 +36,16 @@ import facebook_icon from "../../assets/facebook.png";
 import instagram_icon from "../../assets/instagram.png";
 import linkedin_icon from "../../assets/linkedin.png";
 
+import { setLocalStorage } from '../../utils/localStorage';
+
 export default function LandingPage() {
   const [showModalLogin, setShowModalLogin] = useState(false);
   const [showModalEscolha, setShowModalEscolha] = useState(false);
   const [showModalEmpresa, setShowModalEmpresa] = useState(false);
   const [showModalColaborador, setShowModalColaborador] = useState(false);
   const [showModalCodigo, setShowModalCodigo] = useState(false);
+
+  const history = useHistory();
 
 
   const scrollToTop = () => {
@@ -73,9 +79,9 @@ export default function LandingPage() {
     setShowModalEmpresa(false);
 
     const companyModel = {
-      name: companyData.companyName,
-      email: companyData.email,
-      password: companyData.password,
+      name: companyData.companyName.trim(),
+      email: companyData.email.toLowerCase().trim(),
+      password: companyData.password.trim(),
       is_owner: true
     };
 
@@ -97,9 +103,9 @@ export default function LandingPage() {
     setShowModalColaborador(false);
 
     const colabModel = {
-      name: colabData.colabName,
-      email: colabData.email,
-      password: colabData.password,
+      name: colabData.colabName.trim(),
+      email: colabData.email.toLowerCase().trim(),
+      password: colabData.password.trim(),
       is_owner: false
     };
 
@@ -118,9 +124,35 @@ export default function LandingPage() {
     }
   }
 
+  const login = async (dataLogin) => {
+    try{
+
+      const modelUserLogin = {
+        email: dataLogin.email.toLowerCase().trim(),
+        password: dataLogin.password.trim(),
+      }
+
+      const response = await api.post('/login', modelUserLogin);
+
+      setShowModalLogin(false);
+
+      setLocalStorage("@Scrunner:user", response.data.user);
+      setLocalStorage("@Scrunner:token", response.data.token);
+     
+      history.push("/dashboard");
+      
+    }catch(error){
+      if(error.response.data.err){
+        return toast.error('Erro ao realizar o login do usuário. Tente novamente');
+      }
+      
+      toast.error('Ocorreu um erro inesperado.');
+    }
+  }
+
   return (
     <>
-      {showModalLogin && <ModalLogin handleModalLogin={handleModalLogin} />}
+      {showModalLogin && <ModalLogin login={login} handleModalLogin={handleModalLogin} />}
       {showModalEscolha && (
         <ModalEscolhaCadastro
           handleModalEscolha={handleModalEscolha}

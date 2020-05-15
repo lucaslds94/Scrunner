@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import { toast } from "react-toastify";
+
 import { FaTimes, FaEye, FaEyeSlash } from "react-icons/fa";
 
 import "./styles.css";
@@ -7,11 +9,30 @@ import "./styles.css";
 import logo_roxo from "../../assets/logo_roxo_100.png";
 import bannerLogin from "../../assets/modalLogin.png";
 
-export default function ModalLogin({ handleModalLogin }) {
+export default function ModalLogin({ handleModalLogin, login }) {
   const [showPass, setShowPass] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   function showPassword() {
     setShowPass(!showPass);
+  }
+
+  const handleLogin = () => {
+   
+    if (!email.includes("@")) {
+      toast.error("O email precisa ter o formato exemplo@email.com");
+      return;
+    }
+
+    if (password.length < 8) {
+      toast.error("A senha precisa de no mínimo 8 caracteres!");
+      return;
+    }
+
+    if (email && password) {
+      login({ email, password });
+    }
   }
 
   return (
@@ -32,9 +53,13 @@ export default function ModalLogin({ handleModalLogin }) {
           <h2>Entre usando um email</h2>
           <form id="login" action="" method="POST">
             <div className="email">
-              <label htmlFor="Email">Email</label>
+              <label htmlFor="email">Email</label>
               <br />
-              <input type="email" name="email" id="email" />
+              <input type="email" 
+              name="email"
+              id="email" 
+              value={email} 
+              onChange={e => setEmail(e.target.value)} />
             </div>
             <div className="senha">
               <label htmlFor="password">Senha</label>
@@ -42,7 +67,9 @@ export default function ModalLogin({ handleModalLogin }) {
               <input
                 type={showPass ? "text" : "password"}
                 name="password"
-                id="senha"
+                id="password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
               />
               <button type="button" onClick={showPassword} id="fotoOlho">
                 {showPass && <FaEyeSlash size={20} color={"#737FF3"} />}
@@ -64,7 +91,7 @@ export default function ModalLogin({ handleModalLogin }) {
               </button>
             </div>
           </form>
-          <button className="btn-continue-login">
+          <button onClick={handleLogin} className="btn-continue-login">
             Continuar
           </button>
         </div>

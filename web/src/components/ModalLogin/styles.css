@@ -190,6 +190,13 @@
   font-weight: bold;
   color: #fff;
   cursor: pointer;
+  transition: all .2s;
+}
+
+
+.btn-continue-login:hover {
+  transform: scale(0.97);
+  opacity: 0.9;
 }
 
 @media (max-width: 1000px) {

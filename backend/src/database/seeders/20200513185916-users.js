@@ -8,7 +8,7 @@ module.exports = {
       [
         {
           name: 'John Doe',
-          email: 'johnDoe@test.com',
+          email: 'johndoe@test.com',
           password: bcrypt.hashSync('12345678', 10),     
           is_owner: true,
           is_active: true,     
@@ -17,7 +17,7 @@ module.exports = {
         }, 
         {
           name: 'John Travolta',
-          email: 'johnTravolta@test.com',
+          email: 'johntravolta@test.com',
           is_owner: false,
           is_active: true,  
           password: bcrypt.hashSync('12345678', 10),          
@@ -26,7 +26,7 @@ module.exports = {
         },
         {
           name: 'Jony Bravo',
-          email: 'jonyBravo@test.com',
+          email: 'jonybravo@test.com',
           password: bcrypt.hashSync('12345678', 10),
           is_owner: false,
           is_active: true,          
@@ -35,7 +35,7 @@ module.exports = {
         },
         {
           name: 'Adele Hello',
-          email: 'adeleHello@test.com',
+          email: 'adelehello@test.com',
           password: bcrypt.hashSync('12345678', 10), 
           is_owner: false,
           is_active: true,         
@@ -44,7 +44,7 @@ module.exports = {
         },
         {
           name: 'Rick Martin',
-          email: 'rickMartin123@test.com',
+          email: 'rickmartin123@test.com',
           password: bcrypt.hashSync('12345678', 10),  
           is_owner: false,
           is_active: true,        
@@ -53,7 +53,7 @@ module.exports = {
         },
         {
           name: 'Shakira Da Silva',
-          email: 'shakiraSilvinha@test.com',
+          email: 'shakirasilvinha@test.com',
           password: bcrypt.hashSync('12345678', 10),     
           is_owner: true,
           is_active: true,      
@@ -71,7 +71,7 @@ module.exports = {
         },
         {
           name: 'Morty Pereira',
-          email: 'mortyPereira@test.com',
+          email: 'mortypereira@test.com',
           password: bcrypt.hashSync('12345678', 10), 
           is_owner: false,
           is_active: true,         
@@ -80,7 +80,7 @@ module.exports = {
         },
         {
           name: 'Elvis Santos',
-          email: 'elvisSantos@test.com',
+          email: 'elvissantos@test.com',
           password: bcrypt.hashSync('12345678', 10), 
           is_owner: false,
           is_active: true,          
@@ -89,7 +89,7 @@ module.exports = {
         },
         {
           name: 'Steve Universo',
-          email: 'steveUniverso@test.com',
+          email: 'steveuniverso@test.com',
           password: bcrypt.hashSync('12345678', 10),      
           is_owner: false,
           is_active: true,     
