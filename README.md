@@ -29,13 +29,13 @@ Santander Coders é um programa educacional promovido pelo Santander em parceria
 
 -  [GIT](https://git-scm.com/);
 
-- [HTML](https://developer.mozilla.org/pt-BR/docs/Web/HTML);
+-  [HTML](https://developer.mozilla.org/pt-BR/docs/Web/HTML);
 
-- [CSS](https://developer.mozilla.org/pt-BR/docs/Web/CSS);
+-  [CSS](https://developer.mozilla.org/pt-BR/docs/Web/CSS);
 
-- [JavaScript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript);
+-  [JavaScript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript);
 
-- [NodeJS](https://nodejs.org/en/);
+-  [NodeJS](https://nodejs.org/en/);
 
 -  [React](https://pt-br.reactjs.org/).
 
@@ -63,9 +63,28 @@ O Scrunner tem como objetivo incentivar e facilitar a utilização de metodologi
 - [React Js;](https://pt-br.reactjs.org/)
 
 - [Axios.](https://github.com/axios/axios)
+
+
+**:satellite: Backend**
+ 
+- [NodeJs;](https://nodejs.org/en/)
+
+- [Express;](https://www.express.com/)
+
+- [Postgres;](https://www.postgresql.org/)
+
+- [Jwt;](https://jwt.io/)
+
+- [SqLite;](https://www.sqlite.org/index.html)
+
+- [Jest.](https://jestjs.io/pt-BR/)
   
 
 ## 💜 Preview
+
+<p  align="center">
+<img  alt="Landing Page"  src=".github/preview_landing.png"  width="100%">
+</p>
 
 <p  align="center">
 <img  alt="Dashboard Leader"  src=".github/preview_leader_1.png"  width="100%">
@@ -84,12 +103,30 @@ O Scrunner tem como objetivo incentivar e facilitar a utilização de metodologi
 
 Você precisa clonar o repositório e pode fazer isso digitando em seu terminal `$ git clone https://github.com/lucaslds94/Scrunner.git`.
 
+### :satellite: Backend
+
+> Para executar o backend, você irá necessitar do banco [Postgres](https://www.postgresql.org/) instalado em seu computador. 
+
+- Logo após clonar o repositório, navegue até a pasta backend `$ cd backend/` e execute o comando `yarn install` ou `npm install`.
+
+- Dentro da pasta backend, abra o arquivo `example.env` e substitua os valores correspondentes. Logo após, renomeie o arquivo para `.env`.
+
+- Após as dependências terminarem de ser instaladas, execute `$ yarn dbCreate` ou `$ npm run dbCreate`. Isso irá executar a criação do banco, após o término, execute `$ yarn dbMigrate`  ou `$ npm run dbMigrate`, isso irá executar as migrations e as seeders necessárias para o banco de dados.
+
+> Caso deseje realizar os testes, execute `$ yarn test` ou `$ npm test`. Assim, será exibido em seu terminal o resultado dos testes.
+
+- Logo após seguir tudo que foi feito acima, pode ser executado o comando `yarn start` ou `npm start` e deverá ser apresentado a mensagem:
+
+```
+[SERVER] server runing in port 3333
+```
+
 
 **:crystal_ball: Web**
 
-Após seguir os passos acima vá para pasta  `$ cd web/`  e execute  `$ yarn install`  ou  `$ npm install`.
+Após seguir os passos acima, vá até a pasta  `$ cd web/`  e execute  `$ yarn install`  ou  `$ npm install`.
 
-Depois das dependências terminarem de instalar execute o comando  `$ yarn start`  ou  `$ npm run start`.
+Depois das dependências serem instaladas, execute o comando  `$ yarn start`  ou  `$ npm run start`.
 
 
 ## :mortar_board: Autores 
