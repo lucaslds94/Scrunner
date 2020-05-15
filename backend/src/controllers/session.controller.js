@@ -13,6 +13,10 @@ module.exports = {
       return res.status(400).json({ err: "User not found" });
     }
 
+    if(!user.is_active){
+      return res.status(403).json({ err: "Disabled account" });
+    }
+
     const passwordMatched = await bcrypt.compare(password, user.password);
 
     if(!passwordMatched){

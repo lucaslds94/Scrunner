@@ -11,7 +11,7 @@ const MOCK_USER = {
 let ID_MOCK_USER = "";
 
 const USER_DB = {
-  email: "johnDoe@test.com",
+  email: "johndoe@test.com",
   password: "12345678"
 };
 
@@ -67,12 +67,20 @@ describe("Sessions routes", () => {
 
   it("Should not be able to login with an invalid password", async () => {
     const INVALID_USER =  {
-      email: "johnDoe@test.com",
+      email: "johndoe@test.com",
       password: "1132211"
     }
 
     const response = await request(app).post('/login').send(INVALID_USER);
     
     expect(response.status).toEqual(401);
+  });
+
+  it("Should not be able to login with a disabled account", async () => {
+    const response = await request(app)
+    .post("/login")
+    .send({email: MOCK_USER.email, password: MOCK_USER.password});
+
+    expect(response.status).toEqual(403);
   });
 })

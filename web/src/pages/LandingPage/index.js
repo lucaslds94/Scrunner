@@ -16,7 +16,6 @@ import BurgerMenu from '../../components/BurgerMenu';
 import ModalLogin from "../../components/ModalLogin";
 import ModalEscolhaCadastro from "../../components/ModalEscolhaCadastro";
 import ModalCadastroEmpresa from "../../components/ModalCadastroEmpresa";
-import ModalCodigoColaborador from "../../components/ModalCodigoColaborador";
 import ModalCadastroColaborador from "../../components/ModalCadastroColaborador";
 
 import LogoV2 from "../../assets/Logo_v2.png";
@@ -43,7 +42,6 @@ export default function LandingPage() {
   const [showModalEscolha, setShowModalEscolha] = useState(false);
   const [showModalEmpresa, setShowModalEmpresa] = useState(false);
   const [showModalColaborador, setShowModalColaborador] = useState(false);
-  const [showModalCodigo, setShowModalCodigo] = useState(false);
 
   const history = useHistory();
 
@@ -66,13 +64,8 @@ export default function LandingPage() {
     if (op === "empresa") {
       setShowModalEmpresa(true);
     } else {
-      setShowModalCodigo(true);
+      setShowModalColaborador(true);
     }
-  };
-
-  const handleModalCodigoContinue = () => {
-    setShowModalCodigo(false);
-    setShowModalColaborador(true);
   };
 
   const registerCompany = async (companyData) => {
@@ -116,6 +109,7 @@ export default function LandingPage() {
     } 
     catch(error){
         
+
         if(error.response.data.err){
           return toast.error('Email já cadastrado como colaborador!');
         }
@@ -142,6 +136,11 @@ export default function LandingPage() {
       history.push("/dashboard");
       
     }catch(error){
+      
+      if(error.response.status === 403){
+        return toast.error('Sua conta está desativada.');
+      }
+      
       if(error.response.data.err){
         return toast.error('Erro ao realizar o login do usuário. Tente novamente');
       }
@@ -165,13 +164,7 @@ export default function LandingPage() {
           registerCompany={registerCompany}
         />
       )}
-      {showModalCodigo && (
-        <ModalCodigoColaborador
-          handleModalCodigo={() => setShowModalCodigo(false)}
-          handleModalCodigoContinue={handleModalCodigoContinue}
-        />
-      )}
-
+      
       {showModalColaborador && (
         <ModalCadastroColaborador
           handleModalColaborador={() => setShowModalColaborador(false)}
