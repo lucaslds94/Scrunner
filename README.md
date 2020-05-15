@@ -101,7 +101,7 @@ O Scrunner tem como objetivo incentivar e facilitar a utilização de metodologi
 
 ## 🤠 Getting Started
 
-Você precisa clonar o repositório e pode fazer isso digitando em seu terminal `$ git clone https://github.com/lucaslds94/Scrunner.git`.
+Você precisa clonar o repositório digitando em seu terminal `$ git clone https://github.com/lucaslds94/Scrunner.git`.
 
 ### :satellite: Backend
 
@@ -109,22 +109,22 @@ Você precisa clonar o repositório e pode fazer isso digitando em seu terminal 
 
 - Logo após clonar o repositório, navegue até a pasta backend `$ cd backend/` e execute o comando `yarn install` ou `npm install`.
 
-- Dentro da pasta backend, abra o arquivo `example.env` e substitua os valores correspondentes. Logo após, renomeie o arquivo para `.env`.
+- Dentro da pasta backend, abra o arquivo `example.env` e substitua seus valores pelas informações correspondentes ao seu banco de dados. Logo após, renomeie o arquivo para `.env`.
 
-- Após as dependências terminarem de ser instaladas, execute `$ yarn dbCreate` ou `$ npm run dbCreate`. Isso irá executar a criação do banco, após o término, execute `$ yarn dbMigrate`  ou `$ npm run dbMigrate`, isso irá executar as migrations e as seeders necessárias para o banco de dados.
+- Após as dependências terminarem de ser instaladas, execute `$ yarn dbCreate` ou `$ npm run dbCreate`. Isso irá executar a criação do banco, então, após seu término, execute `$ yarn dbMigrate`  ou `$ npm run dbMigrate`, pelo qual serão executadas as migrations e as seeders necessárias para o banco de dados.
 
 > Caso deseje realizar os testes, execute `$ yarn test` ou `$ npm test`. Assim, será exibido em seu terminal o resultado dos testes.
 
-- Logo após seguir tudo que foi feito acima, pode ser executado o comando `yarn start` ou `npm start` e deverá ser apresentado a mensagem:
+- Logo após seguir os direcionamentos acima, execute o comando `yarn start` ou `npm start`. Apresentando assim, a mensagem abaixo em seu terminal.
 
 ```
-[SERVER] server runing in port 3333
+[SERVER] Server running in the port 3333
 ```
 
 
 **:crystal_ball: Web**
 
-Após seguir os passos acima, vá até a pasta  `$ cd web/`  e execute  `$ yarn install`  ou  `$ npm install`.
+Após seguir os passos anteriores, vá até a pasta  `$ cd web/`  e execute  `$ yarn install`  ou  `$ npm install`.
 
 Depois das dependências serem instaladas, execute o comando  `$ yarn start`  ou  `$ npm run start`.
 

@@ -266,7 +266,7 @@ export default function LandingPage() {
             <div>
               <img className="icon" src={tarefas} alt="Icone Tarefas" />
               <h1 className="tituloIcone">Tarefas</h1>
-              <p>Crie tarefas e distribua para os membros que estão no time.</p>
+              <p>Crie tarefas e direcione-as para os membros presentes no time.</p>
             </div>
             <div>
               <img className="icon" src={daily} alt="Icone Daily" />
@@ -278,13 +278,13 @@ export default function LandingPage() {
             <div>
               <img className="icon" src={relatorios} alt="Icone Relatórios" />
               <h1 className="tituloIcone">Relatórios</h1>
-              <p>Tenha visão do seu projeto evoluindo com o método Scrum.</p>
+              <p>Tenha visão do seu projeto evoluindo com gráficos de desempenho.</p>
             </div>
             <div>
               <img className="icon" src={gestao} alt="Icone Gestão" />
               <h1 className="tituloIcone">Gestão</h1>
               <p>
-                Com Scrunner gerencie as informações dos projetos e dos times.
+                Com Scrunner, gerencie as informações dos projetos e dos times.
               </p>
             </div>
           </div>
@@ -299,7 +299,7 @@ export default function LandingPage() {
                 grandes empresas, inspirando gestores no processo de
                 desenvolvimento de projetos e de gerenciamento de equipes. Esses
                 métodos possuem como finalidade gerar resultados agilizando todo
-                o processo de desenvolvimento e juntamente com a formação de
+                o processo de desenvolvimento, e, juntamente com a formação de
                 equipes, melhorar a comunicação e relacionamento entre os
                 profissionais.
               </p>
@@ -332,7 +332,7 @@ export default function LandingPage() {
                   <div className="artigo-border"></div>
                   <h3>Daily Scrum</h3>
                   <p>
-                    A cada dia do Sprint a equipe faz uma reunião diária, chamada
+                    A cada dia do Sprint, a equipe faz uma reunião diária chamada de
                     Daily Scrum...
                   </p>
                   <div>
