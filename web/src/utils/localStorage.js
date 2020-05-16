@@ -4,7 +4,7 @@ module.exports = {
   },
 
   getLocalStorage (key){
-    localStorage.getItem(key);
+    return JSON.parse(localStorage.getItem(key));
   }
 
 };

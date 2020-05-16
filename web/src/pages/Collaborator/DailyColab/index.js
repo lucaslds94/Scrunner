@@ -15,23 +15,23 @@ export default function DailyColab() {
   return (
     <div className="detalhes-times-daily">
       <Header userName={"Ana Fonseca"} />
-      <MenuLateral isLeader={false} homeActive={false} />
+      <MenuLateral homeActive={false} />
 
       <Container>
         <div className="header-times-daily">
           <div className="header-titles">
             <h2>Dailys</h2>
-            <Link to={`/times/detalhes/2/${name}/colaborador`}>{name}</Link>
+            <Link to={`/times/detalhes/2/${name}`}>{name}</Link>
           </div>
           <div className="header-buttons">
             <ButtonChangeScreen
               titleButton={"Dailys"}
-              to={`/times/colaborador/daily/${name}`}
+              to={`/times/daily/${name}`}
               active
             />
             <ButtonChangeScreen
               titleButton={"Tarefas"}
-              to={`/times/colaborador/tarefa/${name}`}
+              to={`/times/tarefa/${name}`}
             />
           </div>
         </div>
@@ -39,13 +39,13 @@ export default function DailyColab() {
         <div className="container-boards">
           <CardDaily 
             date={"01/04"}   
-            to={`/times/colaborador/dailylog/${name}/01-04`}/>
+            to={`/times/dailylog/${name}/01-04`}/>
           <CardDaily
             date={"26/03"}
             isComplete={true}
             yourDaily={true}
             leaderDaily={true}
-            to={`/times/colaborador/dailylog/${name}/26-03`}
+            to={`/times/dailylog/${name}/26-03`}
           />
         </div>
       </Container>

@@ -22,24 +22,24 @@ export default function DailyLog() {
 
             {showModal&&<ModalCriarDaily handleModalCreateDaily={()=>setShowModal(false)}/>}
             <Header userName={"Ana Fonseca"} />
-            <MenuLateral isLeader={false} homeActive={false} />
+            <MenuLateral homeActive={false} />
             
             <Container>
                 <div className="infos-daily">
                     <div className="header-times-daily">
                         <div className="header-titles">
                             <h2>Dailys</h2>
-                            <Link to={`/times/detalhes/2/${name}/colaborador`}>{name}</Link>
+                            <Link to={`/times/detalhes/2/${name}`}>{name}</Link>
                         </div>
                         <div className="header-buttons">
                             <ButtonChangeScreen
                                 titleButton={"Dailys"}
-                                to={`/times/colaborador/daily/${name}`}
+                                to={`/times/daily/${name}`}
                                 active
                             />
                             <ButtonChangeScreen
                                 titleButton={"Tarefas"}
-                                to={`/times/colaborador/tarefa/${name}`}
+                                to={`/times/tarefa/${name}`}
                             />
                         </div>
                     </div>
@@ -47,7 +47,7 @@ export default function DailyLog() {
 
                     <div className="dailyLogInfo-container">
 
-                        <Link className ="backBtn" to ={`/times/colaborador/daily/${name}`} >
+                        <Link className ="backBtn" to ={`/times/daily/${name}`} >
                             <MdArrowBack size={30} color={"#737FF3"}/> Voltar
                         </Link>
 

@@ -18,21 +18,21 @@ export default function TeamKanban() {
   return (
     <div className="containerKanbanTeam">
       <Header userName = {"Ana Fonseca"}/>
-      <MenuLateral homeActive= {false} isLeader ={false}/>
+      <MenuLateral homeActive= {false} />
       <Container>
         <div className="colaborador-cards-header">
           <div className="bloco-header-titles">
             <p>Tarefas</p>
-            <Link to={`/times/detalhes/2/${name}/colaborador`}>{name}</Link>
+            <Link to={`/times/detalhes/2/${name}`}>{name}</Link>
           </div>
           <div className="colaborador-header-buttons">
-            <ButtonChangeScreen titleButton={"Dailys"} to= {`/times/colaborador/daily/${name}`}/>
+            <ButtonChangeScreen titleButton={"Dailys"} to= {`/times/daily/${name}`}/>
             <ButtonChangeScreen titleButton={"Tarefas"} active/>
           </div>
         </div>
         <div className="teams-divider"/>
         <div className="boardInfo-container">
-          <Link className ="backBtn" to ={`/times/colaborador/tarefa/${name}`} >
+          <Link className ="backBtn" to ={`/times/tarefa/${name}`} >
             <MdArrowBack size={30} color={"#737FF3"}/> Voltar
           </Link>
           <div 

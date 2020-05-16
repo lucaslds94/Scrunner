@@ -75,8 +75,17 @@
 }
 
 .buttonAddDaily:hover {
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
-    transform: scale(0.98);
-    opacity: 0.9;
+    border: 2px solid #B2B2B2;
+    color: #898989;
     cursor: pointer;
+    transition: all .1s;
+  }
+  
+.buttonAddDaily:hover svg {
+    color: #898989 !important;
 }
+
+.buttonAddDaily:hover span {
+    color: #898989 !important;
+}
+

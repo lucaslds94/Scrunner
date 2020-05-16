@@ -52,7 +52,7 @@ export default function DashboardColab() {
   return (
     <div className="dashboard-colaborador">
       <Header userName="Ana Fonseca" />
-      <MenuLateral isLeader={false} />
+      <MenuLateral />
 
       <Container>
         <div className="colaborador-container-cards">

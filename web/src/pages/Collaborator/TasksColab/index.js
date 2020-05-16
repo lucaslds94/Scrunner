@@ -17,23 +17,23 @@ export default function TasksColab() {
   return (
     <div className="colaborador-tarefa">
       <Header userName={"Ana Fonseca"} />
-      <MenuLateral isLeader={false} homeActive={false} />
+      <MenuLateral homeActive={false} />
 
       <Container>
         <div className="container-bloco-tarefa">
           <div className="bloco-header-tarefa">
             <div className="bloco-header-titles">
               <p>Tarefas</p>
-              <Link to={`/times/detalhes/2/${name}/colaborador`}>{name}</Link>
+              <Link to={`/times/detalhes/2/${name}`}>{name}</Link>
             </div>
             <div className="colaborador-header-buttons">
               <ButtonChangeScreen
                 titleButton={"Dailys"}
-                to={`/times/colaborador/daily/${name}`}
+                to={`/times/daily/${name}`}
               />
               <ButtonChangeScreen
                 titleButton={"Tarefas"}
-                to={`/times/colaborador/tarefa/${name}`}
+                to={`/times/tarefa/${name}`}
                 active
               />
             </div>
@@ -43,17 +43,17 @@ export default function TasksColab() {
             <CardTask 
               title="NomeQuadro1" 
               date="10/04/2020" 
-              to={`/times/colaborador/kanban/${name}/NomeQuadro1/10-04-2020`}
+              to={`/times/kanban/${name}/NomeQuadro1/10-04-2020`}
               />
             <CardTask 
               title="NomeQuadro2" 
               date="10/04/2020" 
-              to={`/times/colaborador/kanban/${name}/NomeQuadro2/10-04-2020`}
+              to={`/times/kanban/${name}/NomeQuadro2/10-04-2020`}
             />
             <CardTask 
               title="NomeQuadro3" 
               date="10/04/2020" 
-              to={`/times/colaborador/kanban/${name}/NomeQuadro3/10-04-2020`}
+              to={`/times/kanban/${name}/NomeQuadro3/10-04-2020`}
             />
           </div>
         </div>

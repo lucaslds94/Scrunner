@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import PrivateRoute from './routes/PrivateRoute';
 
 import LandingPage from "./pages/LandingPage";
 
@@ -20,32 +21,48 @@ export default function Routes() {
     <BrowserRouter>
       <Switch>
         <Route path="/" component={LandingPage} exact />
-        <Route path="/dashboard" component={DashboardLeader} exact />
-        <Route path="/times" component={TeamsLeader} exact />
-        <Route
+        <PrivateRoute
+          path="/dashboard"
+          componentLeader={DashboardLeader}
+          componentColab={DashboardColab} />
+        <PrivateRoute
+          path="/times" 
+          componentLeader={TeamsLeader} 
+          componentColab={TeamsColab}
+          exact
+        />
+        <PrivateRoute
           path="/times/detalhes/:id/:name"
-          component={DetailsTeamsLeader}
+          componentLeader={DetailsTeamsLeader}
+          componentColab={DetailsTeamColab}
           exact
         />
 
-        <Route path="/dashboard/colaborador" component={DashboardColab} />
-        <Route path="/times/colaborador" component={TeamsColab} exact />
-        <Route
-          path="/times/detalhes/:id/:name/colaborador"
-          component={DetailsTeamColab}
+        <PrivateRoute 
+          path="/times/daily/:name" 
+          componentColab={DailyColab}
+          componentLeader={() => <h1>Você não tem acesso a essa página</h1>} 
+          exact
         />
-
-        <Route path="/times/colaborador/daily/:name" component={DailyColab} />
-        <Route
-          path="/times/colaborador/dailylog/:name/:dailyDate"
-          component={DailyLog}
+        <PrivateRoute
+          path="/times/dailylog/:name/:dailyDate"
+          componentColab={DailyLog}
+          componentLeader={() => <h1>Você não tem acesso a essa página</h1>} 
+          exact
         />
-
-        <Route path="/times/colaborador/tarefa/:name" component={TasksColab} />
-        <Route
-          path="/times/colaborador/kanban/:name/:boardTitle/:boardDate"
-          component={TeamKanban}
+        <PrivateRoute 
+          path="/times/tarefa/:name" 
+          componentColab={TasksColab}
+          componentLeader={() => <h1>Você não tem acesso a essa página</h1>} 
+          exact 
         />
+        <PrivateRoute
+          path="/times/kanban/:name/:boardTitle/:boardDate"
+          componentColab={TeamKanban}
+          componentLeader={() => <h1>Você não tem acesso a essa página</h1>} 
+          exact 
+        />
+        <Route path="*" component={() => <h1>Page not found 404</h1>} /> 
       </Switch>
     </BrowserRouter>
   );

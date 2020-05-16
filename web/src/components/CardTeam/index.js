@@ -11,18 +11,13 @@ export default function CardTeam({
   teamCategory = "Development",
   teamCode = "No code",
   teamMembers = [],
-  isLeader = true,
 }) {
   /**
    * O número 2 ali significa o id do time :)
    */
   return (
     <Link
-      to={
-        isLeader
-          ? `/times/detalhes/2/${teamName}`
-          : `/times/detalhes/2/${teamName}/colaborador`
-      }
+      to={`/times/detalhes/2/${teamName}`}
       className="cardTeam-link"
     >
       <div className="cardTeam-container">

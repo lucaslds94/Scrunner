@@ -20,7 +20,7 @@ export default function DetailsTeamColab() {
   return (
     <div className="colaborador-detalhes-time">
       <Header userName={"Ana Fonseca"} />
-      <MenuLateral isLeader={false} homeActive={false} />
+      <MenuLateral homeActive={false} />
 
       <Container>
         <div className="colaborador-container-cards">
@@ -29,11 +29,11 @@ export default function DetailsTeamColab() {
             <div className="colaborador-header-buttons">
               <ButtonChangeScreen
                 titleButton={"Dailys"}
-                to={`/times/colaborador/daily/${name}`}
+                to={`/times/daily/${name}`}
               />
               <ButtonChangeScreen
                 titleButton={"Tarefas"}
-                to={`/times/colaborador/tarefa/${name}`}
+                to={`/times/tarefa/${name}`}
               />
             </div>
           </div>
