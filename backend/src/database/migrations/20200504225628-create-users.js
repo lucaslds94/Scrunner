@@ -18,7 +18,7 @@ module.exports = {
         allowNull: false,
       },
       password: {
-        type: Sequelize.STRING(255),
+        type: Sequelize.STRING(256),
         allowNull: false,
       },
       is_owner: {

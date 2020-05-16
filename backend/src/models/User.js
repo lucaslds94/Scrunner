@@ -10,7 +10,7 @@ class User extends Model {
         type: DataTypes.STRING(100) 
       },
       password: {
-        type: DataTypes.STRING(255)
+        type: DataTypes.STRING(256)
       },
       is_owner: {
         type: DataTypes.BOOLEAN

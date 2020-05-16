@@ -1,23 +1,22 @@
-const { verify } = require('jsonwebtoken');
-const { jwt } = require('../config/auth');
+const { verify } = require("jsonwebtoken");
+const { jwt } = require("../config/auth");
 
 module.exports = {
-  auth (req, res, next) {
-    
+  auth(req, res, next) {
     const authHeader = req.headers.authorization;
 
     if (!authHeader) {
-      return res.status(401).json({ err:'JWT token is missing' });
+      return res.status(401).json({ err: "JWT token is missing" });
     }
 
-    const [, token] = authHeader.split(' ');
-    
-    try{
+    const [, token] = authHeader.split(" ");
+
+    try {
       const decoded = verify(token, jwt.secret);
 
       next();
-    }catch {
-      return res.status(401).json({ err:'Invalid JWT token' });
+    } catch {
+      return res.status(401).json({ err: "Invalid JWT token" });
     }
-  }
-}
+  },
+};
