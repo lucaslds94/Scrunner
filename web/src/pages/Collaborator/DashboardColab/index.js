@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 
 import "./styles.css";
 
+import { getLocalStorage } from "../../../utils/localStorage";
+
 import MenuLateral from "../../../components/MenuLateral";
 import Header from "../../../components/Header";
 
@@ -15,9 +17,14 @@ export default function DashboardColab() {
   const [ReportDate, setReportDate] = useState([]);
   const [ReportPlanned, setReportPlanned] = useState([]);
   const [ReportComplete, setReportComplete] = useState([]);
+  const [userName, setUserName] = useState("");
 
   useEffect(() => {
     generateReportDate();
+    const user = getLocalStorage('@Scrunner:user');
+
+    setUserName(user.name);
+    
   }, []);
 
   const generateReportDate = () => {
@@ -49,14 +56,16 @@ export default function DashboardColab() {
     setReportComplete(complete);
   };
 
+
+
   return (
     <div className="dashboard-colaborador">
-      <Header userName="Ana Fonseca" />
+      <Header />
       <MenuLateral />
 
       <Container>
         <div className="colaborador-container-cards">
-          <h1>Olá, Ana Fonseca!</h1>
+        <h1>Olá, {userName}.</h1>
           <div className="colaborador-divider" />
           <div className="colaborador-cards-area">
             <CardInformation

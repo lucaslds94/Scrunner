@@ -14,7 +14,7 @@ export default function DailyColab() {
 
   return (
     <div className="detalhes-times-daily">
-      <Header userName={"Ana Fonseca"} />
+      <Header />
       <MenuLateral homeActive={false} />
 
       <Container>

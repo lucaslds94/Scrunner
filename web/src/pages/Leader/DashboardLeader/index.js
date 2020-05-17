@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import "./styles.css";
+
+import { getLocalStorage } from '../../../utils/localStorage';
 
 import Header from "../../../components/Header";
 import MenuLateral from "../../../components/MenuLateral";
@@ -19,6 +21,14 @@ export default function DashboardLeader() {
   const [ReportDate, setReportDate] = useState([]);
   const [ReportPlanned, setReportPlanned] = useState([]);
   const [ReportComplete, setReportComplete] = useState([]);
+  const [userName, setUserName] = useState("");
+
+  useEffect( () => {
+    const user = getLocalStorage('@Scrunner:user');
+
+    setUserName(user.name);
+
+  }, [])
 
   const handleSelectTime = (time) => {
     setTimeReport(time);
@@ -65,7 +75,7 @@ export default function DashboardLeader() {
       <MenuLateral />
       <Container>
         <div className="container-cards">
-          <h1>Olá, Estevan Gomes!</h1>
+        <h1>Olá, {userName}.</h1>
           <div className="divider" />
           <div className="cards-area">
             <CardInformation

@@ -21,7 +21,7 @@ export default function DailyLog() {
         <div className="dailyLog">
 
             {showModal&&<ModalCriarDaily handleModalCreateDaily={()=>setShowModal(false)}/>}
-            <Header userName={"Ana Fonseca"} />
+            <Header />
             <MenuLateral homeActive={false} />
             
             <Container>

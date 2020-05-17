@@ -16,7 +16,7 @@ export default function TasksColab() {
 
   return (
     <div className="colaborador-tarefa">
-      <Header userName={"Ana Fonseca"} />
+      <Header />
       <MenuLateral homeActive={false} />
 
       <Container>

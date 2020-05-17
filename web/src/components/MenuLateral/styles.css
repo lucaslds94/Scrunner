@@ -60,5 +60,17 @@
   color: #737FF3;
 }
 
+.logoff-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  bottom: calc(100vh - 82%);
+  transition: all .2s;
+}
+
+.logoff-button:hover {
+  transform: scale(0.9)
+}
 
 

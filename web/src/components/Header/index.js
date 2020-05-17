@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
+import { getLocalStorage } from '../../utils/localStorage';
+
+import { FaUserNinja } from 'react-icons/fa';
 
 import "./styles.css";
 
 import logoRoxo from "../../assets/logo_roxo_100.png";
 
-export default function Header({ userName = "Estevan Gomes" }) {
+export default function Header() {
+  const [userName,setUserName]= useState("");
+
+  useEffect(() => {
+    const userStorage = getLocalStorage("@Scrunner:user");
+
+    setUserName(userStorage.name);
+  }, []);
+
   return (
     <div className="dashboardHeader">
       <div className="logoContainer">
@@ -13,7 +24,9 @@ export default function Header({ userName = "Estevan Gomes" }) {
       </div>
       <div className="headerUserName">
         <p>{userName}</p>
-        <div className="userAvatar" />
+        <div className="header-avatar">
+          <FaUserNinja  size={25} color={"#FFF"} />
+        </div>
       </div>
     </div>
   );

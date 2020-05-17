@@ -17,7 +17,7 @@ export default function TeamKanban() {
   
   return (
     <div className="containerKanbanTeam">
-      <Header userName = {"Ana Fonseca"}/>
+      <Header />
       <MenuLateral homeActive= {false} />
       <Container>
         <div className="colaborador-cards-header">

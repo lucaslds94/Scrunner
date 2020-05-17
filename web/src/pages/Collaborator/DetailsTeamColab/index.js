@@ -19,7 +19,7 @@ export default function DetailsTeamColab() {
 
   return (
     <div className="colaborador-detalhes-time">
-      <Header userName={"Ana Fonseca"} />
+      <Header />
       <MenuLateral homeActive={false} />
 
       <Container>

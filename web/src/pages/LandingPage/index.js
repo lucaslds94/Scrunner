@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import api from '../../services/api';
+import {isAuth} from '../../utils/auth';
+
 import "./styles.css";
 
 import { useHistory } from 'react-router-dom';
@@ -45,6 +47,11 @@ export default function LandingPage() {
 
   const history = useHistory();
 
+  useEffect(() => {
+    if(isAuth()){
+      history.push("/dashboard");
+    }
+  }, [history])
 
   const scrollToTop = () => {
     scroll.scrollToTop();
