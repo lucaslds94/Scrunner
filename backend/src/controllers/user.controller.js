@@ -1,5 +1,8 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
+// const Team = require('../models/Team');
+const UserTeam = require('../models/UserTeam');
+
 
 module.exports = {
   async store(req, res) {
@@ -40,4 +43,19 @@ module.exports = {
 
     return res.status(204).send();
   },
+
+  async indexLeader(req, res) {
+    const { id } = req.params;
+    
+    // Retorna quantidade de times criados pelo owner
+    const {count: teamCount} = await UserTeam.findAndCountAll({
+      where: {
+        user_id: id
+      },
+    })
+
+    return res.json(teamCount);
+
+  }
 };
+

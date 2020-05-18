@@ -40,6 +40,10 @@ class User extends Model {
       foreignKey: 'user_id',
       as: 'tasks'
     });
+    this.hasMany(models.UserTeam, {
+      foreignKey: 'user_id',
+      as: 'user_isLeader'
+    });
   }
   
 }
