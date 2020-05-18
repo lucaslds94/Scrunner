@@ -32,6 +32,14 @@ class User extends Model {
       through: 'user_teams',
       as: 'teams'
     });
+    this.hasMany(models.DailyContent, {
+      foreignKey: 'user_id',
+      as: 'daily_contents'
+    });
+    this.hasMany(models.Task, {
+      foreignKey: 'user_id',
+      as: 'tasks'
+    });
   }
   
 }

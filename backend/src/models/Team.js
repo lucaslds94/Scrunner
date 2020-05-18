@@ -23,6 +23,14 @@ class Team extends Model {
       through: 'user_teams',
       as: 'users'
     });
+    this.hasMany(models.DailyBoard, {
+      foreignKey: 'team_id',
+      as: 'daily_boards'
+    });
+    this.hasMany(models.TaskBoard, {
+      foreignKey: 'team_id',
+      as: 'task_boards'
+    });
   }
 }
 

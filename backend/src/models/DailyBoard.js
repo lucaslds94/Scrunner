@@ -3,7 +3,7 @@ const { Model, DataTypes } = require('sequelize');
 class DailyBoard extends Model {
   static init(sequelize){
     super.init({
-      teams_id: {
+      team_id: {
         type: DataTypes.INTEGER,
         references: {
           model: 'Teams',
