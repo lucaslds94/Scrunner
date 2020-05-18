@@ -8,7 +8,7 @@ class TaskBoard extends Model {
                 type: DataTypes.STRING(100),
                 allowNull: false,
             },
-            teams_id: {
+            team_id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 references: { model: "teams", key: "id" },  
@@ -21,8 +21,12 @@ class TaskBoard extends Model {
 
     static associate(models){
         this.belongsTo(models.Team, {
-            foreignKey: 'teams_id',
-            as: 'fk_task_board_teams'
+            foreignKey: 'team_id',
+            as: 'team'
+        })
+        this.hasMany(models.Task, {
+            foreignKey: 'task_board_id',
+            as: 'tasks'
         })
     }
 

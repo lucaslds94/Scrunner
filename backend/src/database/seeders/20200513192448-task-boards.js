@@ -9,13 +9,13 @@ module.exports = {
           name: ' Sprint 1 - FrontEnd',
           created_at: new Date(),
           updated_at: new Date(),
-          teams_id: 1,
+          team_id: 1,
         },
         {
           name: 'Sprint 1 - BackEnd',
           created_at: new Date(),
           updated_at: new Date(),
-          teams_id: 2,
+          team_id: 2,
         }
       ]);
    

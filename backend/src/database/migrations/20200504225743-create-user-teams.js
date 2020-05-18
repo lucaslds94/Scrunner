@@ -21,14 +21,14 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      users_id: {
+      user_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: "users", key: "id" },
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
       },
-      teams_id: {
+      team_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: "teams", key: "id" },

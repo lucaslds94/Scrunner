@@ -25,6 +25,15 @@ class User extends Model {
       sequelize,
     })
   }
+
+  static associate(models){
+    this.belongsToMany(models.Team, {
+      foreignKey: 'user_id',
+      through: 'user_teams',
+      as: 'teams'
+    });
+  }
+  
 }
 
 module.exports = User;

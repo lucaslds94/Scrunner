@@ -11,8 +11,8 @@ module.exports = {
           problems: 'A cadeira não é confortável',
           created_at: new Date(),
           updated_at: new Date(),
-          daily_boards_id: 1,
-          users_id: 2,
+          daily_board_id: 1,
+          user_id: 2,
         },
         {
           did_yesterday: 'Finalizado o layout da página de login',
@@ -20,8 +20,8 @@ module.exports = {
           problems: 'Minhas costas estão doendo',
           created_at: new Date(),
           updated_at: new Date(),
-          daily_boards_id: 1,
-          users_id: 3,
+          daily_board_id: 1,
+          user_id: 3,
         },
         {
           did_yesterday: 'Finalizado o layout do dashboard do líder',
@@ -29,8 +29,8 @@ module.exports = {
           problems: 'Esse mouse da apple está com má conexão',
           created_at: new Date(),
           updated_at: new Date(),
-          daily_boards_id: 1,
-          users_id: 4,
+          daily_board_id: 1,
+          user_id: 4,
         },
         {
           did_yesterday: 'Ajustes na UX',
@@ -38,8 +38,8 @@ module.exports = {
           problems: 'Computador travando',
           created_at: new Date(),
           updated_at: new Date(),
-          daily_boards_id: 1,
-          users_id: 5,
+          daily_board_id: 1,
+          user_id: 5,
         },
         {
           did_yesterday: 'Ajustes nas regras do projeto',
@@ -47,8 +47,8 @@ module.exports = {
           problems: 'Mysql travando',
           created_at: new Date(),
           updated_at: new Date(),
-          daily_boards_id: 2,
-          users_id: 7,
+          daily_board_id: 2,
+          user_id: 7,
         },
         {
           did_yesterday: 'Finalizado o menu responsivo',
@@ -56,8 +56,8 @@ module.exports = {
           problems: ' Má comunicação com o time de design ',
           created_at: new Date(),
           updated_at: new Date(),
-          daily_boards_id: 2,
-          users_id: 8,
+          daily_board_id: 2,
+          user_id: 8,
         },
         {
           did_yesterday: 'Integração da API com frontend',
@@ -65,8 +65,8 @@ module.exports = {
           problems: 'Nenhum',
           created_at: new Date(),
           updated_at: new Date(),
-          daily_boards_id: 2,
-          users_id: 9,
+          daily_board_id: 2,
+          user_id: 9,
         },
         {
           did_yesterday: 'Configuração do protocolo HTTPS',
@@ -74,8 +74,8 @@ module.exports = {
           problems: 'Teclado com letra H e T com mal funcionamento',
           created_at: new Date(),
           updated_at: new Date(),
-          daily_boards_id: 2,
-          users_id: 10,
+          daily_board_id: 2,
+          user_id: 10,
         }
       ],);
   

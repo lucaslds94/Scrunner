@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      teams_id: {
+      team_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: "teams", key: "id" },

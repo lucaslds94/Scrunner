@@ -8,12 +8,12 @@ module.exports = {
         {
           created_at: new Date(),
           updated_at: new Date(),
-          teams_id: 1,
+          team_id: 1,
         },
         {
           created_at: new Date(),
           updated_at: new Date(),
-          teams_id: 2,
+          team_id: 2,
         }
       ]);
     

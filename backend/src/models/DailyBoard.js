@@ -16,10 +16,13 @@ class DailyBoard extends Model {
   }
 
   static associate(models){
-    this.belongsTo(models.Team,
-    { 
-      foreignKey:'teams_id',
-      as: 'fk_user_teams_teams' 
+    this.belongsTo(models.Team,{ 
+      foreignKey:'team_id',
+      as: 'team' 
+    });
+    this.hasMany(models.DailyContent,{ 
+      foreignKey:'daily_board_id',
+      as: 'daily_boards' 
     });
   }
 }

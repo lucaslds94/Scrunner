@@ -26,14 +26,14 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      daily_boards_id: {
+      daily_board_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: "daily_boards", key: "id" },
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
       },
-      users_id: {
+      user_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: "users", key: "id" },

@@ -13,7 +13,7 @@ class DailyContent extends Model {
             problems: {
                 type: DataTypes.STRING(255)
             },
-            users_id: {
+            user_id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 references: {
@@ -21,7 +21,7 @@ class DailyContent extends Model {
                     key: "id"
                 }
             },
-            daily_boards_id: {
+            daily_board_id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 references: {
@@ -38,13 +38,13 @@ class DailyContent extends Model {
 
     static associate(models){
         this.belongsTo(models.User, {
-            foreignKey: 'users_id',
-            as: 'fk_daily_content_users'
+            foreignKey: 'user_id',
+            as: 'user'
         });
 
         this.belongsTo(models.DailyBoard, {
-            foreignKey: 'daily_boards_id',
-            as: 'fk_daily_content_daily_board'
+            foreignKey: 'daily_board_id',
+            as: 'daily_board'
         });
     }
 }

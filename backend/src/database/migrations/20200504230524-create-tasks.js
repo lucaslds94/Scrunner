@@ -29,21 +29,21 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      task_columns_id: {
+      task_column_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: "task_columns", key: "id" },
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
       },
-      task_boards_id: {
+      task_board_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: "task_boards", key: "id" },
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
       },
-      users_id: {
+      user_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: "users", key: "id" },
