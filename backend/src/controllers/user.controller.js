@@ -64,8 +64,8 @@ module.exports = {
     let user = await User.findOne({
       where: {
         id,
-        is_owner: true
-      }
+        is_owner: true,
+      },
     });
 
     if (!user) {
@@ -95,7 +95,6 @@ module.exports = {
       },
     });
 
-
     let boardTasksIds = await TaskBoard.findAll({
       attributes: ["id"],
       where: {
@@ -124,7 +123,7 @@ module.exports = {
       return { id: boardObject.user_id };
     });
 
-    const usersInTeam = await User.findAll({
+    let usersInTeam = await User.findAll({
       attributes: ["id", "name"],
       where: {
         [Op.or]: colabs,
@@ -132,18 +131,37 @@ module.exports = {
       include: [
         {
           model: UserTeam,
+          where: {
+            [Op.or]: ownerTeams,
+          },
           as: "user_isLeader",
           attributes: ["is_leader"],
         },
         {
           model: Team,
           as: "teams",
-          attributes: ["name"],
+          attributes: ["name", "id"],
           through: {
             attributes: [],
           },
         },
       ],
+    });
+
+    usersInTeam = usersInTeam.map((user) => {
+      let teams = user.user_isLeader.map((isLeader, index) => {
+        return {
+          id: user.teams[index].id,
+          name: user.teams[index].name,
+          isLeader: isLeader.is_leader,
+        };
+      });
+
+      return {
+        id: user.id,
+        name: user.name,
+        teams,
+      };
     });
 
     const token = sign({}, jwt.secret, {
@@ -157,8 +175,7 @@ module.exports = {
       doneTasksCount,
       graphs: { roundGraph: (doneTasksCount / tasksCount) * 100 },
       usersInTeam,
-      token
+      token,
     });
   },
 };
-
