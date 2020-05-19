@@ -44,25 +44,39 @@ export default function DashboardLeader() {
     let monthCorrect = month > 10 ? month : `0${month}`;
 
     const dateRange = [
-      `06/${monthCorrect}`,
-      `13/${monthCorrect}`,
-      `20/${monthCorrect}`,
-      `27/${monthCorrect}`,
+      // `05/${monthCorrect}`,
+      // `10/${monthCorrect}`,
+      // `15/${monthCorrect}`,
+      // `20/${monthCorrect}`,
+      15,
+      18,
+      21,
+      24,
+      27,
+      30
+
     ];
 
     const planned = [
-      `${Math.floor(Math.random() * (100 - 20) + 20)}`,
-      `${Math.floor(Math.random() * (100 - 20) + 20)}`,
-      `${Math.floor(Math.random() * (100 - 20) + 20)}`,
-      `${Math.floor(Math.random() * (100 - 20) + 20)}`,
+      //  totalTaskPoints / (dateRange.length -1) => quanto deve reduzir a cada período
+     80,
+     64,
+     48,
+     32,
+     16,
+     0
     ];
 
-    const complete = [
-      `${Math.floor(Math.random() * (100 - 20) + 20)}`,
-      `${Math.floor(Math.random() * (100 - 20) + 20)}`,
-      `${Math.floor(Math.random() * (100 - 20) + 20)}`,
-      `${Math.floor(Math.random() * (100 - 20) + 20)}`,
+    const complete = [ 
+      80,
+      50,
+      20,
+      10,
+      5,
+      0
     ];
+
+    
 
     setReportDate(dateRange);
     setReportPlanned(planned);

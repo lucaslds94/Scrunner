@@ -13,6 +13,10 @@ module.exports = {
         type: Sequelize.STRING(100),
         allowNull: false,
       },
+      date_range: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,

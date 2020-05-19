@@ -8,6 +8,10 @@ class TaskBoard extends Model {
                 type: DataTypes.STRING(100),
                 allowNull: false,
             },
+            date_range: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+            },
             team_id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
