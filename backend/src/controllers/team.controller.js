@@ -1,5 +1,7 @@
+const crypto = require("crypto");
 const { sign } = require("jsonwebtoken");
 const { jwt } = require("../config/auth");
+
 const Team = require("../models/Team");
 const User = require("../models/User");
 const UserTeam = require("../models/UserTeam");
@@ -44,6 +46,35 @@ module.exports = {
     });
 
     res.json({ teams, token });
+  },
+
+  async store(req, res) {
+    const { user_id, name, category } = req.body;
+
+    const user = await User.findByPk(user_id);
+
+    if (!user) {
+      return res.status(400).json({ err: "User not found" });
+    }
+
+    const teamCode = crypto.randomBytes(4).toString("HEX").toUpperCase();
+
+    const {
+      dataValues: { id, code },
+    } = await Team.create({ name, code: teamCode, category });
+
+    await UserTeam.create({
+      is_leader: true,
+      user_id,
+      team_id: id,
+    });
+
+    const token = sign({}, jwt.secret, {
+      subject: `${id}`,
+      expiresIn: jwt.expiresIn,
+    });
+
+    return res.json({ team: { id, code }, token });
   },
 
   async exit(req, res) {

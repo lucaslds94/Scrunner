@@ -191,12 +191,45 @@ describe("Teams Routes", () => {
     expect(response.body).toHaveProperty("token");
   });
 
-  it("Should not be able to return the teams from a invalid user ", async () => {
-    const INVALID_USER_ID = '12312312';
+  it("Should not be able to return the teams from a invalid user", async () => {
+    const INVALID_USER_ID = "12312312";
 
     const response = await request(app)
       .get(`/teams/${INVALID_USER_ID}`)
       .set("Authorization", `Bearer ${USER_DB.token}`);
+
+    expect(response.status).toEqual(400);
+    expect(response.body).toHaveProperty("err");
+  });
+
+  it("Should be able to create a team", async () => {
+    const MOCK_TEAM = {
+      user_id: USER_DB.id,
+      name: "Test team",
+      category: "Test",
+    };
+
+    const response = await request(app)
+      .post(`/teams/create`)
+      .set("Authorization", `Bearer ${USER_DB.token}`)
+      .send(MOCK_TEAM);
+
+    expect(response.status).toEqual(200);
+    expect(response.body).toHaveProperty("team");
+    expect(response.body).toHaveProperty("token");
+  });
+
+  it("Should not be able to create a team using an invalid user id", async () => {
+    const MOCK_TEAM = {
+      user_id: 5522145,
+      name: "Test team",
+      category: "Test",
+    };
+
+    const response = await request(app)
+      .post(`/teams/create`)
+      .set("Authorization", `Bearer ${USER_DB.token}`)
+      .send(MOCK_TEAM);
 
     expect(response.status).toEqual(400);
     expect(response.body).toHaveProperty("err");
