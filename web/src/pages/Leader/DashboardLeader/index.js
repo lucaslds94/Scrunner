@@ -62,30 +62,56 @@ export default function DashboardLeader() {
   };
 
   const generateReportDate = (month) => {
-  
-    const dateRange = [
-      15,
-      18,
-      21,
-      24,
-      27,
-      30,
-    ];
+    const dateRange = [15, 18, 21, 24, 27, 30];
 
-    const planned = [
-      80,
-      64,
-      48,
-      32,
-      16,
-      0,
-    ];
+    const planned = [80, 64, 48, 32, 16, 0];
 
     const complete = [80, 50, 20, 10, 5, 0];
 
     setReportDate(dateRange);
     setReportPlanned(planned);
     setReportComplete(complete);
+  };
+
+  const removeUserTeam = async (colaboratorId, teamId) => {
+    const token = getLocalStorage("@Scrunner:token");
+
+    try {
+      const response = await api.delete("/teams", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          user_id: colaboratorId,
+          team_id: teamId,
+        },
+      });
+
+      let newColaborators = colaborators.map((colaborator) => {
+        if (colaborator.id === colaboratorId) {
+          const teams = colaborator.teams.filter(
+            (team) => Number(team.id) !== Number(teamId)
+          );
+
+          if (teams.length !== 0) {
+            return {
+              ...colaborator,
+              teams,
+            };
+          }
+        } else {
+          return {
+            ...colaborator,
+          };
+        }
+      });
+
+      newColaborators = newColaborators.filter((newColab) => newColab);
+
+      setColaborators(newColaborators);
+    } catch (error) {
+      alert(error);
+    }
   };
 
   return (
@@ -134,7 +160,10 @@ export default function DashboardLeader() {
           />
         </div>
         <div className="colab-area">
-          <UsersList colaboratorsData={colaborators} />
+          <UsersList
+            colaboratorsData={colaborators}
+            removeUserTeam={removeUserTeam}
+          />
           <RoundGraph
             title="Tarefas"
             description="do total de tarefas foram completadas"

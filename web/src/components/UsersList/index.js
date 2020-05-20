@@ -2,7 +2,7 @@ import React from "react";
 import { v4 as uuid } from "uuid";
 import "./styles.css";
 
-export default function UsersList({ colaboratorsData = [] }) {
+export default function UsersList({ colaboratorsData = [], removeUserTeam }) {
   return (
     <article className="listContainer">
       <h2 className="listTitle">Colaboradores</h2>
@@ -22,8 +22,11 @@ export default function UsersList({ colaboratorsData = [] }) {
                     <li>{team.name}</li>
                     <li>{team.isLeader ? "Sim" : "Não"}</li>
                     <li>
-                      <button className="remove-button" >
-                        Remover - {colaborator.id} / {team.id}
+                      <button
+                        onClick={() => removeUserTeam(colaborator.id, team.id)}
+                        className="remove-button"
+                      >
+                        Remover
                       </button>
                     </li>
                   </ul>
@@ -35,4 +38,3 @@ export default function UsersList({ colaboratorsData = [] }) {
     </article>
   );
 }
-
