@@ -5,6 +5,9 @@ import api from "../../../services/api";
 
 import "./styles.css";
 
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import Header from "../../../components/Header";
 import MenuLateral from "../../../components/MenuLateral";
 import Container from "../../../components/Container";
@@ -77,7 +80,7 @@ export default function DashboardLeader() {
     const token = getLocalStorage("@Scrunner:token");
 
     try {
-      const response = await api.delete("/teams", {
+      await api.delete("/teams", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -88,29 +91,28 @@ export default function DashboardLeader() {
       });
 
       let newColaborators = colaborators.map((colaborator) => {
-        if (colaborator.id === colaboratorId) {
-          const teams = colaborator.teams.filter(
-            (team) => Number(team.id) !== Number(teamId)
-          );
-
-          if (teams.length !== 0) {
-            return {
-              ...colaborator,
-              teams,
-            };
-          }
-        } else {
+        if (colaborator.id !== colaboratorId) {
           return {
             ...colaborator,
           };
         }
+        const teams = colaborator.teams.filter(
+          (team) => Number(team.id) !== Number(teamId)
+        );
+        return {
+          ...colaborator,
+          teams,
+        };
       });
 
-      newColaborators = newColaborators.filter((newColab) => newColab);
+      newColaborators = newColaborators.filter(
+        (colaborator) => colaborator.teams.length !== 0
+      );
 
       setColaborators(newColaborators);
+      toast.info("Usuário removido com sucesso");
     } catch (error) {
-      alert(error);
+      toast.error("Error ao remover o usuário");
     }
   };
 
@@ -128,13 +130,14 @@ export default function DashboardLeader() {
               subTitle="Times"
               number={teamsCount}
               buttonText="Clique para visulizar os times"
+              toPage={"/times"}
             />
             <CardInformation
               crown
               cardTitle="Possuem"
               subTitle="Colaboradores"
               number={colabCount}
-              buttonText="Cadastrados na plataforma"
+              buttonText="Cadastrados em seus times"
             />
             <CardInformation
               cardTitle="Foram completadas"
@@ -171,6 +174,7 @@ export default function DashboardLeader() {
           />
         </div>
       </Container>
+      <ToastContainer />
     </div>
   );
 }

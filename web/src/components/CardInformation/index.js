@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Link } from 'react-router-dom'
+
 import { FaUsers , FaCrown } from "react-icons/fa";
 
 import "./styles.css";
@@ -10,9 +12,10 @@ export default function CardInformation({
   number,
   buttonText = "Clique aqui",
   crown = false,
+  toPage = "#"
 }) {
   return (
-    <div className="card">
+    <Link to={toPage} className="card">
       <div className="card-information">
         <p className="card-title">{cardTitle}</p>
         <p>
@@ -25,6 +28,6 @@ export default function CardInformation({
       ) : (
         <FaUsers size={25} color={"#fff"} />
       )}
-    </div>
+    </Link>
   );
 }
