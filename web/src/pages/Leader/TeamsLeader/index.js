@@ -1,4 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+import { getLocalStorage, setLocalStorage } from "../../../utils/localStorage";
+import api from "../../../services/api";
+
+import { v4 as uuid } from "uuid";
 
 import "./styles.css";
 
@@ -14,6 +19,24 @@ import ModalCriarTime from "../../../components/ModalCriarTime";
 
 export default function TeamsLeader() {
   const [showModalCreate, setShowModalCreate] = useState(false);
+  const [teams, setTeams] = useState([]);
+
+  useEffect(() => {
+    const user = getLocalStorage("@Scrunner:user");
+    const token = getLocalStorage("@Scrunner:token");
+
+    const fetchTeams = async () => {
+      const response = await api.get(`/teams/${user.id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      setTeams(response.data.teams);
+
+      setLocalStorage("@Scrunner:token", response.data.token);
+    };
+
+    fetchTeams();
+  }, []);
 
   return (
     <>
@@ -22,7 +45,7 @@ export default function TeamsLeader() {
       )}
       <div className="teamsLider">
         <Header />
-        <MenuLateral homeActive= {false}/>
+        <MenuLateral homeActive={false} />
         <Container>
           <div className="container-title">
             <h1> Times </h1>
@@ -35,19 +58,17 @@ export default function TeamsLeader() {
           <div className="teams-divider"></div>
 
           <div className="container-teams">
-            <CardTeam
-              teamName="Alpha"
-              teamCategory="Development"
-              teamCode="E98H36"
-              teamMembers={[
-                { id: 1, nome: "Ana Fonseca" },
-                { id: 2, nome: "José Afonso" },
-                { id: 3, nome: "Lucas" },
-                { id: 4, nome: "Lucas" },
-              ]}
-            />
-            <CardTeam />
-            <CardTeam />
+            {teams.map((team) => (
+              <CardTeam
+                key= {uuid()}
+                teamName={team.team.name}
+                teamCategory={team.team.category}
+                teamCode={team.team.code}
+                teamMembers={team.team.users}
+                teamId={team.team.id}
+                isOwner
+              />
+            ))}
           </div>
         </Container>
       </div>

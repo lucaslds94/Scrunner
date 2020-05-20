@@ -35,6 +35,8 @@
 
 .cardteam-category {
     margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .cardteam-category span {

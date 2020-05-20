@@ -1,5 +1,5 @@
 import React from "react";
-
+import { v4 as uuid } from "uuid";
 import { Link } from "react-router-dom";
 
 import { FaHashtag as Hash } from "react-icons/fa";
@@ -11,13 +11,20 @@ export default function CardTeam({
   teamCategory = "Development",
   teamCode = "No code",
   teamMembers = [],
+  teamId,
+  isOwner = false,
 }) {
-  /**
-   * O número 2 ali significa o id do time :)
-   */
+  const getOwner = () => {
+    const [owner] = teamMembers.filter((member) => member.is_owner);
+
+    return owner.name;
+  };
+
+  const teamMembersLength = teamMembers.length - 1;
+
   return (
     <Link
-      to={`/times/detalhes/2/${teamName}`}
+      to={`/times/detalhes/${teamId}/${teamName}`}
       className="cardTeam-link"
     >
       <div className="cardTeam-container">
@@ -25,8 +32,16 @@ export default function CardTeam({
         <div className="cardteam-divider"></div>
 
         <div className="cardteam-category">
-          <p> Categoria </p>
-          <span> {teamCategory} </span>
+          <div>
+            <p> Categoria </p>
+            <span> {teamCategory} </span>
+          </div>
+          {!isOwner && (
+            <div>
+              <p> Criado por </p>
+              <span> {getOwner()} </span>
+            </div>
+          )}
         </div>
 
         <p> Código </p>
@@ -39,21 +54,27 @@ export default function CardTeam({
 
         <div className="cardteam-members">
           <p> Membros </p>
-          <p> {teamMembers.length} </p>
+          <p> {teamMembersLength} </p>
         </div>
 
         <div className="cardteam-names">
-          {teamMembers.slice(0, 2).map((member) => {
-            return <p key={member.id}> {member.nome} </p>;
+          {teamMembers.slice(1, 3).map((member) => {
+            return <p key={uuid()}> {member.name} </p>;
           })}
 
-          {teamMembers.length !== 0 ? (
-            <span> E mais {teamMembers.length - 2} outros... </span>
+          {teamMembersLength === 0 ? (
+            <span> Este time ainda não possui membros... </span>
           ) : (
-            <span> Esse time ainda não possui membros... </span>
+            teamMembersLength > 2 && (
+              <span> E mais {teamMembersLength - 2} outros... </span>
+            )
           )}
         </div>
       </div>
     </Link>
   );
 }
+
+
+
+

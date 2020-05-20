@@ -180,4 +180,25 @@ describe("Teams Routes", () => {
 
     expect(response.status).toEqual(403);
   });
+
+  it("Should be able to return the teams from a user", async () => {
+    const response = await request(app)
+      .get(`/teams/${USER_DB.id}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`);
+
+    expect(response.status).toEqual(200);
+    expect(Array.isArray(response.body.teams)).toEqual(true);
+    expect(response.body).toHaveProperty("token");
+  });
+
+  it("Should not be able to return the teams from a invalid user ", async () => {
+    const INVALID_USER_ID = '12312312';
+
+    const response = await request(app)
+      .get(`/teams/${INVALID_USER_ID}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`);
+
+    expect(response.status).toEqual(400);
+    expect(response.body).toHaveProperty("err");
+  });
 });
