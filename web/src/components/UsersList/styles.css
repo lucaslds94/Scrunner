@@ -70,6 +70,22 @@
   
 }
 
+.remove-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #898989;
+  height: 100%;
+  font-size: 16px;
+  transition: all .2s;
+}
+
+.remove-button:hover {
+  color: #dc3545;
+}
+
+  
+
 
 
 

@@ -21,7 +21,11 @@ export default function UsersList({ colaboratorsData = [] }) {
                     <li>{colaborator.name}</li>
                     <li>{team.name}</li>
                     <li>{team.isLeader ? "Sim" : "Não"}</li>
-                    <li>Remover - {colaborator.id} / {team.id}</li>
+                    <li>
+                      <button className="remove-button" >
+                        Remover - {colaborator.id} / {team.id}
+                      </button>
+                    </li>
                   </ul>
                 ));
               })

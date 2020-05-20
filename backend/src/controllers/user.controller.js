@@ -41,7 +41,7 @@ module.exports = {
     let user = await User.findByPk(id);
 
     if (!user) {
-      return res.status(409).json({ err: "User not found" });
+      return res.status(400).json({ err: "User not found" });
     }
 
     await user.update(
