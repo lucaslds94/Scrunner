@@ -57,7 +57,7 @@ export default function DetailsTeamsLeader() {
     setShowModalConfig(!showModalConfig);
   };
 
-  const removeUserTeam = async(colaboratorId) => {
+  const removeUserTeam = async (colaboratorId) => {
     const token = getLocalStorage("@Scrunner:token");
 
     try {
@@ -71,14 +71,14 @@ export default function DetailsTeamsLeader() {
         },
       });
 
-      let newUsers = team.users.filter(user => user.id !== colaboratorId);
+      let newUsers = team.users.filter((user) => user.id !== colaboratorId);
 
-      setTeam({...team, users: newUsers});
+      setTeam({ ...team, users: newUsers });
       toast.info("Colaborador removido com sucesso");
     } catch (error) {
-      toast.error("Erro ao remover o colaborador")
+      toast.error("Erro ao remover o colaborador");
     }
-  }
+  };
 
   return (
     <>
@@ -123,7 +123,10 @@ export default function DetailsTeamsLeader() {
           </div>
 
           <div className="colab-area">
-            <TeamMembersList colaborators={team.users} removeUserTeam={removeUserTeam} />
+            <TeamMembersList
+              colaborators={team.users}
+              removeUserTeam={removeUserTeam}
+            />
             {!loading && (
               <RoundGraph
                 title="Tarefas"

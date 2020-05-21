@@ -88,6 +88,7 @@ module.exports = {
           through: {
             attributes: [],
           },
+          required: true,
           include: [
             {
               model: UserTeam,
@@ -118,7 +119,6 @@ module.exports = {
       };
     });
 
-    
     let boardTasksIds = await TaskBoard.findAll({
       attributes: ["id"],
       where: {
@@ -130,7 +130,7 @@ module.exports = {
       return { task_board_id: boardObject.id };
     });
 
-    
+
     const { count: doneTasksCount } = await Task.findAndCountAll({
       where: {
         [Op.or]: boardTasksIds,
@@ -143,14 +143,17 @@ module.exports = {
         [Op.or]: boardTasksIds,
       },
     });
-    
 
     const token = sign({}, jwt.secret, {
       subject: `${userId}`,
       expiresIn: jwt.expiresIn,
     });
 
-    res.send({ team, graph: { total_done_tasks: doneTasksCount, total_tasks: tasksCount }, token });
+    res.send({
+      team,
+      graph: { total_done_tasks: doneTasksCount, total_tasks: tasksCount },
+      token,
+    });
   },
 
   async store(req, res) {
@@ -175,7 +178,7 @@ module.exports = {
     });
 
     const token = sign({}, jwt.secret, {
-      subject: `${id}`,
+      subject: `${user_id}`,
       expiresIn: jwt.expiresIn,
     });
 
