@@ -7,6 +7,9 @@ import { v4 as uuid } from "uuid";
 
 import "./styles.css";
 
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { FaPlus } from "react-icons/fa";
 
 import Header from "../../../components/Header";
@@ -38,10 +41,49 @@ export default function TeamsLeader() {
     fetchTeams();
   }, []);
 
+  const registerTeam = async ({ teamName, category }) => {
+    setShowModalCreate(false);
+
+    const token = getLocalStorage("@Scrunner:token");
+    const { id } = getLocalStorage("@Scrunner:user");
+
+    let data = {
+      user_id: id,
+      name: teamName,
+      category: category,
+    };
+
+    try {
+      const response = await api.post("/teams/create", data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      let newTeam = {
+        team: {
+          id: response.data.team.id,
+          name: teamName,
+          category: category,
+          code: response.data.team.code,
+          users: [""],
+        },
+      };
+
+      setTeams([...teams, newTeam]);
+
+      toast.info(" Time criado com sucesso. ");
+    } catch (error) {
+      toast.error(" Erro ao criar o time. ");
+    }
+  };
+
   return (
     <>
       {showModalCreate && (
-        <ModalCriarTime handleModalCreate={() => setShowModalCreate(false)} />
+        <ModalCriarTime
+          handleModalCreate={() => setShowModalCreate(false)}
+          registerTeam={registerTeam}
+        />
       )}
       <div className="teamsLider">
         <Header />
@@ -60,7 +102,7 @@ export default function TeamsLeader() {
           <div className="container-teams">
             {teams.map((team) => (
               <CardTeam
-                key= {uuid()}
+                key={uuid()}
                 teamName={team.team.name}
                 teamCategory={team.team.category}
                 teamCode={team.team.code}
@@ -72,6 +114,7 @@ export default function TeamsLeader() {
           </div>
         </Container>
       </div>
+      <ToastContainer />
     </>
   );
 }

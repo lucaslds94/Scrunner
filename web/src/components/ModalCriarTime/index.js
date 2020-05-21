@@ -1,8 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa";
+
+import { toast } from "react-toastify";
+
 import "./styles.css";
 
-export default function ModalCriarTime({ handleModalCreate }) {
+export default function ModalCriarTime({ handleModalCreate, registerTeam }) {
+  const [teamName, setTeamName] = useState("");
+  const [category, setCategory] = useState("");
+
+  const handleRegisterTeam = () => {
+    if (teamName.trim().length === 0) {
+      toast.error("Insira um nome válido!");
+      return;
+    }
+
+    if (category.trim().length === 0) {
+      toast.error("Insira uma categoria válida!");
+      return;
+    }
+
+    if (teamName && category) {
+      registerTeam({teamName, category});
+
+      setTeamName("");
+      setCategory("");
+    }
+  };
+
   return (
     <div className="modal-createTime">
       <div className="modal-fade"></div>
@@ -16,15 +41,31 @@ export default function ModalCriarTime({ handleModalCreate }) {
 
           <div className="text-field">
             <label htmlFor="nomeTime">Nome</label>
-            <input type="input" name="nomeTime" id="nomeTime" />
+            <input
+              type="input"
+              name="nomeTime"
+              id="nomeTime"
+              value={teamName}
+              onChange={(e) => setTeamName(e.target.value)}
+            />
           </div>
           <div className="text-field">
             <label htmlFor="categoria">Categoria</label>
-            <input type="input" name="categoria" id="categoria" />
+            <input
+              type="input"
+              name="categoria"
+              id="categoria"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            />
           </div>
 
           <div className="divBotao">
-            <button className="btnCriarTime" type="submit">
+            <button
+              className="btnCriarTime"
+              type="submit"
+              onClick={handleRegisterTeam}
+            >
               Criar Time
             </button>
           </div>
