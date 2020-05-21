@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { getLocalStorage, setLocalStorage } from "../../../utils/localStorage";
+import {
+  getLocalStorage,
+  setLocalStorage,
+  clearLocalStorage,
+} from "../../../utils/localStorage";
 
 import api from "../../../services/api";
 
-import "./styles.css";
+import { useHistory } from "react-router-dom";
 
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import "./styles.css";
 
 import Header from "../../../components/Header";
 import MenuLateral from "../../../components/MenuLateral";
@@ -32,27 +38,34 @@ export default function DashboardLeader() {
   const [roundGraph, setRoundGraph] = useState(0);
   const [userName, setUserName] = useState("");
 
+  const history = useHistory();
+
   useEffect(() => {
     const user = getLocalStorage("@Scrunner:user");
     const token = getLocalStorage("@Scrunner:token");
 
     const fetchData = async () => {
-      const response = await api.get(`/dashboard/leader/${user.id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      try {
+        const response = await api.get(`/dashboard/leader/${user.id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
 
-      setColaborators(response.data.usersInTeam);
-      setColabCount(response.data.colabCount);
-      setDoneTasksCount(response.data.doneTasksCount);
-      setTeamsCount(response.data.teamCount);
-      setRoundGraph(response.data.graphs.roundGraph);
-      setLocalStorage("@Scrunner:token", response.data.token);
+        setColaborators(response.data.usersInTeam);
+        setColabCount(response.data.colabCount);
+        setDoneTasksCount(response.data.doneTasksCount);
+        setTeamsCount(response.data.teamCount);
+        setRoundGraph(response.data.graphs.roundGraph);
+        setLocalStorage("@Scrunner:token", response.data.token);
 
-      setUserName(user.name);
+        setUserName(user.name);
+      } catch (error) {
+        clearLocalStorage();
+        history.push("/", { error: 1 });
+      }
     };
 
     fetchData();
-  }, []);
+  }, [history]);
 
   const handleSelectTime = (time) => {
     setTimeReport(time);
@@ -170,7 +183,7 @@ export default function DashboardLeader() {
           <RoundGraph
             title="Tarefas"
             description="do total de tarefas foram completadas"
-            complete={roundGraph}
+            complete={roundGraph || 0}
           />
         </div>
       </Container>

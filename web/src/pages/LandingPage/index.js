@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
-import api from '../../services/api';
-import {isAuth} from '../../utils/auth';
+import api from "../../services/api";
+import { isAuth } from "../../utils/auth";
 
 import "./styles.css";
 
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
 import { FaAngleRight } from "react-icons/fa";
 
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { Link, animateScroll as scroll } from 'react-scroll';
+import { Link, animateScroll as scroll } from "react-scroll";
 
-import BurgerMenu from '../../components/BurgerMenu';
+import BurgerMenu from "../../components/BurgerMenu";
 
 import ModalLogin from "../../components/ModalLogin";
 import ModalEscolhaCadastro from "../../components/ModalEscolhaCadastro";
@@ -37,7 +37,7 @@ import facebook_icon from "../../assets/facebook.png";
 import instagram_icon from "../../assets/instagram.png";
 import linkedin_icon from "../../assets/linkedin.png";
 
-import { setLocalStorage } from '../../utils/localStorage';
+import { setLocalStorage } from "../../utils/localStorage";
 
 export default function LandingPage() {
   const [showModalLogin, setShowModalLogin] = useState(false);
@@ -48,14 +48,18 @@ export default function LandingPage() {
   const history = useHistory();
 
   useEffect(() => {
-    if(isAuth()){
+    if (isAuth()) {
       history.push("/dashboard");
     }
-  }, [history])
+
+    if (history.location.state && history.location.state.error === 1) {
+      toast.error("A sessão expirou, realize o login novamente");
+    }
+  }, [history]);
 
   const scrollToTop = () => {
     scroll.scrollToTop();
-  }
+  };
 
   const handleModalLogin = () => {
     setShowModalLogin(!showModalLogin);
@@ -82,22 +86,21 @@ export default function LandingPage() {
       name: companyData.companyName.trim(),
       email: companyData.email.toLowerCase().trim(),
       password: companyData.password.trim(),
-      is_owner: true
+      is_owner: true,
     };
 
-    try{
-      await api.post('/user', companyModel);
-      
-      toast.success("Cadastro realizado com sucesso!");
-    }catch(error){
+    try {
+      await api.post("/user", companyModel);
 
-      if(error.response.data.err){
-        return toast.error('Email já cadastrado como empresa!');
+      toast.success("Cadastro realizado com sucesso!");
+    } catch (error) {
+      if (error.response.data.err) {
+        return toast.error("Email já cadastrado como empresa!");
       }
-      
-      toast.error('Ocorreu um erro inesperado.');
-    } 
-  }
+
+      toast.error("Ocorreu um erro inesperado.");
+    }
+  };
 
   const registerColab = async (colabData) => {
     setShowModalColaborador(false);
@@ -106,59 +109,57 @@ export default function LandingPage() {
       name: colabData.colabName.trim(),
       email: colabData.email.toLowerCase().trim(),
       password: colabData.password.trim(),
-      is_owner: false
+      is_owner: false,
     };
 
     try {
-      await api.post('/user', colabModel);
+      await api.post("/user", colabModel);
 
-      toast.success('Cadastro realizado com sucesso!');
-    } 
-    catch(error){
-        
+      toast.success("Cadastro realizado com sucesso!");
+    } catch (error) {
+      if (error.response.data.err) {
+        return toast.error("Email já cadastrado como colaborador!");
+      }
 
-        if(error.response.data.err){
-          return toast.error('Email já cadastrado como colaborador!');
-        }
-
-        toast.error('Ocorreu um erro inesperado.');
+      toast.error("Ocorreu um erro inesperado.");
     }
-  }
+  };
 
   const login = async (dataLogin) => {
-    try{
-
+    try {
       const modelUserLogin = {
         email: dataLogin.email.toLowerCase().trim(),
         password: dataLogin.password.trim(),
-      }
+      };
 
-      const response = await api.post('/login', modelUserLogin);
+      const response = await api.post("/login", modelUserLogin);
 
       setShowModalLogin(false);
 
       setLocalStorage("@Scrunner:user", response.data.user);
       setLocalStorage("@Scrunner:token", response.data.token);
-     
+
       history.push("/dashboard");
-      
-    }catch(error){
-      
-      if(error.response.status === 403){
-        return toast.error('Sua conta está desativada.');
+    } catch (error) {
+      if (error.response.status === 403) {
+        return toast.error("Sua conta está desativada.");
       }
-      
-      if(error.response.data.err){
-        return toast.error('Erro ao realizar o login do usuário. Tente novamente');
+
+      if (error.response.data.err) {
+        return toast.error(
+          "Erro ao realizar o login do usuário. Tente novamente"
+        );
       }
-      
-      toast.error('Ocorreu um erro inesperado.');
+
+      toast.error("Ocorreu um erro inesperado.");
     }
-  }
+  };
 
   return (
     <>
-      {showModalLogin && <ModalLogin login={login} handleModalLogin={handleModalLogin} />}
+      {showModalLogin && (
+        <ModalLogin login={login} handleModalLogin={handleModalLogin} />
+      )}
       {showModalEscolha && (
         <ModalEscolhaCadastro
           handleModalEscolha={handleModalEscolha}
@@ -171,14 +172,14 @@ export default function LandingPage() {
           registerCompany={registerCompany}
         />
       )}
-      
+
       {showModalColaborador && (
         <ModalCadastroColaborador
           handleModalColaborador={() => setShowModalColaborador(false)}
           registerColab={registerColab}
         />
       )}
-      
+
       <header>
         <nav>
           <BurgerMenu />
@@ -189,47 +190,51 @@ export default function LandingPage() {
 
             <ul>
               <li>
-                <Link 
+                <Link
                   activeClass="active"
                   to="porqueScrunner"
                   spy={false}
                   smooth={true}
                   offset={-70}
-                  duration={300}>
-                Por que usar Scrunner?
+                  duration={300}
+                >
+                  Por que usar Scrunner?
                 </Link>
               </li>
               <li>
-                <Link 
+                <Link
                   activeClass="active"
                   to="aplicacoes"
                   spy={false}
                   smooth={true}
                   offset={-70}
-                  duration={300}>
-                Aplicações
+                  duration={300}
+                >
+                  Aplicações
                 </Link>
               </li>
               <li>
-                <Link 
+                <Link
                   activeClass="active"
                   to="metodologias"
                   spy={false}
                   smooth={true}
                   offset={-20}
-                  duration={300}>
-                Metodologias Ágeis
+                  duration={300}
+                >
+                  Metodologias Ágeis
                 </Link>
               </li>
               <li>
-                <Link 
+                <Link
                   activeClass="active"
                   to="contato"
                   spy={false}
                   smooth={true}
                   offset={-120}
-                  duration={300}>
-                Contatos
+                  duration={300}
+                >
+                  Contatos
                 </Link>
               </li>
             </ul>
@@ -267,7 +272,7 @@ export default function LandingPage() {
               organize times com mais <strong>agilidade</strong> e autonomia.
             </p>
             <br />
-            <button onClick={handleModalEscolha} >Começar a usar</button>
+            <button onClick={handleModalEscolha}>Começar a usar</button>
           </div>
           <img
             id="teamSpirit"
@@ -286,8 +291,8 @@ export default function LandingPage() {
                 times e projetos, o Scrunner visa incentivar e facilitar a
                 aplicação do <strong>Scrum</strong>, uma das mais importantes e
                 utilizadas metodologias de gerenciamento de projetos do mercado,
-                de forma prática e intuitiva reunindo conceitos e ferramentas
-                em um só lugar.
+                de forma prática e intuitiva reunindo conceitos e ferramentas em
+                um só lugar.
               </p>
               <p>
                 Gerencie projetos e equipes de forma mais ágil com Scrunner.
@@ -298,7 +303,9 @@ export default function LandingPage() {
             <div>
               <img className="icon" src={tarefas} alt="Icone Tarefas" />
               <h1 className="tituloIcone">Tarefas</h1>
-              <p>Crie tarefas e direcione-as para os membros presentes no time.</p>
+              <p>
+                Crie tarefas e direcione-as para os membros presentes no time.
+              </p>
             </div>
             <div>
               <img className="icon" src={daily} alt="Icone Daily" />
@@ -310,7 +317,9 @@ export default function LandingPage() {
             <div>
               <img className="icon" src={relatorios} alt="Icone Relatórios" />
               <h1 className="tituloIcone">Relatórios</h1>
-              <p>Tenha visão do seu projeto evoluindo com gráficos de desempenho.</p>
+              <p>
+                Tenha visão do seu projeto evoluindo com gráficos de desempenho.
+              </p>
             </div>
             <div>
               <img className="icon" src={gestao} alt="Icone Gestão" />
@@ -338,12 +347,14 @@ export default function LandingPage() {
             </div>
             <img id="quadroScrum" src={quadroScrum} alt="Quadro Scrum" />
           </div>
-          
+
           <div className="containerArtigos">
             <h3>Artigos sobre:</h3>
             <div className="artigos">
-
-              <a target="__blank" href="https://www.desenvolvimentoagil.com.br/scrum/">
+              <a
+                target="__blank"
+                href="https://www.desenvolvimentoagil.com.br/scrum/"
+              >
                 <div className="artigo">
                   <div className="artigo-border"></div>
                   <h3>O que é Scrum?</h3>
@@ -352,20 +363,25 @@ export default function LandingPage() {
                     mensais) chamados de Sprints...
                   </p>
                   <div>
-                      <p> Leia mais
+                    <p>
+                      {" "}
+                      Leia mais
                       <FaAngleRight size={20} color={"#328CC1"} />
-                      </p>
+                    </p>
                   </div>
                 </div>
               </a>
-              
-              <a target="__blank" href="https://www.desenvolvimentoagil.com.br/scrum/daily_scrum">
+
+              <a
+                target="__blank"
+                href="https://www.desenvolvimentoagil.com.br/scrum/daily_scrum"
+              >
                 <div className="artigo">
                   <div className="artigo-border"></div>
                   <h3>Daily Scrum</h3>
                   <p>
-                    A cada dia do Sprint, a equipe faz uma reunião diária chamada de
-                    Daily Scrum...
+                    A cada dia do Sprint, a equipe faz uma reunião diária
+                    chamada de Daily Scrum...
                   </p>
                   <div>
                     <p>
@@ -474,8 +490,6 @@ export default function LandingPage() {
                   </label>
                 </li>
               </ul>
-              
-              
 
               <br />
               <br />
@@ -503,48 +517,51 @@ export default function LandingPage() {
             </button>
             <ul>
               <li>
-                <Link 
+                <Link
                   activeClass="active"
                   to="porqueScrunner"
                   spy={false}
                   smooth={true}
                   offset={-70}
-                  duration={350}>
-                Por que usar Scrunner?
+                  duration={350}
+                >
+                  Por que usar Scrunner?
                 </Link>
               </li>
               <li>
-                <Link 
+                <Link
                   activeClass="active"
                   to="aplicacoes"
                   spy={false}
                   smooth={true}
                   offset={-70}
-                  duration={350}>
-                Aplicações
+                  duration={350}
+                >
+                  Aplicações
                 </Link>
               </li>
               <li>
-                <Link 
+                <Link
                   activeClass="active"
                   to="metodologias"
                   spy={false}
                   smooth={true}
                   offset={-20}
-                  duration={350}>
-                Metodologias ágeis
+                  duration={350}
+                >
+                  Metodologias ágeis
                 </Link>
-                
               </li>
               <li>
-                <Link 
+                <Link
                   activeClass="active"
                   to="contato"
                   spy={false}
                   smooth={true}
                   offset={-120}
-                  duration={350}>
-                Contato
+                  duration={350}
+                >
+                  Contato
                 </Link>
               </li>
             </ul>

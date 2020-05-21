@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from "react";
 
-import { getLocalStorage, setLocalStorage } from "../../../utils/localStorage";
+import {
+  getLocalStorage,
+  setLocalStorage,
+  clearLocalStorage,
+} from "../../../utils/localStorage";
+
 import api from "../../../services/api";
 
 import { v4 as uuid } from "uuid";
 
-import "./styles.css";
+import { useHistory } from "react-router-dom";
 
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import "./styles.css";
 
 import { FaPlus } from "react-icons/fa";
 
@@ -23,19 +30,25 @@ import ModalCriarTime from "../../../components/ModalCriarTime";
 export default function TeamsLeader() {
   const [showModalCreate, setShowModalCreate] = useState(false);
   const [teams, setTeams] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     const user = getLocalStorage("@Scrunner:user");
     const token = getLocalStorage("@Scrunner:token");
 
     const fetchTeams = async () => {
-      const response = await api.get(`/teams/${user.id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      try {
+        const response = await api.get(`/teams/${user.id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
 
-      setTeams(response.data.teams);
+        setTeams(response.data.teams);
 
-      setLocalStorage("@Scrunner:token", response.data.token);
+        setLocalStorage("@Scrunner:token", response.data.token);
+      } catch (error) {
+        clearLocalStorage();
+        history.push("/", { error: 1 });
+      }
     };
 
     fetchTeams();
