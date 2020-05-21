@@ -5,7 +5,9 @@ const teamController = require('../controllers/team.controller');
 
 const routes = Router();
 
-routes.get('/teams/:id', auth, teamController.index);
+routes.get('/teams/:userId', auth, teamController.index);
+
+routes.get('/teams/details/:teamId/:userId', auth, teamController.details)
 
 routes.post('/teams/create', auth, teamController.store);
 

@@ -11,9 +11,8 @@ let USER_DB = {
 describe("Teams Routes", () => {
   beforeAll(async () => {
     const response = await request(app).post("/login").send(USER_DB);
-  
-    USER_DB.token = response.body.token;
 
+    USER_DB.token = response.body.token;
   });
 
   it("Should be able to remove a user from a team", async () => {
@@ -123,6 +122,55 @@ describe("Teams Routes", () => {
       .send(MOCK_TEAM);
 
     expect(response.status).toEqual(400);
+    expect(response.body).toHaveProperty("err");
+  });
+
+  it("Should be able to return team details", async () => {
+    const TEAM_ID = 1;
+    const USER_ID = 1;
+
+    const response = await request(app)
+      .get(`/teams/details/${TEAM_ID}/${USER_ID}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`);
+
+    expect(response.status).toEqual(200);
+    expect(response.body).toHaveProperty("team");
+    expect(response.body).toHaveProperty("token");
+  });
+
+  it("Should not be able to return details from an nonexistent team", async () => {
+    const INVALID_TEAM_ID = 18547895;
+    const USER_ID = 1;
+
+    const response = await request(app)
+      .get(`/teams/details/${INVALID_TEAM_ID}/${USER_ID}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`);
+
+    expect(response.status).toEqual(400);
+    expect(response.body).toHaveProperty("err");
+  });
+
+  it("Should not be able to return team details from an nonexistent user", async () => {
+    const TEAM_ID = 1;
+    const INVALID_USER_ID = 156454651456;
+
+    const response = await request(app)
+      .get(`/teams/details/${TEAM_ID}/${INVALID_USER_ID}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`);
+
+    expect(response.status).toEqual(400);
+    expect(response.body).toHaveProperty("err");
+  });
+
+  it("Should not be able to return the details from a team the user is not member ", async () => {
+    const TEAM_ID = 1;
+    const NOT_MEMBER_ID = 10;
+
+    const response = await request(app)
+      .get(`/teams/details/${TEAM_ID}/${NOT_MEMBER_ID}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`);
+
+    expect(response.status).toEqual(403);
     expect(response.body).toHaveProperty("err");
   });
 });

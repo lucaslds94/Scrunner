@@ -8,9 +8,9 @@ const UserTeam = require("../models/UserTeam");
 
 module.exports = {
   async index(req, res) {
-    const { id } = req.params;
+    const { userId } = req.params;
 
-    const user = await User.findByPk(id);
+    const user = await User.findByPk(userId);
 
     if (!user) {
       return res.status(400).json({ err: "User not found" });
@@ -19,7 +19,7 @@ module.exports = {
     const teams = await UserTeam.findAll({
       attributes: ["id"],
       where: {
-        user_id: id,
+        user_id: userId,
       },
       include: [
         {
@@ -41,11 +41,56 @@ module.exports = {
     });
 
     const token = sign({}, jwt.secret, {
-      subject: `${id}`,
+      subject: `${userId}`,
       expiresIn: jwt.expiresIn,
     });
 
     res.json({ teams, token });
+  },
+
+  async details(req, res) {
+    const { teamId, userId } = req.params;
+
+    let team = await Team.findByPk(teamId);
+
+    if (!team) {
+      return res.status(400).json({ err: "Team not found" });
+    }
+
+    const user = await User.findByPk(userId);
+
+    if (!user) {
+      return res.status(400).json({ err: "User not found" });
+    }
+
+    const userInTeam = await UserTeam.findOne({
+      where: { user_id: userId, team_id: teamId },
+    });
+
+    if (!userInTeam) {
+      return res.status(403).json({ err: "Access denied" });
+    }
+
+    team = await Team.findByPk(teamId, {
+      attributes: ["id", "name", "code", "category"],
+      include: [
+        {
+          model: User,
+          as: "users",
+          attributes: ["id", "name", "is_owner"],
+          through: {
+            attributes: [],
+          },
+        },
+      ],
+    });
+
+    const token = sign({}, jwt.secret, {
+      subject: `${userId}`,
+      expiresIn: jwt.expiresIn,
+    });
+
+    res.send({ team, token });
   },
 
   async store(req, res) {
