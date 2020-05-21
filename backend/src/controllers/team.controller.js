@@ -5,6 +5,10 @@ const { jwt } = require("../config/auth");
 const Team = require("../models/Team");
 const User = require("../models/User");
 const UserTeam = require("../models/UserTeam");
+const TaskBoard = require("../models/TaskBoard");
+const Task = require("../models/Task");
+
+const { Op, Sequelize } = require("sequelize");
 
 module.exports = {
   async index(req, res) {
@@ -71,7 +75,10 @@ module.exports = {
       return res.status(403).json({ err: "Access denied" });
     }
 
-    team = await Team.findByPk(teamId, {
+    team = await Team.findAll({
+      where: {
+        id: teamId,
+      },
       attributes: ["id", "name", "code", "category"],
       include: [
         {
@@ -81,16 +88,69 @@ module.exports = {
           through: {
             attributes: [],
           },
+          include: [
+            {
+              model: UserTeam,
+              as: "user_isLeader",
+              attributes: ["is_leader"],
+              where: {
+                team_id: teamId,
+              },
+            },
+          ],
         },
       ],
     });
+
+    [team] = team.map((objectTeam) => {
+      const users = objectTeam.dataValues.users.map((user) => {
+        return {
+          id: user.dataValues.id,
+          name: user.dataValues.name,
+          is_owner: user.dataValues.is_owner,
+          is_leader: user.dataValues.user_isLeader[0].is_leader,
+        };
+      });
+
+      return {
+        ...objectTeam.dataValues,
+        users,
+      };
+    });
+
+    
+    let boardTasksIds = await TaskBoard.findAll({
+      attributes: ["id"],
+      where: {
+        team_id: teamId,
+      },
+    });
+
+    boardTasksIds = boardTasksIds.map((boardObject) => {
+      return { task_board_id: boardObject.id };
+    });
+
+    
+    const { count: doneTasksCount } = await Task.findAndCountAll({
+      where: {
+        [Op.or]: boardTasksIds,
+        task_column_id: 3,
+      },
+    });
+
+    const { count: tasksCount } = await Task.findAndCountAll({
+      where: {
+        [Op.or]: boardTasksIds,
+      },
+    });
+    
 
     const token = sign({}, jwt.secret, {
       subject: `${userId}`,
       expiresIn: jwt.expiresIn,
     });
 
-    res.send({ team, token });
+    res.send({ team, graph: { total_done_tasks: doneTasksCount, total_tasks: tasksCount }, token });
   },
 
   async store(req, res) {

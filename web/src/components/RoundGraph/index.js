@@ -6,7 +6,7 @@ import "./styles.css";
 export default function RoundGraph({
   isPercent = true,
   complete = 0,
-  total,
+  total = 0,
   title,
   description,
 }) {

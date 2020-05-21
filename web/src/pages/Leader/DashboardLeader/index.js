@@ -44,6 +44,8 @@ export default function DashboardLeader() {
     const user = getLocalStorage("@Scrunner:user");
     const token = getLocalStorage("@Scrunner:token");
 
+  
+
     const fetchData = async () => {
       try {
         const response = await api.get(`/dashboard/leader/${user.id}`, {
@@ -123,9 +125,9 @@ export default function DashboardLeader() {
       );
 
       setColaborators(newColaborators);
-      toast.info("Usuário removido com sucesso");
+      toast.info("Colaborador removido com sucesso");
     } catch (error) {
-      toast.error("Error ao remover o usuário");
+      toast.error("Erro ao remover o colaborador");
     }
   };
 
@@ -144,6 +146,7 @@ export default function DashboardLeader() {
               number={teamsCount}
               buttonText="Clique para visulizar os times"
               toPage={"/times"}
+              isClickable
             />
             <CardInformation
               crown

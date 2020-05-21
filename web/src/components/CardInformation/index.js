@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 import { FaUsers , FaCrown } from "react-icons/fa";
 
@@ -12,10 +12,19 @@ export default function CardInformation({
   number,
   buttonText = "Clique aqui",
   crown = false,
-  toPage = "#"
+  toPage = "#",
+  isClickable = false
 }) {
+  const history = useHistory();
+
+  const handleCardClick = () => {
+    if(isClickable){
+      history.push(toPage);
+    }
+  }
+
   return (
-    <Link to={toPage} className="card">
+    <div onClick={handleCardClick} className="card">
       <div className="card-information">
         <p className="card-title">{cardTitle}</p>
         <p>
@@ -28,6 +37,6 @@ export default function CardInformation({
       ) : (
         <FaUsers size={25} color={"#fff"} />
       )}
-    </Link>
+    </div>
   );
 }

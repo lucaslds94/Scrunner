@@ -2,23 +2,11 @@ import React from "react";
 
 import "./styles.css";
 
-export default function TeamMembersList() {
-  let usersList = [
-    { id: 1, name: "Heisenberg", lastAcess: "Há 2 horas", isLeader: true },
-    { id: 2, name: "Jess", lastAcess: "Há 4 horas", isLeader: false },
-    { id: 3, name: "Skyle", lastAcess: "Há 6 horas", isLeader: false },
-    { id: 4, name: "Saul Goodman", lastAcess: "Há 3 horas", isLeader: false },
-    { id: 5, name: "Hank", lastAcess: "Há 4 horas", isLeader: false },
-    { id: 6, name: "Walter Jr", lastAcess: "Há 2 horas", isLeader: false },
-    { id: 7, name: "Mike", lastAcess: "Há 9 horas", isLeader: false },
-    { id: 8, name: "Heisenberg", lastAcess: "Há 2 horas", isLeader: true },
-    { id: 9, name: "Jess", lastAcess: "Há 3 horas", isLeader: false },
-    { id: 10, name: "Skyle", lastAcess: "Há 2 horas", isLeader: false },
-    { id: 11, name: "Saul Goodman", lastAcess: "Há 2 horas", isLeader: false },
-    { id: 12, name: "Hank", lastAcess: "Há 2 horas", isLeader: false },
-    { id: 13, name: "Walter Jr", lastAcess: "Há 2 horas", isLeader: false },
-    { id: 14, name: "Mike", lastAcess: "Há 2 horas", isLeader: false },
-  ];
+export default function TeamMembersList({ colaborators = [], removeUserTeam}) {
+  const removeOwnerFromColaborators = () => {
+    return colaborators.filter((colaborator) => !colaborator.is_owner);
+  };
+
   return (
     <article className="listContainer">
       <h2 className="listTitle">Membros</h2>
@@ -29,15 +17,22 @@ export default function TeamMembersList() {
       </div>
       <div className="usersList">
         <div className="listRow">
-          {usersList.map((user) => {
+          {removeOwnerFromColaborators().map((colaborator) => {
             return (
-              <ul key={user.id}>
+              <ul key={colaborator.id}>
                 <li>
                   <div className="userAvatar"></div>
-                  {user.name}
+                  {colaborator.name}
                 </li>
-                <li>{user.isLeader ? "Líder" : "Membro"}</li>
-                <li>Remover</li>
+                <li>{colaborator.is_leader ? "Líder" : "Membro"}</li>
+                <li>
+                  <button
+                    onClick={() => removeUserTeam(colaborator.id)}
+                    className="remove-button"
+                  >
+                    Remover
+                  </button>
+                </li>
               </ul>
             );
           })}

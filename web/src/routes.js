@@ -32,7 +32,7 @@ export default function Routes() {
           exact
         />
         <PrivateRoute
-          path="/times/detalhes/:id/:name"
+          path="/times/detalhes/:name"
           componentLeader={DetailsTeamsLeader}
           componentColab={DetailsTeamColab}
           exact

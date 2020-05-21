@@ -52,7 +52,7 @@ export default function TeamsLeader() {
     };
 
     fetchTeams();
-  }, []);
+  }, [history]);
 
   const registerTeam = async ({ teamName, category }) => {
     setShowModalCreate(false);
@@ -90,6 +90,10 @@ export default function TeamsLeader() {
     }
   };
 
+  const toDetailPage = (teamId, teamName) => {
+    history.push(`/times/detalhes/${teamName}`, {teamId});
+  }
+
   return (
     <>
       {showModalCreate && (
@@ -121,6 +125,7 @@ export default function TeamsLeader() {
                 teamCode={team.team.code}
                 teamMembers={team.team.users}
                 teamId={team.team.id}
+                toDetailPage={() => toDetailPage(team.team.id, team.team.name)}
                 isOwner
               />
             ))}
