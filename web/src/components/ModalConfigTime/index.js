@@ -15,6 +15,7 @@ export default function ModalConfigTime({
   leaderId = "0",
   members = [],
   updateTeam,
+  deleteTeam
 }) {
   const [showModalConfirm, setShowModalConfirm] = useState(false);
   const [newName, setNewName] = useState(nameTime);
@@ -38,12 +39,18 @@ export default function ModalConfigTime({
     }
   };
 
+  const handleDeleteButton = () => {
+    setShowModalConfirm(false);
+    deleteTeam();
+  }
+
+
   return (
     <>
       {showModalConfirm && (
         <ModalConfirmDelTime
           handleCloseConfirmDelTime={() => setShowModalConfirm(false)}
-          handleConfirmDelTime={() => alert("Deletando o time :(((")}
+          handleConfirmDelTime={handleDeleteButton}
           nameTime={nameTime}
         />
       )}

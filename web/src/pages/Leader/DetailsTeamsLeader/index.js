@@ -62,17 +62,16 @@ export default function DetailsTeamsLeader() {
 
   const getLeaderName = () => {
     if (!loading && team.users) {
-    
-        const user = team.users.find((user) => {
-          return user.is_leader && !user.is_owner;
-        });
+      const user = team.users.find((user) => {
+        return user.is_leader && !user.is_owner;
+      });
 
-        if(user){
-          return {id: user.id, name: user.name};
-        }
+      if (user) {
+        return { id: user.id, name: user.name };
+      }
     }
-      
-    return {id: '', name: ''};
+
+    return { id: "", name: "" };
   };
 
   const updateTeam = async (newData) => {
@@ -89,14 +88,31 @@ export default function DetailsTeamsLeader() {
           },
         }
       );
-      console.log(response);
-      setTeam(response.data.team);   
+
+      setTeam(response.data.team);
       setShowModalConfig(false);
+      setLocalStorage("@Scrunner:token", response.data.token);
 
       toast.info("Time atualizado com sucesso.");
-
     } catch (err) {
       toast.error("Erro ao atualizar time.");
+    }
+  };
+
+  const deleteTeam = async () => {
+    const user = getLocalStorage("@Scrunner:user");
+    const token = getLocalStorage("@Scrunner:token");
+
+    try {
+      await api.delete(`/teams/delete/${team.id}/${user.id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      setShowModalConfig(false);
+
+      history.push("/times", { delete: true });
+    } catch (err) {
+      toast.error("Erro ao deletar time");
     }
   };
 
@@ -153,6 +169,7 @@ export default function DetailsTeamsLeader() {
           leaderId={getLeaderName().id}
           leaderMember={getLeaderName().name}
           updateTeam={updateTeam}
+          deleteTeam={deleteTeam}
         />
       )}
       <div className="detailedTeam">

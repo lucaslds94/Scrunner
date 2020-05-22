@@ -58,8 +58,8 @@ export default function DashboardLeader() {
         setTeamsCount(response.data.teamCount);
         setRoundGraph(response.data.graphs.roundGraph);
         setLocalStorage("@Scrunner:token", response.data.token);
-
         setUserName(user.name);
+
       } catch (error) {
         clearLocalStorage();
         history.push("/", { error: 1 });
