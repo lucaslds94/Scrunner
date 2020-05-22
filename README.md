@@ -15,11 +15,14 @@
 	<a  href="#mortar_board-autores">🎓 Autores  </a>	
 </p>
 
+<br>
+
 
 ## :coffee: Santander Coders
 
 Santander Coders é um programa educacional promovido pelo Santander em parceria com a Digital House no qual houve um processo seletivo onde 36 mil inscritos concorreram a 240 bolsas integrais de estudo para o curso de Desenvolvimento Web Full Stack.
 
+<br>
 
 ###  :books: Conteúdo do curso  
 	
@@ -50,10 +53,13 @@ Santander Coders é um programa educacional promovido pelo Santander em parceria
 
 - Network.
 
+<br>
 
 ## :telescope: Projeto
 
 O Scrunner tem como objetivo incentivar e facilitar a utilização de metodologias ágeis através de uma interface intuitiva e dinâmica. Assim, seus usuários poderão se organizar em conjunto com seu time utilizando a plataforma para otimizar o processo de criação ou andamento de um projeto com ferramentas utilizadas no Scrum, como o Kanban e o processo de Dailys, além de gráficos estatísticos que mostram o progresso do time durante as sprints.
+
+<br>
 
 ## :computer: Tecnologias
 
@@ -79,6 +85,7 @@ O Scrunner tem como objetivo incentivar e facilitar a utilização de metodologi
 
 - [Jest.](https://jestjs.io/pt-BR/)
   
+<br>
 
 ## 💜 Preview
 
@@ -128,6 +135,7 @@ Após seguir os passos anteriores, vá até a pasta  `$ cd web/`  e execute  `$ 
 
 Depois das dependências serem instaladas, execute o comando  `$ yarn start`  ou  `$ npm run start`.
 
+<br>
 
 ## :mortar_board: Autores 
 
