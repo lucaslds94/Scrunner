@@ -15,8 +15,8 @@ export default function CardTeam({
 }) {
   const getOwner = () => {
     const [owner] = teamMembers.filter((member) => member.is_owner);
-
-    return owner.name;
+    console.log(owner)
+    return owner.name || "no";
   };
 
   const teamMembersLength = teamMembers.length - 1;

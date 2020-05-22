@@ -7,6 +7,7 @@ import { FaUsers , FaCrown } from "react-icons/fa";
 import "./styles.css";
 
 export default function CardInformation({
+  copyCode,
   cardTitle,
   subTitle,
   number,
@@ -18,8 +19,11 @@ export default function CardInformation({
   const history = useHistory();
 
   const handleCardClick = () => {
+    
     if(isClickable){
       history.push(toPage);
+    }else if (copyCode) {
+      copyCode();
     }
   }
 

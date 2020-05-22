@@ -234,7 +234,7 @@ export default function LandingPage() {
                   offset={-120}
                   duration={300}
                 >
-                  Contatos
+                  Contato
                 </Link>
               </li>
             </ul>

@@ -77,7 +77,7 @@ export default function ModalLogin({ handleModalLogin, login }) {
               </button>
             </div>
             <div className="checkBox">
-              <div>
+              <div className="connect-choice">
                 <input
                   value="1"
                   type="checkbox"

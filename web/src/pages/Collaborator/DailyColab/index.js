@@ -9,6 +9,9 @@ import ButtonChangeScreen from "../../../components/ButtonChangeScreen";
 
 import CardDaily from "../../../components/CardDaily";
 
+
+import { MdArrowBack } from "react-icons/md";
+
 export default function DailyColab() {
   let { name } = useParams();
 
@@ -21,7 +24,7 @@ export default function DailyColab() {
         <div className="header-times-daily">
           <div className="header-titles">
             <h2>Dailys</h2>
-            <Link to={`/times/detalhes/2/${name}`}>{name}</Link>
+            <Link to={`/times/detalhes/${name}`}>{name}</Link>
           </div>
           <div className="header-buttons">
             <ButtonChangeScreen
@@ -36,6 +39,16 @@ export default function DailyColab() {
           </div>
         </div>
         <div className="divider" />
+
+        <div className="teamInfo-container">
+
+            <Link className ="backBtn" to={`/times/detalhes/${name}`} >
+                <MdArrowBack size={30} color={"#737FF3"}/> Voltar
+            </Link>
+
+        </div>
+
+
         <div className="container-boards">
           <CardDaily 
             date={"01/04"}   

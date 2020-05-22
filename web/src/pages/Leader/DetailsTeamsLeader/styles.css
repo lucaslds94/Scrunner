@@ -18,6 +18,28 @@
   width: 100%;
 }
 
+.teamInfo-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  width: 100%;
+}
+
+.teamInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+}
+
+.teamInfo p {
+  margin-right: 15px;
+  line-height: 28px;
+  color: #898989; 
+}
+
+
 .button-config-time {
   background: transparent;
   border: none;

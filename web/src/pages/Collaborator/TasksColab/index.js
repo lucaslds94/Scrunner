@@ -9,7 +9,8 @@ import Container from "../../../components/Container";
 import CardTask from "../../../components/CardTask";
 import ButtonChangeScreen from "../../../components/ButtonChangeScreen";
 
-// Numero 2 da linha 28 referente ao id do time
+import { MdArrowBack } from "react-icons/md";
+
 
 export default function TasksColab() {
   let { name } = useParams();
@@ -24,7 +25,7 @@ export default function TasksColab() {
           <div className="bloco-header-tarefa">
             <div className="bloco-header-titles">
               <p>Tarefas</p>
-              <Link to={`/times/detalhes/2/${name}`}>{name}</Link>
+              <Link to={`/times/detalhes/${name}`}>{name}</Link>
             </div>
             <div className="colaborador-header-buttons">
               <ButtonChangeScreen
@@ -39,6 +40,15 @@ export default function TasksColab() {
             </div>
           </div>
           <div className="divider" />
+
+          <div className="teamInfo-container">
+
+            <Link className ="backBtn" to={`/times/detalhes/${name}`} >
+                <MdArrowBack size={30} color={"#737FF3"}/> Voltar
+            </Link>
+
+          </div>
+
           <div className="bloco-tarefa">
             <CardTask 
               title="NomeQuadro1" 

@@ -6,10 +6,12 @@ import api from "../../../services/api";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams, Link } from "react-router-dom";
+
 
 import "./styles.css";
 
+import { MdArrowBack } from "react-icons/md";
 import { FaHashtag as Hash, FaCog } from "react-icons/fa";
 
 import Header from "../../../components/Header";
@@ -27,6 +29,7 @@ export default function DetailsTeamsLeader() {
   const [team, setTeam] = useState({});
   const [graph, setGraph] = useState({});
   const [loading, setLoading] = useState(true);
+  const [ownerName, setOwnerName] = useState('');
 
   const history = useHistory();
 
@@ -46,6 +49,13 @@ export default function DetailsTeamsLeader() {
 
       setGraph(response.data.graph);
       setTeam(response.data.team);
+
+
+      let owner = response.data.team.users.find(user => {
+        return user.is_owner === true;
+      });
+      setOwnerName(owner.name);
+
 
       setLoading(false);
     };
@@ -80,6 +90,24 @@ export default function DetailsTeamsLeader() {
     }
   };
 
+  const handleCardClick = () => {
+
+    let inputCopy = document.createElement("input");
+    inputCopy.value = team.code;
+    document.body.appendChild(inputCopy);
+    inputCopy.select();
+    try{
+      document.execCommand('copy');
+      toast.success("Código copiado.")
+    }
+    catch (err) {
+      toast.error("Algum erro ocorreu ao tentar copiar o código.")
+    }
+    
+    document.body.removeChild(inputCopy);
+
+  }
+
   return (
     <>
       {showModalConfig && (
@@ -100,12 +128,30 @@ export default function DetailsTeamsLeader() {
               </button>
             </div>
             <div className="divider" />
+
+
+            <div className="teamInfo-container">
+
+                <Link className ="backBtn" to={`/times`} >
+                    <MdArrowBack size={30} color={"#737FF3"}/> Voltar
+                </Link>
+
+                <div className="teamInfo" >
+                    {ownerName && (
+                      <p>Time criado por {ownerName}</p>
+
+                    )}
+                </div>
+            </div>
+
+
             <div className="cards-area">
               <CardInformation
                 cardTitle="O código do time"
                 subTitle={team.code}
                 number={<Hash size={22} />}
                 buttonText="Clique para copiar o código"
+                copyCode={handleCardClick}
               />
               <CardInformation
                 crown

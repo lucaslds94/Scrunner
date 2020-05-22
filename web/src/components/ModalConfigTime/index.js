@@ -26,7 +26,9 @@ export default function ModalConfigTime({
         />
       )}
       <div className="modal-configTime">
-        <div className="modal-fade"></div>
+        <div className="modal-fade">
+          <button onClick={handleModalConfig}></button>
+        </div>
         <div className="modalContainer-configTime">
           <div className="containerCenter-configTime">
             <button id="closeModal" type="button" onClick={handleModalConfig}>

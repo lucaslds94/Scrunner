@@ -140,6 +140,41 @@
   outline: none;
 }
 
+.connect-choice {
+  margin: 0;
+  padding: 0;
+}
+
+.connect-choice:after {
+  content: "";
+  clear: both;
+}
+
+.connect-choice input{
+  display: none;
+}
+
+.connect-choice input + label:before {
+    border: 1px solid #737ff3;
+    content: "";
+    display: inline-block;
+    font: 16px/1em sans-serif;
+    height: 14px;
+    margin: 0 .40em 0 0;
+    padding: 0;
+    vertical-align: top;
+    width: 14px;
+    border-radius: 2px;
+}
+
+.connect-choice input:checked + label:before {
+  background: transparent;
+  color: #737ff3;
+  content: "\2713";
+  text-align: center;
+  font-weight: bold;
+}
+
 .checkBox {
   color: #505050;
   font-weight: normal;

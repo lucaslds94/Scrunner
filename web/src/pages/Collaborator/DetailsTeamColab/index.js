@@ -1,9 +1,10 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { useHistory, useParams, Link } from "react-router-dom";
 
 import "./styles.css";
 
 import { FaHashtag as Hash } from "react-icons/fa";
+import { MdArrowBack } from "react-icons/md";
 
 import Header from "../../../components/Header";
 import MenuLateral from "../../../components/MenuLateral";
@@ -14,8 +15,32 @@ import ButtonChangeScreen from "../../../components/ButtonChangeScreen";
 import RoundGraph from "../../../components/RoundGraph";
 import MembersList from "../../../components/MembersList";
 
+
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+
 export default function DetailsTeamColab() {
   let { name } = useParams();
+  const [ownerName, setOwnerName] = useState('');
+
+  const handleCardClick = () => {
+
+    let inputCopy = document.createElement("input");
+    inputCopy.value = 123; // AQUI O CÓDIGO DO TIME
+    document.body.appendChild(inputCopy);
+    inputCopy.select();
+    try{
+      document.execCommand('copy');
+      toast.success("Código copiado.")
+    }
+    catch (err) {
+      toast.error("Algum erro ocorreu ao tentar copiar o código.")
+    }
+    
+    document.body.removeChild(inputCopy);
+
+  }
 
   return (
     <div className="colaborador-detalhes-time">
@@ -38,12 +63,29 @@ export default function DetailsTeamColab() {
             </div>
           </div>
           <div className="divider" />
+
+          <div className="teamInfo-container">
+
+            <Link className ="backBtn" to={`/times`} >
+                <MdArrowBack size={30} color={"#737FF3"}/> Voltar
+            </Link>
+
+            <div className="teamInfo" >
+                {ownerName && (
+                  <p>Time criado por NomeCriador</p>
+
+                )}
+            </div>
+          </div>
+
+
           <div className="colaborador-area-cards">
             <CardInformation
               cardTitle="O código do time"
               subTitle="E256HJ"
               number={<Hash size={22} />}
               buttonText="Clique para copiar o código"
+              copyCode={handleCardClick}
             />
             <CardInformation
               crown
@@ -81,6 +123,7 @@ export default function DetailsTeamColab() {
           </div>
         </div>
       </Container>
+      <ToastContainer />
     </div>
   );
 }

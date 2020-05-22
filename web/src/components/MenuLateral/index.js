@@ -32,7 +32,7 @@ export default function MenuLateral({homeActive = true }) {
         Times
       </Link>
       <button className="logoff-button" onClick={handleLogOff}>
-        <FaPowerOff size={30} color={"#FFF"} />
+        <FaPowerOff size={24} color={"#FFF"} />
       </button>
     </aside>
   );
