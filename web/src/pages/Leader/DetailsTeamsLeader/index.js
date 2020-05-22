@@ -44,7 +44,7 @@ export default function DetailsTeamsLeader() {
         },
       });
 
-      setLocalStorage("@Scunner:token", response.data.token);
+      setLocalStorage("@Scrunner:token", response.data.token);
 
       setGraph(response.data.graph);
       setTeam(response.data.team);
@@ -61,34 +61,44 @@ export default function DetailsTeamsLeader() {
   }, [history.location.state.teamId]);
 
   const getLeaderName = () => {
-    if (!loading) {
-      const { name, id } = team.users.find((user) => {
-        return user.is_leader && !user.is_owner;
-      });
+    if (!loading && team.users) {
+    
+        const user = team.users.find((user) => {
+          return user.is_leader && !user.is_owner;
+        });
 
-      return {name, id};
+        if(user){
+          return {id: user.id, name: user.name};
+        }
     }
+      
+    return {id: '', name: ''};
   };
 
   const updateTeam = async (newData) => {
+    const user = getLocalStorage("@Scrunner:user");
     const token = getLocalStorage("@Scrunner:token");
 
     try {
-      const response = await api.put(`/teams/update/${team.id}`, newData, {
-        headers: {
-          Authorization: `Bearer ${token}`
+      const response = await api.put(
+        `/teams/update/${team.id}/${user.id}`,
+        newData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      });
-
-      setTeam(response.data.team);
+      );
+      console.log(response);
+      setTeam(response.data.team);   
+      setShowModalConfig(false);
 
       toast.info("Time atualizado com sucesso.");
-      
-    } catch(err) {
+
+    } catch (err) {
       toast.error("Erro ao atualizar time.");
     }
-    
-  }
+  };
 
   const handleShowModalConfig = () => {
     setShowModalConfig(!showModalConfig);

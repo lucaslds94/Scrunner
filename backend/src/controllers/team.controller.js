@@ -130,7 +130,6 @@ module.exports = {
       return { task_board_id: boardObject.id };
     });
 
-
     const { count: doneTasksCount } = await Task.findAndCountAll({
       where: {
         [Op.or]: boardTasksIds,
@@ -186,8 +185,126 @@ module.exports = {
   },
 
   async update(req, res) {
+    const { userId: user_id, teamId: team_id } = req.params;
 
+    const { name, category, leader_id } = req.body;
 
+    const user = await User.findByPk(user_id);
+
+    if (!user) {
+      return res.status(400).json({ err: "User not found" });
+    }
+
+    let team = await Team.findByPk(team_id);
+
+    if (!team) {
+      return res.status(400).json({ err: "Team not found" });
+    }
+
+    if(leader_id) {
+      const userInTeam = await UserTeam.findOne({
+        where: {
+          user_id: leader_id,
+          team_id,
+        },
+      });
+  
+      if (!userInTeam) {
+        return res.status(400).json({ err: "User not found in this team" });
+      }
+    }
+    
+    team = await Team.update(
+      {
+        name,
+        category,
+      },
+      {
+        where: {
+          id: team_id,
+        },
+      }
+    );
+
+    await UserTeam.update(
+      {
+        is_leader: false,
+      },
+      {
+        where: {
+          team_id: Number(team_id),
+          user_id: {
+            [Op.ne]: user_id,
+          },
+        },
+      }
+    );
+
+    if(leader_id !== '' ){
+      await UserTeam.update(
+        {
+          is_leader: true,
+        },
+        {
+          where: {
+            team_id,
+            user_id: leader_id,
+          },
+        }
+      );
+    }
+    
+
+    team = await Team.findAll({
+      where: {
+        id: team_id,
+      },
+      attributes: ["id", "name", "code", "category"],
+      include: [
+        {
+          model: User,
+          as: "users",
+          attributes: ["id", "name", "is_owner"],
+          through: {
+            attributes: [],
+          },
+          required: true,
+          include: [
+            {
+              model: UserTeam,
+              as: "user_isLeader",
+              attributes: ["is_leader"],
+              where: {
+                team_id,
+              },
+            },
+          ],
+        },
+      ],
+    });
+
+    [team] = team.map((objectTeam) => {
+      const users = objectTeam.dataValues.users.map((user) => {
+        return {
+          id: user.dataValues.id,
+          name: user.dataValues.name,
+          is_owner: user.dataValues.is_owner,
+          is_leader: user.dataValues.user_isLeader[0].is_leader,
+        };
+      });
+
+      return {
+        ...objectTeam.dataValues,
+        users,
+      };
+    });
+
+    const token = sign({}, jwt.secret, {
+      subject: `${user_id}`,
+      expiresIn: jwt.expiresIn,
+    });
+
+    return res.json({ team, token });
   },
 
   async exit(req, res) {

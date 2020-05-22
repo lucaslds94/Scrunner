@@ -27,6 +27,7 @@ export default function ModalConfigTime({
       newCategory.trim() !== categoryTime ||
       newLeader !== leaderId
     ) {
+      
       const newData = {
         name: newName.trim(),
         category: newCategory.trim(),
@@ -89,7 +90,7 @@ export default function ModalConfigTime({
                 onChange={(e) => setNewLeader(e.target.value)}
               >
                 <option className="item-default" defaultValue hidden>
-                  {leaderMember}
+                  {leaderMember !== '' ? leaderMember : 'Não há membros no time'}
                 </option>
                 {members.map(
                   (member) =>

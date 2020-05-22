@@ -173,4 +173,84 @@ describe("Teams Routes", () => {
     expect(response.status).toEqual(403);
     expect(response.body).toHaveProperty("err");
   });
+
+  it("Should be able to update the team data", async () => {
+    const TEAM_ID = 1;
+    const USER_ID = 1;
+
+    const NEW_DATA_TEAM = {
+      name: "Updated name",
+      category: "Updated category",
+      leader_id: 3,
+    };
+
+    const response = await request(app)
+      .put(`/teams/update/${TEAM_ID}/${USER_ID}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`)
+      .send(NEW_DATA_TEAM);
+
+    expect(response.status).toEqual(200);
+    expect(response.body).toHaveProperty("team");
+    expect(response.body.team.name).toEqual(NEW_DATA_TEAM.name);
+    expect(response.body).toHaveProperty("token");
+  });
+
+  it("Should not be able to update the data from a nonexistent team", async () => {
+    const TEAM_ID = 1646464;
+    const USER_ID = 1;
+
+    const NEW_DATA_TEAM = {
+      name: "Updated name",
+      category: "Updated category",
+      leader_id: 3,
+    };
+
+    const response = await request(app)
+      .put(`/teams/update/${TEAM_ID}/${USER_ID}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`)
+      .send(NEW_DATA_TEAM);
+
+    expect(response.status).toEqual(400);
+    expect(response.body).toHaveProperty("err");
+  });
+
+  it("Should not be able to update the team data of a nonexistent user", async () => {
+    const TEAM_ID = 1;
+    const USER_ID = 1654564;
+
+    const NEW_DATA_TEAM = {
+      name: "Updated name",
+      category: "Updated category",
+      leader_id: 3,
+    };
+
+    const response = await request(app)
+      .put(`/teams/update/${TEAM_ID}/${USER_ID}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`)
+      .send(NEW_DATA_TEAM);
+
+    expect(response.status).toEqual(400);
+    expect(response.body).toHaveProperty("err");
+  });
+
+  it("Should not be able to update the data from a team that you're not member", async () => {
+    const TEAM_ID = 1;
+    const USER_ID = 1;
+
+    const NEW_DATA_TEAM = {
+      name: "Updated name",
+      category: "Updated category",
+      leader_id: 10,
+    };
+
+    const response = await request(app)
+      .put(`/teams/update/${TEAM_ID}/${USER_ID}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`)
+      .send(NEW_DATA_TEAM);
+
+    expect(response.status).toEqual(400);
+    expect(response.body).toHaveProperty("err");
+  });
+
+
 });
