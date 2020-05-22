@@ -6,8 +6,7 @@ import api from "../../../services/api";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { useHistory, useParams, Link } from "react-router-dom";
-
+import { useHistory, Link } from "react-router-dom";
 
 import "./styles.css";
 
@@ -29,7 +28,7 @@ export default function DetailsTeamsLeader() {
   const [team, setTeam] = useState({});
   const [graph, setGraph] = useState({});
   const [loading, setLoading] = useState(true);
-  const [ownerName, setOwnerName] = useState('');
+  const [ownerName, setOwnerName] = useState("");
 
   const history = useHistory();
 
@@ -50,18 +49,46 @@ export default function DetailsTeamsLeader() {
       setGraph(response.data.graph);
       setTeam(response.data.team);
 
-
-      let owner = response.data.team.users.find(user => {
+      let owner = response.data.team.users.find((user) => {
         return user.is_owner === true;
       });
       setOwnerName(owner.name);
-
 
       setLoading(false);
     };
 
     fetchTeam();
   }, [history.location.state.teamId]);
+
+  const getLeaderName = () => {
+    if (!loading) {
+      const { name, id } = team.users.find((user) => {
+        return user.is_leader && !user.is_owner;
+      });
+
+      return {name, id};
+    }
+  };
+
+  const updateTeam = async (newData) => {
+    const token = getLocalStorage("@Scrunner:token");
+
+    try {
+      const response = await api.put(`/teams/update/${team.id}`, newData, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      setTeam(response.data.team);
+
+      toast.info("Time atualizado com sucesso.");
+      
+    } catch(err) {
+      toast.error("Erro ao atualizar time.");
+    }
+    
+  }
 
   const handleShowModalConfig = () => {
     setShowModalConfig(!showModalConfig);
@@ -91,27 +118,32 @@ export default function DetailsTeamsLeader() {
   };
 
   const handleCardClick = () => {
-
     let inputCopy = document.createElement("input");
     inputCopy.value = team.code;
     document.body.appendChild(inputCopy);
     inputCopy.select();
-    try{
-      document.execCommand('copy');
-      toast.success("Código copiado.")
+    try {
+      document.execCommand("copy");
+      toast.info("Código copiado.");
+    } catch (err) {
+      toast.error("Algum erro ocorreu ao tentar copiar o código.");
     }
-    catch (err) {
-      toast.error("Algum erro ocorreu ao tentar copiar o código.")
-    }
-    
-    document.body.removeChild(inputCopy);
 
-  }
+    document.body.removeChild(inputCopy);
+  };
 
   return (
     <>
       {showModalConfig && (
-        <ModalConfigTime handleModalConfig={handleShowModalConfig} />
+        <ModalConfigTime
+          handleModalConfig={handleShowModalConfig}
+          categoryTime={team.category}
+          nameTime={team.name}
+          members={team.users}
+          leaderId={getLeaderName().id}
+          leaderMember={getLeaderName().name}
+          updateTeam={updateTeam}
+        />
       )}
       <div className="detailedTeam">
         <Header />
@@ -129,21 +161,15 @@ export default function DetailsTeamsLeader() {
             </div>
             <div className="divider" />
 
-
             <div className="teamInfo-container">
+              <Link className="backBtn" to={`/times`}>
+                <MdArrowBack size={30} color={"#737FF3"} /> Voltar
+              </Link>
 
-                <Link className ="backBtn" to={`/times`} >
-                    <MdArrowBack size={30} color={"#737FF3"}/> Voltar
-                </Link>
-
-                <div className="teamInfo" >
-                    {ownerName && (
-                      <p>Time criado por {ownerName}</p>
-
-                    )}
-                </div>
+              <div className="teamInfo">
+                {ownerName && <p>Time criado por {ownerName}</p>}
+              </div>
             </div>
-
 
             <div className="cards-area">
               <CardInformation

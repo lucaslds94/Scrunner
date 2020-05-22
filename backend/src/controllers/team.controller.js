@@ -185,6 +185,11 @@ module.exports = {
     return res.json({ team: { id, code }, token });
   },
 
+  async update(req, res) {
+
+
+  },
+
   async exit(req, res) {
     const { user_id, team_id } = req.body;
 

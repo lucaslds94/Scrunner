@@ -11,10 +11,31 @@ export default function ModalConfigTime({
   handleModalConfig,
   nameTime,
   categoryTime,
-  leaderMember,
+  leaderMember = "Nenhum líder selecionado.",
+  leaderId = "0",
   members = [],
+  updateTeam,
 }) {
   const [showModalConfirm, setShowModalConfirm] = useState(false);
+  const [newName, setNewName] = useState(nameTime);
+  const [newCategory, setNewCategory] = useState(categoryTime);
+  const [newLeader, setNewLeader] = useState(leaderId);
+
+  const handleSaveButton = () => {
+    if (
+      newName.trim() !== nameTime ||
+      newCategory.trim() !== categoryTime ||
+      newLeader !== leaderId
+    ) {
+      const newData = {
+        name: newName.trim(),
+        category: newCategory.trim(),
+        leader_id: newLeader,
+      };
+
+      updateTeam(newData);
+    }
+  };
 
   return (
     <>
@@ -34,7 +55,7 @@ export default function ModalConfigTime({
             <button id="closeModal" type="button" onClick={handleModalConfig}>
               <FaTimes size={20} color={"#737FF3"} />
             </button>
-            <h1>Configurar Time</h1>
+            <h1> Configurar Time </h1>
             <div className="divider" />
 
             <div className="config-text-field">
@@ -43,7 +64,8 @@ export default function ModalConfigTime({
                 type="input"
                 name="nomeTime"
                 id="nomeTime"
-                defaultValue={nameTime}
+                value={newName}
+                onChange={(e) => setNewName(e.target.value)}
               />
             </div>
             <div className="config-text-field">
@@ -52,7 +74,8 @@ export default function ModalConfigTime({
                 type="input"
                 name="categoria"
                 id="categoria"
-                defaultValue={categoryTime}
+                value={newCategory}
+                onChange={(e) => setNewCategory(e.target.value)}
               />
             </div>
             <div className="config-text-field">
@@ -62,15 +85,20 @@ export default function ModalConfigTime({
                 className="select-lider"
                 name="selectLider"
                 id="selectLider"
+                value={newLeader}
+                onChange={(e) => setNewLeader(e.target.value)}
               >
                 <option className="item-default" defaultValue hidden>
                   {leaderMember}
                 </option>
-                {members.map((member) => (
-                  <option key={member.id} value={member.id}>
-                    {member.nome}
-                  </option>
-                ))}
+                {members.map(
+                  (member) =>
+                    !member.is_owner && (
+                      <option key={member.id} value={member.id}>
+                        {member.name}
+                      </option>
+                    )
+                )}
               </select>
             </div>
             <div className="buttonArea">
@@ -81,7 +109,7 @@ export default function ModalConfigTime({
                 Remover Time
               </button>
               <ButtonAction
-                onClick={() => null}
+                onClick={handleSaveButton}
                 ButtonIcon={FaCheck}
                 ButtonText="Salvar"
               />
