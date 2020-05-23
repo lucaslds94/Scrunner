@@ -6,6 +6,9 @@ import {
   clearLocalStorage,
 } from "../../../utils/localStorage";
 
+import { Lottie } from '@crello/react-lottie';
+import animTeamPage from '../../../assets/animations/team-page.json';
+
 import api from "../../../services/api";
 
 import { v4 as uuid } from "uuid";
@@ -121,6 +124,17 @@ export default function TeamsLeader() {
           <div className="teams-divider"></div>
 
           <div className="container-teams">
+            {teams.length === 0 && (
+              <>
+                <Lottie config={{
+                  animationData: animTeamPage,
+                  loop: true,
+                  autoplay: true,
+                
+                }} />
+              </>
+            )}
+            
             {teams.map((team) => (
               <CardTeam
                 key={uuid()}
