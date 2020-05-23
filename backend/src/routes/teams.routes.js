@@ -13,6 +13,8 @@ routes.post('/teams/create', auth, teamController.store);
 
 routes.put('/teams/update/:teamId/:userId', auth, teamController.update);
 
+routes.delete('/teams/delete/:teamId/:userId', auth, teamController.delete);
+
 routes.delete('/teams', auth, teamController.exit);
 
 module.exports = routes;

@@ -8,11 +8,25 @@ let USER_DB = {
   token: null,
 };
 
+const MOCK_TEAM_TO_DELETE = {
+  id: null,
+  user_id: USER_DB.id,
+  name: "Test team",
+  category: "Test",
+};
+
 describe("Teams Routes", () => {
   beforeAll(async () => {
     const response = await request(app).post("/login").send(USER_DB);
 
     USER_DB.token = response.body.token;
+
+    const responseTeam = await request(app)
+      .post(`/teams/create`)
+      .set("Authorization", `Bearer ${USER_DB.token}`)
+      .send(MOCK_TEAM_TO_DELETE);
+
+    MOCK_TEAM_TO_DELETE.id = responseTeam.body.team.id;
   });
 
   it("Should be able to remove a user from a team", async () => {
@@ -252,5 +266,50 @@ describe("Teams Routes", () => {
     expect(response.body).toHaveProperty("err");
   });
 
+  it("Should be able to delete the team ", async () => {
+    const TEAM_ID = MOCK_TEAM_TO_DELETE.id;
+    const USER_ID = 1;
 
+    const response = await request(app)
+      .delete(`/teams/delete/${TEAM_ID}/${USER_ID}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`)
+
+    expect(response.status).toEqual(204);
+  });
+
+  it("Should not be able to delete a nonexistent team", async () => {
+    const TEAM_ID = 64654545;
+    const USER_ID = 1;
+
+    const response = await request(app)
+      .delete(`/teams/delete/${TEAM_ID}/${USER_ID}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`)
+
+    expect(response.status).toEqual(400);
+    expect(response.body).toHaveProperty("err");
+  });
+
+  it("Should not be able to delete the team of a nonexistent user", async () => {
+    const TEAM_ID = MOCK_TEAM_TO_DELETE.id;
+    const USER_ID = 16546546548;
+
+    const response = await request(app)
+      .delete(`/teams/delete/${TEAM_ID}/${USER_ID}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`)
+
+    expect(response.status).toEqual(403);
+    expect(response.body).toHaveProperty("err");
+  });
+
+  it("Should not be able to delete a team that you're not the owner", async () => {
+    const TEAM_ID = 2;
+    const USER_ID = 1;
+
+    const response = await request(app)
+      .delete(`/teams/delete/${TEAM_ID}/${USER_ID}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`)
+
+    expect(response.status).toEqual(403);
+    expect(response.body).toHaveProperty("err");
+  });
 });

@@ -201,19 +201,19 @@ module.exports = {
       return res.status(400).json({ err: "Team not found" });
     }
 
-    if(leader_id) {
+    if (leader_id) {
       const userInTeam = await UserTeam.findOne({
         where: {
           user_id: leader_id,
           team_id,
         },
       });
-  
+
       if (!userInTeam) {
         return res.status(400).json({ err: "User not found in this team" });
       }
     }
-    
+
     team = await Team.update(
       {
         name,
@@ -240,7 +240,7 @@ module.exports = {
       }
     );
 
-    if(leader_id !== '' ){
+    if (leader_id !== "") {
       await UserTeam.update(
         {
           is_leader: true,
@@ -253,7 +253,6 @@ module.exports = {
         }
       );
     }
-    
 
     team = await Team.findAll({
       where: {
@@ -305,6 +304,45 @@ module.exports = {
     });
 
     return res.json({ team, token });
+  },
+
+  async delete(req, res) {
+    const { userId, teamId } = req.params;
+
+    const user = await User.findOne({
+      where: {
+        id: userId,
+        is_owner: true,
+      },
+    });
+
+    if (!user) {
+      return res.status(403).json({ err: "Access denied" });
+    }
+
+    const team = await Team.findByPk(teamId);
+
+    if (!team) {
+      return res.status(400).json({ err: "Team not found" });
+    }
+
+    const userInTeam = await UserTeam.findOne({
+      where: {
+        user_id: userId,
+        team_id: teamId,
+      },
+    });
+
+    if (!userInTeam) {
+      return res.status(403).json({ err: "Access denied" });
+    };
+
+    await Team.destroy({where: {
+      id: teamId
+    }});
+
+    return res.status(204).send();
+
   },
 
   async exit(req, res) {
