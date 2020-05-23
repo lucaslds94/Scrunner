@@ -49,4 +49,25 @@ describe("Dashboard", () => {
     expect(response.status).toEqual(403);
     expect(response.body).toHaveProperty("err");
   });
+
+  it("Should not be able to return the leader dashboard without a JWT", async () => {
+    
+    const response = await request(app)
+      .get(`/dashboard/leader/${USER_DB.id}`)
+      
+
+    expect(response.status).toEqual(401);
+    expect(response.body).toHaveProperty("err");
+  });
+
+  it("Should not be able to return the leader dashboard with an invalid JWT", async () => {
+    const INVALID_TOKEN = "adiouj239u2r89rj239rf28j"
+    
+    const response = await request(app)
+      .get(`/dashboard/leader/${USER_DB.id}`)
+      .set("Authorization", `Bearer ${INVALID_TOKEN}`)
+
+    expect(response.status).toEqual(401);
+    expect(response.body).toHaveProperty("err");
+  });
 });
