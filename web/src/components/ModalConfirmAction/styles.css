@@ -1,0 +1,77 @@
+.container-confirm-action {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 13;
+}
+
+.confirm-action-content {
+  width: 300px;
+  height: 220px;
+  padding: 30px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  z-index: 15;
+  border-radius: 4px;
+  justify-content: space-between;
+}
+
+.confirm-action-content p {
+   font-size: 15px;
+   color: #cc818c;
+   text-align: center;
+}
+
+.confirm-action-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.confirm-action-close-modal {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+.confirm-action-header h2 {
+  font-size: 20px;
+  color: #737ff3;
+}
+
+.confirm-action-divider {
+  margin: 12px 0;
+}
+
+.confirm-action-buttons {
+  display: flex;
+  flex:1;
+  margin-top: 40px;
+  justify-content: space-around;
+}
+
+.confirm-action-buttons button {
+  border: none;
+  background: transparent;
+  transition: all 0.1s ease-in-out;
+  cursor: pointer;
+  width: 95px;
+  height: 35px;
+  outline: transparent;
+  border: 1px solid #595959;
+  border-radius: 50px;
+}
+
+.confirm-action-buttons button:hover {
+ border:2px solid #cc818c;
+ font-weight: 500;
+ color: #cc818c;
+ border-radius: 50px;
+}
+
+  
