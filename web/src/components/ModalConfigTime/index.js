@@ -97,7 +97,7 @@ export default function ModalConfigTime({
                 onChange={(e) => setNewLeader(e.target.value)}
               >
                 <option className="item-default" defaultValue hidden>
-                  {leaderMember !== '' ? leaderMember : 'Não há membros no time'}
+                  {leaderMember !== '' ? leaderMember : 'Não há líder no time'}
                 </option>
                 {members.map(
                   (member) =>

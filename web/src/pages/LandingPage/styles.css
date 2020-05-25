@@ -186,6 +186,7 @@ main {
   width: 155px;
   height: 45px;
   justify-content: center;
+  align-items: center;
   border-radius: 30px;
   align-self: flex-start;
   line-height: 23px;
