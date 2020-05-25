@@ -8,7 +8,7 @@ const UserTeam = require("../models/UserTeam");
 const TaskBoard = require("../models/TaskBoard");
 const Task = require("../models/Task");
 
-const { Op, Sequelize } = require("sequelize");
+const { Op } = require("sequelize");
 
 module.exports = {
   async index(req, res) {
@@ -184,6 +184,99 @@ module.exports = {
     return res.json({ team: { id, code }, token });
   },
 
+  async entry(req, res) {
+    const { user_id, code } = req.body;
+
+    const user = await User.findByPk(user_id);
+
+    if (!user) {
+      return res.status(400).json({ err: "User not found" });
+    }
+
+    if (user.dataValues.is_owner) {
+      return res.status(403).json({ err: "Access denied" });
+    }
+
+    let team = await Team.findOne({
+      where: {
+        code
+      }
+    });
+
+    if (!team) {
+      return res.status(400).json({ err: "Invalid code" });
+    }
+
+    const userInTeam = await UserTeam.findOne({
+      where: {
+        user_id,
+        team_id: team.dataValues.id
+      }
+    })
+
+    if (userInTeam) {
+      return res.status(409).json({ err: "This user is already a member of the Team" });
+    }
+
+    await UserTeam.create({
+      user_id,
+      team_id: team.dataValues.id,
+      is_leader: false
+    });
+
+    let teamResponse = await Team.findAll({
+      where: {
+        id: team.dataValues.id,
+      },
+      attributes: ["id", "name", "code", "category"],
+      include: [
+        {
+          model: User,
+          as: "users",
+          attributes: ["id", "name", "is_owner"],
+          through: {
+            attributes: [],
+          },
+          required: true,
+          include: [
+            {
+              model: UserTeam,
+              as: "user_isLeader",
+              attributes: ["is_leader"],
+              where: {
+                team_id: team.dataValues.id,
+              },
+            },
+          ],
+        },
+      ],
+    });
+
+    [teamResponse] = teamResponse.map((objectTeam) => {
+      const users = objectTeam.dataValues.users.map((user) => {
+        return {
+          id: user.dataValues.id,
+          name: user.dataValues.name,
+          is_owner: user.dataValues.is_owner,
+          is_leader: user.dataValues.user_isLeader[0].is_leader,
+        };
+      });
+
+      return {
+        ...objectTeam.dataValues,
+        users,
+      };
+    });
+
+    const token = sign({}, jwt.secret, {
+      subject: `${user_id}`,
+      expiresIn: jwt.expiresIn,
+    });
+
+    return res.json({ team: teamResponse, token });
+
+  },
+
   async update(req, res) {
     const { userId: user_id, teamId: team_id } = req.params;
 
@@ -337,9 +430,11 @@ module.exports = {
       return res.status(403).json({ err: "Access denied" });
     };
 
-    await Team.destroy({where: {
-      id: teamId
-    }});
+    await Team.destroy({
+      where: {
+        id: teamId
+      }
+    });
 
     return res.status(204).send();
 

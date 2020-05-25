@@ -15,6 +15,7 @@ const MOCK_TEAM_TO_DELETE = {
   category: "Test",
 };
 
+
 describe("Teams Routes", () => {
   beforeAll(async () => {
     const response = await request(app).post("/login").send(USER_DB);
@@ -118,6 +119,7 @@ describe("Teams Routes", () => {
       .set("Authorization", `Bearer ${USER_DB.token}`)
       .send(MOCK_TEAM);
 
+    
     expect(response.status).toEqual(200);
     expect(response.body).toHaveProperty("team");
     expect(response.body).toHaveProperty("token");
@@ -310,6 +312,82 @@ describe("Teams Routes", () => {
       .set("Authorization", `Bearer ${USER_DB.token}`)
 
     expect(response.status).toEqual(403);
+    expect(response.body).toHaveProperty("err");
+  });
+
+  it("Should be able to enter in a team", async () => {
+    const USER_TEAM_DATA = {
+      user_id: 2,
+      code: '9F4A6G5H'
+    }
+
+    const response = await request(app)
+      .post(`/teams/entry`)
+      .set("Authorization", `Bearer ${USER_DB.token}`)
+      .send(USER_TEAM_DATA)
+
+    expect(response.status).toEqual(200);
+    expect(response.body).toHaveProperty("team");
+    expect(response.body).toHaveProperty("token");
+  });
+
+  it("Should not be able to enter in a team with an invalid user", async () => {
+    const TEAM_INVALID_USER = {
+      user_id: 16546546548,
+      code: '84F9A219'
+    };
+
+    const response = await request(app)
+      .post(`/teams/entry`)
+      .set("Authorization", `Bearer ${USER_DB.token}`)
+      .send(TEAM_INVALID_USER);
+
+    expect(response.status).toEqual(400);
+    expect(response.body).toHaveProperty("err");
+  });
+
+  it("Should not be able to enter in a team with an invalid code", async () => {
+    const TEAM_INVALID_CODE = {
+      user_id: 2,
+      code: '54561981'
+    };
+
+    const response = await request(app)
+      .post(`/teams/entry`)
+      .set("Authorization", `Bearer ${USER_DB.token}`)
+      .send(TEAM_INVALID_CODE);
+
+    expect(response.status).toEqual(400);
+    expect(response.body).toHaveProperty("err");
+  });
+
+  it("Should not be able to enter in a team with an owner account", async () => {
+    const TEAM_INVALID_OWNER = {
+      user_id: USER_DB.id,
+      code: '9F4A6G5H'
+    };
+
+    const response = await request(app)
+      .post(`/teams/entry`)
+      .set("Authorization", `Bearer ${USER_DB.token}`)
+      .send(TEAM_INVALID_OWNER);
+
+    expect(response.status).toEqual(403);
+    expect(response.body).toHaveProperty("err");
+  });
+
+  it("Should not be able to enter in a team you're already in", async () => {
+    const TEAM_ALREADY_IN = {
+      user_id: 7,
+      code: '9F4A6G5H'
+    };
+
+    const response = await request(app)
+      .post(`/teams/entry`)
+      .set("Authorization", `Bearer ${USER_DB.token}`)
+      .send(TEAM_ALREADY_IN);
+
+    expect(response.status).toEqual(409);
     expect(response.body).toHaveProperty("err");
   });
 });
