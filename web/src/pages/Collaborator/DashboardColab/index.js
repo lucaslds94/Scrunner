@@ -56,7 +56,7 @@ export default function DashboardColab() {
     }
 
     fetchData();
-  }, []);
+  }, [history]);
 
   const generateReportDate = () => {
     let month = "06";

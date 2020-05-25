@@ -65,7 +65,7 @@ export default function DetailsTeamsLeader() {
     };
 
     fetchTeam();
-  }, [history.location.state.teamId]);
+  }, [history.location.state.teamId, history]);
 
   const getLeaderName = () => {
     if (!loading && team.users) {

@@ -67,7 +67,7 @@ export default function DetailsTeamColab() {
 
     fetchData();
 
-  }, [history.location.state.teamId]);
+  }, [history.location.state.teamId, history]);
 
   const handleCardClick = () => {
 

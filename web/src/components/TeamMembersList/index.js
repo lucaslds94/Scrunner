@@ -2,6 +2,8 @@ import React, { useState } from "react";
 
 import "./styles.css";
 
+import { getLocalStorage } from "../../utils/localStorage";
+
 import ModalConfirmAction from "../ModalConfirmAction";
 
 import { Lottie } from "@crello/react-lottie";
@@ -24,6 +26,12 @@ export default function TeamMembersList({ colaborators = [], removeUserTeam }) {
 
   const removeOwnerFromColaborators = () => {
     return colaborators.filter((colaborator) => !colaborator.is_owner);
+  };
+
+  const showButtonRemove = (userId) => {
+    const user = getLocalStorage("@Scrunner:user");
+
+    return user.id === userId;
   };
 
   return (
@@ -66,12 +74,14 @@ export default function TeamMembersList({ colaborators = [], removeUserTeam }) {
                       </li>
                       <li>{colaborator.is_leader ? "Líder" : "Membro"}</li>
                       <li>
-                        <button
-                          onClick={() => handleConfirmRemove(colaborator.id)}
-                          className="remove-button"
-                        >
-                          Remover
-                        </button>
+                        {!showButtonRemove(colaborator.id) && (
+                          <button
+                            onClick={() => handleConfirmRemove(colaborator.id)}
+                            className="remove-button"
+                          >
+                            Remover
+                          </button>
+                        )}
                       </li>
                     </ul>
                   );
