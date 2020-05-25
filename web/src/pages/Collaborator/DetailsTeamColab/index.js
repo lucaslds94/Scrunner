@@ -1,5 +1,10 @@
-import React, { useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useHistory, Link } from "react-router-dom";
+
+import { getLocalStorage, setLocalStorage, clearLocalStorage } from "../../../utils/localStorage";
+import isLeader from "../../../utils/isLeader";
+
+import api from "../../../services/api";
 
 import "./styles.css";
 
@@ -14,32 +19,96 @@ import ButtonChangeScreen from "../../../components/ButtonChangeScreen";
 
 import RoundGraph from "../../../components/RoundGraph";
 import MembersList from "../../../components/MembersList";
-
+import TeamMembersList from '../../../components/TeamMembersList';
 
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 export default function DetailsTeamColab() {
-  let { name } = useParams();
+  const [team, setTeam] = useState({});
+  const [graph, setGraph] = useState({});
+  const [loading, setLoading] = useState(true);
   const [ownerName, setOwnerName] = useState('');
+
+  const history = useHistory();
+
+  useEffect(() => {
+    const user = getLocalStorage("@Scrunner:user");
+    const token = getLocalStorage("@Scrunner:token");
+    const teamId = history.location.state.teamId;
+
+    const fetchData = async () => {
+      try {
+        
+        const response = await api.get(`teams/details/${teamId}/${user.id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+
+        setTeam(response.data.team)
+        setGraph(response.data.graph);
+
+        setLocalStorage('@Scrunner:token', response.data.token);
+
+        let owner = response.data.team.users.find((user) => {
+          return user.is_owner === true;
+        });
+        setOwnerName(owner.name);
+
+        setLoading(false);
+      }
+      catch (error) {
+        clearLocalStorage();
+        history.push("/", { error: 1 });
+      }
+
+    }
+
+    fetchData();
+
+  }, [history.location.state.teamId]);
 
   const handleCardClick = () => {
 
     let inputCopy = document.createElement("input");
-    inputCopy.value = 123; // AQUI O CÓDIGO DO TIME
+    inputCopy.value = team.code;
     document.body.appendChild(inputCopy);
     inputCopy.select();
-    try{
+    try {
       document.execCommand('copy');
-      toast.success("Código copiado.")
+      toast.info("Código copiado.")
     }
     catch (err) {
       toast.error("Algum erro ocorreu ao tentar copiar o código.")
     }
-    
+
     document.body.removeChild(inputCopy);
 
+  }
+
+  const removeUserTeam = async (colaboratorId) => {
+    const token = getLocalStorage("@Scrunner:token");
+
+    try {
+      await api.delete("/teams", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          user_id: colaboratorId,
+          team_id: team.id,
+        },
+      });
+
+      let newUsers = team.users.filter((user) => user.id !== colaboratorId);
+
+      setTeam({ ...team, users: newUsers });
+      toast.info("Colaborador removido com sucesso");
+    } catch (error) {
+
+      toast.error("Erro ao remover o colaborador");
+    }
   }
 
   return (
@@ -50,15 +119,15 @@ export default function DetailsTeamColab() {
       <Container>
         <div className="colaborador-container-cards">
           <div className="colaborador-cards-header">
-            <h1>{name}</h1>
+            <h1>{team.name}</h1>
             <div className="colaborador-header-buttons">
               <ButtonChangeScreen
                 titleButton={"Dailys"}
-                to={`/times/daily/${name}`}
+                to={`/times/daily/${team.name}`}
               />
               <ButtonChangeScreen
                 titleButton={"Tarefas"}
-                to={`/times/tarefa/${name}`}
+                to={`/times/tarefa/${team.name}`}
               />
             </div>
           </div>
@@ -66,15 +135,15 @@ export default function DetailsTeamColab() {
 
           <div className="teamInfo-container">
 
-            <Link className ="backBtn" to={`/times`} >
-                <MdArrowBack size={30} color={"#737FF3"}/> Voltar
+            <Link className="backBtn" to={`/times`} >
+              <MdArrowBack size={30} color={"#737FF3"} /> Voltar
             </Link>
 
             <div className="teamInfo" >
-                {ownerName && (
-                  <p>Time criado por NomeCriador</p>
+              {ownerName && (
+                <p>Time criado por {ownerName}</p>
 
-                )}
+              )}
             </div>
           </div>
 
@@ -82,7 +151,7 @@ export default function DetailsTeamColab() {
           <div className="colaborador-area-cards">
             <CardInformation
               cardTitle="O código do time"
-              subTitle="E256HJ"
+              subTitle={team.code}
               number={<Hash size={22} />}
               buttonText="Clique para copiar o código"
               copyCode={handleCardClick}
@@ -91,35 +160,32 @@ export default function DetailsTeamColab() {
               crown
               cardTitle="O time possui"
               subTitle="Membros"
-              number={8}
+              number={team.users && team.users.length - 1}
               buttonText="Visualize os membros do time abaixo."
             />
             <CardInformation
               cardTitle="A categoria do time é"
-              subTitle="Desenvolvimento"
+              subTitle={team.category}
               buttonText="Clique para configurar o grupo"
             />
           </div>
           <div className="colaborador-graph-area">
-            <MembersList
-              users={[
-                { id: 1, name: "Heisenberg", isLeader: true },
-                { id: 2, name: "Heisenberg", isLeader: false },
-                { id: 3, name: "Heisenberg", isLeader: false },
-                { id: 4, name: "Heisenberg", isLeader: false },
-                { id: 5, name: "Heisenberg", isLeader: false },
-                { id: 6, name: "Heisenberg", isLeader: false },
-                { id: 7, name: "Heisenberg", isLeader: false },
-                { id: 8, name: "Heisenberg", isLeader: false },
-              ]}
-            />
-            <RoundGraph
-              title="Tarefas"
-              description="Tarefas foram realizadas no total"
-              isPercent={false}
-              total={9}
-              complete={5}
-            />
+            {!loading &&
+              isLeader(team.users) ?
+              <TeamMembersList colaborators={team.users} removeUserTeam={removeUserTeam} /> :
+              <MembersList users={team.users} />
+            }
+
+            {!loading &&
+              <RoundGraph
+                title="Tarefas"
+                description="Tarefas foram realizadas no total"
+                isPercent={false}
+                total={graph.total_tasks}
+                complete={graph.total_done_tasks}
+              />
+            }
+
           </div>
         </div>
       </Container>

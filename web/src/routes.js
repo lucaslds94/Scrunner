@@ -23,17 +23,17 @@ export default function Routes() {
         <Route path="/" component={LandingPage} exact />
         <PrivateRoute
           path="/dashboard"
-          componentLeader={DashboardLeader}
+          componentOwner={DashboardLeader}
           componentColab={DashboardColab} />
         <PrivateRoute
           path="/times" 
-          componentLeader={TeamsLeader} 
+          componentOwner={TeamsLeader} 
           componentColab={TeamsColab}
           exact
         />
         <PrivateRoute
           path="/times/detalhes/:name"
-          componentLeader={DetailsTeamsLeader}
+          componentOwner={DetailsTeamsLeader}
           componentColab={DetailsTeamColab}
           exact
         />
@@ -41,25 +41,25 @@ export default function Routes() {
         <PrivateRoute 
           path="/times/daily/:name" 
           componentColab={DailyColab}
-          componentLeader={() => <h1>Você não tem acesso a essa página</h1>} 
+          componentOwner={() => <h1>Você não tem acesso a essa página</h1>} 
           exact
         />
         <PrivateRoute
           path="/times/dailylog/:name/:dailyDate"
           componentColab={DailyLog}
-          componentLeader={() => <h1>Você não tem acesso a essa página</h1>} 
+          componentOwner={() => <h1>Você não tem acesso a essa página</h1>} 
           exact
         />
         <PrivateRoute 
           path="/times/tarefa/:name" 
           componentColab={TasksColab}
-          componentLeader={() => <h1>Você não tem acesso a essa página</h1>} 
+          componentOwner={() => <h1>Você não tem acesso a essa página</h1>} 
           exact 
         />
         <PrivateRoute
           path="/times/kanban/:name/:boardTitle/:boardDate"
           componentColab={TeamKanban}
-          componentLeader={() => <h1>Você não tem acesso a essa página</h1>} 
+          componentOwner={() => <h1>Você não tem acesso a essa página</h1>} 
           exact 
         />
         <Route path="*" component={() => <h1>Page not found 404</h1>} /> 

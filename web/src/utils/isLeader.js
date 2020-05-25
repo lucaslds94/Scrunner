@@ -1,11 +1,10 @@
-import {getLocalStorage} from './localStorage';
+import { getLocalStorage } from './localStorage';
 
-export const isLeader = () => {
-  const user = getLocalStorage("@Scrunner:user");
-  
-  if(!user.is_owner){
-    return false;
-  }
+export default function isLeader(users) {
 
-  return true;
-};
+  const myUser = getLocalStorage("@Scrunner:user");
+
+  return users.find(user => {
+    return user.id === myUser.id && user.is_leader
+  });
+}

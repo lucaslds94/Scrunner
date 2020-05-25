@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getLocalStorage, setLocalStorage } from "../../../utils/localStorage";
+import { getLocalStorage, setLocalStorage, clearLocalStorage } from "../../../utils/localStorage";
 
 import api from "../../../services/api";
 
@@ -34,27 +34,34 @@ export default function DetailsTeamsLeader() {
 
   useEffect(() => {
     const fetchTeam = async () => {
-      const user = getLocalStorage("@Scrunner:user");
-      const token = getLocalStorage("@Scrunner:token");
-      const teamId = history.location.state.teamId;
+      try {
+        const user = getLocalStorage("@Scrunner:user");
+        const token = getLocalStorage("@Scrunner:token");
+        const teamId = history.location.state.teamId;
 
-      const response = await api.get(`/teams/details/${teamId}/${user.id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+        const response = await api.get(`/teams/details/${teamId}/${user.id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-      setLocalStorage("@Scrunner:token", response.data.token);
+        setLocalStorage("@Scrunner:token", response.data.token);
 
-      setGraph(response.data.graph);
-      setTeam(response.data.team);
+        setGraph(response.data.graph);
+        setTeam(response.data.team);
 
-      let owner = response.data.team.users.find((user) => {
-        return user.is_owner === true;
-      });
-      setOwnerName(owner.name);
+        let owner = response.data.team.users.find((user) => {
+          return user.is_owner === true;
+        });
+        setOwnerName(owner.name);
 
-      setLoading(false);
+        setLoading(false);
+      }
+      catch (error) {
+        clearLocalStorage();
+        history.push("/", { error: 1 });
+      }
+
     };
 
     fetchTeam();

@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 
+import api from '../../../services/api';
+
 import "./styles.css";
 
-import { getLocalStorage } from "../../../utils/localStorage";
+import { getLocalStorage, setLocalStorage, clearLocalStorage } from "../../../utils/localStorage";
+
+import { useHistory } from 'react-router-dom';
 
 import MenuLateral from "../../../components/MenuLateral";
 import Header from "../../../components/Header";
@@ -19,12 +23,39 @@ export default function DashboardColab() {
   const [ReportComplete, setReportComplete] = useState([]);
   const [userName, setUserName] = useState("");
 
+  const [teamCount, setTeamCount] = useState(0);
+  const [dailyCount, setDailyCount] = useState(0);
+  const [taskCount, setTaskCount] = useState(0);
+
+  const history = useHistory();
+
   useEffect(() => {
     generateReportDate();
     const user = getLocalStorage('@Scrunner:user');
+    const token = getLocalStorage('@Scrunner:token');
 
     setUserName(user.name);
-    
+
+    const fetchData = async () => {
+      try {
+        const response = await api.get(`/dashboard/colaborator/${user.id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+
+        setTeamCount(response.data.teamCount);
+        setDailyCount(response.data.dailyCount);
+        setTaskCount(response.data.taskCount);
+
+        setLocalStorage('@Scrunner:token', response.data.token);
+      } catch (error) {
+        clearLocalStorage();
+        history.push("/", { error: 1 });
+      }
+    }
+
+    fetchData();
   }, []);
 
   const generateReportDate = () => {
@@ -56,8 +87,6 @@ export default function DashboardColab() {
     setReportComplete(complete);
   };
 
-
-
   return (
     <div className="dashboard-colaborador">
       <Header />
@@ -65,26 +94,28 @@ export default function DashboardColab() {
 
       <Container>
         <div className="colaborador-container-cards">
-        <h1>Olá, {userName}.</h1>
+          <h1>Olá, {userName}.</h1>
           <div className="colaborador-divider" />
           <div className="colaborador-cards-area">
             <CardInformation
               cardTitle="Você está em"
               subTitle="Times"
-              number={3}
+              number={teamCount}
               buttonText="Clique para visualizar os times"
+              isClickable
+              toPage={'/times'}
             />
             <CardInformation
               cardTitle="Você registrou"
               subTitle="Dailys"
-              number={10}
+              number={dailyCount}
               buttonText="No total"
               crown
             />
             <CardInformation
-              cardTitle="Você completou"
+              cardTitle="Você criou"
               subTitle="Tarefas"
-              number={21}
+              number={taskCount}
               buttonText="No total"
             />
           </div>

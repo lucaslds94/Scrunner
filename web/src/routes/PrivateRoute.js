@@ -2,10 +2,10 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
 import {isAuth} from '../utils/auth';
-import {isLeader} from '../utils/isLeader';
+import {isOwner} from '../utils/isOwner';
 
 export default function PrivateRoute({
-  componentLeader: ComponentLeader,
+  componentOwner: ComponentOwner,
   componentColab: ComponentColab,
   ...rest 
   }){
@@ -15,7 +15,7 @@ export default function PrivateRoute({
       render={props => 
         isAuth() 
         ? 
-          isLeader() ?  <ComponentLeader {...props} /> : <ComponentColab {...props} />
+          isOwner() ?  <ComponentOwner {...props} /> : <ComponentColab {...props} />
         : <Redirect to={{pathname: '/', state: { from: props.location }}} />
       }
     />
