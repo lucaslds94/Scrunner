@@ -8,6 +8,12 @@ let USER_DB = {
   token: null,
 };
 
+let COLABORATOR_DB = {
+  id: 2,
+  email: "johntravolta@test.com",
+  password: "12345678"
+}
+
 describe("Dashboard", () => {
   beforeAll(async () => {
     const response = await request(app).post("/login").send(USER_DB);
@@ -70,4 +76,26 @@ describe("Dashboard", () => {
     expect(response.status).toEqual(401);
     expect(response.body).toHaveProperty("err");
   });
+
+  it("Should be able to return the colaborator dashboard information", async () => {
+    const response = await request(app)
+      .get(`/dashboard/colaborator/${COLABORATOR_DB.id}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`);
+
+    expect(response.status).toEqual(200);
+    expect(response.body).toHaveProperty("teamCount");
+    expect(response.body).toHaveProperty("dailyCount");
+    expect(response.body).toHaveProperty("taskCount");
+    expect(response.body).toHaveProperty("token");
+  });
+
+  it("Should not be able to return the colaborator dashboard information with an invalid id", async () => {
+    const response = await request(app)
+      .get(`/dashboard/colaborator/${USER_DB.id}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`);
+
+    expect(response.status).toEqual(403);
+    expect(response.body).toHaveProperty("err");
+  });
+
 });

@@ -6,8 +6,9 @@ const Team = require("../models/Team");
 const UserTeam = require("../models/UserTeam");
 const TaskBoard = require("../models/TaskBoard");
 const Task = require("../models/Task");
+const DailyContent = require("../models/DailyContent");
 
-const { Op, Sequelize } = require("sequelize");
+const { Op } = require("sequelize");
 
 module.exports = {
   async indexLeader(req, res) {
@@ -130,4 +131,45 @@ module.exports = {
       token,
     });
   },
+
+  async indexColaborator(req, res) {
+    const { id } = req.params;
+
+    let user = await User.findOne({
+      where: {
+        id,
+        is_owner: false,
+      },
+    });
+
+    if (!user) {
+      return res.status(403).json({ err: "Access denied" });
+    }
+
+    const { count: teamCount } = await UserTeam.findAndCountAll({
+      where: {
+        user_id: id,
+      }
+    });
+
+    const { count: dailyCount } = await DailyContent.findAndCountAll({
+      where: {
+        user_id: id,
+      }
+    });
+
+    const { count: taskCount } = await Task.findAndCountAll({
+      where: {
+        user_id: id,
+      }
+    });
+
+    const token = sign({}, jwt.secret, {
+      subject: `${id}`,
+      expiresIn: jwt.expiresIn,
+    });
+
+
+    return res.json({ teamCount, dailyCount, taskCount, token });
+  }
 }
