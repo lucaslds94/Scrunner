@@ -24,7 +24,7 @@ describe("Dashboard", () => {
 
   it("Should be able to return the leader dashboard information", async () => {
     const response = await request(app)
-      .get(`/dashboard/leader/${USER_DB.id}`)
+      .get(`/dashboard/owner/${USER_DB.id}`)
       .set("Authorization", `Bearer ${USER_DB.token}`);
 
     expect(response.status).toEqual(200);
@@ -38,10 +38,10 @@ describe("Dashboard", () => {
 
   it("Should not be able to return the leader dashboard information with an invalid id", async () => {
     const response = await request(app)
-      .get(`/dashboard/leader/4584`)
+      .get(`/dashboard/owner/4584`)
       .set("Authorization", `Bearer ${USER_DB.token}`);
 
-    expect(response.status).toEqual(403);
+    expect(response.status).toEqual(400);
     expect(response.body).toHaveProperty("err");
   });
 
@@ -49,7 +49,7 @@ describe("Dashboard", () => {
     const VALID_ID = 2;
 
     const response = await request(app)
-      .get(`/dashboard/leader/${VALID_ID}`)
+      .get(`/dashboard/owner/${VALID_ID}`)
       .set("Authorization", `Bearer ${USER_DB.token}`);
 
     expect(response.status).toEqual(403);
@@ -59,7 +59,7 @@ describe("Dashboard", () => {
   it("Should not be able to return the leader dashboard without a JWT", async () => {
     
     const response = await request(app)
-      .get(`/dashboard/leader/${USER_DB.id}`)
+      .get(`/dashboard/owner/${USER_DB.id}`)
       
 
     expect(response.status).toEqual(401);
@@ -70,7 +70,7 @@ describe("Dashboard", () => {
     const INVALID_TOKEN = "adiouj239u2r89rj239rf28j"
     
     const response = await request(app)
-      .get(`/dashboard/leader/${USER_DB.id}`)
+      .get(`/dashboard/owner/${USER_DB.id}`)
       .set("Authorization", `Bearer ${INVALID_TOKEN}`)
 
     expect(response.status).toEqual(401);

@@ -14,13 +14,7 @@ module.exports = {
   async index(req, res) {
     const { userId } = req.params;
 
-    const user = await User.findByPk(userId);
-
-    if (!user) {
-      return res.status(400).json({ err: "User not found" });
-    }
-
-    const teams = await UserTeam.findAll({
+   const teams = await UserTeam.findAll({
       attributes: ["id"],
       where: {
         user_id: userId,
@@ -59,12 +53,6 @@ module.exports = {
 
     if (!team) {
       return res.status(400).json({ err: "Team not found" });
-    }
-
-    const user = await User.findByPk(userId);
-
-    if (!user) {
-      return res.status(400).json({ err: "User not found" });
     }
 
     const userInTeam = await UserTeam.findOne({
@@ -281,12 +269,6 @@ module.exports = {
     const { userId: user_id, teamId: team_id } = req.params;
 
     const { name, category, leader_id } = req.body;
-
-    const user = await User.findByPk(user_id);
-
-    if (!user) {
-      return res.status(400).json({ err: "User not found" });
-    }
 
     let team = await Team.findByPk(team_id);
 

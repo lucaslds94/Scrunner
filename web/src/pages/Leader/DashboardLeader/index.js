@@ -48,7 +48,7 @@ export default function DashboardLeader() {
 
     const fetchData = async () => {
       try {
-        const response = await api.get(`/dashboard/leader/${user.id}`, {
+        const response = await api.get(`/dashboard/owner/${user.id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 

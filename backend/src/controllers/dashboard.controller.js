@@ -11,12 +11,12 @@ const DailyContent = require("../models/DailyContent");
 const { Op } = require("sequelize");
 
 module.exports = {
-  async indexLeader(req, res) {
-    const { id } = req.params;
+  async indexOwner(req, res) {
+    const { userId } = req.params;
 
     let user = await User.findOne({
       where: {
-        id,
+        id: userId,
         is_owner: true,
       },
     });
@@ -29,7 +29,7 @@ module.exports = {
       {
         attributes: ["team_id"],
         where: {
-          user_id: id,
+          user_id: userId,
         },
       }
     );
@@ -43,7 +43,7 @@ module.exports = {
       where: {
         [Op.or]: ownerTeams,
         user_id: {
-          [Op.ne]: id,
+          [Op.ne]: userId,
         },
       },
     });
@@ -118,7 +118,7 @@ module.exports = {
     });
 
     const token = sign({}, jwt.secret, {
-      subject: `${id}`,
+      subject: `${userId}`,
       expiresIn: jwt.expiresIn,
     });
 
@@ -133,11 +133,11 @@ module.exports = {
   },
 
   async indexColaborator(req, res) {
-    const { id } = req.params;
+    const { userId } = req.params;
 
     let user = await User.findOne({
       where: {
-        id,
+        id: userId,
         is_owner: false,
       },
     });
@@ -148,24 +148,24 @@ module.exports = {
 
     const { count: teamCount } = await UserTeam.findAndCountAll({
       where: {
-        user_id: id,
+        user_id: userId,
       }
     });
 
     const { count: dailyCount } = await DailyContent.findAndCountAll({
       where: {
-        user_id: id,
+        user_id: userId,
       }
     });
 
     const { count: taskCount } = await Task.findAndCountAll({
       where: {
-        user_id: id,
+        user_id: userId,
       }
     });
 
     const token = sign({}, jwt.secret, {
-      subject: `${id}`,
+      subject: `${userId}`,
       expiresIn: jwt.expiresIn,
     });
 

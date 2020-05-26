@@ -8,20 +8,23 @@ const MOCK_USER = {
   is_owner: 1,
 };
 
-let ID_MOCK_USER = "";
-
-let USER_DB = {
-  id: 1,
-  email: "johndoe@test.com",
+let MOCK_USER_TO_DELETE = {
+  id: null,
+  name: "Example",
+  email: "accounttest@test.com",
   password: "12345678",
-  token: null,
+  is_owner: 1,
 };
 
 describe("Users routes", () => {
+  beforeAll(async () => {
+    const response = await request(app).post('/user').send(MOCK_USER_TO_DELETE);
+
+    MOCK_USER_TO_DELETE.id = response.body.id;
+  });
+
   it("Should be able to create a new user", async () => {
     const response = await request(app).post("/user").send(MOCK_USER);
-
-    ID_MOCK_USER = response.body.id;
 
     expect(response.status).toEqual(200);
     expect(response.body).toHaveProperty("id");
@@ -35,7 +38,7 @@ describe("Users routes", () => {
   });
 
   it("Should be able to disable a user", async () => {
-    const response = await request(app).put(`/user/${ID_MOCK_USER}`);
+    const response = await request(app).put(`/user/${MOCK_USER_TO_DELETE.id}`);
 
     expect(response.status).toEqual(204);
   });

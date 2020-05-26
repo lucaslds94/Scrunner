@@ -36,21 +36,15 @@ module.exports = {
   },
 
   async disable(req, res) {
-    const { id } = req.params;
+    const { userId } = req.params;
 
-    let user = await User.findByPk(id);
-
-    if (!user) {
-      return res.status(400).json({ err: "User not found" });
-    }
-
-    await user.update(
+    await User.update(
       {
         is_active: false,
       },
       {
         where: {
-          id,
+          id: userId,
         },
       }
     );

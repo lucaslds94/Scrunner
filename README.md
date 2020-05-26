@@ -125,7 +125,7 @@ Você precisa clonar o repositório digitando em seu terminal `$ git clone https
 - Logo após seguir os direcionamentos acima, execute o comando `yarn start` ou `npm start`. Apresentando assim, a mensagem abaixo em seu terminal.
 
 ```
-[SERVER] Server running in the port 3333
+[SERVER] Server running on port 3333
 ```
 
 

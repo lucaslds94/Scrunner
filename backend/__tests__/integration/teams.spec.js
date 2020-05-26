@@ -299,13 +299,26 @@ describe("Teams Routes", () => {
       .delete(`/teams/delete/${TEAM_ID}/${USER_ID}`)
       .set("Authorization", `Bearer ${USER_DB.token}`)
 
-    expect(response.status).toEqual(403);
+    expect(response.status).toEqual(400);
     expect(response.body).toHaveProperty("err");
   });
 
   it("Should not be able to delete a team that you're not the owner", async () => {
     const TEAM_ID = 2;
     const USER_ID = 1;
+
+    const response = await request(app)
+      .delete(`/teams/delete/${TEAM_ID}/${USER_ID}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`)
+
+    expect(response.status).toEqual(403);
+    expect(response.body).toHaveProperty("err");
+  });
+
+
+  it("Should not be able to delete a team with a colaborator account", async () => {
+    const TEAM_ID = 2;
+    const USER_ID = 2;
 
     const response = await request(app)
       .delete(`/teams/delete/${TEAM_ID}/${USER_ID}`)
