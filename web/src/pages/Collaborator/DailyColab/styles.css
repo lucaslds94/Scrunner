@@ -24,10 +24,11 @@
   margin-right: 15px;
 }
 
-.header-titles a {
+.header-titles span {
   text-decoration: none;
   font-size: 17px;
   color: #898989;
+  cursor: pointer;
 }
 
 .header-buttons {

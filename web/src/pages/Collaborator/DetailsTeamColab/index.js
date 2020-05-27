@@ -111,6 +111,10 @@ export default function DetailsTeamColab() {
     }
   }
 
+  const toDailysPage = () => {
+    history.push(`/times/daily/${team.name}`, {teamId: team.id, teamName: team.name});
+  }
+
   return (
     <div className="colaborador-detalhes-time">
       <Header />
@@ -123,7 +127,7 @@ export default function DetailsTeamColab() {
             <div className="colaborador-header-buttons">
               <ButtonChangeScreen
                 titleButton={"Dailys"}
-                to={`/times/daily/${team.name}`}
+                toPage={toDailysPage}
               />
               <ButtonChangeScreen
                 titleButton={"Tarefas"}

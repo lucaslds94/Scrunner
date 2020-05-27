@@ -6,17 +6,20 @@ import { FaRegCheckCircle, FaRegClock } from "react-icons/fa";
 
 import "./styles.css";
 
+import moment from "moment";
+import 'moment/locale/pt-br';
+
 export default function CardDaily({
   date,
   isComplete = false,
   yourDaily = false,
   leaderDaily = false,
-  to = '#'
+  to = "#",
 }) {
   return (
     <Link to={to} className="component-board-daily">
       <div className="board-daily-header">
-        <h3>{date}</h3>
+        <h3>{moment(date).format('DD/MM')}</h3>
         {isComplete ? (
           <FaRegCheckCircle size={17} color={"#0BC984"} />
         ) : (

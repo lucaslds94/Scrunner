@@ -25,7 +25,7 @@ class DailyBoard extends Model {
     });
     this.hasMany(models.DailyContent, {
       foreignKey: "daily_board_id",
-      as: "daily_boards",
+      as: "daily_contents",
     });
   }
 }

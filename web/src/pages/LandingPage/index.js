@@ -141,11 +141,11 @@ export default function LandingPage() {
 
       history.push("/dashboard");
     } catch (error) {
-      if (error.response.status === 403) {
+      if (error.response && error.response.status === 403) {
         return toast.error("Sua conta está desativada.");
       }
 
-      if (error.response.data.err) {
+      if (error.response && error.response.data.err) {
         return toast.error(
           "Erro ao realizar o login do usuário. Tente novamente"
         );

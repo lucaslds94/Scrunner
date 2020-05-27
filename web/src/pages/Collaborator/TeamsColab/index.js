@@ -91,7 +91,7 @@ export default function TeamsColab() {
       setTeams([...teams, newTeam]);
       toast.info(`Agora você faz parte do time ${response.data.team.name}`);
     } catch (error) {
-      console.log(error.response);
+      
       if (error.response.data.err) {
         switch (error.response.status) {
           case 400:
