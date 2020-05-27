@@ -132,7 +132,7 @@ module.exports = {
     });
   },
 
-  async indexColaborator(req, res) {
+  async indexCollaborator(req, res) {
     const { userId } = req.params;
 
     let user = await User.findOne({

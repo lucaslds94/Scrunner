@@ -31,7 +31,7 @@ export default function DashboardLeader() {
   const [ReportDate, setReportDate] = useState([]);
   const [ReportPlanned, setReportPlanned] = useState([]);
   const [ReportComplete, setReportComplete] = useState([]);
-  const [colaborators, setColaborators] = useState([]);
+  const [collaborators, setCollaborators] = useState([]);
   const [colabCount, setColabCount] = useState(0);
   const [doneTasksCount, setDoneTasksCount] = useState(0);
   const [teamsCount, setTeamsCount] = useState(0);
@@ -52,7 +52,7 @@ export default function DashboardLeader() {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        setColaborators(response.data.usersInTeam);
+        setCollaborators(response.data.usersInTeam);
         setColabCount(response.data.colabCount);
         setDoneTasksCount(response.data.doneTasksCount);
         setTeamsCount(response.data.teamCount);
@@ -91,7 +91,7 @@ export default function DashboardLeader() {
     setReportComplete(complete);
   };
 
-  const removeUserTeam = async (colaboratorId, teamId) => {
+  const removeUserTeam = async (collaboratorId, teamId) => {
     const token = getLocalStorage("@Scrunner:token");
 
     try {
@@ -100,31 +100,31 @@ export default function DashboardLeader() {
           Authorization: `Bearer ${token}`,
         },
         data: {
-          user_id: colaboratorId,
+          user_id: collaboratorId,
           team_id: teamId,
         },
       });
 
-      let newColaborators = colaborators.map((colaborator) => {
-        if (colaborator.id !== colaboratorId) {
+      let newCollaborators = collaborators.map((collaborator) => {
+        if (collaborator.id !== collaboratorId) {
           return {
-            ...colaborator,
+            ...collaborator,
           };
         }
-        const teams = colaborator.teams.filter(
+        const teams = collaborator.teams.filter(
           (team) => Number(team.id) !== Number(teamId)
         );
         return {
-          ...colaborator,
+          ...collaborator,
           teams,
         };
       });
 
-      newColaborators = newColaborators.filter(
-        (colaborator) => colaborator.teams.length !== 0
+      newCollaborators = newCollaborators.filter(
+        (collaborator) => collaborator.teams.length !== 0
       );
 
-      setColaborators(newColaborators);
+      setCollaborators(newCollaborators);
       toast.info("Colaborador removido com sucesso");
     } catch (error) {
       toast.error("Erro ao remover o colaborador");
@@ -180,7 +180,7 @@ export default function DashboardLeader() {
         </div>
         <div className="colab-area">
           <UsersList
-            colaboratorsData={colaborators}
+            collaboratorsData={collaborators}
             removeUserTeam={removeUserTeam}
           />
           <RoundGraph

@@ -38,7 +38,7 @@ export default function DashboardColab() {
 
     const fetchData = async () => {
       try {
-        const response = await api.get(`/dashboard/colaborator/${user.id}`, {
+        const response = await api.get(`/dashboard/collaborator/${user.id}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }

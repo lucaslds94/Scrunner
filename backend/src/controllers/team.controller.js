@@ -49,21 +49,7 @@ module.exports = {
   async details(req, res) {
     const { teamId, userId } = req.params;
 
-    let team = await Team.findByPk(teamId);
-
-    if (!team) {
-      return res.status(400).json({ err: "Team not found" });
-    }
-
-    const userInTeam = await UserTeam.findOne({
-      where: { user_id: userId, team_id: teamId },
-    });
-
-    if (!userInTeam) {
-      return res.status(403).json({ err: "Access denied" });
-    }
-
-    team = await Team.findAll({
+    let team = await Team.findAll({
       where: {
         id: teamId,
       },
@@ -270,12 +256,6 @@ module.exports = {
 
     const { name, category, leader_id } = req.body;
 
-    let team = await Team.findByPk(team_id);
-
-    if (!team) {
-      return res.status(400).json({ err: "Team not found" });
-    }
-
     if (leader_id) {
       const userInTeam = await UserTeam.findOne({
         where: {
@@ -289,7 +269,7 @@ module.exports = {
       }
     }
 
-    team = await Team.update(
+    let team = await Team.update(
       {
         name,
         category,

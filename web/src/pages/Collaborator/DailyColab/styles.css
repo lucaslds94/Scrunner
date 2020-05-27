@@ -13,7 +13,7 @@
 .header-titles {
   display: flex;
   align-items: baseline;
-  width: 13%;
+  width: fit-content;
   justify-content: space-between;
 }
 
@@ -21,6 +21,7 @@
   font-weight: bold;
   font-size: 30px;
   color: #737ff3;
+  margin-right: 15px;
 }
 
 .header-titles a {

@@ -316,7 +316,7 @@ describe("Teams Routes", () => {
   });
 
 
-  it("Should not be able to delete a team with a colaborator account", async () => {
+  it("Should not be able to delete a team with a collaborator account", async () => {
     const TEAM_ID = 2;
     const USER_ID = 2;
 

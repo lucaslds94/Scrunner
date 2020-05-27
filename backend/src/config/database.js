@@ -9,7 +9,7 @@ const config = {
   database: "scrunner",
   username: process.env.DB_USER || "postgres",
   password: process.env.DB_PASS || "",
-  logging: process.env.DB_DIALECT === 'sqlite' ? false : true,
+  logging: process.env.DB_DIALECT === 'sqlite' && false,
   define: {
     timestamps: true,
     underscored: true,

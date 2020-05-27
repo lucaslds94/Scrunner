@@ -7,6 +7,6 @@ const dashboardController = require('../controllers/dashboard.controller');
 const routes = Router();
 
 routes.get('/dashboard/owner/:userId', auth, user, dashboardController.indexOwner);
-routes.get('/dashboard/colaborator/:userId', auth, user, dashboardController.indexColaborator);
+routes.get('/dashboard/collaborator/:userId', auth, user, dashboardController.indexCollaborator);
 
 module.exports = routes;

@@ -127,7 +127,7 @@ export default function DetailsTeamsLeader() {
     setShowModalConfig(!showModalConfig);
   };
 
-  const removeUserTeam = async (colaboratorId) => {
+  const removeUserTeam = async (collaboratorId) => {
     const token = getLocalStorage("@Scrunner:token");
 
     try {
@@ -136,12 +136,12 @@ export default function DetailsTeamsLeader() {
           Authorization: `Bearer ${token}`,
         },
         data: {
-          user_id: colaboratorId,
+          user_id: collaboratorId,
           team_id: team.id,
         },
       });
 
-      let newUsers = team.users.filter((user) => user.id !== colaboratorId);
+      let newUsers = team.users.filter((user) => user.id !== collaboratorId);
 
       setTeam({ ...team, users: newUsers });
       toast.info("Colaborador removido com sucesso");
@@ -230,7 +230,7 @@ export default function DetailsTeamsLeader() {
 
           <div className="colab-area">
             <TeamMembersList
-              colaborators={team.users}
+              collaborators={team.users}
               removeUserTeam={removeUserTeam}
             />
             {!loading && (

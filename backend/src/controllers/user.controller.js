@@ -1,14 +1,5 @@
 const bcrypt = require("bcrypt");
-const { sign } = require("jsonwebtoken");
-const { jwt } = require("../config/auth");
-
 const User = require("../models/User");
-const Team = require("../models/Team");
-const UserTeam = require("../models/UserTeam");
-const TaskBoard = require("../models/TaskBoard");
-const Task = require("../models/Task");
-
-const { Op, Sequelize } = require("sequelize");
 
 module.exports = {
   async store(req, res) {

@@ -9,23 +9,23 @@ import ModalConfirmAction from "../ModalConfirmAction";
 import { Lottie } from "@crello/react-lottie";
 import animEmptyTeamList from "../../assets/animations/emptyTeamList.json";
 
-export default function TeamMembersList({ colaborators = [], removeUserTeam }) {
+export default function TeamMembersList({ collaborators = [], removeUserTeam }) {
   const [showModalConfirmAction, setShowModalConfirmAction] = useState(false);
-  const [colaboratorId, setColaboratorId] = useState(0);
+  const [collaboratorId, setCollaboratorId] = useState(0);
 
-  const handleConfirmRemove = (colaboratorId) => {
-    setColaboratorId(colaboratorId);
+  const handleConfirmRemove = (collaboratorId) => {
+    setCollaboratorId(collaboratorId);
 
     setShowModalConfirmAction(true);
   };
 
   const handleRemove = () => {
-    removeUserTeam(colaboratorId);
+    removeUserTeam(collaboratorId);
     setShowModalConfirmAction(false);
   };
 
-  const removeOwnerFromColaborators = () => {
-    return colaborators.filter((colaborator) => !colaborator.is_owner);
+  const removeOwnerFromCollaborators = () => {
+    return collaborators.filter((collaborator) => !collaborator.is_owner);
   };
 
   const showButtonRemove = (userId) => {
@@ -46,7 +46,7 @@ export default function TeamMembersList({ colaborators = [], removeUserTeam }) {
       <article className="listContainer">
         <h2 className="listTitle">Membros</h2>
 
-        {removeOwnerFromColaborators().length === 0 ? (
+        {removeOwnerFromCollaborators().length === 0 ? (
           <>
             <Lottie
               config={{
@@ -65,18 +65,18 @@ export default function TeamMembersList({ colaborators = [], removeUserTeam }) {
             </div>
             <div className="usersList">
               <div className="listRow">
-                {removeOwnerFromColaborators().map((colaborator) => {
+                {removeOwnerFromCollaborators().map((collaborator) => {
                   return (
-                    <ul key={colaborator.id}>
+                    <ul key={collaborator.id}>
                       <li>
                         <div className="userAvatar"></div>
-                        {colaborator.name}
+                        {collaborator.name}
                       </li>
-                      <li>{colaborator.is_leader ? "Líder" : "Membro"}</li>
+                      <li>{collaborator.is_leader ? "Líder" : "Membro"}</li>
                       <li>
-                        {!showButtonRemove(colaborator.id) && (
+                        {!showButtonRemove(collaborator.id) && (
                           <button
-                            onClick={() => handleConfirmRemove(colaborator.id)}
+                            onClick={() => handleConfirmRemove(collaborator.id)}
                             className="remove-button"
                           >
                             Remover
