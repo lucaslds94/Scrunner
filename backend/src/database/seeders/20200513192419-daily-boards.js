@@ -1,7 +1,9 @@
 'use strict';
 
-let YESTERDAY = new Date();
-YESTERDAY = new Date(YESTERDAY.getDate() - 1);
+const today = new Date()
+const YESTERDAY= new Date(today)
+
+YESTERDAY.setDate(YESTERDAY.getDate() - 1)
 
 module.exports = {
   up: (queryInterface, Sequelize) => {

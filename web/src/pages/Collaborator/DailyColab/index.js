@@ -75,6 +75,29 @@ export default function DailyColab() {
     }
   };
 
+  const deleteDailyBoard = async (boardId) => {
+    const user = getLocalStorage("@Scrunner:user");
+    const token = getLocalStorage("@Scrunner:token");
+
+    try {
+      await api.delete(`/dailys/boards/${teamId}/${boardId}/${user.id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const newBoards = dailyBoards.filter(
+        (dailyBoard) => dailyBoard.id !== boardId
+      );
+
+      setDailyBoards(newBoards);
+
+      toast.info("Quadro deletado com sucesso");
+    } catch (error) {
+      toast.error("Ocorreu um erro inesperado");
+    }
+  };
+
   return (
     <div className="detalhes-times-daily">
       <Header />
@@ -117,6 +140,7 @@ export default function DailyColab() {
               isComplete={dailyBoard.daily_contents.your_daily}
               leaderDaily={dailyBoard.daily_contents.leader_daily}
               yourDaily={dailyBoard.daily_contents.your_daily}
+              deleteDailyBoard={() => deleteDailyBoard(dailyBoard.id)}
             />
           ))}
         </div>

@@ -14,6 +14,7 @@ export default function CardDaily({
   yourDaily = false,
   leaderDaily = false,
   toPage,
+  deleteDailyBoard
 }) {
   return (
     <div onClick={toPage} className="component-board-daily">
@@ -35,7 +36,7 @@ export default function CardDaily({
           <p>Registro pelo líder</p>
           <p>{leaderDaily ? "Disponível" : "Não Realizado"}</p>
         </div>
-        <div  onClick={() => alert('OLÁ')} className="board-daily-trash-button">
+        <div  onClick={deleteDailyBoard} className="board-daily-trash-button">
           <BsTrash size={25} color={'#BBB'} />
         </div>
       </div>

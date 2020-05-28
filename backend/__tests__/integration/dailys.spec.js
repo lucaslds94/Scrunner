@@ -10,11 +10,27 @@ let USER_DB = {
 
 const TEAM_ID = 1;
 
+let USER_DB_OTHER_TEAM = {
+  id: 7,
+  email: "waltinho@test.com",
+  password: "12345678",
+};
+
+const OTHER_TEAM_ID = 2;
+
+let ID_BOARD_TO_DELETE = null;
+
 describe("Dashboard", () => {
   beforeAll(async () => {
     const response = await request(app).post("/login").send(USER_DB);
 
     USER_DB.token = response.body.token;
+
+    const createBoard = await request(app)
+      .post(`/dailys/boards/${OTHER_TEAM_ID}/${USER_DB_OTHER_TEAM.id}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`);
+
+    ID_BOARD_TO_DELETE = createBoard.body.board.id;
   });
 
   it("Should be able to return the daily board info", async () => {
@@ -72,7 +88,7 @@ describe("Dashboard", () => {
   });
 
   it("Should not be able to create a daily board if the user is not leader", async () => {
-    const UNAUTHORIZED_USER_ID = 3;
+    const UNAUTHORIZED_USER_ID = 4;
 
     const response = await request(app)
       .post(`/dailys/boards/${TEAM_ID}/${UNAUTHORIZED_USER_ID}`)
@@ -81,4 +97,15 @@ describe("Dashboard", () => {
     expect(response.status).toEqual(403);
     expect(response.body).toHaveProperty("err");
   });
+
+  it("Should be able to delete a daily board", async () => {
+    const response = await request(app)
+      .delete(
+        `/dailys/boards/${OTHER_TEAM_ID}/${ID_BOARD_TO_DELETE}/${USER_DB_OTHER_TEAM.id}`
+      )
+      .set("Authorization", `Bearer ${USER_DB.token}`);
+
+    expect(response.status).toEqual(204);
+  });
+  
 });

@@ -87,23 +87,25 @@ module.exports = {
   async store(req, res) {
     const { userId, teamId } = req.params;
     let startHourTodayDate = new Date();
-    startHourTodayDate = startHourTodayDate.setHours(0,0,1);
+    startHourTodayDate = startHourTodayDate.setHours(0, 0, 1);
 
     let finishHourTodayDate = new Date();
-    finishHourTodayDate = finishHourTodayDate.setHours(23,59,59);
-        
+    finishHourTodayDate = finishHourTodayDate.setHours(23, 59, 59);
+
     const createdBoard = await DailyBoard.findOne({
       where: {
         team_id: teamId,
         created_at: {
           [Op.gte]: startHourTodayDate,
-          [Op.lt]: finishHourTodayDate
-        }
-      }
+          [Op.lt]: finishHourTodayDate,
+        },
+      },
     });
-    
-    if(createdBoard){
-      return res.status(409).json({err: 'There is already a daily board created today'});
+
+    if (createdBoard) {
+      return res
+        .status(409)
+        .json({ err: "There is already a daily board created today" });
     }
 
     let board = await DailyBoard.create({
@@ -124,5 +126,28 @@ module.exports = {
     });
 
     return res.json({ board, token });
+  },
+
+  async deleteBoard(req, res) {
+    const { teamId, boardId } = req.params;
+
+    const board = DailyBoard.findOne({
+      where: {
+        id: boardId,
+      },
+    });
+
+    if (!board) {
+      return res.status(400).json({ err: "Board not found" });
+    }
+
+    await DailyBoard.destroy({
+      where: {
+        id: boardId,
+        team_id: teamId,
+      },
+    });
+
+    return res.status(204).send();
   },
 };

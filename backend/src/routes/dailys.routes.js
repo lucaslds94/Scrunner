@@ -29,4 +29,14 @@ routes.post(
   dailyController.store
 );
 
+routes.delete(
+  "/dailys/boards/:teamId/:boardId/:userId",
+  auth,
+  user,
+  team,
+  userInTeam,
+  isLeader,
+  dailyController.deleteBoard
+);
+
 module.exports = routes;
