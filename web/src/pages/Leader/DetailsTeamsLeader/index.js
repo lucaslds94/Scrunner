@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { getLocalStorage, setLocalStorage, clearLocalStorage } from "../../../utils/localStorage";
+import {
+  getLocalStorage,
+  setLocalStorage,
+  clearLocalStorage,
+} from "../../../utils/localStorage";
 
 import api from "../../../services/api";
 
@@ -56,12 +60,10 @@ export default function DetailsTeamsLeader() {
         setOwnerName(owner.name);
 
         setLoading(false);
-      }
-      catch (error) {
+      } catch (error) {
         clearLocalStorage();
         history.push("/", { error: 1 });
       }
-
     };
 
     fetchTeam();
@@ -134,7 +136,7 @@ export default function DetailsTeamsLeader() {
       await api.delete(`/teams/exit/${team.id}/${collaboratorId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
-        }
+        },
       });
 
       let newUsers = team.users.filter((user) => user.id !== collaboratorId);
@@ -212,8 +214,8 @@ export default function DetailsTeamsLeader() {
               <CardInformation
                 crown
                 cardTitle="O time possui"
-                subTitle="Membros"
-                number={team.users && team.users.length - 1}
+                subTitle={team.users?.length > 1 ? "Membros" : "Membro"}
+                number={team.users?.length - 1}
                 buttonText="Visualize os membros do time abaixo."
               />
               <CardInformation

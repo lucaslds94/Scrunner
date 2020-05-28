@@ -91,7 +91,7 @@ export default function DetailsTeamColab() {
       await api.delete(`/teams/exit/${team.id}/${collaboratorId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
-        }
+        },
       });
 
       let newUsers = team.users.filter((user) => user.id !== collaboratorId);
@@ -107,6 +107,7 @@ export default function DetailsTeamColab() {
     history.push(`/times/daily/${team.name}`, {
       teamId: team.id,
       teamName: team.name,
+      users: team.users
     });
   };
 
@@ -153,8 +154,8 @@ export default function DetailsTeamColab() {
             <CardInformation
               crown
               cardTitle="O time possui"
-              subTitle="Membros"
-              number={team.users && team.users.length - 1}
+              subTitle={team.users?.length > 1 ? "Membros" : "Membro"}
+              number={`${team.users?.length - 1}`}
               buttonText="Visualize os membros do time abaixo."
             />
             <CardInformation

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { v4 as uuid } from "uuid";
+
 import "./styles.css";
 
 import Header from "../../../components/Header";
@@ -7,21 +9,22 @@ import MenuLateral from "../../../components/MenuLateral";
 import Container from "../../../components/Container";
 import ButtonChangeScreen from "../../../components/ButtonChangeScreen";
 import CardDaily from "../../../components/CardDaily";
+import CreateBoard from "../../../components/CreateBoard";
 
 import { MdArrowBack } from "react-icons/md";
 
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import api from "../../../services/api";
 import { getLocalStorage, setLocalStorage } from "../../../utils/localStorage";
-import { v4 as uuid } from "uuid";
+import isLeader from "../../../utils/isLeader";
 
 export default function DailyColab() {
   const [dailyBoards, setDailyBoards] = useState([]);
 
   const history = useHistory();
-  const {teamId, teamName} = history.location.state;
+  const { teamId, teamName, users } = history.location.state;
 
   useEffect(() => {
     const fetchBoards = async () => {
@@ -46,6 +49,28 @@ export default function DailyColab() {
     history.push(`/times/detalhes/${teamName}`, { teamId });
   };
 
+  const handleCreateBoard = async () => {
+    const user = getLocalStorage("@Scrunner:user");
+    const token = getLocalStorage("@Scrunner:token");
+
+    try {
+      const response = await api.post(
+        `/dailys/boards/${teamId}/${user.id}`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      const newBoard = response.data.board;
+
+      setDailyBoards([...dailyBoards, newBoard]);
+      setLocalStorage("@Scrunner:token", response.data.token);
+
+      toast.info("Quadro criado com sucesso");
+    } catch (error) {
+      toast.error("Aconteceu um erro inesperado");
+    }
+  };
+
   return (
     <div className="detalhes-times-daily">
       <Header />
@@ -55,7 +80,7 @@ export default function DailyColab() {
         <div className="header-times-daily">
           <div className="header-titles">
             <h2>Dailys</h2>
-            <span onClick={toDetailsTeamPage} >{teamName}</span>
+            <span onClick={toDetailsTeamPage}>{teamName}</span>
           </div>
           <div className="header-buttons">
             <ButtonChangeScreen
@@ -78,6 +103,9 @@ export default function DailyColab() {
         </div>
 
         <div className="container-boards">
+          {users && isLeader(users) && (
+            <CreateBoard handleCreateBoard={handleCreateBoard} />
+          )}
           {dailyBoards.map((dailyBoard) => (
             <CardDaily
               key={uuid()}

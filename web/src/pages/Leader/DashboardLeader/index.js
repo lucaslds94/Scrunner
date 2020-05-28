@@ -44,8 +44,6 @@ export default function DashboardLeader() {
     const user = getLocalStorage("@Scrunner:user");
     const token = getLocalStorage("@Scrunner:token");
 
-  
-
     const fetchData = async () => {
       try {
         const response = await api.get(`/dashboard/owner/${user.id}`, {
@@ -59,7 +57,6 @@ export default function DashboardLeader() {
         setRoundGraph(response.data.graphs.roundGraph);
         setLocalStorage("@Scrunner:token", response.data.token);
         setUserName(user.name);
-
       } catch (error) {
         clearLocalStorage();
         history.push("/", { error: 1 });
@@ -98,7 +95,7 @@ export default function DashboardLeader() {
       await api.delete(`/teams/exit/${teamId}/${collaboratorId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
-        }
+        },
       });
 
       let newCollaborators = collaborators.map((collaborator) => {
@@ -138,7 +135,7 @@ export default function DashboardLeader() {
           <div className="cards-area">
             <CardInformation
               cardTitle="Foram Criados"
-              subTitle="Times"
+              subTitle={teamsCount > 1 ? "Tarefas" : "Tarefa"}
               number={teamsCount}
               buttonText="Clique para visulizar os times"
               toPage={"/times"}
@@ -147,13 +144,13 @@ export default function DashboardLeader() {
             <CardInformation
               crown
               cardTitle="Possuem"
-              subTitle="Colaboradores"
+              subTitle={colabCount > 1 ? "Colaboradores" : "Colaborador"}
               number={colabCount}
               buttonText="Cadastrados em seus times"
             />
             <CardInformation
               cardTitle="Foram completadas"
-              subTitle="Tarefas"
+              subTitle={doneTasksCount > 1 ? "Tarefas" : "Tarefa"}
               number={doneTasksCount}
               buttonText="Somando todos os times"
             />

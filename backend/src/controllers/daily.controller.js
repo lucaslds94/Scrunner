@@ -87,9 +87,17 @@ module.exports = {
   async store(req, res) {
     const { userId, teamId } = req.params;
 
-    const board = await DailyBoard.create({
+    let board = await DailyBoard.create({
       team_id: teamId,
     });
+
+    board = {
+      ...board.dataValues,
+      daily_contents: {
+        leader_daily: false,
+        your_daily: false,
+      },
+    };
 
     const token = sign({}, jwt.secret, {
       subject: `${userId}`,

@@ -1,0 +1,32 @@
+.create-board{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 350px;
+  height: 215px;
+  background:#ffffff;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.11);
+  border-radius: 10px;
+  padding: 25px;
+  margin: 10px 15px 10px 0px;
+  transition: transform .3s;
+  cursor: pointer;
+}
+
+.create-board:hover {
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+
+.create-board p {
+  width: 150px;
+  text-align: center;
+  color: #737FF3;
+  font-size: 20px;
+}
+
+.create-board svg {
+  margin-bottom: 15px;
+}

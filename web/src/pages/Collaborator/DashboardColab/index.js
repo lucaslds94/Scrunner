@@ -99,7 +99,7 @@ export default function DashboardColab() {
           <div className="colaborador-cards-area">
             <CardInformation
               cardTitle="Você está em"
-              subTitle="Times"
+              subTitle={teamCount > 1 ? "Times" : "Time"}
               number={teamCount}
               buttonText="Clique para visualizar os times"
               isClickable
@@ -107,16 +107,16 @@ export default function DashboardColab() {
             />
             <CardInformation
               cardTitle="Você registrou"
-              subTitle="Dailys"
+              subTitle={dailyCount > 1 ? "Dailys" : "Daily"}
               number={dailyCount}
-              buttonText="No total"
+              buttonText="no total"
               crown
             />
             <CardInformation
               cardTitle="Você criou"
-              subTitle="Tarefas"
+              subTitle={taskCount > 1 ? "Tarefas" : "Tarefa"}
               number={taskCount}
-              buttonText="No total"
+              buttonText="no total"
             />
           </div>
         </div>
