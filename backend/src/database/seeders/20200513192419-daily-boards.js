@@ -1,23 +1,21 @@
 'use strict';
 
+let YESTERDAY = new Date();
+YESTERDAY = new Date(YESTERDAY.getDate() - 1);
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     
       return queryInterface.bulkInsert('daily_boards', 
       [
         {
-          created_at: new Date(),
-          updated_at: new Date(),
+          created_at: YESTERDAY,
+          updated_at: YESTERDAY,
           team_id: 1,
         },
         {
-          created_at: new Date(),
-          updated_at: new Date(),
-          team_id: 2,
-        },
-        {
-          created_at: new Date(),
-          updated_at: new Date(),
+          created_at: YESTERDAY,
+          updated_at: YESTERDAY,
           team_id: 2,
         }
       ]);

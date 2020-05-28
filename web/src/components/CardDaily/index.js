@@ -1,8 +1,7 @@
 import React from "react";
 
-import { Link } from "react-router-dom";
-
 import { FaRegCheckCircle, FaRegClock } from "react-icons/fa";
+import { BsTrash } from "react-icons/bs";
 
 import "./styles.css";
 
@@ -14,10 +13,10 @@ export default function CardDaily({
   isComplete = false,
   yourDaily = false,
   leaderDaily = false,
-  to = "#",
+  toPage,
 }) {
   return (
-    <Link to={to} className="component-board-daily">
+    <div onClick={toPage} className="component-board-daily">
       <div className="board-daily-header">
         <h3>{moment(date).format('DD/MM')}</h3>
         {isComplete ? (
@@ -36,7 +35,10 @@ export default function CardDaily({
           <p>Registro pelo líder</p>
           <p>{leaderDaily ? "Disponível" : "Não Realizado"}</p>
         </div>
+        <div  onClick={() => alert('OLÁ')} className="board-daily-trash-button">
+          <BsTrash size={25} color={'#BBB'} />
+        </div>
       </div>
-    </Link>
+    </div>
   );
 }

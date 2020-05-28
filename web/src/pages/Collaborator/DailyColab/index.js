@@ -67,6 +67,10 @@ export default function DailyColab() {
 
       toast.info("Quadro criado com sucesso");
     } catch (error) {
+      if (error.response?.status === 409) {
+        return toast.info("Você já criou um quadro hoje");
+      }
+
       toast.error("Aconteceu um erro inesperado");
     }
   };

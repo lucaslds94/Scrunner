@@ -7,7 +7,8 @@
   border-radius: 10px;
   padding: 25px;
   margin: 10px 15px 10px 0px;
-  transition: transform .3s;
+  transition: transform 0.3s;
+  cursor: pointer;
 }
 
 .component-board-daily:hover {
@@ -31,6 +32,7 @@
 .board-daily-body {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .board-register-daily {
@@ -46,4 +48,17 @@
   font-size: 18px;
   color: #595959;
   margin-top: 5px;
+}
+
+.board-daily-trash-button {
+  display:flex;
+  z-index: 1000;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  cursor:pointer;
+}
+
+.board-daily-trash-button svg:hover {
+  color: #dc3545 !important;
 }

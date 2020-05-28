@@ -35,7 +35,7 @@ module.exports = {
       where: {
         team_id: teamId,
       },
-      order: [["createdAt"]],
+      order: [["createdAt", "DESC"]],
       include: [
         {
           model: DailyContent,
@@ -86,6 +86,25 @@ module.exports = {
 
   async store(req, res) {
     const { userId, teamId } = req.params;
+    let startHourTodayDate = new Date();
+    startHourTodayDate = startHourTodayDate.setHours(0,0,1);
+
+    let finishHourTodayDate = new Date();
+    finishHourTodayDate = finishHourTodayDate.setHours(23,59,59);
+        
+    const createdBoard = await DailyBoard.findOne({
+      where: {
+        team_id: teamId,
+        created_at: {
+          [Op.gte]: startHourTodayDate,
+          [Op.lt]: finishHourTodayDate
+        }
+      }
+    });
+    
+    if(createdBoard){
+      return res.status(409).json({err: 'There is already a daily board created today'});
+    }
 
     let board = await DailyBoard.create({
       team_id: teamId,
