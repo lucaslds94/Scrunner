@@ -28,7 +28,7 @@ export default function DailyColab() {
       const user = getLocalStorage("@Scrunner:user");
       const token = getLocalStorage("@Scrunner:token");
 
-      const response = await api.get(`/dailys/${teamId}/${user.id}`, {
+      const response = await api.get(`/dailys/boards/${teamId}/${user.id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -19,7 +19,7 @@ describe("Dashboard", () => {
 
   it("Should be able to return the daily board info", async () => {
     const response = await request(app)
-      .get(`/dailys/${TEAM_ID}/${USER_DB.id}`)
+      .get(`/dailys/boards/${TEAM_ID}/${USER_DB.id}`)
       .set("Authorization", `Bearer ${USER_DB.token}`);
 
     expect(response.status).toEqual(200);
@@ -31,7 +31,7 @@ describe("Dashboard", () => {
     const INVALID_USER_ID = 58547;
 
     const response = await request(app)
-      .get(`/dailys/${TEAM_ID}/${INVALID_USER_ID}`)
+      .get(`/dailys/boards/${TEAM_ID}/${INVALID_USER_ID}`)
       .set("Authorization", `Bearer ${USER_DB.token}`);
 
     expect(response.status).toEqual(400);
@@ -42,7 +42,7 @@ describe("Dashboard", () => {
     const INVALID_TEAM_ID = 58547;
 
     const response = await request(app)
-      .get(`/dailys/${INVALID_TEAM_ID}/${USER_DB.id}`)
+      .get(`/dailys/boards/${INVALID_TEAM_ID}/${USER_DB.id}`)
       .set("Authorization", `Bearer ${USER_DB.token}`);
 
     expect(response.status).toEqual(400);
@@ -54,7 +54,28 @@ describe("Dashboard", () => {
     const INVALID_TEAM_MEMBER = 2;
 
     const response = await request(app)
-      .get(`/dailys/${INVALID_TEAM_MEMBER}/${INVALID_USER}`)
+      .get(`/dailys/boards/${INVALID_TEAM_MEMBER}/${INVALID_USER}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`);
+
+    expect(response.status).toEqual(403);
+    expect(response.body).toHaveProperty("err");
+  });
+
+  it("Should be able to create a daily board", async () => {
+    const response = await request(app)
+      .post(`/dailys/boards/${TEAM_ID}/${USER_DB.id}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`);
+
+    expect(response.status).toEqual(200);
+    expect(response.body).toHaveProperty("board");
+    expect(response.body).toHaveProperty("token");
+  });
+
+  it("Should not be able to create a daily board if the user is not leader", async () => {
+    const UNAUTHORIZED_USER_ID = 3;
+
+    const response = await request(app)
+      .post(`/dailys/boards/${TEAM_ID}/${UNAUTHORIZED_USER_ID}`)
       .set("Authorization", `Bearer ${USER_DB.token}`);
 
     expect(response.status).toEqual(403);

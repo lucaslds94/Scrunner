@@ -35,9 +35,7 @@ module.exports = {
       where: {
         team_id: teamId,
       },
-      order: [
-        ['createdAt']
-      ],
+      order: [["createdAt"]],
       include: [
         {
           model: DailyContent,
@@ -84,5 +82,20 @@ module.exports = {
     });
 
     return res.json({ boards, token });
+  },
+
+  async store(req, res) {
+    const { userId, teamId } = req.params;
+
+    const board = await DailyBoard.create({
+      team_id: teamId,
+    });
+
+    const token = sign({}, jwt.secret, {
+      subject: `${userId}`,
+      expiresIn: jwt.expiresIn,
+    });
+
+    return res.json({ board, token });
   },
 };
