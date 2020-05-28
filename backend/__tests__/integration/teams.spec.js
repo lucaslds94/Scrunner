@@ -10,11 +10,9 @@ let USER_DB = {
 
 const MOCK_TEAM_TO_DELETE = {
   id: null,
-  user_id: USER_DB.id,
   name: "Test team",
   category: "Test",
 };
-
 
 describe("Teams Routes", () => {
   beforeAll(async () => {
@@ -23,7 +21,7 @@ describe("Teams Routes", () => {
     USER_DB.token = response.body.token;
 
     const responseTeam = await request(app)
-      .post(`/teams/create`)
+      .post(`/teams/create/${USER_DB.id}`)
       .set("Authorization", `Bearer ${USER_DB.token}`)
       .send(MOCK_TEAM_TO_DELETE);
 
@@ -31,57 +29,49 @@ describe("Teams Routes", () => {
   });
 
   it("Should be able to remove a user from a team", async () => {
-    const MOCK_REMOVE_USER_TEAM = {
-      user_id: 10,
-      team_id: 2,
-    };
-
+    const USER_ID = 10;
+    const TEAM_ID = 2;
+    
     const response = await request(app)
-      .delete("/teams")
+      .delete(`/teams/exit/${TEAM_ID}/${USER_ID}`)
       .set("Authorization", `Bearer ${USER_DB.token}`)
-      .send(MOCK_REMOVE_USER_TEAM);
 
     expect(response.status).toEqual(204);
   });
 
   it("Should not be able to remove a user with an invalid id from a team ", async () => {
-    const MOCK_REMOVE_USER_TEAM = {
-      user_id: 4561556132131,
-      team_id: 2,
-    };
+    const INVALID_USER_ID = 4561556132131;
+    const TEAM_ID = 2;
+    
 
     const response = await request(app)
-      .delete("/teams")
+      .delete(`/teams/exit/${TEAM_ID}/${INVALID_USER_ID}`)
       .set("Authorization", `Bearer ${USER_DB.token}`)
-      .send(MOCK_REMOVE_USER_TEAM);
 
     expect(response.status).toEqual(400);
   });
 
   it("Should not be able to remove a user from a team with an invalid id", async () => {
-    const MOCK_REMOVE_USER_TEAM = {
-      user_id: 10,
-      team_id: 273817389217,
-    };
+    
+    const USER_ID = 10;
+    const INVALID_TEAM_ID = 273817389217;
+    
 
     const response = await request(app)
-      .delete("/teams")
+      .delete(`/teams/exit/${INVALID_TEAM_ID}/${USER_ID}`)
       .set("Authorization", `Bearer ${USER_DB.token}`)
-      .send(MOCK_REMOVE_USER_TEAM);
 
     expect(response.status).toEqual(400);
   });
 
   it("Should not be able to remove a user from a team when there's no association between them", async () => {
-    const MOCK_REMOVE_USER_TEAM = {
-      user_id: 10,
-      team_id: 1,
-    };
+    
+    const USER_ID = 10;
+    const TEAM_ID = 1;
 
     const response = await request(app)
-      .delete("/teams")
+      .delete(`/teams/exit/${TEAM_ID}/${USER_ID}`)
       .set("Authorization", `Bearer ${USER_DB.token}`)
-      .send(MOCK_REMOVE_USER_TEAM);
 
     expect(response.status).toEqual(403);
   });
@@ -109,31 +99,30 @@ describe("Teams Routes", () => {
 
   it("Should be able to create a team", async () => {
     const MOCK_TEAM = {
-      user_id: USER_DB.id,
       name: "Test team",
       category: "Test",
     };
 
     const response = await request(app)
-      .post(`/teams/create`)
+      .post(`/teams/create/${USER_DB.id}`)
       .set("Authorization", `Bearer ${USER_DB.token}`)
       .send(MOCK_TEAM);
 
-    
     expect(response.status).toEqual(200);
     expect(response.body).toHaveProperty("team");
     expect(response.body).toHaveProperty("token");
   });
 
   it("Should not be able to create a team using an invalid user id", async () => {
+    const INVALID_USER_ID = 5522145;
+
     const MOCK_TEAM = {
-      user_id: 5522145,
       name: "Test team",
       category: "Test",
     };
 
     const response = await request(app)
-      .post(`/teams/create`)
+      .post(`/teams/create/${INVALID_USER_ID}`)
       .set("Authorization", `Bearer ${USER_DB.token}`)
       .send(MOCK_TEAM);
 
@@ -211,6 +200,25 @@ describe("Teams Routes", () => {
     expect(response.body).toHaveProperty("token");
   });
 
+  it("Should not be able to update the data from a team if the user is not the owner", async () => {
+    const TEAM_ID = 1;
+    const NOT_OWNER_ID = 2;
+
+    const NEW_DATA_TEAM = {
+      name: "Updated name",
+      category: "Updated category",
+      leader_id: 3,
+    };
+
+    const response = await request(app)
+      .put(`/teams/update/${TEAM_ID}/${NOT_OWNER_ID}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`)
+      .send(NEW_DATA_TEAM);
+
+    expect(response.status).toEqual(403);
+    expect(response.body).toHaveProperty("err");
+  });
+
   it("Should not be able to update the data from a nonexistent team", async () => {
     const TEAM_ID = 1646464;
     const USER_ID = 1;
@@ -274,7 +282,7 @@ describe("Teams Routes", () => {
 
     const response = await request(app)
       .delete(`/teams/delete/${TEAM_ID}/${USER_ID}`)
-      .set("Authorization", `Bearer ${USER_DB.token}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`);
 
     expect(response.status).toEqual(204);
   });
@@ -285,7 +293,7 @@ describe("Teams Routes", () => {
 
     const response = await request(app)
       .delete(`/teams/delete/${TEAM_ID}/${USER_ID}`)
-      .set("Authorization", `Bearer ${USER_DB.token}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`);
 
     expect(response.status).toEqual(400);
     expect(response.body).toHaveProperty("err");
@@ -297,7 +305,7 @@ describe("Teams Routes", () => {
 
     const response = await request(app)
       .delete(`/teams/delete/${TEAM_ID}/${USER_ID}`)
-      .set("Authorization", `Bearer ${USER_DB.token}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`);
 
     expect(response.status).toEqual(400);
     expect(response.body).toHaveProperty("err");
@@ -309,12 +317,11 @@ describe("Teams Routes", () => {
 
     const response = await request(app)
       .delete(`/teams/delete/${TEAM_ID}/${USER_ID}`)
-      .set("Authorization", `Bearer ${USER_DB.token}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`);
 
     expect(response.status).toEqual(403);
     expect(response.body).toHaveProperty("err");
   });
-
 
   it("Should not be able to delete a team with a collaborator account", async () => {
     const TEAM_ID = 2;
@@ -322,22 +329,20 @@ describe("Teams Routes", () => {
 
     const response = await request(app)
       .delete(`/teams/delete/${TEAM_ID}/${USER_ID}`)
-      .set("Authorization", `Bearer ${USER_DB.token}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`);
 
     expect(response.status).toEqual(403);
     expect(response.body).toHaveProperty("err");
   });
 
   it("Should be able to enter in a team", async () => {
-    const USER_TEAM_DATA = {
-      user_id: 2,
-      code: '9F4A6G5H'
-    }
+    const USER_ID = 2;
+    const CODE = "9F4A6G5H";
 
     const response = await request(app)
-      .post(`/teams/entry`)
+      .post(`/teams/entry/${USER_ID}`)
       .set("Authorization", `Bearer ${USER_DB.token}`)
-      .send(USER_TEAM_DATA)
+      .send({ code: CODE });
 
     expect(response.status).toEqual(200);
     expect(response.body).toHaveProperty("team");
@@ -345,60 +350,52 @@ describe("Teams Routes", () => {
   });
 
   it("Should not be able to enter in a team with an invalid user", async () => {
-    const TEAM_INVALID_USER = {
-      user_id: 16546546548,
-      code: '84F9A219'
-    };
+    const INVALID_USER_ID = 16546546548;
+    const CODE = "84F9A219";
 
     const response = await request(app)
-      .post(`/teams/entry`)
+      .post(`/teams/entry/${INVALID_USER_ID}`)
       .set("Authorization", `Bearer ${USER_DB.token}`)
-      .send(TEAM_INVALID_USER);
+      .send({ code: CODE });
 
     expect(response.status).toEqual(400);
     expect(response.body).toHaveProperty("err");
   });
 
   it("Should not be able to enter in a team with an invalid code", async () => {
-    const TEAM_INVALID_CODE = {
-      user_id: 2,
-      code: '54561981'
-    };
+    const USER_ID = 2;
+    const INVALID_CODE = "54561981";
 
     const response = await request(app)
-      .post(`/teams/entry`)
+      .post(`/teams/entry/${USER_ID}`)
       .set("Authorization", `Bearer ${USER_DB.token}`)
-      .send(TEAM_INVALID_CODE);
+      .send({ code: INVALID_CODE });
 
     expect(response.status).toEqual(400);
     expect(response.body).toHaveProperty("err");
   });
 
   it("Should not be able to enter in a team with an owner account", async () => {
-    const TEAM_INVALID_OWNER = {
-      user_id: USER_DB.id,
-      code: '9F4A6G5H'
-    };
+    const OWNER_USER_ID = USER_DB.id;
+    const CODE = "9F4A6G5H";
 
     const response = await request(app)
-      .post(`/teams/entry`)
+      .post(`/teams/entry/${OWNER_USER_ID}`)
       .set("Authorization", `Bearer ${USER_DB.token}`)
-      .send(TEAM_INVALID_OWNER);
+      .send({ code: CODE });
 
     expect(response.status).toEqual(403);
     expect(response.body).toHaveProperty("err");
   });
 
   it("Should not be able to enter in a team you're already in", async () => {
-    const TEAM_ALREADY_IN = {
-      user_id: 7,
-      code: '9F4A6G5H'
-    };
+    const USER_ID = 7;
+    const TEAM_ALREADY_IN_CODE = "9F4A6G5H";
 
     const response = await request(app)
-      .post(`/teams/entry`)
+      .post(`/teams/entry/${USER_ID}`)
       .set("Authorization", `Bearer ${USER_DB.token}`)
-      .send(TEAM_ALREADY_IN);
+      .send({ code: TEAM_ALREADY_IN_CODE });
 
     expect(response.status).toEqual(409);
     expect(response.body).toHaveProperty("err");

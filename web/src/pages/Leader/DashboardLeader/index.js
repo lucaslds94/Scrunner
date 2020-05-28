@@ -95,14 +95,10 @@ export default function DashboardLeader() {
     const token = getLocalStorage("@Scrunner:token");
 
     try {
-      await api.delete("/teams", {
+      await api.delete(`/teams/exit/${teamId}/${collaboratorId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
-        },
-        data: {
-          user_id: collaboratorId,
-          team_id: teamId,
-        },
+        }
       });
 
       let newCollaborators = collaborators.map((collaborator) => {

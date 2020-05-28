@@ -68,9 +68,8 @@ export default function TeamsColab() {
 
     try {
       const response = await api.post(
-        "/teams/entry",
+        `/teams/entry/${user.id}`,
         {
-          user_id: user.id,
           code,
         },
         {

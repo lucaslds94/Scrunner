@@ -6,8 +6,8 @@ import {
   clearLocalStorage,
 } from "../../../utils/localStorage";
 
-import { Lottie } from '@crello/react-lottie';
-import animTeamPage from '../../../assets/animations/team-page.json';
+import { Lottie } from "@crello/react-lottie";
+import animTeamPage from "../../../assets/animations/team-page.json";
 
 import api from "../../../services/api";
 
@@ -54,8 +54,8 @@ export default function TeamsLeader() {
       }
     };
 
-    if(history.location.state && history.location.state.delete){
-      toast.info("Time deletado com sucesso.")
+    if (history.location.state && history.location.state.delete) {
+      toast.info("Time deletado com sucesso.");
     }
 
     fetchTeams();
@@ -68,13 +68,12 @@ export default function TeamsLeader() {
     const { id } = getLocalStorage("@Scrunner:user");
 
     let data = {
-      user_id: id,
       name: teamName,
       category: category,
     };
 
     try {
-      const response = await api.post("/teams/create", data, {
+      const response = await api.post(`/teams/create/${id}`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -98,8 +97,8 @@ export default function TeamsLeader() {
   };
 
   const toDetailPage = (teamId, teamName) => {
-    history.push(`/times/detalhes/${teamName}`, {teamId});
-  }
+    history.push(`/times/detalhes/${teamName}`, { teamId });
+  };
 
   return (
     <>
@@ -126,15 +125,16 @@ export default function TeamsLeader() {
           <div className="container-teams">
             {teams.length === 0 && (
               <>
-                <Lottie config={{
-                  animationData: animTeamPage,
-                  loop: true,
-                  autoplay: true,
-                
-                }} />
+                <Lottie
+                  config={{
+                    animationData: animTeamPage,
+                    loop: true,
+                    autoplay: true,
+                  }}
+                />
               </>
             )}
-            
+
             {teams.map((team) => (
               <CardTeam
                 key={uuid()}

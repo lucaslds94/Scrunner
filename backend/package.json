@@ -5,11 +5,11 @@
   "license": "MIT",
   "scripts": {
     "start": "nodemon src/server.js --ignore __tests__",
-    "dbCreate": "yarn sequelize db:create",
-    "dbMigrate": "yarn sequelize db:migrate",
-    "postdbMigrate": "yarn sequelize-cli db:seed:all",
+    "dbCreate": "npx sequelize db:create",
+    "dbMigrate": "npx sequelize db:migrate",
+    "postdbMigrate": "npx sequelize-cli db:seed:all",
     "pretest": "NODE_ENV=test sequelize db:migrate && NODE_ENV=test sequelize-cli db:seed:all",
-    "test": "NODE_ENV=test  jest",
+    "test": "NODE_ENV=test jest",
     "posttest": "NODE_ENV=test sequelize db:migrate:undo:all"
   },
   "dependencies": {

@@ -131,14 +131,10 @@ export default function DetailsTeamsLeader() {
     const token = getLocalStorage("@Scrunner:token");
 
     try {
-      await api.delete("/teams", {
+      await api.delete(`/teams/exit/${team.id}/${collaboratorId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
-        },
-        data: {
-          user_id: collaboratorId,
-          team_id: team.id,
-        },
+        }
       });
 
       let newUsers = team.users.filter((user) => user.id !== collaboratorId);

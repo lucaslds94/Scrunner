@@ -14,17 +14,6 @@ module.exports = {
   async indexOwner(req, res) {
     const { userId } = req.params;
 
-    let user = await User.findOne({
-      where: {
-        id: userId,
-        is_owner: true,
-      },
-    });
-
-    if (!user) {
-      return res.status(403).json({ err: "Access denied" });
-    }
-
     let { count: teamCount, rows: ownerTeams } = await UserTeam.findAndCountAll(
       {
         attributes: ["team_id"],
@@ -134,34 +123,23 @@ module.exports = {
 
   async indexCollaborator(req, res) {
     const { userId } = req.params;
-
-    let user = await User.findOne({
-      where: {
-        id: userId,
-        is_owner: false,
-      },
-    });
-
-    if (!user) {
-      return res.status(403).json({ err: "Access denied" });
-    }
-
+    
     const { count: teamCount } = await UserTeam.findAndCountAll({
       where: {
         user_id: userId,
-      }
+      },
     });
 
     const { count: dailyCount } = await DailyContent.findAndCountAll({
       where: {
         user_id: userId,
-      }
+      },
     });
 
     const { count: taskCount } = await Task.findAndCountAll({
       where: {
         user_id: userId,
-      }
+      },
     });
 
     const token = sign({}, jwt.secret, {
@@ -169,7 +147,6 @@ module.exports = {
       expiresIn: jwt.expiresIn,
     });
 
-
     return res.json({ teamCount, dailyCount, taskCount, token });
-  }
-}
+  },
+};

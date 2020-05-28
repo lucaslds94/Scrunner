@@ -14,7 +14,7 @@ module.exports = {
   async index(req, res) {
     const { userId } = req.params;
 
-   const teams = await UserTeam.findAll({
+    const teams = await UserTeam.findAll({
       attributes: ["id"],
       where: {
         user_id: userId,
@@ -130,14 +130,9 @@ module.exports = {
   },
 
   async store(req, res) {
-    const { user_id, name, category } = req.body;
-
-    const user = await User.findByPk(user_id);
-
-    if (!user) {
-      return res.status(400).json({ err: "User not found" });
-    }
-
+    const { userId: user_id } = req.params;
+    const { name, category } = req.body;
+    
     const teamCode = crypto.randomBytes(4).toString("HEX").toUpperCase();
 
     const {
@@ -159,22 +154,13 @@ module.exports = {
   },
 
   async entry(req, res) {
-    const { user_id, code } = req.body;
-
-    const user = await User.findByPk(user_id);
-
-    if (!user) {
-      return res.status(400).json({ err: "User not found" });
-    }
-
-    if (user.dataValues.is_owner) {
-      return res.status(403).json({ err: "Access denied" });
-    }
-
+    const { userId: user_id } = req.params;
+    const { code } = req.body;
+    
     let team = await Team.findOne({
       where: {
-        code
-      }
+        code,
+      },
     });
 
     if (!team) {
@@ -184,18 +170,20 @@ module.exports = {
     const userInTeam = await UserTeam.findOne({
       where: {
         user_id,
-        team_id: team.dataValues.id
-      }
-    })
+        team_id: team.dataValues.id,
+      },
+    });
 
     if (userInTeam) {
-      return res.status(409).json({ err: "This user is already a member of the Team" });
+      return res
+        .status(409)
+        .json({ err: "This user is already a member of the Team" });
     }
 
     await UserTeam.create({
       user_id,
       team_id: team.dataValues.id,
-      is_leader: false
+      is_leader: false,
     });
 
     let teamResponse = await Team.findAll({
@@ -248,7 +236,6 @@ module.exports = {
     });
 
     return res.json({ team: teamResponse, token });
-
   },
 
   async update(req, res) {
@@ -362,71 +349,19 @@ module.exports = {
   },
 
   async delete(req, res) {
-    const { userId, teamId } = req.params;
-
-    const user = await User.findOne({
-      where: {
-        id: userId,
-        is_owner: true,
-      },
-    });
-
-    if (!user) {
-      return res.status(403).json({ err: "Access denied" });
-    }
-
-    const team = await Team.findByPk(teamId);
-
-    if (!team) {
-      return res.status(400).json({ err: "Team not found" });
-    }
-
-    const userInTeam = await UserTeam.findOne({
-      where: {
-        user_id: userId,
-        team_id: teamId,
-      },
-    });
-
-    if (!userInTeam) {
-      return res.status(403).json({ err: "Access denied" });
-    };
-
+    const { teamId } = req.params;
+      
     await Team.destroy({
       where: {
-        id: teamId
-      }
+        id: teamId,
+      },
     });
 
     return res.status(204).send();
-
   },
 
   async exit(req, res) {
-    const { user_id, team_id } = req.body;
-
-    const user = await User.findByPk(user_id);
-
-    if (!user) {
-      return res.status(400).json({ err: "User not found" });
-    }
-
-    const team = await Team.findByPk(team_id);
-
-    if (!team) {
-      return res.status(400).json({ err: "Team not found" });
-    }
-
-    const userInTeam = await UserTeam.findOne({
-      where: {
-        user_id,
-        team_id,
-      },
-    });
-
-    if (!userInTeam) {
-      return res.status(403).json({ err: "Access denied" });
-    }
+    const { userId: user_id, teamId: team_id } = req.params;
 
     await UserTeam.destroy({
       where: {

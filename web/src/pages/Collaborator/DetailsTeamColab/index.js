@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 
-import { getLocalStorage, setLocalStorage, clearLocalStorage } from "../../../utils/localStorage";
+import {
+  getLocalStorage,
+  setLocalStorage,
+  clearLocalStorage,
+} from "../../../utils/localStorage";
 import isLeader from "../../../utils/isLeader";
 
 import api from "../../../services/api";
@@ -19,7 +23,7 @@ import ButtonChangeScreen from "../../../components/ButtonChangeScreen";
 
 import RoundGraph from "../../../components/RoundGraph";
 import MembersList from "../../../components/MembersList";
-import TeamMembersList from '../../../components/TeamMembersList';
+import TeamMembersList from "../../../components/TeamMembersList";
 
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -28,7 +32,7 @@ export default function DetailsTeamColab() {
   const [team, setTeam] = useState({});
   const [graph, setGraph] = useState({});
   const [loading, setLoading] = useState(true);
-  const [ownerName, setOwnerName] = useState('');
+  const [ownerName, setOwnerName] = useState("");
 
   const history = useHistory();
 
@@ -39,17 +43,16 @@ export default function DetailsTeamColab() {
 
     const fetchData = async () => {
       try {
-        
         const response = await api.get(`teams/details/${teamId}/${user.id}`, {
           headers: {
-            Authorization: `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         });
 
-        setTeam(response.data.team)
+        setTeam(response.data.team);
         setGraph(response.data.graph);
 
-        setLocalStorage('@Scrunner:token', response.data.token);
+        setLocalStorage("@Scrunner:token", response.data.token);
 
         let owner = response.data.team.users.find((user) => {
           return user.is_owner === true;
@@ -57,48 +60,38 @@ export default function DetailsTeamColab() {
         setOwnerName(owner.name);
 
         setLoading(false);
-      }
-      catch (error) {
+      } catch (error) {
         clearLocalStorage();
         history.push("/", { error: 1 });
       }
-
-    }
+    };
 
     fetchData();
-
   }, [history.location.state.teamId, history]);
 
   const handleCardClick = () => {
-
     let inputCopy = document.createElement("input");
     inputCopy.value = team.code;
     document.body.appendChild(inputCopy);
     inputCopy.select();
     try {
-      document.execCommand('copy');
-      toast.info("Código copiado.")
-    }
-    catch (err) {
-      toast.error("Algum erro ocorreu ao tentar copiar o código.")
+      document.execCommand("copy");
+      toast.info("Código copiado.");
+    } catch (err) {
+      toast.error("Algum erro ocorreu ao tentar copiar o código.");
     }
 
     document.body.removeChild(inputCopy);
-
-  }
+  };
 
   const removeUserTeam = async (collaboratorId) => {
     const token = getLocalStorage("@Scrunner:token");
 
     try {
-      await api.delete("/teams", {
+      await api.delete(`/teams/exit/${team.id}/${collaboratorId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
-        },
-        data: {
-          user_id: collaboratorId,
-          team_id: team.id,
-        },
+        }
       });
 
       let newUsers = team.users.filter((user) => user.id !== collaboratorId);
@@ -106,14 +99,16 @@ export default function DetailsTeamColab() {
       setTeam({ ...team, users: newUsers });
       toast.info("Colaborador removido com sucesso");
     } catch (error) {
-
       toast.error("Erro ao remover o colaborador");
     }
-  }
+  };
 
   const toDailysPage = () => {
-    history.push(`/times/daily/${team.name}`, {teamId: team.id, teamName: team.name});
-  }
+    history.push(`/times/daily/${team.name}`, {
+      teamId: team.id,
+      teamName: team.name,
+    });
+  };
 
   return (
     <div className="colaborador-detalhes-time">
@@ -138,19 +133,14 @@ export default function DetailsTeamColab() {
           <div className="divider" />
 
           <div className="teamInfo-container">
-
-            <Link className="backBtn" to={`/times`} >
+            <Link className="backBtn" to={`/times`}>
               <MdArrowBack size={30} color={"#737FF3"} /> Voltar
             </Link>
 
-            <div className="teamInfo" >
-              {ownerName && (
-                <p>Time criado por {ownerName}</p>
-
-              )}
+            <div className="teamInfo">
+              {ownerName && <p>Time criado por {ownerName}</p>}
             </div>
           </div>
-
 
           <div className="colaborador-area-cards">
             <CardInformation
@@ -174,13 +164,16 @@ export default function DetailsTeamColab() {
             />
           </div>
           <div className="colaborador-graph-area">
-            {!loading &&
-              isLeader(team.users) ?
-              <TeamMembersList collaborators={team.users} removeUserTeam={removeUserTeam} /> :
+            {!loading && isLeader(team.users) ? (
+              <TeamMembersList
+                collaborators={team.users}
+                removeUserTeam={removeUserTeam}
+              />
+            ) : (
               <MembersList users={team.users} />
-            }
+            )}
 
-            {!loading &&
+            {!loading && (
               <RoundGraph
                 title="Tarefas"
                 description="Tarefas foram realizadas no total"
@@ -188,8 +181,7 @@ export default function DetailsTeamColab() {
                 total={graph.total_tasks}
                 complete={graph.total_done_tasks}
               />
-            }
-
+            )}
           </div>
         </div>
       </Container>

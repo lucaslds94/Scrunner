@@ -14,9 +14,13 @@ module.exports = {
           created_at: new Date(),
           updated_at: new Date(),
           team_id: 2,
+        },
+        {
+          created_at: new Date(),
+          updated_at: new Date(),
+          team_id: 2,
         }
       ]);
-    
   },
 
   down: (queryInterface, Sequelize) => {
