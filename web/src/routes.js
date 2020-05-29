@@ -45,7 +45,7 @@ export default function Routes() {
           exact
         />
         <PrivateRoute
-          path="/times/dailylog/:name/:dailyDate"
+          path="/times/dailylog/:name"
           componentColab={DailyLog}
           componentOwner={() => <h1>Você não tem acesso a essa página</h1>} 
           exact

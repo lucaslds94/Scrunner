@@ -65,7 +65,7 @@
     background-color: white;
     display: flex;
     justify-content: center;
-    place-content: center;
+    align-items: center;
     transition: transform .3s;
 }
 

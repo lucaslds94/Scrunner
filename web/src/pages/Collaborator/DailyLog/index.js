@@ -1,7 +1,5 @@
-import React, {useState} from "react";
-import { useParams, Link } from "react-router-dom";
-import { MdArrowBack } from "react-icons/md";
-import { FaPlus } from "react-icons/fa";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 import "./styles.css";
 
@@ -12,90 +10,165 @@ import ButtonChangeScreen from "../../../components/ButtonChangeScreen";
 import CardDailyLog from "../../../components/CardDailyLog";
 import ModalCriarDaily from "../../../components/ModalCriarDaily";
 
+import { MdArrowBack } from "react-icons/md";
+import { FaPlus } from "react-icons/fa";
+
+import {
+  getLocalStorage,
+  setLocalStorage,
+  clearLocalStorage,
+} from "../../../utils/localStorage";
+
+import isLeader from "../../../utils/isLeader";
+
+import api from "../../../services/api";
+
+import moment from "moment";
+import "moment/locale/pt-br";
 
 export default function DailyLog() {
-    const [showModal,setShowModal] = useState(false)
-    const { name, dailyDate } = useParams();
+  const [showModal, setShowModal] = useState(false);
+  const [dailyCount, setDailyCount] = useState(0);
+  const [leaderContent, setLeaderContent] = useState({});
+  const [collaboratorContent, setCollaboratorContent] = useState([]);
+  const [registeredDaily, setRegisteredDaily] = useState(false);
 
-    return (
-        <div className="dailyLog">
+  const history = useHistory();
+  const {
+    teamId,
+    teamName,
+    boardId,
+    boardDate,
+    users,
+  } = history.location.state;
 
-            {showModal&&<ModalCriarDaily handleModalCreateDaily={()=>setShowModal(false)}/>}
-            <Header />
-            <MenuLateral homeActive={false} />
-            
-            <Container>
-                <div className="infos-daily">
-                    <div className="header-times-daily">
-                        <div className="header-titles">
-                            <h2>Dailys</h2>
-                            <Link to={`/times/detalhes/2/${name}`}>{name}</Link>
-                        </div>
-                        <div className="header-buttons">
-                            <ButtonChangeScreen
-                                titleButton={"Dailys"}
-                                to={`/times/daily/${name}`}
-                                active
-                            />
-                            <ButtonChangeScreen
-                                titleButton={"Tarefas"}
-                                to={`/times/tarefa/${name}`}
-                            />
-                        </div>
-                    </div>
-                    <div className="divider" />
+  useEffect(() => {
+    const user = getLocalStorage("@Scrunner:user");
+    const token = getLocalStorage("@Scrunner:token");
 
-                    <div className="dailyLogInfo-container">
+    const fetchContent = async () => {
+      const response = await api.get(
+        `/dailys/boards/contents/${teamId}/${boardId}/${user.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-                        <Link className ="backBtn" to ={`/times/daily/${name}`} >
-                            <MdArrowBack size={30} color={"#737FF3"}/> Voltar
-                        </Link>
+      const [leaderContent] = response.data.dailyContents.filter(
+        (daily) => daily.user.is_leader
+      );
 
-                        <div className="dailyLogInfo" >
-                            <h2>{dailyDate}</h2>
-                            <h4>{2} registros foram realizados</h4>
-                        </div>
-                    </div>
-                </div>
+      const collaboratorContent = response.data.dailyContents.filter(
+        (daily) => !daily.user.is_leader
+      );
 
-                <div className="dailyLog-content">
-                    
-                    <div className="dailyLog-leadText">
-                        <CardDailyLog 
-                            Leader="true"
-                            LeaderText="Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Metus dictum at tempor commodo. 
-                                Imperdiet sed euismod nisi porta lorem."
-                            Nome={"Estevan Gomes"} />
-                    </div>
+      const registeredDaily = response.data.dailyContents.find(
+        (daily) => daily.user.id === user.id
+      );
 
-                    <div className="dailyLog-colabText">
+      setLeaderContent(leaderContent);
+      setRegisteredDaily(!!registeredDaily);
+      setCollaboratorContent(collaboratorContent);
+      setDailyCount(response.data.dailyContents.length);
 
-                        <button onClick={()=>setShowModal(true)}  className="buttonAddDaily">
-                            <FaPlus size={20} color={"#B2B2B2"} />
-                            <span> Adicionar registro daily </span>
-                        </button>
+      setLocalStorage("@Scrunner:token", response.data.token);
+      
+    };
 
-                        <CardDailyLog 
-                            ColabText1="Resposta pergunta 1"
-                            ColabText2="Resposta pergunta 2"
-                            ColabText3="Resposta pergunta 3"
-                            Nome={"Ana Fonseca"} />
+    fetchContent();
+  }, []);
 
-                        <CardDailyLog 
-                            ColabText1="Resposta pergunta 1"
-                            ColabText2="Resposta pergunta 2"
-                            ColabText3="Resposta pergunta 3"
-                            Nome={"José Augusto"} />
-                        
-                        
-                    </div>
-                </div>
+  const toTeamDailysPage = () => {
+    history.push(`/times/daily/${teamName}`, { teamId, teamName, users });
+  };
 
-                
-            </Container>
+  return (
+    <div className="dailyLog">
+      {showModal && (
+        <ModalCriarDaily handleModalCreateDaily={() => setShowModal(false)} />
+      )}
+      <Header />
+      <MenuLateral homeActive={false} />
 
+      <Container>
+        <div className="infos-daily">
+          <div className="header-times-daily">
+            <div className="header-titles">
+              <h2>Dailys</h2>
+              <span onClick={toTeamDailysPage}>{teamName}</span>
+            </div>
+            <div className="header-buttons">
+              <ButtonChangeScreen
+                titleButton={"Dailys"}
+                to={`/times/daily/${teamName}`}
+                active
+              />
+              <ButtonChangeScreen
+                titleButton={"Tarefas"}
+                to={`/times/tarefa/${teamName}`}
+              />
+            </div>
+          </div>
+          <div className="divider" />
+
+          <div className="dailyLogInfo-container">
+            <div onClick={toTeamDailysPage} className="backBtn">
+              <MdArrowBack size={30} color={"#737FF3"} /> Voltar
+            </div>
+
+            <div className="dailyLogInfo">
+              <h2>{moment(boardDate).format("DD/MM/YYYY")}</h2>
+              <h4>{dailyCount} registros foram realizados</h4>
+            </div>
+          </div>
         </div>
-    )
 
+        <div className="dailyLog-content">
+          <div className="dailyLog-leadText">
+            {!registeredDaily && isLeader(users) && (
+              <button
+                onClick={() => setShowModal(true)}
+                className="buttonAddDaily"
+              >
+                <FaPlus size={20} color={"#B2B2B2"} />
+                <span> Adicionar registro daily </span>
+              </button>
+            )}
+
+            {leaderContent?.user && (
+              <CardDailyLog
+              leader={true}
+              didYesterday={leaderContent.did_yesterday}
+              doToday={leaderContent.do_today}
+              problems={leaderContent.problems}
+              name={leaderContent.user.name}
+              />
+            )}
+          </div>
+
+          <div className="dailyLog-colabText">
+            {!registeredDaily && !isLeader(users) && (
+              <button
+                onClick={() => setShowModal(true)}
+                className="buttonAddDaily"
+              >
+                <FaPlus size={20} color={"#B2B2B2"} />
+                <span> Adicionar registro daily </span>
+              </button>
+            )}
+            {collaboratorContent.map((content) => (
+              <CardDailyLog
+                didYesterday={content.did_yesterday}
+                doToday={content.do_today}
+                problems={content.problems}
+                name={content.user.name}
+              />
+            ))}
+          </div>
+        </div>
+      </Container>
+    </div>
+  );
 }

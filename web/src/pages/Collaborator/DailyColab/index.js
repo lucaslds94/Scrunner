@@ -22,6 +22,7 @@ import isLeader from "../../../utils/isLeader";
 
 export default function DailyColab() {
   const [dailyBoards, setDailyBoards] = useState([]);
+  const [leader, setLeader] = useState(false);
 
   const history = useHistory();
   const { teamId, teamName, users } = history.location.state;
@@ -37,6 +38,9 @@ export default function DailyColab() {
         },
       });
 
+      const userIsLeader = isLeader(users);
+
+      setLeader(userIsLeader);
       setDailyBoards(response.data.boards);
 
       setLocalStorage("@Scrunner:token", response.data.token);
@@ -62,10 +66,10 @@ export default function DailyColab() {
 
       const newBoard = response.data.board;
 
-      setDailyBoards([...dailyBoards, newBoard]);
+      setDailyBoards([newBoard, ...dailyBoards]);
       setLocalStorage("@Scrunner:token", response.data.token);
 
-      toast.info("Quadro criado com sucesso");
+      toast.success("Quadro criado com sucesso");
     } catch (error) {
       if (error.response?.status === 409) {
         return toast.info("Você já criou um quadro hoje");
@@ -96,6 +100,16 @@ export default function DailyColab() {
     } catch (error) {
       toast.error("Ocorreu um erro inesperado");
     }
+  };
+
+  const toDailyLogPage = (boardId, boardDate) => {
+    history.push(`/times/dailylog/${teamName}`, {
+      teamId,
+      teamName,
+      boardId,
+      boardDate,
+      users,
+    });
   };
 
   return (
@@ -130,7 +144,7 @@ export default function DailyColab() {
         </div>
 
         <div className="container-boards">
-          {users && isLeader(users) && (
+          {users && leader && (
             <CreateBoard handleCreateBoard={handleCreateBoard} />
           )}
           {dailyBoards.map((dailyBoard) => (
@@ -141,6 +155,8 @@ export default function DailyColab() {
               leaderDaily={dailyBoard.daily_contents.leader_daily}
               yourDaily={dailyBoard.daily_contents.your_daily}
               deleteDailyBoard={() => deleteDailyBoard(dailyBoard.id)}
+              isLeader={leader}
+              toPage={() => toDailyLogPage(dailyBoard.id, dailyBoard.createdAt)}
             />
           ))}
         </div>

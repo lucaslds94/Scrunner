@@ -1,3 +1,18 @@
+.component-card-daily-container{
+  position: relative;
+  width: 350px;
+  height: 215px;
+  margin: 10px 15px 10px 0px;
+  border-radius: 10px;
+  transition: transform 0.3s;
+}
+
+.component-card-daily-container:hover {
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+
 .component-board-daily {
   text-decoration: none;
   width: 350px;
@@ -6,16 +21,9 @@
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.11);
   border-radius: 10px;
   padding: 25px;
-  margin: 10px 15px 10px 0px;
-  transition: transform 0.3s;
   cursor: pointer;
 }
 
-.component-board-daily:hover {
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
-  transform: scale(0.98);
-  opacity: 0.9;
-}
 
 .board-daily-header {
   display: flex;
@@ -52,10 +60,10 @@
 
 .board-daily-trash-button {
   display:flex;
-  z-index: 1000;
+  z-index: 2;
   position: absolute;
-  bottom: 0;
-  right: 0;
+  bottom: 34px;
+  right: 21px;
   cursor:pointer;
 }
 
