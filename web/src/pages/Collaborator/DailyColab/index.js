@@ -10,6 +10,7 @@ import Container from "../../../components/Container";
 import ButtonChangeScreen from "../../../components/ButtonChangeScreen";
 import CardDaily from "../../../components/CardDaily";
 import CreateBoard from "../../../components/CreateBoard";
+import Loading from "../../../components/Loading";
 
 import { MdArrowBack } from "react-icons/md";
 
@@ -23,6 +24,7 @@ import isLeader from "../../../utils/isLeader";
 export default function DailyColab() {
   const [dailyBoards, setDailyBoards] = useState([]);
   const [leader, setLeader] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const history = useHistory();
   const { teamId, teamName, users } = history.location.state;
@@ -44,10 +46,11 @@ export default function DailyColab() {
       setDailyBoards(response.data.boards);
 
       setLocalStorage("@Scrunner:token", response.data.token);
+      setLoading(false);
     };
 
     fetchBoards();
-  }, [history, teamId]);
+  }, [history, teamId, users]);
 
   const toDetailsTeamPage = () => {
     history.push(`/times/detalhes/${teamName}`, { teamId });
@@ -116,51 +119,56 @@ export default function DailyColab() {
     <div className="detalhes-times-daily">
       <Header />
       <MenuLateral homeActive={false} />
-
-      <Container>
-        <div className="header-times-daily">
-          <div className="header-titles">
-            <h2>Dailys</h2>
-            <span onClick={toDetailsTeamPage}>{teamName}</span>
+      {loading ? (
+        <Loading />
+      ) : (
+        <Container>
+          <div className="header-times-daily">
+            <div className="header-titles">
+              <h2>Dailys</h2>
+              <span onClick={toDetailsTeamPage}>{teamName}</span>
+            </div>
+            <div className="header-buttons">
+              <ButtonChangeScreen
+                titleButton={"Dailys"}
+                to={`/times/daily/${teamName}`}
+                active
+              />
+              <ButtonChangeScreen
+                titleButton={"Tarefas"}
+                to={`/times/tarefa/${teamName}`}
+              />
+            </div>
           </div>
-          <div className="header-buttons">
-            <ButtonChangeScreen
-              titleButton={"Dailys"}
-              to={`/times/daily/${teamName}`}
-              active
-            />
-            <ButtonChangeScreen
-              titleButton={"Tarefas"}
-              to={`/times/tarefa/${teamName}`}
-            />
-          </div>
-        </div>
-        <div className="divider" />
+          <div className="divider" />
 
-        <div className="teamInfo-container">
-          <div onClick={toDetailsTeamPage} className="backBtn">
-            <MdArrowBack size={30} color={"#737FF3"} /> Voltar
+          <div className="teamInfo-container">
+            <div onClick={toDetailsTeamPage} className="backBtn">
+              <MdArrowBack size={30} color={"#737FF3"} /> Voltar
+            </div>
           </div>
-        </div>
 
-        <div className="container-boards">
-          {users && leader && (
-            <CreateBoard handleCreateBoard={handleCreateBoard} />
-          )}
-          {dailyBoards.map((dailyBoard) => (
-            <CardDaily
-              key={uuid()}
-              date={dailyBoard.createdAt}
-              isComplete={dailyBoard.daily_contents.your_daily}
-              leaderDaily={dailyBoard.daily_contents.leader_daily}
-              yourDaily={dailyBoard.daily_contents.your_daily}
-              deleteDailyBoard={() => deleteDailyBoard(dailyBoard.id)}
-              isLeader={leader}
-              toPage={() => toDailyLogPage(dailyBoard.id, dailyBoard.createdAt)}
-            />
-          ))}
-        </div>
-      </Container>
+          <div className="container-boards">
+            {users && leader && (
+              <CreateBoard handleCreateBoard={handleCreateBoard} />
+            )}
+            {dailyBoards.map((dailyBoard) => (
+              <CardDaily
+                key={uuid()}
+                date={dailyBoard.createdAt}
+                isComplete={dailyBoard.daily_contents.your_daily}
+                leaderDaily={dailyBoard.daily_contents.leader_daily}
+                yourDaily={dailyBoard.daily_contents.your_daily}
+                deleteDailyBoard={() => deleteDailyBoard(dailyBoard.id)}
+                isLeader={leader}
+                toPage={() =>
+                  toDailyLogPage(dailyBoard.id, dailyBoard.createdAt)
+                }
+              />
+            ))}
+          </div>
+        </Container>
+      )}
       <ToastContainer />
     </div>
   );

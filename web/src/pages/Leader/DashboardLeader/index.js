@@ -25,6 +25,8 @@ import BurndownGraph from "../../../components/BurndownGraph";
 import UsersList from "../../../components/UsersList";
 import RoundGraph from "../../../components/RoundGraph";
 
+import Loading from "../../../components/Loading";
+
 export default function DashboardLeader() {
   const [MonthReport, setMonthReport] = useState(0);
   const [TimeReport, setTimeReport] = useState(0);
@@ -37,6 +39,7 @@ export default function DashboardLeader() {
   const [teamsCount, setTeamsCount] = useState(0);
   const [roundGraph, setRoundGraph] = useState(0);
   const [userName, setUserName] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const history = useHistory();
 
@@ -56,6 +59,7 @@ export default function DashboardLeader() {
         setTeamsCount(response.data.teamCount);
         setRoundGraph(response.data.graphs.roundGraph);
         setLocalStorage("@Scrunner:token", response.data.token);
+        setLoading(false);
         setUserName(user.name);
       } catch (error) {
         clearLocalStorage();
@@ -128,61 +132,66 @@ export default function DashboardLeader() {
     <div className="dashboardLider">
       <Header />
       <MenuLateral />
-      <Container>
-        <div className="container-cards">
-          <h1>Olá, {userName}.</h1>
-          <div className="divider" />
-          <div className="cards-area">
-            <CardInformation
-              cardTitle="Foram Criados"
-              subTitle={teamsCount > 1 ? "Tarefas" : "Tarefa"}
-              number={teamsCount}
-              buttonText="Clique para visulizar os times"
-              toPage={"/times"}
-              isClickable
+      {loading ? (
+        <Loading />
+      ) : (
+        <Container>
+          <div className="container-cards">
+            <h1>Olá, {userName}.</h1>
+            <div className="divider" />
+            <div className="cards-area">
+              <CardInformation
+                cardTitle="Foram Criados"
+                subTitle={teamsCount > 1 ? "Tarefas" : "Tarefa"}
+                number={teamsCount}
+                buttonText="Clique para visulizar os times"
+                toPage={"/times"}
+                isClickable
+              />
+              <CardInformation
+                crown
+                cardTitle="Possuem"
+                subTitle={colabCount > 1 ? "Colaboradores" : "Colaborador"}
+                number={colabCount}
+                buttonText="Cadastrados em seus times"
+              />
+              <CardInformation
+                cardTitle="Foram completadas"
+                subTitle={doneTasksCount > 1 ? "Tarefas" : "Tarefa"}
+                number={doneTasksCount}
+                buttonText="Somando todos os times"
+              />
+            </div>
+          </div>
+          <div className="container-report">
+            <SelectReport
+              handleMonth={handleSelectMonth}
+              handleTime={handleSelectTime}
+              times={[
+                { name: "Alfa", value: 1 },
+                { name: "Beta", value: 2 },
+              ]}
             />
-            <CardInformation
-              crown
-              cardTitle="Possuem"
-              subTitle={colabCount > 1 ? "Colaboradores" : "Colaborador"}
-              number={colabCount}
-              buttonText="Cadastrados em seus times"
-            />
-            <CardInformation
-              cardTitle="Foram completadas"
-              subTitle={doneTasksCount > 1 ? "Tarefas" : "Tarefa"}
-              number={doneTasksCount}
-              buttonText="Somando todos os times"
+            <BurndownGraph
+              DateRange={ReportDate}
+              planned={ReportPlanned}
+              complete={ReportComplete}
             />
           </div>
-        </div>
-        <div className="container-report">
-          <SelectReport
-            handleMonth={handleSelectMonth}
-            handleTime={handleSelectTime}
-            times={[
-              { name: "Alfa", value: 1 },
-              { name: "Beta", value: 2 },
-            ]}
-          />
-          <BurndownGraph
-            DateRange={ReportDate}
-            planned={ReportPlanned}
-            complete={ReportComplete}
-          />
-        </div>
-        <div className="colab-area">
-          <UsersList
-            collaboratorsData={collaborators}
-            removeUserTeam={removeUserTeam}
-          />
-          <RoundGraph
-            title="Tarefas"
-            description="do total de tarefas foram completadas"
-            complete={roundGraph || 0}
-          />
-        </div>
-      </Container>
+          <div className="colab-area">
+            <UsersList
+              collaboratorsData={collaborators}
+              removeUserTeam={removeUserTeam}
+            />
+            <RoundGraph
+              title="Tarefas"
+              description="do total de tarefas foram completadas"
+              complete={roundGraph || 0}
+            />
+          </div>
+        </Container>
+      )}
+
       <ToastContainer />
     </div>
   );

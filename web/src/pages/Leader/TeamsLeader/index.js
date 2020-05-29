@@ -27,11 +27,13 @@ import MenuLateral from "../../../components/MenuLateral";
 import Container from "../../../components/Container";
 import CardTeam from "../../../components/CardTeam";
 import ButtonAction from "../../../components/ButtonAction";
+import Loading from "../../../components/Loading";
 
 import ModalCriarTime from "../../../components/ModalCriarTime";
 
 export default function TeamsLeader() {
   const [showModalCreate, setShowModalCreate] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [teams, setTeams] = useState([]);
   const history = useHistory();
 
@@ -46,7 +48,7 @@ export default function TeamsLeader() {
         });
 
         setTeams(response.data.teams);
-
+        setLoading(false);
         setLocalStorage("@Scrunner:token", response.data.token);
       } catch (error) {
         clearLocalStorage();
@@ -111,44 +113,50 @@ export default function TeamsLeader() {
       <div className="teamsLider">
         <Header />
         <MenuLateral homeActive={false} />
-        <Container>
-          <div className="container-title">
-            <h1> Times </h1>
-            <ButtonAction
-              onClick={() => setShowModalCreate(!showModalCreate)}
-              ButtonText="Criar Time"
-              ButtonIcon={FaPlus}
-            />
-          </div>
-          <div className="teams-divider"></div>
-
-          <div className="container-teams">
-            {teams.length === 0 && (
-              <>
-                <Lottie
-                  config={{
-                    animationData: animTeamPage,
-                    loop: true,
-                    autoplay: true,
-                  }}
-                />
-              </>
-            )}
-
-            {teams.map((team) => (
-              <CardTeam
-                key={uuid()}
-                teamName={team.team.name}
-                teamCategory={team.team.category}
-                teamCode={team.team.code}
-                teamMembers={team.team.users}
-                teamId={team.team.id}
-                toDetailPage={() => toDetailPage(team.team.id, team.team.name)}
-                isOwner
+        {loading ? (
+          <Loading />
+        ) : (
+          <Container>
+            <div className="container-title">
+              <h1> Times </h1>
+              <ButtonAction
+                onClick={() => setShowModalCreate(!showModalCreate)}
+                ButtonText="Criar Time"
+                ButtonIcon={FaPlus}
               />
-            ))}
-          </div>
-        </Container>
+            </div>
+            <div className="teams-divider"></div>
+
+            <div className="container-teams">
+              {teams.length === 0 && (
+                <>
+                  <Lottie
+                    config={{
+                      animationData: animTeamPage,
+                      loop: true,
+                      autoplay: true,
+                    }}
+                  />
+                </>
+              )}
+
+              {teams.map((team) => (
+                <CardTeam
+                  key={uuid()}
+                  teamName={team.team.name}
+                  teamCategory={team.team.category}
+                  teamCode={team.team.code}
+                  teamMembers={team.team.users}
+                  teamId={team.team.id}
+                  toDetailPage={() =>
+                    toDetailPage(team.team.id, team.team.name)
+                  }
+                  isOwner
+                />
+              ))}
+            </div>
+          </Container>
+        )}
       </div>
       <ToastContainer />
     </>

@@ -20,6 +20,7 @@ import MenuLateral from "../../../components/MenuLateral";
 import Container from "../../../components/Container";
 import CardInformation from "../../../components/CardInformation";
 import ButtonChangeScreen from "../../../components/ButtonChangeScreen";
+import Loading from "../../../components/Loading";
 
 import RoundGraph from "../../../components/RoundGraph";
 import MembersList from "../../../components/MembersList";
@@ -107,7 +108,7 @@ export default function DetailsTeamColab() {
     history.push(`/times/daily/${team.name}`, {
       teamId: team.id,
       teamName: team.name,
-      users: team.users
+      users: team.users,
     });
   };
 
@@ -115,77 +116,80 @@ export default function DetailsTeamColab() {
     <div className="colaborador-detalhes-time">
       <Header />
       <MenuLateral homeActive={false} />
+      {loading ? (
+        <Loading />
+      ) : (
+        <Container>
+          <div className="colaborador-container-cards">
+            <div className="colaborador-cards-header">
+              <h1>{team.name}</h1>
+              <div className="colaborador-header-buttons">
+                <ButtonChangeScreen
+                  titleButton={"Dailys"}
+                  toPage={toDailysPage}
+                />
+                <ButtonChangeScreen
+                  titleButton={"Tarefas"}
+                  to={`/times/tarefa/${team.name}`}
+                />
+              </div>
+            </div>
+            <div className="divider" />
 
-      <Container>
-        <div className="colaborador-container-cards">
-          <div className="colaborador-cards-header">
-            <h1>{team.name}</h1>
-            <div className="colaborador-header-buttons">
-              <ButtonChangeScreen
-                titleButton={"Dailys"}
-                toPage={toDailysPage}
+            <div className="teamInfo-container">
+              <Link className="backBtn" to={`/times`}>
+                <MdArrowBack size={30} color={"#737FF3"} /> Voltar
+              </Link>
+
+              <div className="teamInfo">
+                {ownerName && <p>Time criado por {ownerName}</p>}
+              </div>
+            </div>
+
+            <div className="colaborador-area-cards">
+              <CardInformation
+                cardTitle="O código do time"
+                subTitle={team.code}
+                number={<Hash size={22} />}
+                buttonText="Clique para copiar o código"
+                copyCode={handleCardClick}
               />
-              <ButtonChangeScreen
-                titleButton={"Tarefas"}
-                to={`/times/tarefa/${team.name}`}
+              <CardInformation
+                crown
+                cardTitle="O time possui"
+                subTitle={team.users?.length > 1 ? "Membros" : "Membro"}
+                number={`${team.users?.length - 1}`}
+                buttonText="Visualize os membros do time abaixo."
+              />
+              <CardInformation
+                cardTitle="A categoria do time é"
+                subTitle={team.category}
+                buttonText="Clique para configurar o grupo"
               />
             </div>
-          </div>
-          <div className="divider" />
+            <div className="colaborador-graph-area">
+              {!loading && isLeader(team.users) ? (
+                <TeamMembersList
+                  collaborators={team.users}
+                  removeUserTeam={removeUserTeam}
+                />
+              ) : (
+                <MembersList users={team.users} />
+              )}
 
-          <div className="teamInfo-container">
-            <Link className="backBtn" to={`/times`}>
-              <MdArrowBack size={30} color={"#737FF3"} /> Voltar
-            </Link>
-
-            <div className="teamInfo">
-              {ownerName && <p>Time criado por {ownerName}</p>}
+              {!loading && (
+                <RoundGraph
+                  title="Tarefas"
+                  description="Tarefas foram realizadas no total"
+                  isPercent={false}
+                  total={graph.total_tasks}
+                  complete={graph.total_done_tasks}
+                />
+              )}
             </div>
           </div>
-
-          <div className="colaborador-area-cards">
-            <CardInformation
-              cardTitle="O código do time"
-              subTitle={team.code}
-              number={<Hash size={22} />}
-              buttonText="Clique para copiar o código"
-              copyCode={handleCardClick}
-            />
-            <CardInformation
-              crown
-              cardTitle="O time possui"
-              subTitle={team.users?.length > 1 ? "Membros" : "Membro"}
-              number={`${team.users?.length - 1}`}
-              buttonText="Visualize os membros do time abaixo."
-            />
-            <CardInformation
-              cardTitle="A categoria do time é"
-              subTitle={team.category}
-              buttonText="Clique para configurar o grupo"
-            />
-          </div>
-          <div className="colaborador-graph-area">
-            {!loading && isLeader(team.users) ? (
-              <TeamMembersList
-                collaborators={team.users}
-                removeUserTeam={removeUserTeam}
-              />
-            ) : (
-              <MembersList users={team.users} />
-            )}
-
-            {!loading && (
-              <RoundGraph
-                title="Tarefas"
-                description="Tarefas foram realizadas no total"
-                isPercent={false}
-                total={graph.total_tasks}
-                complete={graph.total_done_tasks}
-              />
-            )}
-          </div>
-        </div>
-      </Container>
+        </Container>
+      )}
       <ToastContainer />
     </div>
   );

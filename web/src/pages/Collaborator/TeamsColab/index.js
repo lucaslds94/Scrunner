@@ -26,12 +26,14 @@ import MenuLaretal from "../../../components/MenuLateral";
 import Container from "../../../components/Container";
 import CardTeam from "../../../components/CardTeam";
 import ButtonAction from "../../../components/ButtonAction";
+import Loading from "../../../components/Loading";
 
 import ModalEntrarTime from "../../../components/ModalEntrarTime";
 
 export default function TeamsColab() {
   const [showModalEnterTeam, setShowModalEnterTeam] = useState(false);
   const [teams, setTeams] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const history = useHistory();
 
@@ -54,6 +56,8 @@ export default function TeamsColab() {
         setTeams(response.data.teams);
 
         setLocalStorage("@Scrunner:token", response.data.token);
+        setLoading(false);
+
       } catch (error) {
         clearLocalStorage();
         history.push("/", { error: 1 });
@@ -90,7 +94,6 @@ export default function TeamsColab() {
       setTeams([...teams, newTeam]);
       toast.info(`Agora você faz parte do time ${response.data.team.name}`);
     } catch (error) {
-      
       if (error.response.data.err) {
         switch (error.response.status) {
           case 400:
@@ -124,43 +127,49 @@ export default function TeamsColab() {
       <div className="teamsColaborador">
         <Header />
         <MenuLaretal homeActive={false} />
-        <Container>
-          <div className="container-title">
-            <h1> Times </h1>
-            <ButtonAction
-              onClick={() => setShowModalEnterTeam(!showModalEnterTeam)}
-              ButtonText="Entrar em time"
-              ButtonIcon={FiLogIn}
-            />
-          </div>
-          <div className="teams-divider"></div>
-
-          <div className="container-teams">
-            {teams.length === 0 && (
-              <>
-                <Lottie
-                  config={{
-                    animationData: animTeamPage,
-                    loop: true,
-                    autoplay: true,
-                  }}
-                />
-              </>
-            )}
-
-            {teams.map((team) => (
-              <CardTeam
-                key={uuid()}
-                teamName={team.team.name}
-                teamCategory={team.team.category}
-                teamCode={team.team.code}
-                teamMembers={team.team.users}
-                teamId={team.team.id}
-                toDetailPage={() => toDetailPage(team.team.id, team.team.name)}
+        {loading ? (
+          <Loading />
+        ) : (
+          <Container>
+            <div className="container-title">
+              <h1> Times </h1>
+              <ButtonAction
+                onClick={() => setShowModalEnterTeam(!showModalEnterTeam)}
+                ButtonText="Entrar em time"
+                ButtonIcon={FiLogIn}
               />
-            ))}
-          </div>
-        </Container>
+            </div>
+            <div className="teams-divider"></div>
+
+            <div className="container-teams">
+              {teams.length === 0 && (
+                <>
+                  <Lottie
+                    config={{
+                      animationData: animTeamPage,
+                      loop: true,
+                      autoplay: true,
+                    }}
+                  />
+                </>
+              )}
+
+              {teams.map((team) => (
+                <CardTeam
+                  key={uuid()}
+                  teamName={team.team.name}
+                  teamCategory={team.team.category}
+                  teamCode={team.team.code}
+                  teamMembers={team.team.users}
+                  teamId={team.team.id}
+                  toDetailPage={() =>
+                    toDetailPage(team.team.id, team.team.name)
+                  }
+                />
+              ))}
+            </div>
+          </Container>
+        )}
         <ToastContainer />
       </div>
     </>

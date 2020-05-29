@@ -21,6 +21,7 @@ import Header from "../../../components/Header";
 import MenuLateral from "../../../components/MenuLateral";
 import Container from "../../../components/Container";
 import CardInformation from "../../../components/CardInformation";
+import Loading from "../../../components/Loading";
 
 import TeamMembersList from "../../../components/TeamMembersList";
 import RoundGraph from "../../../components/RoundGraph";
@@ -180,58 +181,60 @@ export default function DetailsTeamsLeader() {
       <div className="detailedTeam">
         <Header />
         <MenuLateral homeActive={false} />
-        <Container>
-          <div className="container-cards">
-            <div className="container-card-header">
-              <h1>{team.name}</h1>
-              <button
-                onClick={handleShowModalConfig}
-                className="button-config-time"
-              >
-                <FaCog size={22} color={"#B2B2B2"} />
-              </button>
-            </div>
-            <div className="divider" />
+        {loading ? (
+          <Loading />
+        ) : (
+          <Container>
+            <div className="container-cards">
+              <div className="container-card-header">
+                <h1>{team.name}</h1>
+                <button
+                  onClick={handleShowModalConfig}
+                  className="button-config-time"
+                >
+                  <FaCog size={22} color={"#B2B2B2"} />
+                </button>
+              </div>
+              <div className="divider" />
 
-            <div className="teamInfo-container">
-              <Link className="backBtn" to={`/times`}>
-                <MdArrowBack size={30} color={"#737FF3"} /> Voltar
-              </Link>
+              <div className="teamInfo-container">
+                <Link className="backBtn" to={`/times`}>
+                  <MdArrowBack size={30} color={"#737FF3"} /> Voltar
+                </Link>
 
-              <div className="teamInfo">
-                {ownerName && <p>Time criado por {ownerName}</p>}
+                <div className="teamInfo">
+                  {ownerName && <p>Time criado por {ownerName}</p>}
+                </div>
+              </div>
+
+              <div className="cards-area">
+                <CardInformation
+                  cardTitle="O código do time"
+                  subTitle={team.code}
+                  number={<Hash size={22} />}
+                  buttonText="Clique para copiar o código"
+                  copyCode={handleCardClick}
+                />
+                <CardInformation
+                  crown
+                  cardTitle="O time possui"
+                  subTitle={team.users?.length > 1 ? "Membros" : "Membro"}
+                  number={team.users?.length - 1}
+                  buttonText="Visualize os membros do time abaixo."
+                />
+                <CardInformation
+                  cardTitle="A categoria do time é"
+                  subTitle={team.category}
+                  buttonText="Clique para configurar o grupo"
+                />
               </div>
             </div>
 
-            <div className="cards-area">
-              <CardInformation
-                cardTitle="O código do time"
-                subTitle={team.code}
-                number={<Hash size={22} />}
-                buttonText="Clique para copiar o código"
-                copyCode={handleCardClick}
+            <div className="colab-area">
+              <TeamMembersList
+                collaborators={team.users}
+                removeUserTeam={removeUserTeam}
               />
-              <CardInformation
-                crown
-                cardTitle="O time possui"
-                subTitle={team.users?.length > 1 ? "Membros" : "Membro"}
-                number={team.users?.length - 1}
-                buttonText="Visualize os membros do time abaixo."
-              />
-              <CardInformation
-                cardTitle="A categoria do time é"
-                subTitle={team.category}
-                buttonText="Clique para configurar o grupo"
-              />
-            </div>
-          </div>
-
-          <div className="colab-area">
-            <TeamMembersList
-              collaborators={team.users}
-              removeUserTeam={removeUserTeam}
-            />
-            {!loading && (
               <RoundGraph
                 title="Tarefas"
                 description="tarefas foram realizadas no total"
@@ -239,9 +242,9 @@ export default function DetailsTeamsLeader() {
                 isPercent={false}
                 total={graph.total_tasks}
               />
-            )}
-          </div>
-        </Container>
+            </div>
+          </Container>
+        )}
         <ToastContainer />
       </div>
     </>
