@@ -33,7 +33,7 @@ describe("Dashboard", () => {
     ID_BOARD_TO_DELETE = createBoard.body.board.id;
   });
 
-  it("Should be able to return the daily board info", async () => {
+  it("Should be able to return the daily board information", async () => {
     const response = await request(app)
       .get(`/dailys/boards/${TEAM_ID}/${USER_DB.id}`)
       .set("Authorization", `Bearer ${USER_DB.token}`);
@@ -43,7 +43,7 @@ describe("Dashboard", () => {
     expect(response.body).toHaveProperty("token");
   });
 
-  it("Should not be able to return the daily board info of an invalid user", async () => {
+  it("Should not be able to return the daily board information of an invalid user", async () => {
     const INVALID_USER_ID = 58547;
 
     const response = await request(app)
@@ -54,7 +54,7 @@ describe("Dashboard", () => {
     expect(response.body).toHaveProperty("err");
   });
 
-  it("Should not be able to return the daily board info of an invalid team", async () => {
+  it("Should not be able to return the daily board information of an invalid team", async () => {
     const INVALID_TEAM_ID = 58547;
 
     const response = await request(app)
@@ -65,7 +65,7 @@ describe("Dashboard", () => {
     expect(response.body).toHaveProperty("err");
   });
 
-  it("Should not be able to return the daily board info of a team that the user is not member", async () => {
+  it("Should not be able to return the daily board information of a team that the user is not member", async () => {
     const INVALID_USER = 3;
     const INVALID_TEAM_MEMBER = 2;
 
@@ -85,6 +85,15 @@ describe("Dashboard", () => {
     expect(response.status).toEqual(200);
     expect(response.body).toHaveProperty("board");
     expect(response.body).toHaveProperty("token");
+  });
+
+  it("Should not be able to create more than one daily board in the same day", async () => {
+    const response = await request(app)
+      .post(`/dailys/boards/${TEAM_ID}/${USER_DB.id}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`);
+
+    expect(response.status).toEqual(409);
+    expect(response.body).toHaveProperty("err");
   });
 
   it("Should not be able to create a daily board if the user is not leader", async () => {
@@ -107,5 +116,43 @@ describe("Dashboard", () => {
 
     expect(response.status).toEqual(204);
   });
-  
+
+  it("Should not be able to delete a daily board that not exists", async () => {
+    const INVALID_BOARD_ID = 9646887
+
+    const response = await request(app)
+      .delete(
+        `/dailys/boards/${OTHER_TEAM_ID}/${INVALID_BOARD_ID}/${USER_DB_OTHER_TEAM.id}`
+      )
+      .set("Authorization", `Bearer ${USER_DB.token}`);
+
+    expect(response.status).toEqual(400);
+    expect(response.body).toHaveProperty('err');
+  });
+
+  it("Should be able to return the daily content information", async () => {
+    const BOARD_ID = 1;
+    const response = await request(app)
+      .get(
+        `/dailys/boards/contents/${TEAM_ID}/${BOARD_ID}/${USER_DB.id}`
+      )
+      .set("Authorization", `Bearer ${USER_DB.token}`);
+
+    expect(response.status).toEqual(200);
+    expect(response.body).toHaveProperty('dailyContents');
+    expect(response.body).toHaveProperty('token');
+  });
+
+  it("Should not be able to return the daily content information from an invalid board", async () => {
+    const INVALID_BOARD_ID = 1545654161;
+    const response = await request(app)
+      .get(
+        `/dailys/boards/contents/${TEAM_ID}/${INVALID_BOARD_ID}/${USER_DB.id}`
+      )
+      .set("Authorization", `Bearer ${USER_DB.token}`);
+
+    expect(response.status).toEqual(400);
+    expect(response.body).toHaveProperty('err');
+  });
+
 });

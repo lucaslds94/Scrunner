@@ -3,6 +3,7 @@ const { Router } = require("express");
 const { auth } = require("../middlewares/auth.middleware");
 const { user } = require("../middlewares/user.middleware");
 const { team } = require("../middlewares/team.middleware");
+const { board } = require("../middlewares/board.middleware");
 const { userInTeam } = require("../middlewares/userInTeam.middleware");
 const { isLeader } = require("../middlewares/isLeader.middleware");
 
@@ -17,6 +18,16 @@ routes.get(
   team,
   userInTeam,
   dailyController.index
+);
+
+routes.get(
+  "/dailys/boards/contents/:teamId/:boardId/:userId",
+  auth,
+  user,
+  team,
+  userInTeam,
+  board,
+  dailyController.indexContent
 );
 
 routes.post(
@@ -36,6 +47,7 @@ routes.delete(
   team,
   userInTeam,
   isLeader,
+  board,
   dailyController.deleteBoard
 );
 

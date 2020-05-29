@@ -84,6 +84,57 @@ module.exports = {
     return res.json({ boards, token });
   },
 
+  async indexContent(req, res) {
+    const { userId, boardId } = req.params;
+
+    let dailyContents = await DailyContent.findAll({
+      where: {
+        daily_board_id: boardId,
+      },
+      attributes: {
+        exclude: ["daily_board_id"],
+      },
+      include: [
+        {
+          model: User,
+          as: "user",
+          attributes: ["id", "name", "email","image"],
+
+          include: [
+            {
+              model: UserTeam,
+              as: "user_isLeader",
+              attributes: ["is_leader"],
+            },
+          ],
+        },
+      ],
+    });
+
+    dailyContents = dailyContents.map((objectContent) => {
+      const user = {
+        id: objectContent.dataValues.user.dataValues.id,
+        name: objectContent.dataValues.user.dataValues.name,
+        email: objectContent.dataValues.user.dataValues.email,
+        image: objectContent.dataValues.user.dataValues.image,
+        is_leader:
+          objectContent.dataValues.user.dataValues.user_isLeader[0].is_leader,
+      };
+
+      return {
+        ...objectContent.dataValues,
+        user,
+      };
+    });
+
+    const token = sign({}, jwt.secret, {
+      subject: `${userId}`,
+      expiresIn: jwt.expiresIn,
+    });
+
+    return res.json({ dailyContents, token });
+  },
+
   async store(req, res) {
     const { userId, teamId } = req.params;
     let startHourTodayDate = new Date();
@@ -130,17 +181,7 @@ module.exports = {
 
   async deleteBoard(req, res) {
     const { teamId, boardId } = req.params;
-
-    const board = DailyBoard.findOne({
-      where: {
-        id: boardId,
-      },
-    });
-
-    if (!board) {
-      return res.status(400).json({ err: "Board not found" });
-    }
-
+   
     await DailyBoard.destroy({
       where: {
         id: boardId,
