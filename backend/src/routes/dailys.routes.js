@@ -6,6 +6,7 @@ const { team } = require("../middlewares/team.middleware");
 const { board } = require("../middlewares/board.middleware");
 const { userInTeam } = require("../middlewares/userInTeam.middleware");
 const { isLeader } = require("../middlewares/isLeader.middleware");
+const { isCollaborator } = require("../middlewares/isCollaborator.middleware");
 
 const routes = Router();
 
@@ -17,6 +18,7 @@ routes.get(
   user,
   team,
   userInTeam,
+  isCollaborator,
   dailyController.index
 );
 
@@ -27,7 +29,20 @@ routes.get(
   team,
   userInTeam,
   board,
+  isCollaborator,
   dailyController.indexContent
+);
+
+
+routes.post(
+  "/dailys/boards/contents/:teamId/:boardId/:userId",
+  auth,
+  user,
+  team,
+  userInTeam,
+  board,
+  isCollaborator,
+  dailyController.storeContent
 );
 
 routes.post(

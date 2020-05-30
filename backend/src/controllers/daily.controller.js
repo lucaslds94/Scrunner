@@ -13,7 +13,7 @@ module.exports = {
   async index(req, res) {
     const { teamId, userId } = req.params;
 
-    const { id: leaderInTeam } = await UserTeam.findOne({
+    let leaderInTeam = await UserTeam.findOne({
       where: {
         team_id: teamId,
         is_leader: true,
@@ -30,6 +30,10 @@ module.exports = {
         },
       ],
     });
+
+    if (leaderInTeam) {
+      leaderInTeam = leaderInTeam.dataValues.id;
+    }
 
     let boards = await DailyBoard.findAll({
       where: {
@@ -85,7 +89,7 @@ module.exports = {
   },
 
   async indexContent(req, res) {
-    const { userId, boardId } = req.params;
+    const { userId, boardId, teamId } = req.params;
 
     let dailyContents = await DailyContent.findAll({
       where: {
@@ -98,12 +102,13 @@ module.exports = {
         {
           model: User,
           as: "user",
-          attributes: ["id", "name", "email","image"],
+          attributes: ["id", "name", "email", "image"],
 
           include: [
             {
               model: UserTeam,
               as: "user_isLeader",
+              where: { team_id: teamId },
               attributes: ["is_leader"],
             },
           ],
@@ -133,6 +138,26 @@ module.exports = {
     });
 
     return res.json({ dailyContents, token });
+  },
+
+  async storeContent(req, res) {
+    const { userId, boardId, teamId } = req.params;
+    const { did_yesterday, do_today, problems } = req.body;
+
+    const content = await DailyContent.create({
+      user_id: userId,
+      daily_board_id: boardId,
+      did_yesterday,
+      problems,
+      do_today,
+    });
+
+    const token = sign({}, jwt.secret, {
+      subject: `${userId}`,
+      expiresIn: jwt.expiresIn,
+    });
+
+    return res.json({ content, token });
   },
 
   async store(req, res) {
@@ -181,7 +206,7 @@ module.exports = {
 
   async deleteBoard(req, res) {
     const { teamId, boardId } = req.params;
-   
+
     await DailyBoard.destroy({
       where: {
         id: boardId,
