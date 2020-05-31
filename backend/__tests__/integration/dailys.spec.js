@@ -155,6 +155,26 @@ describe("Dashboard", () => {
     expect(response.body).toHaveProperty("err");
   });
 
+  it("Should be able to create a daily content", async () => {
+    const BOARD_ID = 1;
+    const CONTENT_DATA = {
+      did_yesterday: 'Making Tests',
+      do_today: 'Do Tests again',
+      problems: 'Tests'
+    }
+    
+    const response = await request(app)
+      .post(
+        `/dailys/boards/contents/${TEAM_ID}/${BOARD_ID}/${USER_DB.id}`
+      )
+      .send(CONTENT_DATA)
+      .set("Authorization", `Bearer ${USER_DB.token}`);
+
+    expect(response.status).toEqual(200);
+    expect(response.body).toHaveProperty('content');
+    expect(response.body).toHaveProperty('token');
+  });
+
   it("Should be able to delete a daily content", async () => {
     const BOARD_ID = 1;
     const response = await request(app)
