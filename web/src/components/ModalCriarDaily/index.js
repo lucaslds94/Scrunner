@@ -1,13 +1,30 @@
 import React from "react";
 import { FaTimes, FaCheck } from "react-icons/fa";
 import "./styles.css";
+import { useState } from "react";
 
-// import whiteCheck from "../../../src/assets/whiteCheck"
+export default function ModalCriarDaily({
+  handleModalCreateDaily,
+  createDailyContent,
+}) {
+  const [didYesterday, setDidYesterday] = useState("");
+  const [doToday, setDoToday] = useState("");
+  const [problems, setProblems] = useState("");
 
-export default function ModalCriarDaily({ handleModalCreateDaily }) {
+  const handleCreateDailyContent = () => {
+    createDailyContent({
+      did_yesterday: didYesterday,
+      do_today: doToday,
+      problems,
+    });
+    handleModalCreateDaily();
+  };
+
   return (
     <div className="modal-createDaily">
-       <div className="modal-fade"><button onClick={handleModalCreateDaily} ></button></div> 
+      <div className="modal-fade">
+        <button onClick={handleModalCreateDaily}></button>
+      </div>
       <div className="modalContainer-createDaily">
         <div className="containerCenter-createDaily">
           <button
@@ -21,40 +38,46 @@ export default function ModalCriarDaily({ handleModalCreateDaily }) {
           <div className="divider" />
 
           <div className="defaultField">
-            <label htmlFor="nomeDaily">O que você fez ontem?</label>
+            <label htmlFor="did_yesterday">O que você fez ontem?</label>
             <br />
             <textarea
               maxLength="255"
               type="input"
-              name="nomeDaily"
+              name="did_yesterday"
               className="text-daily-content"
+              onChange={(e) => setDidYesterday(e.target.value)}
             />
           </div>
           <div className="defaultField">
-            <label htmlFor="categoria">O que você irá fazer hoje?</label>
+            <label htmlFor="do_today">O que você irá fazer hoje?</label>
             <br />
             <textarea
               maxLength="255"
               type="input"
-              name="categoria"
+              name="do_today"
               className="text-daily-content"
+              onChange={(e) => setDoToday(e.target.value)}
             />
           </div>
           <div className="defaultField">
-            <label htmlFor="categoria">
+            <label htmlFor="problems">
               Existe/existiu algum impedimento no seu caminho?
             </label>
             <br />
             <textarea
               maxLength="255"
               type="input"
-              name="categoria"
+              name="problems"
               className="text-daily-content"
+              onChange={(e) => setProblems(e.target.value)}
             />
           </div>
 
           <div className="divBotao">
-            <button className="btnCriarDaily">
+            <button
+              className="btnCriarDaily"
+              onClick={handleCreateDailyContent}
+            >
               <FaCheck />
               Salvar
             </button>

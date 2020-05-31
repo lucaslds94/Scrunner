@@ -20,6 +20,8 @@ import isLeader from "../../../utils/isLeader";
 
 import api from "../../../services/api";
 
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import moment from "moment";
 import "moment/locale/pt-br";
 import { v4 as uuid } from "uuid";
@@ -82,10 +84,51 @@ export default function DailyLog() {
     history.push(`/times/daily/${teamName}`, { teamId, teamName, users });
   };
 
+  const createDailyContent = async ({ did_yesterday, do_today, problems }) => {
+    const user = getLocalStorage("@Scrunner:user");
+    const token = getLocalStorage("@Scrunner:token");
+    setLoading(true);
+    try {
+      const response = await api.post(
+        `/dailys/boards/contents/${teamId}/${boardId}/${user.id}`,
+        { did_yesterday, do_today, problems },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      const newContent = {
+        ...response.data.content,
+        user: {
+          name: user.name,
+        },
+      };
+
+      const isLeader = users.find(
+        (colab) => colab.id === user.id && colab.is_leader
+      );
+
+
+      !isLeader
+        ? setCollaboratorContent([...collaboratorContent, newContent])
+        : setLeaderContent(newContent);
+
+      setLocalStorage("@Scrunner:token", response.data.token);
+      setDailyCount(dailyCount + 1);
+      setRegisteredDaily(true);
+
+      toast.success("Daily criada com sucesso.");
+    } catch (error) {
+      toast.error("Ocorreu um erro ao criar a daily.");
+    }
+    setLoading(false);
+  };
+
   return (
     <div className="dailyLog">
       {showModal && (
-        <ModalCriarDaily handleModalCreateDaily={() => setShowModal(false)} />
+        <ModalCriarDaily
+          handleModalCreateDaily={() => setShowModal(false)}
+          createDailyContent={createDailyContent}
+        />
       )}
       <Header />
       <MenuLateral homeActive={false} />
@@ -169,6 +212,7 @@ export default function DailyLog() {
               ))}
             </div>
           </div>
+          <ToastContainer />
         </Container>
       )}
     </div>
