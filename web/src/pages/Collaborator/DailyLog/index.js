@@ -34,6 +34,7 @@ export default function DailyLog() {
   const [collaboratorContent, setCollaboratorContent] = useState([]);
   const [registeredDaily, setRegisteredDaily] = useState(false);
 
+  const user = getLocalStorage("@Scrunner:user");
   const history = useHistory();
   const {
     teamId,
@@ -44,7 +45,6 @@ export default function DailyLog() {
   } = history.location.state;
 
   useEffect(() => {
-    const user = getLocalStorage("@Scrunner:user");
     const token = getLocalStorage("@Scrunner:token");
 
     const fetchContent = async () => {
@@ -78,14 +78,13 @@ export default function DailyLog() {
     };
 
     fetchContent();
-  }, [users, boardId, teamId]);
+  }, [users, boardId, teamId, user.id]);
 
   const toTeamDailysPage = () => {
     history.push(`/times/daily/${teamName}`, { teamId, teamName, users });
   };
 
   const createDailyContent = async ({ did_yesterday, do_today, problems }) => {
-    const user = getLocalStorage("@Scrunner:user");
     const token = getLocalStorage("@Scrunner:token");
     setLoading(true);
     try {
@@ -106,7 +105,6 @@ export default function DailyLog() {
         (colab) => colab.id === user.id && colab.is_leader
       );
 
-
       !isLeader
         ? setCollaboratorContent([...collaboratorContent, newContent])
         : setLeaderContent(newContent);
@@ -120,6 +118,35 @@ export default function DailyLog() {
       toast.error("Ocorreu um erro ao criar a daily.");
     }
     setLoading(false);
+  };
+
+  const deleteDailyLog = async (contentId, isLeader) => {
+    const token = getLocalStorage("@Scrunner:token");
+    try {
+      await api.delete(
+        `/dailys/boards/contents/${teamId}/${boardId}/${contentId}/${user.id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      if (isLeader) {
+        setLeaderContent({});
+      } else {
+        const newContents = collaboratorContent.filter(
+          (content) => content.id !== contentId
+        );
+
+        setCollaboratorContent(newContents);
+      }
+
+      setRegisteredDaily(false);
+      setDailyCount(dailyCount - 1);
+
+      toast.info(" Daily excluída com sucesso.");
+    } catch (error) {
+      toast.error("Ocorreu um erro inesperado.");
+    }
   };
 
   return (
@@ -187,6 +214,8 @@ export default function DailyLog() {
                   doToday={leaderContent.do_today}
                   problems={leaderContent.problems}
                   name={leaderContent.user.name}
+                  deleteDailyLog={() => deleteDailyLog(leaderContent.id, true)}
+                  isMyDaily={leaderContent.user_id === user.id}
                 />
               )}
             </div>
@@ -208,6 +237,8 @@ export default function DailyLog() {
                   doToday={content.do_today}
                   problems={content.problems}
                   name={content.user.name}
+                  deleteDailyLog={() => deleteDailyLog(content.id, false)}
+                  isMyDaily={content.user_id === user.id}
                 />
               ))}
             </div>
