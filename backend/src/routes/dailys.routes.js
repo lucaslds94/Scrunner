@@ -7,6 +7,7 @@ const { board } = require("../middlewares/board.middleware");
 const { userInTeam } = require("../middlewares/userInTeam.middleware");
 const { isLeader } = require("../middlewares/isLeader.middleware");
 const { isCollaborator } = require("../middlewares/isCollaborator.middleware");
+const { dailyContent } = require("../middlewares/dailyContent.middleware");
 
 const routes = Router();
 
@@ -64,6 +65,17 @@ routes.delete(
   isLeader,
   board,
   dailyController.deleteBoard
+);
+
+routes.delete(
+  "/dailys/boards/contents/:teamId/:boardId/:contentId/:userId",
+  auth,
+  user,
+  team,
+  userInTeam,
+  board,
+  dailyContent,
+  dailyController.deleteContent
 );
 
 module.exports = routes;

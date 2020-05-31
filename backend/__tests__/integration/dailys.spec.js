@@ -20,6 +20,8 @@ const OTHER_TEAM_ID = 2;
 
 let ID_BOARD_TO_DELETE = null;
 
+const DAILY_CONTENT_TO_DELETE = 1;
+
 describe("Dashboard", () => {
   beforeAll(async () => {
     const response = await request(app).post("/login").send(USER_DB);
@@ -118,7 +120,7 @@ describe("Dashboard", () => {
   });
 
   it("Should not be able to delete a daily board that not exists", async () => {
-    const INVALID_BOARD_ID = 9646887
+    const INVALID_BOARD_ID = 9646887;
 
     const response = await request(app)
       .delete(
@@ -127,20 +129,18 @@ describe("Dashboard", () => {
       .set("Authorization", `Bearer ${USER_DB.token}`);
 
     expect(response.status).toEqual(400);
-    expect(response.body).toHaveProperty('err');
+    expect(response.body).toHaveProperty("err");
   });
 
   it("Should be able to return the daily content information", async () => {
     const BOARD_ID = 1;
     const response = await request(app)
-      .get(
-        `/dailys/boards/contents/${TEAM_ID}/${BOARD_ID}/${USER_DB.id}`
-      )
+      .get(`/dailys/boards/contents/${TEAM_ID}/${BOARD_ID}/${USER_DB.id}`)
       .set("Authorization", `Bearer ${USER_DB.token}`);
 
     expect(response.status).toEqual(200);
-    expect(response.body).toHaveProperty('dailyContents');
-    expect(response.body).toHaveProperty('token');
+    expect(response.body).toHaveProperty("dailyContents");
+    expect(response.body).toHaveProperty("token");
   });
 
   it("Should not be able to return the daily content information from an invalid board", async () => {
@@ -152,7 +152,45 @@ describe("Dashboard", () => {
       .set("Authorization", `Bearer ${USER_DB.token}`);
 
     expect(response.status).toEqual(400);
-    expect(response.body).toHaveProperty('err');
+    expect(response.body).toHaveProperty("err");
   });
 
+  it("Should be able to delete a daily content", async () => {
+    const BOARD_ID = 1;
+    const response = await request(app)
+      .delete(
+        `/dailys/boards/contents/${TEAM_ID}/${BOARD_ID}/${DAILY_CONTENT_TO_DELETE}/${USER_DB.id}`
+      )
+      .set("Authorization", `Bearer ${USER_DB.token}`);
+
+    expect(response.status).toEqual(204);
+  });
+
+  it("Should not be able to delete a daily content that do not exists", async () => {
+    const BOARD_ID = 1;
+    const INVALID_DAILY_CONTENT = 9265964525;
+
+    const response = await request(app)
+      .delete(
+        `/dailys/boards/contents/${TEAM_ID}/${BOARD_ID}/${INVALID_DAILY_CONTENT}/${USER_DB.id}`
+      )
+      .set("Authorization", `Bearer ${USER_DB.token}`);
+
+    expect(response.status).toEqual(400);
+    expect(response.body).toHaveProperty('err');
+  });
+  
+  it("Should not be able to delete a daily content that the user is not the author", async () => {
+    const BOARD_ID = 1;
+    const NOT_MY_DAILY_CONTENT = 3;
+
+    const response = await request(app)
+      .delete(
+        `/dailys/boards/contents/${TEAM_ID}/${BOARD_ID}/${NOT_MY_DAILY_CONTENT}/${USER_DB.id}`
+      )
+      .set("Authorization", `Bearer ${USER_DB.token}`);
+
+    expect(response.status).toEqual(403);
+    expect(response.body).toHaveProperty('err');
+  });
 });

@@ -216,4 +216,30 @@ module.exports = {
 
     return res.status(204).send();
   },
+
+  async deleteContent(req, res) {
+    const { contentId, userId, boardId } = req.params;
+
+    const isMyContent = await DailyContent.findOne({
+      where: {
+        id: contentId,
+        user_id: userId,
+        daily_board_id: boardId,
+      },
+    });
+
+    if (!isMyContent) {
+      return res.status(403).json({ err: "Access denied" });
+    }
+
+    await DailyContent.destroy({
+      where: {
+        id: contentId,
+        user_id: userId,
+        daily_board_id: boardId,
+      },
+    });
+
+    return res.status(204).send();
+  },
 };
