@@ -569,7 +569,7 @@ export default function LandingPage() {
           <p>Todos os direitos reservados 2020 &copy; | Scrunner</p>
         </div>
       </footer>
-      <ToastContainer />
+      <ToastContainer limit={3}/>
     </>
   );
 }

@@ -158,7 +158,7 @@ export default function TeamsLeader() {
           </Container>
         )}
       </div>
-      <ToastContainer />
+      <ToastContainer limit={3}/>
     </>
   );
 }

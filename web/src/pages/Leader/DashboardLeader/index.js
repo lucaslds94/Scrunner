@@ -192,7 +192,7 @@ export default function DashboardLeader() {
         </Container>
       )}
 
-      <ToastContainer />
+      <ToastContainer limit={3}/>
     </div>
   );
 }

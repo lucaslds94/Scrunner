@@ -170,7 +170,7 @@ export default function TeamsColab() {
             </div>
           </Container>
         )}
-        <ToastContainer />
+        <ToastContainer limit={3}/>
       </div>
     </>
   );

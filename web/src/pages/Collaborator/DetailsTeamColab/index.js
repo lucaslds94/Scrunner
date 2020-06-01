@@ -111,6 +111,10 @@ export default function DetailsTeamColab() {
       users: team.users,
     });
   };
+  
+  const toTasksPage = () => {
+    history.push(`/times/tarefas/${team.name}`);
+  };
 
   return (
     <div className="colaborador-detalhes-time">
@@ -130,7 +134,7 @@ export default function DetailsTeamColab() {
                 />
                 <ButtonChangeScreen
                   titleButton={"Tarefas"}
-                  to={`/times/tarefa/${team.name}`}
+                  toPage={toTasksPage}
                 />
               </div>
             </div>
@@ -164,7 +168,7 @@ export default function DetailsTeamColab() {
               <CardInformation
                 cardTitle="A categoria do time é"
                 subTitle={team.category}
-                buttonText="Clique para configurar o grupo"
+                buttonText="Contate seu líder para mais informações"
               />
             </div>
             <div className="colaborador-graph-area">
@@ -190,7 +194,7 @@ export default function DetailsTeamColab() {
           </div>
         </Container>
       )}
-      <ToastContainer />
+      <ToastContainer limit={3}/>
     </div>
   );
 }

@@ -56,6 +56,10 @@ export default function DailyColab() {
     history.push(`/times/detalhes/${teamName}`, { teamId });
   };
 
+  const toTasksPage = () => {
+    history.push(`/times/tarefas/${teamName}`);
+  };
+
   const handleCreateBoard = async () => {
     const user = getLocalStorage("@Scrunner:user");
     const token = getLocalStorage("@Scrunner:token");
@@ -131,12 +135,11 @@ export default function DailyColab() {
             <div className="header-buttons">
               <ButtonChangeScreen
                 titleButton={"Dailys"}
-                to={`/times/daily/${teamName}`}
                 active
               />
               <ButtonChangeScreen
                 titleButton={"Tarefas"}
-                to={`/times/tarefa/${teamName}`}
+                toPage={toTasksPage}
               />
             </div>
           </div>
@@ -169,7 +172,7 @@ export default function DailyColab() {
           </div>
         </Container>
       )}
-      <ToastContainer />
+      <ToastContainer limit={3}/>
     </div>
   );
 }

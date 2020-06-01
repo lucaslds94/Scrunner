@@ -245,7 +245,7 @@ export default function DetailsTeamsLeader() {
             </div>
           </Container>
         )}
-        <ToastContainer />
+        <ToastContainer limit={3} />
       </div>
     </>
   );

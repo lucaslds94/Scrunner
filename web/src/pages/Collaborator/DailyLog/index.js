@@ -84,6 +84,10 @@ export default function DailyLog() {
     history.push(`/times/daily/${teamName}`, { teamId, teamName, users });
   };
 
+  const toTasksPage = () => {
+    history.push(`/times/tarefas/${teamName}`);
+  };
+
   const createDailyContent = async ({ did_yesterday, do_today, problems }) => {
     const token = getLocalStorage("@Scrunner:token");
     setLoading(true);
@@ -170,14 +174,10 @@ export default function DailyLog() {
                 <span onClick={toTeamDailysPage}>{teamName}</span>
               </div>
               <div className="header-buttons">
-                <ButtonChangeScreen
-                  titleButton={"Dailys"}
-                  to={`/times/daily/${teamName}`}
-                  active
-                />
+                <ButtonChangeScreen titleButton={"Dailys"} active />
                 <ButtonChangeScreen
                   titleButton={"Tarefas"}
-                  to={`/times/tarefa/${teamName}`}
+                  toPage={toTasksPage}
                 />
               </div>
             </div>
@@ -243,7 +243,7 @@ export default function DailyLog() {
               ))}
             </div>
           </div>
-          <ToastContainer />
+          <ToastContainer limit={3} />
         </Container>
       )}
     </div>

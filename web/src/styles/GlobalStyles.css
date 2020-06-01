@@ -26,3 +26,18 @@ body {
   -webkit-font-smoothing: antialiased;
   
 }
+
+.Toastify__toast--info {
+  background: #332a58 ;
+  border-radius: 4px;
+
+}
+.Toastify__toast--success {
+  background: #7178ca;
+  border-radius: 4px;
+}
+
+.Toastify__toast--error {
+  background: #dc3545;
+  border-radius: 4px;
+}
