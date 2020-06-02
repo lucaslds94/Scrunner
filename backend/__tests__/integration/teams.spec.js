@@ -186,7 +186,7 @@ describe("Teams Routes", () => {
     const NEW_DATA_TEAM = {
       name: "Updated name",
       category: "Updated category",
-      leader_id: 3,
+      leader_id: 2,
     };
 
     const response = await request(app)

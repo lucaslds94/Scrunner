@@ -80,8 +80,10 @@ describe("Dashboard", () => {
   });
 
   it("Should be able to create a daily board", async () => {
+    const ID_LEADER_TEAM = 2;
+
     const response = await request(app)
-      .post(`/dailys/boards/${TEAM_ID}/${USER_DB.id}`)
+      .post(`/dailys/boards/${TEAM_ID}/${ID_LEADER_TEAM}`)
       .set("Authorization", `Bearer ${USER_DB.token}`);
 
     expect(response.status).toEqual(200);
