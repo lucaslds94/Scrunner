@@ -57,7 +57,7 @@ export default function DailyColab() {
   };
 
   const toTasksPage = () => {
-    history.push(`/times/tarefas/${teamName}`);
+    history.push(`/times/tarefas/${teamName}`, { teamId });
   };
 
   const handleCreateBoard = async () => {
@@ -133,10 +133,7 @@ export default function DailyColab() {
               <span onClick={toDetailsTeamPage}>{teamName}</span>
             </div>
             <div className="header-buttons">
-              <ButtonChangeScreen
-                titleButton={"Dailys"}
-                active
-              />
+              <ButtonChangeScreen titleButton={"Dailys"} active />
               <ButtonChangeScreen
                 titleButton={"Tarefas"}
                 toPage={toTasksPage}
@@ -172,7 +169,7 @@ export default function DailyColab() {
           </div>
         </Container>
       )}
-      <ToastContainer limit={3}/>
+      <ToastContainer limit={3} />
     </div>
   );
 }

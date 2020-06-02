@@ -85,7 +85,7 @@ export default function DailyLog() {
   };
 
   const toTasksPage = () => {
-    history.push(`/times/tarefas/${teamName}`);
+    history.push(`/times/tarefas/${teamName}`, { teamId, teamName, users });
   };
 
   const createDailyContent = async ({ did_yesterday, do_today, problems }) => {

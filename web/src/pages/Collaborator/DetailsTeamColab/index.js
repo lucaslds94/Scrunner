@@ -111,9 +111,9 @@ export default function DetailsTeamColab() {
       users: team.users,
     });
   };
-  
+
   const toTasksPage = () => {
-    history.push(`/times/tarefas/${team.name}`);
+    history.push(`/times/tarefas/${team.name}`, { teamId: team.id });
   };
 
   return (
@@ -194,7 +194,7 @@ export default function DetailsTeamColab() {
           </div>
         </Container>
       )}
-      <ToastContainer limit={3}/>
+      <ToastContainer limit={3} />
     </div>
   );
 }

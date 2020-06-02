@@ -1,11 +1,11 @@
-.card-tarefa{
+.card-tarefa {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   width: 350px;
   height: 180px;
   padding: 20px 25px;
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.11);
   border-radius: 10px;
   transition: all 0.2s ease-in-out;
@@ -14,13 +14,13 @@
   text-decoration: none;
 }
 
-.card-tarefa:hover{
+.card-tarefa:hover {
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
   transform: scale(0.98);
   opacity: 0.9;
 }
 
-.card-information-tarefa{
+.card-information-tarefa {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -28,12 +28,12 @@
 }
 
 .card-title-tarefa {
-  color: #737FF3;
+  color: #737ff3;
   font-size: 22px;
   font-weight: bold;
 }
 
-.card-textdate-tarefa{
+.card-textdate-tarefa {
   color: #898989;
   font-size: 15px;
   margin-bottom: 3px;
@@ -42,4 +42,20 @@
 .card-information-tarefa p:last-child strong {
   color: #595959;
   font-size: 18px;
+}
+
+.task-dates {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.task-creation-date, 
+.task-expiration-date {
+  display: flex;
+  flex-direction: column;
+}
+
+.task-expiration-date {
+  text-align: right;
 }
