@@ -91,7 +91,7 @@ describe("Dashboard", () => {
 
   it("Should not be able to create more than one daily board in the same day", async () => {
     const response = await request(app)
-      .post(`/dailys/boards/${TEAM_ID}/${USER_DB.id}`)
+      .post(`/dailys/boards/${OTHER_TEAM_ID}/${USER_DB_OTHER_TEAM.id}`)
       .set("Authorization", `Bearer ${USER_DB.token}`);
 
     expect(response.status).toEqual(409);

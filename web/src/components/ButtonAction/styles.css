@@ -4,7 +4,7 @@
     border-radius: 25px;
     background: linear-gradient( to right, #9EA8FF, #737FF3);
     border: none;
-    outline: none;
+    outline-color: #737FF3;
     color: white;
     font-size: 16px;
     display: flex;

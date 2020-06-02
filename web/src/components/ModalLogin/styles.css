@@ -137,7 +137,7 @@
   border: none;
   background-color: transparent;
   cursor: pointer;
-  outline: none;
+  outline-color: #737FF3;
 }
 
 .connect-choice {
@@ -201,7 +201,7 @@
   color: #737FF3;
   text-decoration: none;
   border: none;
-  outline: none;
+  outline-color: #737FF3;
   background: transparent;
   cursor: pointer;
   transition: transform .2s;

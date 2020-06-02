@@ -27,7 +27,7 @@ export default function ModalCadastroEmpresa({
 
   const showConfirmPassword = () => {
     setShowConfirmPass(!showConfirmPass);
-  }
+  };
 
   const handleRegisterCompany = () => {
     if (companyName.trim().length === 0) {
@@ -45,8 +45,8 @@ export default function ModalCadastroEmpresa({
       return;
     }
 
-    if(confirmPassword !== password){
-      toast.error("As senhas devem ser iguais")
+    if (confirmPassword !== password) {
+      toast.error("As senhas devem ser iguais");
       return;
     }
 
@@ -55,14 +55,13 @@ export default function ModalCadastroEmpresa({
       return;
     }
 
-    if ( companyName && email && password && confirmPassword && checkTerms) {
+    if (companyName && email && password && confirmPassword && checkTerms) {
       registerCompany({ companyName, email, password });
 
       setCompanyName("");
       setEmail("");
       setPassword("");
       setConfirmPassword("");
-
     }
   };
 
@@ -72,7 +71,11 @@ export default function ModalCadastroEmpresa({
 
       <div className="modal-main-container">
         <div className="main-left-container">
-          <button className="responsive-close" onClick={handleModalEmpresa} href="#">
+          <button
+            className="responsive-close"
+            onClick={handleModalEmpresa}
+            href="#"
+          >
             <FaTimes size={20} color={"#737FF3"} />
           </button>
           <div className="title-container">
@@ -89,6 +92,7 @@ export default function ModalCadastroEmpresa({
               type="text"
               name="companyName"
               id="companyName"
+              tabIndex="1"
               onChange={(e) => setCompanyName(e.target.value)}
             />
           </div>
@@ -100,6 +104,7 @@ export default function ModalCadastroEmpresa({
               type="email"
               name="email"
               id="email"
+              tabIndex="2"
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
@@ -111,9 +116,10 @@ export default function ModalCadastroEmpresa({
               value={password}
               name="password"
               id="password"
+              tabIndex="3"
               onChange={(e) => setPassword(e.target.value)}
             />
-            <button type="button" onClick={showPassword} id="iconOlho">
+            <button type="button" onClick={showPassword} tabIndex="-1" id="iconOlho">
               {showPass && <FaEyeSlash size={20} color={"#737FF3"} />}
               {!showPass && <FaEye size={20} color={"#c3c3c3"} />}
             </button>
@@ -127,9 +133,10 @@ export default function ModalCadastroEmpresa({
               value={confirmPassword}
               name="confirmPassword"
               id="confirmPassword"
+              tabIndex="4"
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
-            <button type="button" onClick={showConfirmPassword} id="iconOlho">
+            <button type="button" onClick={showConfirmPassword} tabIndex="-1" id="iconOlho">
               {showConfirmPass && <FaEyeSlash size={20} color={"#737FF3"} />}
               {!showConfirmPass && <FaEye size={20} color={"#c3c3c3"} />}
             </button>
@@ -142,6 +149,7 @@ export default function ModalCadastroEmpresa({
                 type="checkbox"
                 name="check-terms"
                 id="check-terms"
+                tabIndex="5"
                 onChange={() => setCheckTerms(!checkTerms)}
               />
               <label htmlFor="check-terms">
@@ -151,7 +159,7 @@ export default function ModalCadastroEmpresa({
             </div>
           </div>
 
-          <button id="btnContinue" onClick={handleRegisterCompany}>
+          <button id="btnContinue" tabIndex="6" onClick={handleRegisterCompany}>
             Continuar
           </button>
         </div>
