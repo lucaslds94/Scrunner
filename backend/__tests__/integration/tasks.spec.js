@@ -27,4 +27,20 @@ describe("Tasks", () => {
     expect(response.body).toHaveProperty("boards");
     expect(response.body).toHaveProperty("token");
   });
+
+  it("Should be able to create a task board", async () => {
+    const NEW_TASK_BOARD = {
+      name: 'Task Board',
+      days: '15',
+    }
+    
+    const response = await request(app)
+      .post(`/tasks/boards/${TEAM_ID}/${USER_DB.id}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`)
+      .send(NEW_TASK_BOARD);
+
+    expect(response.status).toEqual(200);
+    expect(response.body).toHaveProperty("board");
+    expect(response.body).toHaveProperty("token");
+  });
 });

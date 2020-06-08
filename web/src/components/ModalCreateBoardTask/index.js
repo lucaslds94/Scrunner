@@ -6,7 +6,7 @@ import { FaTimes, FaCheck } from "react-icons/fa";
 
 import ButtonAction from "../ButtonAction";
 
-export default function ModalCreateTask({ handleCloseModal, createBoard }) {
+export default function ModalCreateBoardTask({ handleCloseModal, createBoard }) {
   const [name, setName] = useState("");
   const [days, setDays] = useState("0");
 

@@ -10,7 +10,7 @@ import CardTask from "../../../components/CardTask";
 import ButtonChangeScreen from "../../../components/ButtonChangeScreen";
 import Loading from "../../../components/Loading";
 import CreateBoard from "../../../components/CreateBoard";
-import ModalCreateTask from "../../../components/ModalCreateTask";
+import ModalCreateBoardTask from "../../../components/ModalCreateBoardTask";
 
 import { MdArrowBack } from "react-icons/md";
 
@@ -62,7 +62,7 @@ export default function TasksColab() {
     };
 
     fetchBoards();
-  }, [history, teamId, users, user]);
+  }, [history, teamId, user.id, users]);
 
   const toDailyPage = () => {
     history.push(`/times/daily/${teamName}`, { teamId, users, teamName });
@@ -95,7 +95,7 @@ export default function TasksColab() {
         }
       );
 
-      setTaskBoards([response.data.board, ...taskBoards]);
+      setTaskBoards([response.data.board,...taskBoards]);
       setShowModalCreateTask(false);
       setLocalStorage("@Scrunner:token", response.data.token);
 
@@ -117,7 +117,7 @@ export default function TasksColab() {
 
       setTaskBoards(filteredBoards);
 
-      toast.success("Quadro deletado com sucesso.")
+      toast.success("Quadro deletado com sucesso.");
     } catch (error) {
       toast.error("Algum erro interno ocorreu.");
     }
@@ -126,7 +126,7 @@ export default function TasksColab() {
   return (
     <>
       {showModalCreateTask && (
-        <ModalCreateTask
+        <ModalCreateBoardTask
           handleCloseModal={() => setShowModalCreateTask(false)}
           createBoard={createBoard}
         />
@@ -176,7 +176,7 @@ export default function TasksColab() {
                       dateRange={taskBoard.date_range}
                       isLeader={leader}
                       toPage={() => toKanbanPage(taskBoard.id, taskBoard.name)}
-                      deleteTaskBoard={() => deleteBoard(taskboard.id)}
+                      deleteTaskBoard={() => deleteBoard(taskBoard.id)}
                     />
                   ))}
                 </>

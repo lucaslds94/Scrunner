@@ -18,7 +18,18 @@ routes.get(
   team,
   userInTeam,
   isCollaborator,
-  taskController.index
+  taskController.indexBoards
+);
+
+routes.post(
+  "/tasks/boards/:teamId/:userId",
+  auth,
+  user,
+  team,
+  userInTeam,
+  isCollaborator,
+  isLeader,
+  taskController.storeBoard
 );
 
 module.exports = routes;

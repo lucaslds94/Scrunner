@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import "./styles.css";
 
 import { BsTrash } from "react-icons/bs";
@@ -14,10 +14,10 @@ export default function CardTask({
   dateRange,
   toPage,
   isLeader = false,
-  deleteTaskBoard
+  deleteTaskBoard,
 }) {
   const [showModalConfirm, setShowModalConfirm] = useState(false);
-
+  
   const handleConfirmRemove = () => {
     setShowModalConfirm(true);
   };
@@ -27,12 +27,22 @@ export default function CardTask({
     deleteTaskBoard();
   };
 
-  const getExpiresIn = () => {
+  const getExpiresIn = useCallback(() => {
     const ndate = moment(date);
     const expiration = moment(ndate).add(dateRange, "days");
     const now = moment(new Date());
-    return expiration.diff(now, "days", false);
-  };
+    const expirationDays = Math.round(expiration.diff(now, "days", true));
+    
+    if (expirationDays <= 0) {
+      return "Expirado.";
+    }
+
+    if (expirationDays === 1) {
+      return `${expirationDays} dia`;
+    } else {
+      return `${expirationDays} dias`;
+    }
+  }, [date, dateRange]);
 
   const getExpirationDate = () => {
     const ndate = moment(date).format();
@@ -70,14 +80,9 @@ export default function CardTask({
             </div>
             <div className="task-expiration-date">
               <p className="card-textdate-tarefa">Expira em</p>
-              {getExpiresIn() <= 0 ? (
-                <p>Expirado</p>
-              ) : (
-                <p>
-                  <strong>{getExpiresIn()}</strong>
-                  <span> dias</span>
-                </p>
-              )}
+              <p>
+                <strong>{getExpiresIn()}</strong>
+              </p>
             </div>
           </div>
         </div>
