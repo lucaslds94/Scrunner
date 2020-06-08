@@ -105,6 +105,24 @@ export default function TasksColab() {
     }
   };
 
+  const deleteBoard = async (boardId) => {
+    const token = getLocalStorage("@Scrunner:token");
+
+    try {
+      await api.delete(`/tasks/boards/${teamId}/${user.id}/${boardId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      const filteredBoards = taskBoards.filter((board) => boardId !== board.id);
+
+      setTaskBoards(filteredBoards);
+
+      toast.success("Quadro deletado com sucesso.")
+    } catch (error) {
+      toast.error("Algum erro interno ocorreu.");
+    }
+  };
+
   return (
     <>
       {showModalCreateTask && (
@@ -158,6 +176,7 @@ export default function TasksColab() {
                       dateRange={taskBoard.date_range}
                       isLeader={leader}
                       toPage={() => toKanbanPage(taskBoard.id, taskBoard.name)}
+                      deleteTaskBoard={() => deleteBoard(taskboard.id)}
                     />
                   ))}
                 </>
