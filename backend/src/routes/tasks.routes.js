@@ -6,8 +6,9 @@ const { team } = require("../middlewares/team.middleware");
 const { userInTeam } = require("../middlewares/userInTeam.middleware");
 const { isLeader } = require("../middlewares/isLeader.middleware");
 const { isCollaborator } = require("../middlewares/isCollaborator.middleware");
+const { taskBoard } = require("../middlewares/taskBoard.middlware");
 
-const taskController = require('../controllers/task.controller');
+const taskController = require("../controllers/task.controller");
 
 const routes = Router();
 
@@ -30,6 +31,18 @@ routes.post(
   isCollaborator,
   isLeader,
   taskController.storeBoard
+);
+
+routes.delete(
+  "/tasks/boards/:teamId/:userId/:boardId",
+  auth,
+  user,
+  team,
+  userInTeam,
+  isCollaborator,
+  isLeader,
+  taskBoard,
+  taskController.deleteBoard
 );
 
 module.exports = routes;

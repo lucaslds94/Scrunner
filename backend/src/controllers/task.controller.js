@@ -39,4 +39,17 @@ module.exports = {
 
     return res.json({ board: newBoard, token });
   },
+
+  async deleteBoard(req, res) {
+    const { teamId, boardId } = req.params;
+
+    await TaskBoard.destroy({
+      where: {
+        id: boardId,
+        team_id: teamId,
+      },
+    });
+
+    return res.status(204).send();
+  },
 };

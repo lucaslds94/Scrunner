@@ -34,7 +34,7 @@ export default function CardTask({
     const expirationDays = Math.round(expiration.diff(now, "days", true));
     
     if (expirationDays <= 0) {
-      return "Expirado.";
+      return "Expirado";
     }
 
     if (expirationDays === 1) {
