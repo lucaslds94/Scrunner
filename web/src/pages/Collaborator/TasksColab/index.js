@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import "./styles.css";
 
@@ -9,6 +9,8 @@ import Container from "../../../components/Container";
 import CardTask from "../../../components/CardTask";
 import ButtonChangeScreen from "../../../components/ButtonChangeScreen";
 import Loading from "../../../components/Loading";
+import CreateBoard from "../../../components/CreateBoard";
+import ModalCreateTask from "../../../components/ModalCreateTask";
 
 import { MdArrowBack } from "react-icons/md";
 
@@ -21,20 +23,22 @@ import {
   setLocalStorage,
   clearLocalStorage,
 } from "../../../utils/localStorage";
+import isLeader from "../../../utils/isLeader";
 
-import {v4 as uuid} from 'uuid';
+import { v4 as uuid } from "uuid";
 
 export default function TasksColab() {
   const [taskBoards, setTaskBoards] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [leader, setLeader] = useState(false);
+  const [showModalCreateTask, setShowModalCreateTask] = useState(false);
 
-  let { name } = useParams();
   const history = useHistory();
-  const { teamId } = history.location.state;
+  const user = getLocalStorage("@Scrunner:user");
+  const { teamId, users, teamName } = history.location.state;
 
   useEffect(() => {
     const fetchBoards = async () => {
-      const user = getLocalStorage("@Scrunner:user");
       const token = getLocalStorage("@Scrunner:token");
 
       try {
@@ -43,6 +47,10 @@ export default function TasksColab() {
             Authorization: `Bearer ${token}`,
           },
         });
+
+        const userIsLeader = isLeader(users);
+
+        setLeader(userIsLeader);
 
         setTaskBoards(response.data.boards);
         setLocalStorage("@Scrunner:token", response.data.token);
@@ -54,58 +62,111 @@ export default function TasksColab() {
     };
 
     fetchBoards();
-  }, [history, teamId]);
+  }, [history, teamId, users, user]);
+
+  const toDailyPage = () => {
+    history.push(`/times/daily/${teamName}`, { teamId, users, teamName });
+  };
+
+  const toDetailsTeamPage = () => {
+    history.push(`/times/detalhes/${teamName}`, { teamId });
+  };
+
+  const toKanbanPage = (boardId, boardName) => {
+    history.push(`/times/kanban/${teamName}/${boardName}/`, {
+      teamId,
+      boardId,
+      users,
+      teamName,
+    });
+  };
+
+  const createBoard = async (data) => {
+    const token = getLocalStorage("@Scrunner:token");
+
+    try {
+      const response = await api.post(
+        `/tasks/boards/${teamId}/${user.id}`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setTaskBoards([response.data.board, ...taskBoards]);
+      setShowModalCreateTask(false);
+      setLocalStorage("@Scrunner:token", response.data.token);
+
+      toast.success("Quadro criado com sucesso.");
+    } catch (err) {
+      toast.error("Algum erro interno ocorreu.");
+    }
+  };
 
   return (
-    <div className="colaborador-tarefa">
-      <Header />
-      <MenuLateral homeActive={false} />
+    <>
+      {showModalCreateTask && (
+        <ModalCreateTask
+          handleCloseModal={() => setShowModalCreateTask(false)}
+          createBoard={createBoard}
+        />
+      )}
+      <div className="colaborador-tarefa">
+        <Header />
+        <MenuLateral homeActive={false} />
 
-      <Container>
-        <div className="container-bloco-tarefa">
-          <div className="bloco-header-tarefa">
-            <div className="bloco-header-titles">
-              <p>Tarefas</p>
-              <Link to={`/times/detalhes/${name}`}>{name}</Link>
-            </div>
-            <div className="colaborador-header-buttons">
-              <ButtonChangeScreen
-                titleButton={"Dailys"}
-                to={`/times/daily/${name}`}
-              />
-              <ButtonChangeScreen
-                titleButton={"Tarefas"}
-                to={`/times/tarefa/${name}`}
-                active
-              />
-            </div>
-          </div>
-          <div className="divider" />
-
-          <div className="teamInfo-container">
-            <Link className="backBtn" to={`/times/detalhes/${name}`}>
-              <MdArrowBack size={30} color={"#737FF3"} /> Voltar
-            </Link>
-          </div>
-
-          <div className="bloco-tarefa">
-            {loading ? (
-              <Loading />
-            ) : (
-              taskBoards.map((taskBoard) => (
-                <CardTask
-                  key={uuid()}
-                  title={taskBoard.name}
-                  date={taskBoard.createdAt}
-                  dateRange={taskBoard.date_range}
-                  to={`/times/kanban/${name}/NomeQuadro1/10-04-2020`}
+        <Container>
+          <div className="container-bloco-tarefa">
+            <div className="bloco-header-tarefa">
+              <div className="bloco-header-titles">
+                <p>Tarefas</p>
+                <span onClick={toDetailsTeamPage}>{teamName}</span>
+              </div>
+              <div className="colaborador-header-buttons">
+                <ButtonChangeScreen
+                  titleButton={"Dailys"}
+                  toPage={toDailyPage}
                 />
-              ))
-            )}
+                <ButtonChangeScreen titleButton={"Tarefas"} active />
+              </div>
+            </div>
+            <div className="divider" />
+
+            <div className="teamInfo-container">
+              <div className="backBtn" onClick={toDetailsTeamPage}>
+                <MdArrowBack size={30} color={"#737FF3"} /> Voltar
+              </div>
+            </div>
+
+            <div className="bloco-tarefa">
+              {loading ? (
+                <Loading />
+              ) : (
+                <>
+                  {users && leader && (
+                    <CreateBoard
+                      handleCreateBoard={() => setShowModalCreateTask(true)}
+                    />
+                  )}
+                  {taskBoards.map((taskBoard) => (
+                    <CardTask
+                      key={uuid()}
+                      title={taskBoard.name}
+                      date={taskBoard.createdAt}
+                      dateRange={taskBoard.date_range}
+                      isLeader={leader}
+                      toPage={() => toKanbanPage(taskBoard.id, taskBoard.name)}
+                    />
+                  ))}
+                </>
+              )}
+            </div>
           </div>
-        </div>
-      </Container>
-      <ToastContainer limit={3} />
-    </div>
+        </Container>
+        <ToastContainer limit={3} />
+      </div>
+    </>
   );
 }

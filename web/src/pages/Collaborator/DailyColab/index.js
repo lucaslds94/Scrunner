@@ -57,7 +57,7 @@ export default function DailyColab() {
   };
 
   const toTasksPage = () => {
-    history.push(`/times/tarefas/${teamName}`, { teamId });
+    history.push(`/times/tarefas/${teamName}`, { teamId, users, teamName });
   };
 
   const handleCreateBoard = async () => {

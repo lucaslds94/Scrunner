@@ -57,7 +57,7 @@ export default function Routes() {
           exact 
         />
         <PrivateRoute
-          path="/times/kanban/:name/:boardTitle/:boardDate"
+          path="/times/kanban/:name/:boardTitle"
           componentColab={TeamKanban}
           componentOwner={() => <h1>Você não tem acesso a essa página</h1>} 
           exact 

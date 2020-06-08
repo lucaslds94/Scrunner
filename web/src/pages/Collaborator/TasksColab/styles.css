@@ -33,10 +33,11 @@
   font-size: 30px;
 }
 
-.bloco-header-titles a {
+.bloco-header-titles span {
   color: #898989;
   font-size: 17px;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .colaborador-header-buttons {

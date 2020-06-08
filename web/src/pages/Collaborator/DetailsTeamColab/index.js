@@ -113,7 +113,11 @@ export default function DetailsTeamColab() {
   };
 
   const toTasksPage = () => {
-    history.push(`/times/tarefas/${team.name}`, { teamId: team.id });
+    history.push(`/times/tarefas/${team.name}`, {
+      teamId: team.id,
+      teamName: team.name,
+      users: team.users,
+    });
   };
 
   return (

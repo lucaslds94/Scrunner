@@ -13,7 +13,7 @@ import ButtonChangeScreen from "../../../components/ButtonChangeScreen";
 
 
 export default function TeamKanban() {
-  const {boardTitle, name, boardDate} = useParams();
+  const {boardTitle, name } = useParams();
   
   return (
     <div className="containerKanbanTeam">
@@ -39,7 +39,7 @@ export default function TeamKanban() {
           className="boardInfo"
           >
             <h2>{boardTitle}</h2>
-            <h4>Criado em {boardDate}</h4>
+            <h4>Criado em DATA AQUI</h4>
           </div>
         </div>
         <Kanban/>
