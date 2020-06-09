@@ -72,12 +72,14 @@ export default function TasksColab() {
     history.push(`/times/detalhes/${teamName}`, { teamId });
   };
 
-  const toKanbanPage = (boardId, boardName) => {
+  const toKanbanPage = (boardId, boardName, boardDate) => {
     history.push(`/times/kanban/${teamName}/${boardName}/`, {
       teamId,
       boardId,
       users,
       teamName,
+      boardName,
+      boardDate
     });
   };
 
@@ -95,7 +97,7 @@ export default function TasksColab() {
         }
       );
 
-      setTaskBoards([response.data.board,...taskBoards]);
+      setTaskBoards([response.data.board, ...taskBoards]);
       setShowModalCreateTask(false);
       setLocalStorage("@Scrunner:token", response.data.token);
 
@@ -175,7 +177,13 @@ export default function TasksColab() {
                       date={taskBoard.createdAt}
                       dateRange={taskBoard.date_range}
                       isLeader={leader}
-                      toPage={() => toKanbanPage(taskBoard.id, taskBoard.name)}
+                      toPage={() =>
+                        toKanbanPage(
+                          taskBoard.id,
+                          taskBoard.name,
+                          taskBoard.createdAt
+                        )
+                      }
                       deleteTaskBoard={() => deleteBoard(taskBoard.id)}
                     />
                   ))}

@@ -84,6 +84,10 @@ export default function DailyLog() {
     history.push(`/times/daily/${teamName}`, { teamId, teamName, users });
   };
 
+  const toDetailTeamPage = () => {
+    history.push(`/times/detalhes/${teamName}`, { teamId });
+  };
+
   const toTasksPage = () => {
     history.push(`/times/tarefas/${teamName}`, { teamId, teamName, users });
   };
@@ -171,7 +175,7 @@ export default function DailyLog() {
             <div className="header-times-daily">
               <div className="header-titles">
                 <h2>Dailys</h2>
-                <span onClick={toTeamDailysPage}>{teamName}</span>
+                <span onClick={toDetailTeamPage}>{teamName}</span>
               </div>
               <div className="header-buttons">
                 <ButtonChangeScreen titleButton={"Dailys"} active />
