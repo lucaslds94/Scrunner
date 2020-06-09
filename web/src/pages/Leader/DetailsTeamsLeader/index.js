@@ -213,6 +213,7 @@ export default function DetailsTeamsLeader() {
                   subTitle={team.code}
                   number={<Hash size={22} />}
                   buttonText="Clique para copiar o código"
+                  isCopyable
                   copyCode={handleCardClick}
                 />
                 <CardInformation
@@ -225,6 +226,8 @@ export default function DetailsTeamsLeader() {
                 <CardInformation
                   cardTitle="A categoria do time é"
                   subTitle={team.category}
+                  isClickable
+                  onClick={() => setShowModalConfig(true)}
                   buttonText="Clique para configurar o grupo"
                 />
               </div>

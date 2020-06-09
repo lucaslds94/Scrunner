@@ -1,7 +1,7 @@
 .component-card-task-container {
   width: 350px;
   height: 215px;
-  margin: 0 10px 10px 0;
+  margin: 10px 10px 10px 0;
   border-radius: 10px;
   position: relative;
   transition: all 0.2s ease-in-out;

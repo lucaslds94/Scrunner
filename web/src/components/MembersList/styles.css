@@ -5,11 +5,11 @@
   background: #ffffff;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.11);
   border-radius: 10px;
-  padding: 30px; 
+  padding: 30px;
   overflow: hidden;
 }
 
-.table-members-header h1{
+.table-members-header h1 {
   display: flex;
   justify-content: flex-start;
   color: #595959;
@@ -18,31 +18,31 @@
 
 .table-title-members {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   width: 100%;
   margin: 30px 0 10px 0px;
-  color: #B2B2B2;
+  color: #737FF3;
 }
 
 .table-title-members p {
-  width: 150px;
+  width: 33%;
   margin-bottom: 20px;
 }
 
-.table-title-members p:last-child{
-  margin-left: 20%;
+.table-title-members p:first-child {
+  margin-left: 10%;
 }
 
-.table-list{
+.table-list {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   width: 100%;
   height: 70%;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
-.table-row{
+.table-row {
   width: 100%;
   height: 100%;
   display: flex;
@@ -54,37 +54,39 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   list-style: none;
 }
 
-.list-item{
+.list-item {
   display: flex;
+  justify-content: space-between;
   border-bottom: 1px solid rgba(0, 0, 0, 0.17);
   margin-bottom: 10px;
 }
 
-.list-item:last-child{
+.list-item:last-child {
   border: none;
 }
 
 .list-item li {
-  width: 150px;
+  width: 33%;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   padding-bottom: 5px;
   margin-bottom: 5px;
-  color:#898989;
+  color: #898989;
 }
 
-.list-item li:last-child{
+.list-item li:last-child {
   margin-left: 20%;
 }
 
-.user-image{
+.user-image {
   width: 40px;
   height: 40px;
-  background: #737FF3;
+  background: #737ff3;
   border-radius: 50%;
   margin-right: 10px;
 }

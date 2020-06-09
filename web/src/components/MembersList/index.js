@@ -16,7 +16,7 @@ export default function MembersList({ users = [] }) {
       </div>
       <div className="table-title-members">
         <p>Nome</p>
-        <p>Posição</p>
+        <p>Líder</p>
       </div>
       <div className="table-list">
         <div className="table-row">
@@ -27,7 +27,7 @@ export default function MembersList({ users = [] }) {
                   <div className="user-image" />
                   {user.name}
                 </li>
-                <li>{user.is_leader ? "Líder" : "Membro"}</li>
+                <li>{user.is_leader ? "Sim" : "Não"}</li>
               </div>
             ))}
           </ul>

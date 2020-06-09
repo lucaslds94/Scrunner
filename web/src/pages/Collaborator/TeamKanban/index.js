@@ -69,6 +69,10 @@ export default function TeamKanban() {
     history.push(`/times/detalhes/${teamName}`, { teamId });
   };
 
+  const toDailysPage = () => {
+    history.push(`/times/daily/${teamName}`, { teamId, users, teamName });
+  };
+
   return (
     <div className="containerKanbanTeam">
       <Header />
@@ -85,7 +89,7 @@ export default function TeamKanban() {
             <div className="colaborador-header-buttons">
               <ButtonChangeScreen
                 titleButton={"Dailys"}
-                to={`/times/daily/${teamName}`}
+                toPage={toDailysPage}
               />
               <ButtonChangeScreen titleButton={"Tarefas"} active />
             </div>

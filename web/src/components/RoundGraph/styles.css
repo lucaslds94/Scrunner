@@ -35,3 +35,9 @@
   color: #737FF3;
   padding: 0 40px 0 40px;
 }
+
+.no-data-graph-description{
+  font-size: 17px;
+  text-align: center;
+  color: #737FF3;
+}

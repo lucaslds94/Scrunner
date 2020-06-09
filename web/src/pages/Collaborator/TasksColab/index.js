@@ -25,6 +25,9 @@ import {
 } from "../../../utils/localStorage";
 import isLeader from "../../../utils/isLeader";
 
+import { Lottie } from "@crello/react-lottie";
+import animEmptyTeamList from "../../../assets/animations/emptyTeamList.json";
+
 import { v4 as uuid } from "uuid";
 
 export default function TasksColab() {
@@ -79,7 +82,7 @@ export default function TasksColab() {
       users,
       teamName,
       boardName,
-      boardDate
+      boardDate,
     });
   };
 
@@ -169,6 +172,19 @@ export default function TasksColab() {
                     <CreateBoard
                       handleCreateBoard={() => setShowModalCreateTask(true)}
                     />
+                  )}
+                  {!leader && taskBoards.length === 0 && (
+                    <div className="animation-empty-tasks">
+                      <Lottie
+                        width={450}
+                        height={450}
+                        config={{
+                          animationData: animEmptyTeamList,
+                          loop: false,
+                          autoplay: true,
+                        }}
+                      />
+                    </div>
                   )}
                   {taskBoards.map((taskBoard) => (
                     <CardTask

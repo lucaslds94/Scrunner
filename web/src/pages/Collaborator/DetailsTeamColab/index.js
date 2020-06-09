@@ -160,6 +160,7 @@ export default function DetailsTeamColab() {
                 subTitle={team.code}
                 number={<Hash size={22} />}
                 buttonText="Clique para copiar o código"
+                isCopyable
                 copyCode={handleCardClick}
               />
               <CardInformation
@@ -176,7 +177,7 @@ export default function DetailsTeamColab() {
               />
             </div>
             <div className="colaborador-graph-area">
-              {!loading && isLeader(team.users) ? (
+              {isLeader(team.users) ? (
                 <TeamMembersList
                   collaborators={team.users}
                   removeUserTeam={removeUserTeam}

@@ -1,8 +1,8 @@
 import React from "react";
 
-import { useHistory } from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 
-import { FaUsers , FaCrown } from "react-icons/fa";
+import { FaUsers, FaCrown } from "react-icons/fa";
 
 import "./styles.css";
 
@@ -14,18 +14,25 @@ export default function CardInformation({
   buttonText = "Clique aqui",
   crown = false,
   toPage = "#",
-  isClickable = false
+  isClickable = false,
+  isCopyable = false,
+  onClick,
 }) {
   const history = useHistory();
 
   const handleCardClick = () => {
-    
-    if(isClickable){
-      history.push(toPage);
-    }else if (copyCode) {
-      copyCode();
+    if (isClickable) {
+      if (toPage !== "#") {
+        return history.push(toPage);
+      }
+
+      return onClick();
     }
-  }
+
+    if (isCopyable) {
+      return copyCode();
+    }
+  };
 
   return (
     <div onClick={handleCardClick} className="card">

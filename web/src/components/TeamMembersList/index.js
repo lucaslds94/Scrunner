@@ -72,7 +72,7 @@ export default function TeamMembersList({ collaborators = [], removeUserTeam }) 
                         <div className="userAvatar"></div>
                         {collaborator.name}
                       </li>
-                      <li>{collaborator.is_leader ? "Líder" : "Membro"}</li>
+                      <li>{collaborator.is_leader ? "Sim" : "Não"}</li>
                       <li>
                         {!showButtonRemove(collaborator.id) && (
                           <button

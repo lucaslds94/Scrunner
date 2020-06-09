@@ -17,6 +17,9 @@ import { MdArrowBack } from "react-icons/md";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { Lottie } from "@crello/react-lottie";
+import animEmptyTeamList from "../../../assets/animations/emptyTeamList.json";
+
 import api from "../../../services/api";
 import { getLocalStorage, setLocalStorage } from "../../../utils/localStorage";
 import isLeader from "../../../utils/isLeader";
@@ -123,52 +126,65 @@ export default function DailyColab() {
     <div className="detalhes-times-daily">
       <Header />
       <MenuLateral homeActive={false} />
-      {loading ? (
-        <Loading />
-      ) : (
-        <Container>
-          <div className="header-times-daily">
-            <div className="header-titles">
-              <h2>Dailys</h2>
-              <span onClick={toDetailsTeamPage}>{teamName}</span>
-            </div>
-            <div className="header-buttons">
-              <ButtonChangeScreen titleButton={"Dailys"} active />
-              <ButtonChangeScreen
-                titleButton={"Tarefas"}
-                toPage={toTasksPage}
-              />
-            </div>
-          </div>
-          <div className="divider" />
 
-          <div className="teamInfo-container">
-            <div onClick={toDetailsTeamPage} className="backBtn">
-              <MdArrowBack size={30} color={"#737FF3"} /> Voltar
+      <Container>
+        <div className="header-times-daily">
+          <div className="header-titles">
+            <h2>Dailys</h2>
+            <span onClick={toDetailsTeamPage}>{teamName}</span>
+          </div>
+          <div className="header-buttons">
+            <ButtonChangeScreen titleButton={"Dailys"} active />
+            <ButtonChangeScreen titleButton={"Tarefas"} toPage={toTasksPage} />
+          </div>
+        </div>
+        <div className="divider" />
+        {loading ? (
+          <Loading />
+        ) : (
+          <>
+            <div className="teamInfo-container">
+              <div onClick={toDetailsTeamPage} className="backBtn">
+                <MdArrowBack size={30} color={"#737FF3"} /> Voltar
+              </div>
             </div>
-          </div>
 
-          <div className="container-boards">
-            {users && leader && (
-              <CreateBoard handleCreateBoard={handleCreateBoard} />
-            )}
-            {dailyBoards.map((dailyBoard) => (
-              <CardDaily
-                key={uuid()}
-                date={dailyBoard.createdAt}
-                isComplete={dailyBoard.daily_contents.your_daily}
-                leaderDaily={dailyBoard.daily_contents.leader_daily}
-                yourDaily={dailyBoard.daily_contents.your_daily}
-                deleteDailyBoard={() => deleteDailyBoard(dailyBoard.id)}
-                isLeader={leader}
-                toPage={() =>
-                  toDailyLogPage(dailyBoard.id, dailyBoard.createdAt)
-                }
-              />
-            ))}
-          </div>
-        </Container>
-      )}
+            <div className="container-boards">
+              {users && leader && (
+                <CreateBoard handleCreateBoard={handleCreateBoard} />
+              )}
+              {!leader && dailyBoards.length === 0 && (
+                <div className="animation-empty-dailys">
+                  <Lottie
+                    width={450}
+                    height={450}
+                    config={{
+                      animationData: animEmptyTeamList,
+                      loop: false,
+                      autoplay: true,
+                    }}
+                  />
+                </div>
+              )}
+              {dailyBoards.map((dailyBoard) => (
+                <CardDaily
+                  key={uuid()}
+                  date={dailyBoard.createdAt}
+                  isComplete={dailyBoard.daily_contents.your_daily}
+                  leaderDaily={dailyBoard.daily_contents.leader_daily}
+                  yourDaily={dailyBoard.daily_contents.your_daily}
+                  deleteDailyBoard={() => deleteDailyBoard(dailyBoard.id)}
+                  isLeader={leader}
+                  toPage={() =>
+                    toDailyLogPage(dailyBoard.id, dailyBoard.createdAt)
+                  }
+                />
+              ))}
+            </div>
+          </>
+        )}
+      </Container>
+
       <ToastContainer limit={3} />
     </div>
   );
