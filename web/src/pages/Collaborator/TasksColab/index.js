@@ -109,7 +109,7 @@ export default function TasksColab() {
     const token = getLocalStorage("@Scrunner:token");
 
     try {
-      await api.delete(`/tasks/boards/${teamId}/${user.id}/${boardId}`, {
+      await api.delete(`/tasks/boards/${teamId}/${boardId}/${user.id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

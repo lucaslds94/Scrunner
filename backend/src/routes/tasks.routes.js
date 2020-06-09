@@ -19,7 +19,18 @@ routes.get(
   team,
   userInTeam,
   isCollaborator,
-  taskController.indexBoards
+  taskController.boardsIndex
+);
+
+routes.get(
+  "/tasks/kanban/:teamId/:boardId/:userId",
+  auth,
+  user,
+  team,
+  userInTeam,
+  isCollaborator,
+  taskBoard,
+  taskController.tasksIndex
 );
 
 routes.post(
@@ -34,7 +45,7 @@ routes.post(
 );
 
 routes.delete(
-  "/tasks/boards/:teamId/:userId/:boardId",
+  "/tasks/boards/:teamId/:boardId/:userId",
   auth,
   user,
   team,

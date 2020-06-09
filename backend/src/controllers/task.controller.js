@@ -1,10 +1,11 @@
 const TaskBoard = require("../models/TaskBoard");
 const TaskColumn = require("../models/TaskColumn");
+const Task = require("../models/Task");
 
 const { createToken } = require("../utils/createToken");
 
 module.exports = {
-  async indexBoards(req, res) {
+  async boardsIndex(req, res) {
     const { userId, teamId } = req.params;
 
     const boards = await TaskBoard.findAll({
@@ -17,6 +18,34 @@ module.exports = {
     const token = createToken(userId);
 
     return res.json({ boards, token });
+  },
+
+  async tasksIndex(req, res) {
+    const { teamId, boardId, userId } = req.params;
+
+    const tasks = await TaskColumn.findAll({
+      include: [
+        {
+          model: Task,
+          as: "tasks",
+          include: [
+            {
+              model: TaskBoard,
+              as: "task_board",
+              where: {
+                team_id: teamId,
+                id: boardId,
+              },
+              attributes: [],
+            },
+          ],
+        },
+      ],
+    });
+
+    const token = createToken(userId);
+
+    return res.json({ tasks, token });
   },
 
   async storeBoard(req, res) {
