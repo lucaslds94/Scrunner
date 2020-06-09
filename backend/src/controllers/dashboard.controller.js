@@ -1,12 +1,11 @@
-const { sign } = require("jsonwebtoken");
-const { jwt } = require("../config/auth");
-
 const User = require("../models/User");
 const Team = require("../models/Team");
 const UserTeam = require("../models/UserTeam");
 const TaskBoard = require("../models/TaskBoard");
 const Task = require("../models/Task");
 const DailyContent = require("../models/DailyContent");
+
+const { createToken } = require("../utils/createToken");
 
 const { Op } = require("sequelize");
 
@@ -106,10 +105,7 @@ module.exports = {
       };
     });
 
-    const token = sign({}, jwt.secret, {
-      subject: `${userId}`,
-      expiresIn: jwt.expiresIn,
-    });
+    const token = createToken(userId);
 
     return res.json({
       teamCount,
@@ -123,7 +119,7 @@ module.exports = {
 
   async indexCollaborator(req, res) {
     const { userId } = req.params;
-    
+
     const { count: teamCount } = await UserTeam.findAndCountAll({
       where: {
         user_id: userId,
@@ -142,10 +138,7 @@ module.exports = {
       },
     });
 
-    const token = sign({}, jwt.secret, {
-      subject: `${userId}`,
-      expiresIn: jwt.expiresIn,
-    });
+    const token = createToken(userId);
 
     return res.json({ teamCount, dailyCount, taskCount, token });
   },

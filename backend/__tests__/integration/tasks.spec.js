@@ -8,6 +8,13 @@ let USER_DB = {
   token: null,
 };
 
+let TASK_BOARD_TO_DELETE = {
+  id: null,
+  team_id: 1,
+  name: "Task board to delete",
+  days: "15",
+};
+
 const TEAM_ID = 1;
 
 describe("Tasks", () => {
@@ -15,6 +22,13 @@ describe("Tasks", () => {
     const response = await request(app).post("/login").send(USER_DB);
 
     USER_DB.token = response.body.token;
+
+    const resBoard = await request(app)
+      .post(`/tasks/boards/${TASK_BOARD_TO_DELETE.team_id}/${USER_DB.id}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`)
+      .send(TASK_BOARD_TO_DELETE);
+
+    TASK_BOARD_TO_DELETE.id = resBoard.body.board.id;
   });
 
   it("Should be able to return the task board information", async () => {
@@ -56,5 +70,16 @@ describe("Tasks", () => {
       .set("Authorization", `Bearer ${USER_DB.token}`);
 
     expect(response.status).toEqual(204);
+  });
+
+  it("Should not be able to delete a task board with an invalid id", async () => {
+    const response = await request(app)
+      .delete(
+        `/tasks/boards/${TASK_BOARD_TO_DELETE.teamId}/${USER_DB.id}/${TASK_BOARD_TO_DELETE.id}`
+      )
+      .set("Authorization", `Bearer ${USER_DB.token}`);
+
+    expect(response.status).toEqual(400);
+    expect(response.body).toHaveProperty("err");
   });
 });

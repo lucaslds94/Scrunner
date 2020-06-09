@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
-const { sign } = require("jsonwebtoken");
-const { jwt } = require("../config/auth");
 const User = require("../models/User");
+
+const { createToken } = require("../utils/createToken");
 
 module.exports = {
   async login(req, res) {
@@ -27,10 +27,7 @@ module.exports = {
 
     delete user.dataValues.password;
 
-    const token = sign({}, jwt.secret, {
-      subject: `${user.id}`,
-      expiresIn: jwt.expiresIn,
-    });
+    const token = createToken(user.id);
 
     return res.json({ user, token });
   },

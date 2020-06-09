@@ -1,7 +1,7 @@
-const { sign } = require("jsonwebtoken");
-const { jwt } = require("../config/auth");
-
 const TaskBoard = require("../models/TaskBoard");
+const TaskColumn = require("../models/TaskColumn");
+
+const { createToken } = require("../utils/createToken");
 
 module.exports = {
   async indexBoards(req, res) {
@@ -14,10 +14,7 @@ module.exports = {
       order: [["createdAt", "DESC"]],
     });
 
-    const token = sign({}, jwt.secret, {
-      subject: `${userId}`,
-      expiresIn: jwt.expiresIn,
-    });
+    const token = createToken(userId);
 
     return res.json({ boards, token });
   },
@@ -32,10 +29,7 @@ module.exports = {
       team_id: teamId,
     });
 
-    const token = sign({}, jwt.secret, {
-      subject: `${userId}`,
-      expiresIn: jwt.expiresIn,
-    });
+    const token = createToken(userId);
 
     return res.json({ board: newBoard, token });
   },

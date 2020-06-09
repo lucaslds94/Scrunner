@@ -1,12 +1,12 @@
 const crypto = require("crypto");
-const { sign } = require("jsonwebtoken");
-const { jwt } = require("../config/auth");
 
 const Team = require("../models/Team");
 const User = require("../models/User");
 const UserTeam = require("../models/UserTeam");
 const TaskBoard = require("../models/TaskBoard");
 const Task = require("../models/Task");
+
+const { createToken } = require("../utils/createToken");
 
 const { Op } = require("sequelize");
 
@@ -38,10 +38,7 @@ module.exports = {
       ],
     });
 
-    const token = sign({}, jwt.secret, {
-      subject: `${userId}`,
-      expiresIn: jwt.expiresIn,
-    });
+    const token = createToken(userId);
 
     res.json({ teams, token });
   },
@@ -117,10 +114,7 @@ module.exports = {
       },
     });
 
-    const token = sign({}, jwt.secret, {
-      subject: `${userId}`,
-      expiresIn: jwt.expiresIn,
-    });
+    const token = createToken(userId);
 
     res.send({
       team,
@@ -132,7 +126,7 @@ module.exports = {
   async store(req, res) {
     const { userId: user_id } = req.params;
     const { name, category } = req.body;
-    
+
     const teamCode = crypto.randomBytes(4).toString("HEX").toUpperCase();
 
     const {
@@ -145,10 +139,7 @@ module.exports = {
       team_id: id,
     });
 
-    const token = sign({}, jwt.secret, {
-      subject: `${user_id}`,
-      expiresIn: jwt.expiresIn,
-    });
+    const token = createToken(user_id);
 
     return res.json({ team: { id, code }, token });
   },
@@ -156,7 +147,7 @@ module.exports = {
   async entry(req, res) {
     const { userId: user_id } = req.params;
     const { code } = req.body;
-    
+
     let team = await Team.findOne({
       where: {
         code,
@@ -230,10 +221,7 @@ module.exports = {
       };
     });
 
-    const token = sign({}, jwt.secret, {
-      subject: `${user_id}`,
-      expiresIn: jwt.expiresIn,
-    });
+    const token = createToken(user_id);
 
     return res.json({ team: teamResponse, token });
   },
@@ -340,17 +328,14 @@ module.exports = {
       };
     });
 
-    const token = sign({}, jwt.secret, {
-      subject: `${user_id}`,
-      expiresIn: jwt.expiresIn,
-    });
+    const token = createToken(user_id);
 
     return res.json({ team, token });
   },
 
   async delete(req, res) {
     const { teamId } = req.params;
-      
+
     await Team.destroy({
       where: {
         id: teamId,

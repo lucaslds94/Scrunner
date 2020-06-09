@@ -1,13 +1,11 @@
 const User = require("../models/User");
-const Team = require("../models/Team");
 const UserTeam = require("../models/UserTeam");
 const DailyBoard = require("../models/DailyBoard");
 const DailyContent = require("../models/DailyContent");
 
-const { Op } = require("sequelize");
+const { createToken } = require("../utils/createToken");
 
-const { sign } = require("jsonwebtoken");
-const { jwt } = require("../config/auth");
+const { Op } = require("sequelize");
 
 module.exports = {
   async index(req, res) {
@@ -80,10 +78,7 @@ module.exports = {
       };
     });
 
-    const token = sign({}, jwt.secret, {
-      subject: `${userId}`,
-      expiresIn: jwt.expiresIn,
-    });
+    const token = createToken(userId);
 
     return res.json({ boards, token });
   },
@@ -132,10 +127,7 @@ module.exports = {
       };
     });
 
-    const token = sign({}, jwt.secret, {
-      subject: `${userId}`,
-      expiresIn: jwt.expiresIn,
-    });
+    const token = createToken(userId);
 
     return res.json({ dailyContents, token });
   },
@@ -152,10 +144,7 @@ module.exports = {
       do_today,
     });
 
-    const token = sign({}, jwt.secret, {
-      subject: `${userId}`,
-      expiresIn: jwt.expiresIn,
-    });
+    const token = createToken(userId);
 
     return res.json({ content, token });
   },
@@ -196,10 +185,7 @@ module.exports = {
       },
     };
 
-    const token = sign({}, jwt.secret, {
-      subject: `${userId}`,
-      expiresIn: jwt.expiresIn,
-    });
+    const token = createToken(userId);
 
     return res.json({ board, token });
   },
