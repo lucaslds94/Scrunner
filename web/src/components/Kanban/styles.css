@@ -68,9 +68,9 @@
 
 .kanbanCard {
   user-select: none;
-  padding: 16px;
-  margin-bottom: 8px;
-  min-height: 100px;
+  padding: 30px;
+  margin-bottom: 10px;
+  min-height: 120px;
   color: #595959;
   width: 90%;
   background: #FFFFFF;
@@ -84,28 +84,25 @@
 }
 
 .kanbanCard h3 {
-  text-align: center;
+  color: #737FF3;
   margin-bottom: 6px;
   font-size: 16px;
   line-height: 19px;
-  color: #595959;
-  font-weight: normal;
-
 }
 
 .kanbanCard p {
-  text-align: center;
+  word-wrap: break-word;
+  font-size: 15px;
   color: #898989
 }
 
 
 .trashBtn {
-  /* color: rgb(187, 187, 187); */
   background: none;
   border: none;
   position: absolute;
   right:10px;
-  top:10px;
+  bottom:10px;
   cursor: pointer;
 }
 

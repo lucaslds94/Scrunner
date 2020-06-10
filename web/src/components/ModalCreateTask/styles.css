@@ -1,29 +1,29 @@
-.modal-createDaily{
+.modal-create-task {
   height: 100vh;
   width: 100%;
   position: fixed;
-  top:0;
+  top: 0;
+  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 13;
 }
 
-
-.modalContainer-createDaily {
+.modal-container-create-task {
   width: 750px;
   max-width: 750px;
-  height: 650px;
+  height: 460px;
   background-color: white;
   z-index: 10;
   border-radius: 4px;
-  display: flex; 
+  display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
 }
 
-.containerCenter-createDaily {
+.container-center-create-task {
   width: 750px;
   max-width: 750px;
   height: 100%;
@@ -33,19 +33,19 @@
   padding: 40px 40px;
 }
 
-.containerCenter-createDaily>img{
+.container-center-create-task > img {
   position: relative;
   right: 15px;
   width: 20%;
 }
 
-#closeModal{
+#closeModal {
   position: absolute;
   right: 50px;
   top: 45px;
   z-index: 1;
   text-decoration: none;
-  color: #737FF3;
+  color: #737ff3;
   font-weight: bold;
   font-size: 19px;
   border: none;
@@ -53,71 +53,71 @@
   cursor: pointer;
 }
 
-.containerCenter-createDaily>h1{
-    margin-bottom: 25px;
-    font-size: 25px;
-    color: #737FF3;
+.container-center-create-task > h1 {
+  margin-bottom: 25px;
+  font-size: 25px;
+  color: #737ff3;
 }
 
-.containerCenter-createDaily>hr{
+.container-center-create-task > hr {
   margin-bottom: 48px;
-  border: 1px solid #d8d8d8;;
+  border: 1px solid #d8d8d8;
 }
 
-.containerCenter-createDaily>form{
+.container-center-create-task > form {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  font-size:16px;
+  font-size: 16px;
   font-weight: normal;
   color: #595959;
   display: flex;
 }
 
-.defaultField{
+.create-task-field {
   font-size: 14px;
-  font-weight: bold;
   transition: box-shadow 0.3s;
   margin-bottom: 20px;
 }
 
-.defaultField>label{
+.create-task-field > label {
   color: #898989;
 }
 
-.containerCenter-createDaily>form{
+.container-center-create-task > form {
   margin-top: 20px;
 }
 
-.defaultField>input{
+.create-task-field > input {
   width: 100%;
   height: 100px;
   background: #ffffff;
-  border: 1px solid #737ff3;
+  border: 1px solid #dcdce6;
   box-shadow: 0px 0px 4px rgba(115, 127, 243, 0.34);
-  border-radius: 10px;
-  margin: 7.5px 0 20px 0;
+  border-radius: 8px;
+  margin: 7.5px 0 10px 0;
   padding: 10px;
-  outline: none;
   font-size: 16px;
-  color: #b2b2b2;
 }
 
-.defaultField>input:focus{
+.defaultField > input:focus {
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
+}
+.defaultField > textarea:focus {
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
 }
 
-.divBotao{
+.divBotao {
   display: flex;
   justify-content: flex-end;
 }
 
-.btnCriarDaily{
+.btnCriarDaily {
   width: fit-content;
   height: 40px;
   border-radius: 25px;
   margin-top: 10px;
-  background: linear-gradient( to right, #9EA8FF, #737FF3);
+  background: linear-gradient(to right, #9ea8ff, #737ff3);
   border: none;
   outline: none;
   color: white;
@@ -127,13 +127,13 @@
   box-sizing: border-box;
   justify-content: space-around;
   align-items: center;
-  transition: transform .3s;
+  transition: transform 0.3s;
   cursor: pointer;
 }
 
 .btnCriarDaily:hover {
   transform: scale(0.97);
-    opacity: 0.9;
+  opacity: 0.9;
 }
 
 .btnCriarDaily span {
@@ -144,15 +144,64 @@
   margin-right: 10px;
 }
 
-
-.text-daily-content{
+.text-create-task {
   margin-top: 10px;
   width: 100%;
-  min-height: 100px;
+  min-height: 115px;
   color: #333;
   border: 1px solid #dcdce6;
   border-radius: 8px;
   padding: 10px;
   line-height: 24px;
   resize: none;
+  box-shadow: 0px 0px 4px rgba(115, 127, 243, 0.34);
+}
+
+#title {
+  min-height: 30px;
+  max-height: 60px;
+  height: 40px;
+  overflow-y: hidden;
+  font-size: 16px;
+}
+
+#description {
+  font-size: 16px;
+}
+
+.task-points-container {
+  display: flex;
+  align-items: center;
+  color: #898989;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.container-input-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#task-points {
+  height: 30px;
+  width: 100px;
+  border-radius: 8px;
+  margin-left: 8px;
+  border: 1px solid #dcdce6;
+  box-shadow: 0px 0px 4px rgba(115, 127, 243, 0.34);
+  text-align: center;
+  font-size: 15px;
+}
+
+#task-points::placeholder {
+  opacity: 0.5;
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
 }

@@ -4,10 +4,18 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { BsTrash } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa";
 
+import ModalCofirmAction from "../ModalConfirmAction";
+import ModalCreateTask from "../ModalCreateTask";
+
 import "./styles.css";
 
-function Kanban({ tasksColumns = [] }) {
+function Kanban({ tasksColumns = [], deleteTask, createTask }) {
   const [columns, setColumns] = useState({});
+  const [showModalConfirmDel, setShowModalConfirmDel] = useState(false);
+  const [showModalCreateTask, setShowModalCreateTask] = useState(false);
+  const [idTaskToDelete, setIdTaskToDelete] = useState("");
+  const [taskColumn, setTaskColumn] = useState(0);
+  
 
   useEffect(() => {
     const kanbanColumns = {
@@ -60,7 +68,6 @@ function Kanban({ tasksColumns = [] }) {
       console.log(source);
       console.log(destination);
       console.log(destItems);
-      
     } else {
       const column = columns[source.droppableId];
 
@@ -80,79 +87,127 @@ function Kanban({ tasksColumns = [] }) {
     }
   };
 
+  const ConfirmDeleteTask = (taskId) => {
+    setIdTaskToDelete(taskId);
+    setShowModalConfirmDel(true);
+  };
+
+  const handleDeleteTask = () => {
+    setShowModalConfirmDel(false);
+    deleteTask(idTaskToDelete);
+  };
+
+  const handleClickCreateTask = (columnId) => {
+    setTaskColumn(columnId);
+    setShowModalCreateTask(true);
+  };
+
+  const handleCreateTask = (data) => {
+
+    const dataObj = {
+      task_column: taskColumn,
+      ...data,
+    }
+    createTask(dataObj);
+  }
+
+  
+  
   return (
-    <div className="kanbanContainer">
-      <div className="kanbanGrid1" />
-      <div className="kanbanGrid2" />
-      <div className="kanbanGrid3" />
-      <DragDropContext
-        onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
-      >
-        {Object.entries(columns).map(([columnId, column]) => {
-          return (
-            <div className="columnContainer" key={columnId}>
-              <h2>{column.name}</h2>
-              <div className="marginContainer">
-                <Droppable droppableId={`${columnId}`} key={`${columnId}`}>
-                  {(provided, snapshot) => {
-                    return (
-                      <div
-                        className="droppableColumn"
-                        {...provided.droppableProps}
-                        ref={provided.innerRef}
-                        style={{
-                          background: snapshot.isDraggingOver
-                            ? "#9EA8FF"
-                            : "white",
-                        }}
-                      >
-                        {column.tasks.map((task, index) => {
-                          return (
-                            <Draggable
-                              key={`${task.id}`}
-                              draggableId={`${task.id}`}
-                              index={index}
-                            >
-                              {(provided, snapshot) => {
-                                return (
-                                  <div
-                                    className="kanbanCard"
-                                    ref={provided.innerRef}
-                                    {...provided.draggableProps}
-                                    {...provided.dragHandleProps}
-                                    style={{
-                                      backgroundColor: snapshot.isDragging
-                                        ? "#F5F5F5"
-                                        : "#FFF",
-                                      ...provided.draggableProps.style,
-                                    }}
-                                  >
-                                    <button className="trashBtn">
-                                      <BsTrash size={18} color={"#BBB"} />
-                                    </button>
-                                    <h3>{task.title}</h3>
-                                    <p>{task.description}</p>
-                                  </div>
-                                );
-                              }}
-                            </Draggable>
-                          );
-                        })}
-                        {provided.placeholder}
-                        <button onClick={() => console.log(columnId)} className="addTask">
-                          <FaPlus size={22} />
-                          Adicionar tarefa
-                        </button>
-                      </div>
-                    );
-                  }}
-                </Droppable>
+    <>
+      {showModalConfirmDel && (
+        <ModalCofirmAction
+          handleCloseModalConfirmAction={() => setShowModalConfirmDel(false)}
+          handleConfirmAction={handleDeleteTask}
+        />
+      )}
+      {showModalCreateTask && (
+        <ModalCreateTask
+          handleModalCreateTask={() => setShowModalCreateTask(false)}
+          createTaskContent={handleCreateTask}
+        />
+      )}
+      <div className="kanbanContainer">
+        <div className="kanbanGrid1" />
+        <div className="kanbanGrid2" />
+        <div className="kanbanGrid3" />
+        <DragDropContext
+          onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
+        >
+          {Object.entries(columns).map(([columnId, column]) => {
+            return (
+              <div className="columnContainer" key={columnId}>
+                <h2>{column.name}</h2>
+                <div className="marginContainer">
+                  <Droppable droppableId={`${columnId}`} key={`${columnId}`}>
+                    {(provided, snapshot) => {
+                      return (
+                        <div
+                          className="droppableColumn"
+                          {...provided.droppableProps}
+                          ref={provided.innerRef}
+                          style={{
+                            background: snapshot.isDraggingOver
+                              ? "#9EA8FF"
+                              : "white",
+                          }}
+                        >
+                          {column.tasks.map((task, index) => {
+                            return (
+                              <Draggable
+                                key={`${task.id}`}
+                                draggableId={`${task.id}`}
+                                index={index}
+                              >
+                                {(provided, snapshot) => {
+                                  return (
+                                    <div
+                                      className="kanbanCard"
+                                      ref={provided.innerRef}
+                                      {...provided.draggableProps}
+                                      {...provided.dragHandleProps}
+                                      style={{
+                                        backgroundColor: snapshot.isDragging
+                                          ? "#F5F5F5"
+                                          : "#FFF",
+                                        ...provided.draggableProps.style,
+                                      }}
+                                    >
+                                      <button
+                                        onClick={() =>
+                                          ConfirmDeleteTask(task.id)
+                                        }
+                                        className="trashBtn"
+                                      >
+                                        <BsTrash size={22} color={"#BBB"} />
+                                      </button>
+                                      <h3>{task.title}</h3>
+                                      <p>{task.description}</p>
+                                    </div>
+                                  );
+                                }}
+                              </Draggable>
+                            );
+                          })}
+                          {provided.placeholder}
+                          <button
+                            onClick={() => handleClickCreateTask(columnId)}
+                            className="addTask"
+                          >
+                            <FaPlus size={22} />
+                            Adicionar tarefa
+                          </button>
+                        </div>
+                      );
+                    }}
+                  </Droppable>
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </DragDropContext>
-    </div>
+            );
+          })}
+        </DragDropContext>
+      </div>
+    </>
   );
 }
 

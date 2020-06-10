@@ -11,6 +11,8 @@ import Kanban from "../../../components/Kanban";
 import ButtonChangeScreen from "../../../components/ButtonChangeScreen";
 import Loading from "../../../components/Loading";
 
+import { ToastContainer, toast } from "react-toastify";
+
 import {
   clearLocalStorage,
   getLocalStorage,
@@ -61,6 +63,30 @@ export default function TeamKanban() {
     fetchTasksColumns();
   }, [boardId, teamId, user.id, history]);
 
+  const deleteTask = async (taskId) => {
+    const token = getLocalStorage("@Scrunner:token");
+
+    try {
+      await api.delete(
+        `/tasks/contents/${teamId}/${boardId}/${taskId}/${user.id}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      const filteredColumns = tasksColumns.map((column) => {
+        const tasks = column.tasks.filter((task) => task.id !== taskId);
+        return {
+          ...column,
+          tasks,
+        };
+      });
+
+      setTasksColumns(filteredColumns);
+      toast.success("Tarefa deletada com sucesso");
+    } catch (error) {
+      toast.error("Ocorreu um erro inesperado");
+    }
+  };
+
   const toTasksColabPage = () => {
     history.push(`/times/tarefas/${teamName}`, { teamName, users, teamId });
   };
@@ -71,6 +97,33 @@ export default function TeamKanban() {
 
   const toDailysPage = () => {
     history.push(`/times/daily/${teamName}`, { teamId, users, teamName });
+  };
+
+  const createTask = async (data) => {
+    const token = getLocalStorage("@Scrunner:token");
+    try {
+      const response = await api.post(
+        `/tasks/contents/${teamId}/${boardId}/${user.id}`,
+        data,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      const newTasksColumn = tasksColumns.map((column) => {
+        if (`${column.id}` === `${data.task_column}`) {
+          const tasks = [response.data.content, ...column.tasks];
+
+          return {
+            ...column,
+            tasks,
+          };
+        }
+        return column;
+      });
+
+      setTasksColumns(newTasksColumn);
+    } catch (error) {
+      toast.error("Ocorreu um erro inesperado");
+    }
   };
 
   return (
@@ -104,9 +157,14 @@ export default function TeamKanban() {
               <h4>Criado em {moment(boardDate).format("DD/MM/YYYY")}</h4>
             </div>
           </div>
-          <Kanban tasksColumns={tasksColumns} />
+          <Kanban
+            tasksColumns={tasksColumns}
+            deleteTask={deleteTask}
+            createTask={createTask}
+          />
         </Container>
       )}
+      <ToastContainer />
     </div>
   );
 }
