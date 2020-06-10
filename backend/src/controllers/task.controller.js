@@ -63,6 +63,24 @@ module.exports = {
     return res.json({ board: newBoard, token });
   },
 
+  async storeContent(req, res) {
+    const { userId, boardId } = req.params;
+    const { title, description, task_points, task_column } = req.body;
+
+    const content = await Task.create({
+      user_id: userId,
+      title,
+      description,
+      task_points,
+      task_board_id: boardId,
+      task_column_id: task_column,
+    });
+
+    const token = createToken(userId);
+
+    return res.json({ content, token });
+  },
+
   async deleteBoard(req, res) {
     const { teamId, boardId } = req.params;
 
@@ -70,6 +88,19 @@ module.exports = {
       where: {
         id: boardId,
         team_id: teamId,
+      },
+    });
+
+    return res.status(204).send();
+  },
+
+  async deleteContent(req, res) {
+    const { boardId, contentId } = req.params;
+
+    await Task.destroy({
+      where: {
+        id: contentId,
+        task_board_id: boardId,
       },
     });
 

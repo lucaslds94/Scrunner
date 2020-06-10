@@ -16,10 +16,6 @@ class Task extends Model {
               type: DataTypes.INTEGER,
               allowNull: false,
             },
-            task_points: {
-              type: DataTypes.INTEGER,
-              allowNull: false,
-            },
             task_board_id: {
               type: DataTypes.INTEGER,
               allowNull: false,

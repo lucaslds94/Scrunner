@@ -15,10 +15,16 @@ let TASK_BOARD_TO_DELETE = {
   days: "15",
 };
 
+let TASK_TO_DELETE = {
+  id: null,
+};
+
+const BOARD_ID = 1;
 const TEAM_ID = 1;
 
 describe("Tasks", () => {
   beforeAll(async () => {
+
     const response = await request(app).post("/login").send(USER_DB);
 
     USER_DB.token = response.body.token;
@@ -29,6 +35,20 @@ describe("Tasks", () => {
       .send(TASK_BOARD_TO_DELETE);
 
     TASK_BOARD_TO_DELETE.id = resBoard.body.board.id;
+
+    const NEW_TASK_TO_DELETE = {
+      title: "New title",
+      description: "No description",
+      task_points: 10,
+      task_column: 1,
+    };
+
+    const resContent = await request(app)
+      .post(`/tasks/contents/${TEAM_ID}/${BOARD_ID}/${USER_DB.id}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`)
+      .send(NEW_TASK_TO_DELETE);
+
+    TASK_TO_DELETE.id = resContent.body.content.id;
   });
 
   it("Should be able to return the task board information", async () => {
@@ -81,14 +101,56 @@ describe("Tasks", () => {
   });
 
   it("Should be able to return tasks information from a board", async () => {
-    const BOARD_ID = 1;
+    
 
     const response = await request(app)
-      .get(`/tasks/kanban/${TEAM_ID}/${BOARD_ID}/${USER_DB.id}`)
+      .get(`/tasks/contents/${TEAM_ID}/${BOARD_ID}/${USER_DB.id}`)
       .set("Authorization", `Bearer ${USER_DB.token}`);
 
     expect(response.status).toEqual(200);
     expect(response.body).toHaveProperty("tasks");
     expect(response.body).toHaveProperty("token");
+  });
+
+  it("Should be able to create a new task", async () => {
+    
+
+    const NEW_TASK = {
+      title: "New title",
+      description: "No description",
+      task_points: 10,
+      task_column: 1,
+    };
+
+    const response = await request(app)
+      .post(`/tasks/contents/${TEAM_ID}/${BOARD_ID}/${USER_DB.id}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`)
+      .send(NEW_TASK);
+
+    expect(response.status).toEqual(200);
+    expect(response.body).toHaveProperty("content");
+    expect(response.body).toHaveProperty("token");
+  });
+
+  it("Should be able to delete a task", async () => {
+    
+
+    const response = await request(app)
+      .delete(`/tasks/contents/${TEAM_ID}/${BOARD_ID}/${TASK_TO_DELETE.id}/${USER_DB.id}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`);
+
+    expect(response.status).toEqual(204);
+  });
+
+  it("Should be able to delete a task", async () => {
+    
+    const INVALID_CONTENT_ID = 99999999999;
+
+    const response = await request(app)
+      .delete(`/tasks/contents/${TEAM_ID}/${BOARD_ID}/${INVALID_CONTENT_ID}/${USER_DB.id}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`);
+
+    expect(response.status).toEqual(400);
+    expect(response.body).toHaveProperty("err");
   });
 });

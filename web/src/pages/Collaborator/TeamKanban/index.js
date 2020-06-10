@@ -44,7 +44,7 @@ export default function TeamKanban() {
 
       try {
         const response = await api.get(
-          `/tasks/kanban/${teamId}/${boardId}/${user.id}`,
+          `/tasks/contents/${teamId}/${boardId}/${user.id}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
 
