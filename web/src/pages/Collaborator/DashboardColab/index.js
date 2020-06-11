@@ -15,8 +15,6 @@ import { useHistory } from "react-router-dom";
 import MenuLateral from "../../../components/MenuLateral";
 import Header from "../../../components/Header";
 
-import undraw_remotely from "../../../assets/undraw_remotely.png";
-
 import Container from "../../../components/Container";
 import CardInformation from "../../../components/CardInformation";
 import BurndownGraph from "../../../components/BurndownGraph";
@@ -73,6 +71,17 @@ export default function DashboardColab() {
       `13/${month}`,
       `20/${month}`,
       `27/${month}`,
+      `29/${month}`,
+      `30/${month}`,
+      `06/${month}`,
+      `13/${month}`,
+      `20/${month}`,
+      `27/${month}`,
+      `29/${month}`,
+      `30/${month}`,
+      `31/${month}`,
+      `31/${month}`,
+      `31/${month}`,
     ];
 
     const planned = [
@@ -80,6 +89,8 @@ export default function DashboardColab() {
       `${Math.floor(Math.random() * (100 - 20) + 20)}`,
       `${Math.floor(Math.random() * (100 - 20) + 20)}`,
       `${Math.floor(Math.random() * (100 - 20) + 20)}`,
+      `${Math.floor(Math.random() * (100 - 20) + 20)}`,
+      
     ];
 
     const complete = [
@@ -87,6 +98,8 @@ export default function DashboardColab() {
       `${Math.floor(Math.random() * (100 - 20) + 20)}`,
       `${Math.floor(Math.random() * (100 - 20) + 20)}`,
       `${Math.floor(Math.random() * (100 - 20) + 20)}`,
+      `${Math.floor(Math.random() * (100 - 20) + 20)}`,
+      
     ];
 
     setReportDate(dateRange);
@@ -135,10 +148,10 @@ export default function DashboardColab() {
               complete={ReportComplete}
               DateRange={ReportDate}
             />
-            <div className="colaborador-image-area">
-              <img src={undraw_remotely} alt="Remotely Work" />
-            </div>
           </div>
+          {/* <div className="colaborador-image-area">
+              <img src={undraw_remotely} alt="Remotely Work" />
+            </div> */}
         </Container>
       )}
     </div>

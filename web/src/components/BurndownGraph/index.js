@@ -22,7 +22,6 @@ export default function BurndownGraph({
     ],
     options: {
       chart: {
-        height: 250,
         zoom: {
           enabled: false,
         },
@@ -94,7 +93,7 @@ export default function BurndownGraph({
       },
     },
   };
-
+  
   return (
     <div className="burndown-area">
       <div className="burndown-graph">
@@ -103,7 +102,7 @@ export default function BurndownGraph({
           series={OPTIONS_GRAPH.series}
           type="line"
           height={280}
-          width={680}
+          width={1024}  
         />
       </div>
     </div>

@@ -32,35 +32,33 @@ export default function SelectReport({ times = [], handleMonth, handleTime }) {
 
   return (
     <div className="report">
-      <h3>Relatórios</h3>
-      <span>Observe como o time está evoluindo</span>
-      <select className="select-time" onChange={handleSelectTime}>
-        <option className="item-default" defaultValue hidden>
-          Selecione o time
-        </option>
-        {times.map((time) => (
-          <option key={time.name} className="time-item" value={time.value}>
-            {time.name}
+      <div className="select-container">
+        <div>
+          <h3>Relatórios</h3>
+          <span>Observe como o time está evoluindo</span>
+        </div>
+        <select className="select-time" onChange={handleSelectTime}>
+          <option className="item-default" defaultValue hidden>
+            Selecione o time
           </option>
-        ))}
-      </select>
+          {times.map((time) => (
+            <option key={time.name} className="time-item" value={time.value}>
+              {time.name}
+            </option>
+          ))}
+        </select>
 
-      <select className="select-month" onChange={handleSelectMonth}>
-        <option className="item-default" defaultValue hidden>
-          Selecione o mês
-        </option>
-        {MONTHS.map((month) => (
-          <option key={month.name} className="month-item" value={month.value}>
-            {month.name}
+        <select className="select-month" onChange={handleSelectMonth}>
+          <option className="item-default" defaultValue hidden>
+            Selecione o quadro de tarefa
           </option>
-        ))}
-      </select>
-
-      <p>
-        Saber como os times estão realizando as tarefas é importante para que em
-        caso de declínio de Tempo x Tarefas, possa ser feito algo para reverter
-        o quadro.
-      </p>
+          {MONTHS.map((month) => (
+            <option key={month.name} className="month-item" value={month.value}>
+              {month.name}
+            </option>
+          ))}
+        </select>
+      </div>
     </div>
   );
 }

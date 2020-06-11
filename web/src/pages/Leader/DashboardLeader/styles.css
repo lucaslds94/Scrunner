@@ -26,11 +26,12 @@
 .container-report {
   display: flex;
   align-items: center;
+  flex-direction: column;
+  
 }
 
 .colab-area {
   display: flex;
-  /* flex-wrap: wrap; */
   align-items: center;
   justify-content: space-between;
   margin-bottom: 50px;

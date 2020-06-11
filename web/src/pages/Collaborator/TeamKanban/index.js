@@ -23,7 +23,6 @@ import api from "../../../services/api";
 
 import moment from "moment";
 import "moment/locale/pt-br";
-import { FaCreativeCommonsNcJp } from "react-icons/fa";
 
 export default function TeamKanban() {
   const [tasksColumns, setTasksColumns] = useState([]);
