@@ -23,6 +23,7 @@ import api from "../../../services/api";
 
 import moment from "moment";
 import "moment/locale/pt-br";
+import { FaCreativeCommonsNcJp } from "react-icons/fa";
 
 export default function TeamKanban() {
   const [tasksColumns, setTasksColumns] = useState([]);
@@ -126,6 +127,21 @@ export default function TeamKanban() {
     }
   };
 
+  const moveTask = async (columnId, taskId) => {
+    const token = getLocalStorage("@Scrunner:token");
+    try {
+      const response = await api.put(
+        `/tasks/contents/${teamId}/${taskId}/${user.id}`,
+        { columnId },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      setLocalStorage("@Scrunner:token", response.data.token);
+    } catch (error) {
+      toast.error("Aconteceu um erro inesperado");
+    }
+  };
+
   return (
     <div className="containerKanbanTeam">
       <Header />
@@ -161,6 +177,7 @@ export default function TeamKanban() {
             tasksColumns={tasksColumns}
             deleteTask={deleteTask}
             createTask={createTask}
+            moveTask={(columnId, taskId) => moveTask(columnId, taskId)}
           />
         </Container>
       )}

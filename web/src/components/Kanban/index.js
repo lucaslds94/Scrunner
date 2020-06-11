@@ -9,7 +9,7 @@ import ModalCreateTask from "../ModalCreateTask";
 
 import "./styles.css";
 
-function Kanban({ tasksColumns = [], deleteTask, createTask }) {
+function Kanban({ tasksColumns = [], deleteTask, createTask, moveTask}) {
   const [columns, setColumns] = useState({});
   const [showModalConfirmDel, setShowModalConfirmDel] = useState(false);
   const [showModalCreateTask, setShowModalCreateTask] = useState(false);
@@ -51,6 +51,8 @@ function Kanban({ tasksColumns = [], deleteTask, createTask }) {
 
       const [removed] = sourceItems.splice(source.index, 1);
 
+      moveTask(destination.droppableId, removed.id);
+
       destItems.splice(destination.index, 0, removed);
 
       setColumns({
@@ -65,9 +67,7 @@ function Kanban({ tasksColumns = [], deleteTask, createTask }) {
         },
       });
 
-      console.log(source);
-      console.log(destination);
-      console.log(destItems);
+    
     } else {
       const column = columns[source.droppableId];
 
