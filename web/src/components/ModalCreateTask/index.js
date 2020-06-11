@@ -1,8 +1,11 @@
 import React from "react";
 import { FaTimes, FaCheck } from "react-icons/fa";
+import { FiAlertCircle } from "react-icons/fi";
 import "./styles.css";
 import { useState } from "react";
 import { toast } from "react-toastify";
+
+import ToolTip from "../ToolTip";
 
 export default function ModalCreateTask({
   handleModalCreateTask,
@@ -80,6 +83,12 @@ export default function ModalCreateTask({
                 value={taskPoints}
                 onChange={(e) => setTaskPoints(e.target.value)}
               />
+
+              <ToolTip
+                title={"Pontos que se referem ao grau de importância da tarefa"}
+              >
+                <FiAlertCircle size={20} />
+              </ToolTip>
             </div>
 
             <div className="divBotao">

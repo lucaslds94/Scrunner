@@ -82,6 +82,7 @@
 
 .create-task-field > label {
   color: #898989;
+  font-weight: bold;
 }
 
 .container-center-create-task > form {
@@ -187,7 +188,7 @@
   height: 30px;
   width: 100px;
   border-radius: 8px;
-  margin-left: 8px;
+  margin: 0 8px;
   border: 1px solid #dcdce6;
   box-shadow: 0px 0px 4px rgba(115, 127, 243, 0.34);
   text-align: center;
