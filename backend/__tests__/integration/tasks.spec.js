@@ -153,4 +153,17 @@ describe("Tasks", () => {
     expect(response.status).toEqual(400);
     expect(response.body).toHaveProperty("err");
   });
+
+  it("Should be able to change a task column ", async () => {
+    const TASK_ID = 1;
+    const columnId = 2;
+
+    const response = await request(app)
+      .put(`/tasks/contents/${TEAM_ID}/${TASK_ID}/${USER_DB.id}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`)
+      .send({columnId});
+
+    expect(response.status).toEqual(200);
+    expect(response.body).toHaveProperty("token");
+  });
 });

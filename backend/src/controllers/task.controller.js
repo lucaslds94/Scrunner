@@ -106,4 +106,24 @@ module.exports = {
 
     return res.status(204).send();
   },
+
+  async updateContent(req, res) {
+    const { userId, contentId } = req.params;
+    const { columnId } = req.body;
+
+    await Task.update(
+      {
+        task_column_id: columnId,
+      },
+      {
+        where: {
+          id: contentId,
+        },
+      }
+    );
+
+    const token = createToken(userId);
+
+    return res.json({ token });
+  },
 };

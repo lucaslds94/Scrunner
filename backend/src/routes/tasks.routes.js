@@ -80,4 +80,15 @@ routes.delete(
   taskController.deleteContent
 );
 
+routes.put(
+  "/tasks/contents/:teamId/:contentId/:userId",
+  auth,
+  user,
+  team,
+  userInTeam,
+  isCollaborator,
+  taskContent,
+  taskController.updateContent
+);
+
 module.exports = routes;
