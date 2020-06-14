@@ -17,6 +17,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+}
+
+.burndown-tooltip {
+  position: absolute;
+  top: 6px;
+  left: 206px;
 }
 
 .apexcharts-menu-icon {

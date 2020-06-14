@@ -27,6 +27,7 @@ module.exports = {
           created_at: new Date(),
           updated_at: new Date(),
           team_id: 2,
+          total_task_points: 0,
         }
       ]);
    

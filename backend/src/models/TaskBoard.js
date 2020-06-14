@@ -14,6 +14,8 @@ class TaskBoard extends Model {
             },
             total_task_points: {
                 type: DataTypes.FLOAT,
+                defaultValue: 0,
+                allowNull: false    
             },
             team_id: {
                 type: DataTypes.INTEGER,

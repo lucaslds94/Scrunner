@@ -27,11 +27,13 @@ import Loading from "../../../components/Loading";
 export default function DashboardColab() {
   const [ReportDate, setReportDate] = useState([]);
   const [ReportPlanned, setReportPlanned] = useState([]);
+  const [ReportCompleted, setReportCompleted] = useState([]);
 
   const [teams, setTeams] = useState([]);
   const [taskBoards, setTaskBoards] = useState([]);
   const [userName, setUserName] = useState("");
   const [loading, setLoading] = useState(true);
+  
 
   const [teamCount, setTeamCount] = useState(0);
   const [dailyCount, setDailyCount] = useState(0);
@@ -76,9 +78,9 @@ export default function DashboardColab() {
     let totalTaskPoints = board.total_task_points;
     const decrease = totalTaskPoints / dateRange;
 
-    const dateRangeInDays = [];
+    const dateRangeInDays = [0];
 
-    for (let i = 0; i <= dateRange; i++) {
+    for (let i = 0; i < dateRange; i++) {
       dateRangeInDays.push(moment(createdAt).add(i, "days").format("DD/MM"));
     }
 
@@ -86,11 +88,12 @@ export default function DashboardColab() {
       if (index !== 0) {
         totalTaskPoints = totalTaskPoints - decrease;
       }
-
+      
       return totalTaskPoints.toFixed(0);
     });
 
     setReportDate(dateRangeInDays);
+    setReportCompleted(board.completed_tasks);
     setReportPlanned(planned);
   };
 
@@ -143,6 +146,7 @@ export default function DashboardColab() {
             <BurndownGraph
               planned={ReportPlanned}
               DateRange={ReportDate}
+              complete={ReportCompleted}
               isEmpty={teams.length === 0}
             />
           </div>

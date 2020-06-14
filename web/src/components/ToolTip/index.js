@@ -2,11 +2,11 @@ import React from 'react';
 
 import './styles.css';
 
-const ToolTip = ({title, children}) => {
+const ToolTip = ({title, children, width}) => {
   return (
     <div className="toolTip">
       {children}
-      <span>{title}</span>
+      <span style={ {"width": width} } >{title}</span>
     </div>
     )
 }

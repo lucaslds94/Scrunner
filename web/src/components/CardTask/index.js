@@ -17,7 +17,7 @@ export default function CardTask({
   deleteTaskBoard,
 }) {
   const [showModalConfirm, setShowModalConfirm] = useState(false);
-  
+
   const handleConfirmRemove = () => {
     setShowModalConfirm(true);
   };
@@ -32,7 +32,7 @@ export default function CardTask({
     const expiration = moment(ndate).add(dateRange, "days");
     const now = moment(new Date());
     const expirationDays = Math.round(expiration.diff(now, "days", true));
-    
+
     if (expirationDays <= 0) {
       return "Expirado";
     }
@@ -46,7 +46,9 @@ export default function CardTask({
 
   const getExpirationDate = () => {
     const ndate = moment(date).format();
-    return moment(ndate).add(dateRange, "days").format("DD/MM/YYYY");
+    return moment(ndate)
+      .add(dateRange - 1, "days")
+      .format("DD/MM/YYYY");
   };
 
   return (

@@ -85,7 +85,8 @@ export default function ModalCreateTask({
               />
 
               <ToolTip
-                title={"Pontos que se referem ao grau de dificuldade da tarefa"}
+                width={"200px"}
+                title={"Pontos que se referem ao grau de dificuldade da tarefa."}
               >
                 <FiAlertCircle size={20} />
               </ToolTip>

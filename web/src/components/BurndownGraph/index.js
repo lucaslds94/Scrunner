@@ -1,6 +1,9 @@
 import React from "react";
 
 import Chart from "react-apexcharts";
+import Tooltip from "../ToolTip";
+
+import { FiAlertCircle } from "react-icons/fi";
 
 import { Lottie } from "@crello/react-lottie";
 import emptyGraph from "../../assets/animations/emptyGraph.json";
@@ -16,11 +19,11 @@ export default function BurndownGraph({
   const OPTIONS_GRAPH = {
     series: [
       {
-        name: "Planejado",
+        name: "Pontos planejados",
         data: planned,
       },
       {
-        name: "Realizado",
+        name: "Pontos restantes",
         data: complete,
       },
     ],
@@ -41,7 +44,7 @@ export default function BurndownGraph({
       },
       colors: ["#ACB4FF", "#87B36F"],
       title: {
-        text: "Tarefas Realizadas",
+        text: `Gráfico de Burndown`,
         align: "left",
         style: {
           fontSize: 20,
@@ -97,31 +100,42 @@ export default function BurndownGraph({
       },
     },
   };
-  
+
   return (
     <div className="burndown-area">
       <div className="burndown-graph">
-        {isEmpty ? 
-        <Lottie
-        width={800}
-        height={300}
-        style={ {margin: '30px'} }
-        speed={.8}
-        config={{
-          animationData: emptyGraph,
-          loop: false,
-          autoplay: true,
-        }}
-      />  
-      : 
-        <Chart
-          options={OPTIONS_GRAPH.options}
-          series={OPTIONS_GRAPH.series}
-          type="line"
-          height={280}
-          width={1024}  
-        />
-      }
+        {isEmpty ? (
+          <Lottie
+            width={800}
+            height={300}
+            style={{ margin: "30px" }}
+            speed={0.8}
+            config={{
+              animationData: emptyGraph,
+              loop: false,
+              autoplay: true,
+            }}
+          />
+        ) : (
+          <>
+            <Chart
+              options={OPTIONS_GRAPH.options}
+              series={OPTIONS_GRAPH.series}
+              type="line"
+              height={280}
+              width={1024}
+            />
+            <div className="burndown-tooltip">
+              <Tooltip
+                width={"280px"}
+                className="burndown-tooltip"
+                title="É uma representação gráfica das tarefas a serem feitas ao longo da sprint, sendo útil para prever quando todo o trabalho será concluído."
+              >
+                <FiAlertCircle size={20} />
+              </Tooltip>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

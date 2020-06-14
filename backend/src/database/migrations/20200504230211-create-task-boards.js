@@ -19,6 +19,8 @@ module.exports = {
       },
       total_task_points: {
         type: Sequelize.FLOAT,
+        defaultValue: 0,
+        allowNull: false,
       },
       created_at: {
         type: Sequelize.DATE,

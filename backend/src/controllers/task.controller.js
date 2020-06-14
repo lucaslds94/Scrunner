@@ -80,8 +80,9 @@ module.exports = {
       attributes: ["total_task_points"],
     });
 
+    
     totalTaskPoints =
-      totalTaskPoints.dataValues.total_task_points + task_points;
+      totalTaskPoints.dataValues.total_task_points + Number(task_points);
 
     await TaskBoard.update(
       {

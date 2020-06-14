@@ -40,6 +40,7 @@ export default function DashboardLeader() {
   const [loading, setLoading] = useState(true);
 
   const [ReportDate, setReportDate] = useState([]);
+  const [ReportCompleted, setReportCompleted] = useState([]);
   const [ReportPlanned, setReportPlanned] = useState([]);
 
   const [teams, setTeams] = useState([]);
@@ -85,9 +86,9 @@ export default function DashboardLeader() {
     let totalTaskPoints = board.total_task_points;
     const decrease = totalTaskPoints / dateRange;
 
-    const dateRangeInDays = [];
+    const dateRangeInDays = [0];
 
-    for (let i = 0; i <= dateRange; i++) {
+    for (let i = 0; i < dateRange; i++) {
       dateRangeInDays.push(moment(createdAt).add(i, "days").format("DD/MM"));
     }
 
@@ -98,8 +99,9 @@ export default function DashboardLeader() {
 
       return totalTaskPoints.toFixed(0);
     });
-
+    
     setReportDate(dateRangeInDays);
+    setReportCompleted(board.completed_tasks);
     setReportPlanned(planned);
   };
 
@@ -184,6 +186,7 @@ export default function DashboardLeader() {
             <BurndownGraph
               planned={ReportPlanned}
               DateRange={ReportDate}
+              complete={ReportCompleted}
               isEmpty={teams.length === 0}
             />
           </div>

@@ -5,6 +5,9 @@ const TaskBoard = require("../models/TaskBoard");
 const Task = require("../models/Task");
 const DailyContent = require("../models/DailyContent");
 
+const moment = require("moment");
+require("moment/locale/pt-br");
+
 const { createToken } = require("../utils/createToken");
 
 const { Op } = require("sequelize");
@@ -105,7 +108,7 @@ module.exports = {
       };
     });
 
-    const [{ teams: burndown = [] }] = await User.findAll({
+    let [{ teams: burndown = [] }] = await User.findAll({
       where: {
         id: userId,
       },
@@ -130,10 +133,69 @@ module.exports = {
                 "created_at",
                 "total_task_points",
               ],
+              include: [
+                {
+                  model: Task,
+                  as: "tasks",
+                  attributes: ["updated_at", "task_points"],
+                  required: false,
+                  where: {
+                    task_column_id: 3,
+                  },
+                },
+              ],
             },
           ],
         },
       ],
+    });
+
+    burndown = burndown.map((burn) => {
+      const task_boards = burn.dataValues.task_boards.map((board) => {
+        const current_date = moment(new Date()).format("DD/MM");
+        const dateRange = [];
+        let completed_tasks = [];
+        let total_tasks = board.dataValues.total_task_points;
+
+        for (let i = 0; i <= board.date_range; i++) {
+          dateRange.push(
+            moment(board.dataValues.created_at).add(i, "days").format("DD/MM")
+          );
+        }
+
+        board.dataValues.tasks.map((task) => {
+          const formatted_date = moment(task.dataValues.updated_at).format(
+            "DD/MM"
+          );
+
+          completed_tasks = dateRange.map((date) => {
+            if (date <= current_date) {
+              if (date == formatted_date) {
+                total_tasks -= task.dataValues.task_points;
+              }
+              return total_tasks;
+            }
+          });
+
+          completed_tasks = completed_tasks.filter((data) => data);
+          completed_tasks.unshift(board.dataValues.total_task_points);
+          return {
+            ...task.dataValues,
+          };
+        });
+
+        delete board.dataValues.tasks;
+
+        return {
+          ...board.dataValues,
+          completed_tasks,
+        };
+      });
+
+      return {
+        ...burn.dataValues,
+        task_boards,
+      };
     });
 
     const token = createToken(userId);
@@ -142,7 +204,10 @@ module.exports = {
       teamCount,
       colabCount,
       doneTasksCount,
-      graphs: { roundGraph: (doneTasksCount / tasksCount) * 100, burndown },
+      graphs: {
+        roundGraph: ((doneTasksCount / tasksCount) * 100).toFixed(0),
+        burndown,
+      },
       usersInTeam,
       token,
     });
@@ -169,7 +234,7 @@ module.exports = {
       },
     });
 
-    const [{ teams: burndown = [] }] = await User.findAll({
+    let [{ teams: burndown = [] }] = await User.findAll({
       where: {
         id: userId,
       },
@@ -194,10 +259,71 @@ module.exports = {
                 "created_at",
                 "total_task_points",
               ],
+              include: [
+                {
+                  model: Task,
+                  as: "tasks",
+                  attributes: ["updated_at", "task_points"],
+                  required: false,
+                  where: {
+                    task_column_id: 3,
+                  },
+                },
+              ],
             },
           ],
         },
       ],
+    });
+
+    burndown = burndown.map((burn) => {
+      const task_boards = burn.dataValues.task_boards.map((board) => {
+        const current_date = moment(new Date()).format("DD/MM");
+        const dateRange = [];
+        let completed_tasks = [];
+        let total_tasks = board.dataValues.total_task_points;
+
+        for (let i = 0; i <= board.date_range; i++) {
+          dateRange.push(
+            moment(board.dataValues.created_at).add(i, "days").format("DD/MM")
+          );
+        }
+
+        board.dataValues.tasks.map((task) => {
+          const formatted_date = moment(task.dataValues.updated_at).format(
+            "DD/MM"
+          );
+
+          completed_tasks = dateRange.map((date) => {
+            
+            if (date <= current_date) {
+              if (date == formatted_date) {
+                total_tasks -= task.dataValues.task_points;
+              }
+
+              return total_tasks;
+            }
+          });
+
+          completed_tasks = completed_tasks.filter((data) => data);
+          completed_tasks.unshift(board.dataValues.total_task_points);
+          return {
+            ...task.dataValues,
+          };
+        });
+
+        delete board.dataValues.tasks;
+
+        return {
+          ...board.dataValues,
+          completed_tasks,
+        };
+      });
+
+      return {
+        ...burn.dataValues,
+        task_boards,
+      };
     });
 
     const token = createToken(userId);
