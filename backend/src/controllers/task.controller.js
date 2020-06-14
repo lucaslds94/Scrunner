@@ -76,9 +76,27 @@ module.exports = {
       task_column_id: task_column,
     });
 
+    let totalTaskPoints = await TaskBoard.findByPk(boardId, {
+      attributes: ["total_task_points"],
+    });
+
+    totalTaskPoints =
+      totalTaskPoints.dataValues.total_task_points + task_points;
+
+    await TaskBoard.update(
+      {
+        total_task_points: totalTaskPoints,
+      },
+      {
+        where: {
+          id: boardId,
+        },
+      }
+    );
+
     const token = createToken(userId);
 
-    return res.json({ content, token });
+    return res.json({ content, token, totalTaskPoints });
   },
 
   async deleteBoard(req, res) {
@@ -96,6 +114,32 @@ module.exports = {
 
   async deleteContent(req, res) {
     const { boardId, contentId } = req.params;
+
+    const task = await Task.findOne({
+      where: {
+        id: contentId,
+        task_board_id: boardId,
+      },
+    });
+
+    let totalTaskPoints = await TaskBoard.findByPk(boardId, {
+      attributes: ["total_task_points"],
+    });
+
+    totalTaskPoints =
+      totalTaskPoints.dataValues.total_task_points -
+      task.dataValues.task_points;
+
+    await TaskBoard.update(
+      {
+        total_task_points: totalTaskPoints,
+      },
+      {
+        where: {
+          id: boardId,
+        },
+      }
+    );
 
     await Task.destroy({
       where: {

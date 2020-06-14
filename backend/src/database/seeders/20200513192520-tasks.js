@@ -7,7 +7,7 @@ module.exports = {
       {
         title: 'Otimização da interface',
         description: 'Devemos deixar a interface mais fluida',
-        task_points: Math.round(Math.random() * 100),
+        task_points:  100,
         created_at: new Date(),
         updated_at: new Date(),
         task_column_id: 1,
@@ -17,7 +17,7 @@ module.exports = {
       {
         title: 'Finalização do layout do login',
         description: 'Adicionar inputs e estilização',
-        task_points: Math.round(Math.random() * 100),
+        task_points: 100,
         created_at: new Date(),
         updated_at: new Date(),
         task_column_id: 1,
@@ -27,7 +27,7 @@ module.exports = {
       {
         title: 'Otimização do dashboard',
         description: 'Deveremos otimizar a dashboard',
-        task_points: Math.round(Math.random() * 100),
+        task_points:  100,
         created_at: new Date(),
         updated_at: new Date(),
         task_column_id: 1,
@@ -37,7 +37,7 @@ module.exports = {
       {
         title: 'Ajustes na UX',
         description: ' Melhorar o posicionamento dos botões e hovers',
-        task_points: Math.round(Math.random() * 100),
+        task_points:  100,
         created_at: new Date(),
         updated_at: new Date(),
         task_column_id: 1,
@@ -47,7 +47,7 @@ module.exports = {
       {
         title: 'Refatoração do ER',
         description: 'Adicionar tabelas intermediárias',
-        task_points: Math.round(Math.random() * 100),
+        task_points:  100,
         created_at: new Date(),
         updated_at: new Date(),
         task_column_id: 1,
@@ -55,9 +55,9 @@ module.exports = {
         user_id: 7, 
       },
       {
-        title: 'Finalizado o menu responsivo',
-        description: 'Deixar o menu responsivo mais fluido',
-        task_points: Math.round(Math.random() * 100),
+        title: 'Finalizar rotas de autenticação',
+        description: 'Criar e enviar tokens por JWT',
+        task_points:  100,
         created_at: new Date(),
         updated_at: new Date(),
         task_column_id: 1,
@@ -67,7 +67,7 @@ module.exports = {
       {
         title: 'Finalizar a integração',
         description: 'Ajustes nas chamadas da API e respostas do servidor',
-        task_points: Math.round(Math.random() * 100),
+        task_points:  100,
         created_at: new Date(),
         updated_at: new Date(),
         task_column_id: 1,
@@ -77,7 +77,7 @@ module.exports = {
       {
         title: 'Finalização da configuração dos protocolos',
         description: 'Ajustar a segurança do sistema adicionando protocolos https',
-        task_points: Math.round(Math.random() * 100),
+        task_points:  100,
         created_at: new Date(),
         updated_at: new Date(),
         task_column_id: 1,

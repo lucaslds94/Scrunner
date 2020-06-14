@@ -138,8 +138,44 @@ module.exports = {
       },
     });
 
-    const token = createToken(userId);
+    const burndown = await User.findAll({
+      where: {
+        id: userId,
+      },
+      attributes: [],
+      include: [
+        {
+          model: Team,
+          as: "teams",
+          attributes: ["id", "name"],
 
-    return res.json({ teamCount, dailyCount, taskCount, token });
+          through: {
+            attributes: [],
+          },
+          include: [
+            {
+              model: TaskBoard,
+              as: "task_boards",
+              attributes: [
+                "id",
+                "name",
+                "date_range",
+                "created_at",
+                "total_task_points",
+              ],
+            },
+          ],
+        },
+      ],
+    });
+
+    const token = createToken(userId);
+    return res.json({
+      teamCount,
+      dailyCount,
+      taskCount,
+      graph: { burndown },
+      token,
+    });
   },
 };
