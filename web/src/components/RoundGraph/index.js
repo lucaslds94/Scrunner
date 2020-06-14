@@ -55,7 +55,7 @@ export default function RoundGraph({
   return (
     <div className="graph-container">
       <h3 className="graph-title">{title}</h3>
-      {complete !== 0 && total !== 0 ? (
+      {complete !== 0 || total !== 0 ? (
         <>
           <div className="graph">
             <Chart

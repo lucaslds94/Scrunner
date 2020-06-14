@@ -138,7 +138,7 @@ module.exports = {
       },
     });
 
-    const burndown = await User.findAll({
+    const [{ teams: burndown = [] }] = await User.findAll({
       where: {
         id: userId,
       },

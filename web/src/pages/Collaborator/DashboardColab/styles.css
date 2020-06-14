@@ -31,9 +31,11 @@
   align-items: center;
 }
 
-.colaborador-graph-area {
+.dashboard-colaborador-graph-area {
   display: flex;
+  flex-direction: column;
   align-items: center;
+  padding: 30px 0;
 }
 
 .colaborador-image-area {

@@ -2,12 +2,16 @@ import React from "react";
 
 import Chart from "react-apexcharts";
 
+import { Lottie } from "@crello/react-lottie";
+import emptyGraph from "../../assets/animations/emptyGraph.json";
+
 import "./styles.css";
 
 export default function BurndownGraph({
   planned = [],
   complete = [],
   DateRange = [],
+  isEmpty = false,
 }) {
   const OPTIONS_GRAPH = {
     series: [
@@ -97,6 +101,19 @@ export default function BurndownGraph({
   return (
     <div className="burndown-area">
       <div className="burndown-graph">
+        {isEmpty ? 
+        <Lottie
+        width={800}
+        height={300}
+        style={ {margin: '30px'} }
+        speed={.8}
+        config={{
+          animationData: emptyGraph,
+          loop: false,
+          autoplay: true,
+        }}
+      />  
+      : 
         <Chart
           options={OPTIONS_GRAPH.options}
           series={OPTIONS_GRAPH.series}
@@ -104,6 +121,7 @@ export default function BurndownGraph({
           height={280}
           width={1024}  
         />
+      }
       </div>
     </div>
   );

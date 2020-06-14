@@ -1,33 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
+import { v4 as uuid } from "uuid";
 
 import "./styles.css";
 
-export default function SelectReport({ times = [], handleMonth, handleTime }) {
-  const MONTHS = [
-    { name: "Janeiro", value: 1 },
-    { name: "Fevereiro", value: 2 },
-    { name: "Março", value: 3 },
-    { name: "Abril", value: 4 },
-    { name: "Maio", value: 5 },
-    { name: "Junho", value: 6 },
-    { name: "Julho", value: 7 },
-    { name: "Agosto", value: 8 },
-    { name: "Setembro", value: 9 },
-    { name: "Outubro", value: 10 },
-    { name: "Novembro", value: 11 },
-    { name: "Dezembro", value: 12 },
-  ];
+export default function SelectReport({
+  times = [],
+  quadros = [],
+  handleBoard,
+  handleTime,
+}) {
+  const [selectedTeam, setSelectedTeam] = useState("");
+  const [selectedBoard, setSelectedBoard] = useState("");
 
   const handleSelectTime = (e) => {
-    const time = e.target.value;
+    const time_id = e.target.value;
+    setSelectedTeam(time_id);
+
+    const time = times.find((time) => {
+      return time.id === Number(time_id);
+    });
 
     handleTime(time);
   };
 
-  const handleSelectMonth = (e) => {
-    const month = e.target.value;
+  const handleSelectBoard = (e) => {
+    const quadro_id = e.target.value;
 
-    handleMonth(month);
+    setSelectedBoard(quadro_id);
+
+    const quadro = quadros.find((quadro) => {
+      return quadro.id === Number(quadro_id);
+    });
+
+    handleBoard(quadro);
   };
 
   return (
@@ -37,24 +42,41 @@ export default function SelectReport({ times = [], handleMonth, handleTime }) {
           <h3>Relatórios</h3>
           <span>Observe como o time está evoluindo</span>
         </div>
-        <select className="select-time" onChange={handleSelectTime}>
+        <select
+          className="select-time"
+          value={selectedTeam}
+          onChange={handleSelectTime}
+        >
           <option className="item-default" defaultValue hidden>
             Selecione o time
           </option>
+          {times.length === 0 && (
+            <option disabled> Você participa de nenhum time. </option>
+          )}
           {times.map((time) => (
-            <option key={time.name} className="time-item" value={time.value}>
+            <option key={uuid()} className="time-item" value={time.id}>
               {time.name}
             </option>
           ))}
         </select>
 
-        <select className="select-month" onChange={handleSelectMonth}>
+        <select
+          className="select-month"
+          value={selectedBoard}
+          onChange={handleSelectBoard}
+        >
           <option className="item-default" defaultValue hidden>
             Selecione o quadro de tarefa
           </option>
-          {MONTHS.map((month) => (
-            <option key={month.name} className="month-item" value={month.value}>
-              {month.name}
+          {times.length === 0 && (
+            <option disabled> Você não participa de um time. </option>
+          )}
+          {times.length !== 0 && quadros.length === 0 && (
+            <option disabled> Selecione previamente um time.</option>
+          )}
+          {quadros.map((quadro) => (
+            <option key={uuid()} className="month-item" value={quadro.id}>
+              {quadro.name}
             </option>
           ))}
         </select>

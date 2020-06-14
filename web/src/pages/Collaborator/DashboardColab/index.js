@@ -11,6 +11,8 @@ import {
 } from "../../../utils/localStorage";
 
 import { useHistory } from "react-router-dom";
+import moment from "moment";
+import "moment/locale/pt-br";
 
 import MenuLateral from "../../../components/MenuLateral";
 import Header from "../../../components/Header";
@@ -18,12 +20,16 @@ import Header from "../../../components/Header";
 import Container from "../../../components/Container";
 import CardInformation from "../../../components/CardInformation";
 import BurndownGraph from "../../../components/BurndownGraph";
+import SelectReport from "../../../components/SelectReport";
+
 import Loading from "../../../components/Loading";
 
 export default function DashboardColab() {
   const [ReportDate, setReportDate] = useState([]);
   const [ReportPlanned, setReportPlanned] = useState([]);
-  const [ReportComplete, setReportComplete] = useState([]);
+  
+  const [teams, setTeams] = useState([]);
+  const [taskBoards, setTaskBoards] = useState([]);
   const [userName, setUserName] = useState("");
   const [loading, setLoading] = useState(true);
 
@@ -34,7 +40,6 @@ export default function DashboardColab() {
   const history = useHistory();
 
   useEffect(() => {
-    generateReportDate();
     const user = getLocalStorage("@Scrunner:user");
     const token = getLocalStorage("@Scrunner:token");
 
@@ -52,6 +57,8 @@ export default function DashboardColab() {
         setDailyCount(response.data.dailyCount);
         setTaskCount(response.data.taskCount);
 
+        setTeams(response.data.graph.burndown);
+
         setLocalStorage("@Scrunner:token", response.data.token);
         setLoading(false);
       } catch (error) {
@@ -63,48 +70,34 @@ export default function DashboardColab() {
     fetchData();
   }, [history]);
 
-  const generateReportDate = () => {
-    let month = "06";
+  const handleBoard = (board) => {
 
-    const dateRange = [
-      `06/${month}`,
-      `13/${month}`,
-      `20/${month}`,
-      `27/${month}`,
-      `29/${month}`,
-      `30/${month}`,
-      `06/${month}`,
-      `13/${month}`,
-      `20/${month}`,
-      `27/${month}`,
-      `29/${month}`,
-      `30/${month}`,
-      `31/${month}`,
-      `31/${month}`,
-      `31/${month}`,
-    ];
+    const createdAt = board.created_at;
+    const dateRange = board.date_range;
+    let totalTaskPoints = Math.round(board.total_task_points).toFixed(0);
+    const decrease = Math.round(totalTaskPoints / dateRange).toFixed(0);
 
-    const planned = [
-      `${Math.floor(Math.random() * (100 - 20) + 20)}`,
-      `${Math.floor(Math.random() * (100 - 20) + 20)}`,
-      `${Math.floor(Math.random() * (100 - 20) + 20)}`,
-      `${Math.floor(Math.random() * (100 - 20) + 20)}`,
-      `${Math.floor(Math.random() * (100 - 20) + 20)}`,
-      
-    ];
+    const dateRangeInDays = [];
 
-    const complete = [
-      `${Math.floor(Math.random() * (100 - 20) + 20)}`,
-      `${Math.floor(Math.random() * (100 - 20) + 20)}`,
-      `${Math.floor(Math.random() * (100 - 20) + 20)}`,
-      `${Math.floor(Math.random() * (100 - 20) + 20)}`,
-      `${Math.floor(Math.random() * (100 - 20) + 20)}`,
-      
-    ];
+    for (let i = 0; i <= dateRange; i++) {
+      dateRangeInDays.push(moment(createdAt).add(i, "days").format("DD/MM"));
+    }
 
-    setReportDate(dateRange);
+    const planned = dateRangeInDays.map((_, index) => {
+      if (index !== 0) {
+        totalTaskPoints = totalTaskPoints - decrease;
+      }
+
+      return totalTaskPoints;
+    });
+
+    
+    setReportDate(dateRangeInDays);
     setReportPlanned(planned);
-    setReportComplete(complete);
+  };
+
+  const handleSelectTime = (team) => {
+    setTaskBoards(team.task_boards);
   };
 
   return (
@@ -142,16 +135,20 @@ export default function DashboardColab() {
               />
             </div>
           </div>
-          <div className="colaborador-graph-area">
+          <div className="dashboard-colaborador-graph-area">
+            <SelectReport
+              times={teams}
+              quadros={taskBoards}
+              handleTime={handleSelectTime}
+              handleBoard={handleBoard}
+            />
             <BurndownGraph
               planned={ReportPlanned}
-              complete={ReportComplete}
+              
               DateRange={ReportDate}
+              isEmpty={teams.length === 0}
             />
           </div>
-          {/* <div className="colaborador-image-area">
-              <img src={undraw_remotely} alt="Remotely Work" />
-            </div> */}
         </Container>
       )}
     </div>
