@@ -105,13 +105,44 @@ module.exports = {
       };
     });
 
+    const [{ teams: burndown = [] }] = await User.findAll({
+      where: {
+        id: userId,
+      },
+      attributes: [],
+      include: [
+        {
+          model: Team,
+          as: "teams",
+          attributes: ["id", "name"],
+
+          through: {
+            attributes: [],
+          },
+          include: [
+            {
+              model: TaskBoard,
+              as: "task_boards",
+              attributes: [
+                "id",
+                "name",
+                "date_range",
+                "created_at",
+                "total_task_points",
+              ],
+            },
+          ],
+        },
+      ],
+    });
+
     const token = createToken(userId);
 
     return res.json({
       teamCount,
       colabCount,
       doneTasksCount,
-      graphs: { roundGraph: (doneTasksCount / tasksCount) * 100 },
+      graphs: { roundGraph: (doneTasksCount / tasksCount) * 100, burndown },
       usersInTeam,
       token,
     });
@@ -174,7 +205,7 @@ module.exports = {
       teamCount,
       dailyCount,
       taskCount,
-      graph: { burndown },
+      graphs: { burndown },
       token,
     });
   },

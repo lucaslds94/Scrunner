@@ -27,7 +27,7 @@ import Loading from "../../../components/Loading";
 export default function DashboardColab() {
   const [ReportDate, setReportDate] = useState([]);
   const [ReportPlanned, setReportPlanned] = useState([]);
-  
+
   const [teams, setTeams] = useState([]);
   const [taskBoards, setTaskBoards] = useState([]);
   const [userName, setUserName] = useState("");
@@ -57,7 +57,7 @@ export default function DashboardColab() {
         setDailyCount(response.data.dailyCount);
         setTaskCount(response.data.taskCount);
 
-        setTeams(response.data.graph.burndown);
+        setTeams(response.data.graphs.burndown);
 
         setLocalStorage("@Scrunner:token", response.data.token);
         setLoading(false);
@@ -71,11 +71,10 @@ export default function DashboardColab() {
   }, [history]);
 
   const handleBoard = (board) => {
-
     const createdAt = board.created_at;
     const dateRange = board.date_range;
-    let totalTaskPoints = Math.round(board.total_task_points).toFixed(0);
-    const decrease = Math.round(totalTaskPoints / dateRange).toFixed(0);
+    let totalTaskPoints = board.total_task_points;
+    const decrease = totalTaskPoints / dateRange;
 
     const dateRangeInDays = [];
 
@@ -88,10 +87,9 @@ export default function DashboardColab() {
         totalTaskPoints = totalTaskPoints - decrease;
       }
 
-      return totalTaskPoints;
+      return totalTaskPoints.toFixed(0);
     });
 
-    
     setReportDate(dateRangeInDays);
     setReportPlanned(planned);
   };
@@ -144,7 +142,6 @@ export default function DashboardColab() {
             />
             <BurndownGraph
               planned={ReportPlanned}
-              
               DateRange={ReportDate}
               isEmpty={teams.length === 0}
             />

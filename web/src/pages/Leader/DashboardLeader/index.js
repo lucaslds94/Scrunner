@@ -27,12 +27,10 @@ import RoundGraph from "../../../components/RoundGraph";
 
 import Loading from "../../../components/Loading";
 
+import moment from "moment";
+import "moment/locale/pt-br";
+
 export default function DashboardLeader() {
-  const [MonthReport, setMonthReport] = useState(0);
-  const [TimeReport, setTimeReport] = useState(0);
-  const [ReportDate, setReportDate] = useState([]);
-  const [ReportPlanned, setReportPlanned] = useState([]);
-  const [ReportComplete, setReportComplete] = useState([]);
   const [collaborators, setCollaborators] = useState([]);
   const [colabCount, setColabCount] = useState(0);
   const [doneTasksCount, setDoneTasksCount] = useState(0);
@@ -40,6 +38,12 @@ export default function DashboardLeader() {
   const [roundGraph, setRoundGraph] = useState(0);
   const [userName, setUserName] = useState("");
   const [loading, setLoading] = useState(true);
+
+  const [ReportDate, setReportDate] = useState([]);
+  const [ReportPlanned, setReportPlanned] = useState([]);
+
+  const [teams, setTeams] = useState([]);
+  const [taskBoards, setTaskBoards] = useState([]);
 
   const history = useHistory();
 
@@ -52,12 +56,13 @@ export default function DashboardLeader() {
         const response = await api.get(`/dashboard/owner/${user.id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-
+        
         setCollaborators(response.data.usersInTeam);
         setColabCount(response.data.colabCount);
         setDoneTasksCount(response.data.doneTasksCount);
         setTeamsCount(response.data.teamCount);
         setRoundGraph(response.data.graphs.roundGraph);
+        setTeams(response.data.graphs.burndown);
         setLocalStorage("@Scrunner:token", response.data.token);
         setLoading(false);
         setUserName(user.name);
@@ -70,26 +75,32 @@ export default function DashboardLeader() {
     fetchData();
   }, [history]);
 
-  const handleSelectTime = (time) => {
-    setTimeReport(time);
-    console.log(TimeReport);
+  const handleSelectTime = (team) => {
+    setTaskBoards(team.task_boards);
   };
 
-  const handleSelectMonth = (month) => {
-    setMonthReport(month, generateReportDate(month));
-    console.log(MonthReport);
-  };
+  const handleBoard = (board) => {
+    const createdAt = board.created_at;
+    const dateRange = board.date_range;
+    let totalTaskPoints = board.total_task_points;
+    const decrease = totalTaskPoints / dateRange;
 
-  const generateReportDate = (month) => {
-    const dateRange = [15, 18, 21, 24, 27, 30];
+    const dateRangeInDays = [];
 
-    const planned = [80, 64, 48, 32, 16, 0];
+    for (let i = 0; i <= dateRange; i++) {
+      dateRangeInDays.push(moment(createdAt).add(i, "days").format("DD/MM"));
+    }
 
-    const complete = [80, 50, 20, 10, 5, 0];
+    const planned = dateRangeInDays.map((_, index) => {
+      if (index !== 0) {
+        totalTaskPoints = totalTaskPoints - decrease;
+      }
 
-    setReportDate(dateRange);
+      return totalTaskPoints.toFixed(0);
+    });
+
+    setReportDate(dateRangeInDays);
     setReportPlanned(planned);
-    setReportComplete(complete);
   };
 
   const removeUserTeam = async (collaboratorId, teamId) => {
@@ -165,20 +176,19 @@ export default function DashboardLeader() {
           </div>
           <div className="container-report">
             <SelectReport
-              handleMonth={handleSelectMonth}
+              times={teams}
+              quadros={taskBoards}
               handleTime={handleSelectTime}
-              times={[
-                { name: "Alfa", value: 1 },
-                { name: "Beta", value: 2 },
-              ]}
+              handleBoard={handleBoard}
             />
             <BurndownGraph
-              DateRange={ReportDate}
               planned={ReportPlanned}
-              complete={ReportComplete}
+              DateRange={ReportDate}
+              isEmpty={teams.length === 0}
             />
           </div>
           <div className="colab-area">
+            
             <UsersList
               collaboratorsData={collaborators}
               removeUserTeam={removeUserTeam}
@@ -192,7 +202,7 @@ export default function DashboardLeader() {
         </Container>
       )}
 
-      <ToastContainer limit={3}/>
+      <ToastContainer limit={3} />
     </div>
   );
 }
