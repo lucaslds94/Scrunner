@@ -4,6 +4,8 @@ const Task = require("../models/Task");
 
 const { createToken } = require("../utils/createToken");
 
+const moment = require('moment');
+
 module.exports = {
   async boardsIndex(req, res) {
     const { userId, teamId } = req.params;
@@ -66,12 +68,16 @@ module.exports = {
   async storeContent(req, res) {
     const { userId, boardId } = req.params;
     const { title, description, task_points, task_column } = req.body;
+    
+    const created_at = moment(new Date()).format('MM/DD/YYYY');
 
     const content = await Task.create({
       user_id: userId,
       title,
       description,
       task_points,
+      created_at,
+      updated_at: created_at,
       task_board_id: boardId,
       task_column_id: task_column,
     });
@@ -156,9 +162,12 @@ module.exports = {
     const { userId, contentId } = req.params;
     const { columnId } = req.body;
 
+    const updated_at = moment(new Date()).format('MM/DD/YYYY');
+
     await Task.update(
       {
         task_column_id: columnId,
+        updated_at
       },
       {
         where: {

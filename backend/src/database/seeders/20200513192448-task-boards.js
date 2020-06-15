@@ -11,7 +11,7 @@ module.exports = {
           created_at: new Date(),
           updated_at: new Date(),
           team_id: 1,
-          total_task_points: 500,
+          total_task_points: 400,
         },
         {
           name: 'Sprint 1 - BackEnd',
@@ -19,7 +19,7 @@ module.exports = {
           created_at: new Date(),
           updated_at: new Date(),
           team_id: 2,
-          total_task_points: 500,
+          total_task_points: 400,
         },
         {
           name: 'Sprint 1 - Integração',

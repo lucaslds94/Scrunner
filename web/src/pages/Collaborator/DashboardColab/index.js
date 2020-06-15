@@ -33,7 +33,6 @@ export default function DashboardColab() {
   const [taskBoards, setTaskBoards] = useState([]);
   const [userName, setUserName] = useState("");
   const [loading, setLoading] = useState(true);
-  
 
   const [teamCount, setTeamCount] = useState(0);
   const [dailyCount, setDailyCount] = useState(0);
@@ -73,28 +72,17 @@ export default function DashboardColab() {
   }, [history]);
 
   const handleBoard = (board) => {
-    const createdAt = board.created_at;
-    const dateRange = board.date_range;
-    let totalTaskPoints = board.total_task_points;
-    const decrease = totalTaskPoints / dateRange;
-
-    const dateRangeInDays = [0];
-
-    for (let i = 0; i < dateRange; i++) {
-      dateRangeInDays.push(moment(createdAt).add(i, "days").format("DD/MM"));
-    }
-
-    const planned = dateRangeInDays.map((_, index) => {
+    const dateRange = board.date_range.map((date, index) => {
       if (index !== 0) {
-        totalTaskPoints = totalTaskPoints - decrease;
+        return moment(date).format("DD/MM");
       }
-      
-      return totalTaskPoints.toFixed(0);
+
+      return date;
     });
 
-    setReportDate(dateRangeInDays);
-    setReportCompleted(board.completed_tasks);
-    setReportPlanned(planned);
+    setReportDate(dateRange);
+    setReportCompleted(board.remaining_points);
+    setReportPlanned(board.planned_points);
   };
 
   const handleSelectTime = (team) => {

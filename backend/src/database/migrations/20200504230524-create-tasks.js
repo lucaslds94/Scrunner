@@ -22,11 +22,11 @@ module.exports = {
         allowNull: false,
       },
       created_at: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATEONLY,
         allowNull: false,
       },
       updated_at: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATEONLY,
         allowNull: false,
       },
       task_column_id: {

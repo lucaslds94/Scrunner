@@ -57,13 +57,14 @@ export default function DashboardLeader() {
         const response = await api.get(`/dashboard/owner/${user.id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        
+
         setCollaborators(response.data.usersInTeam);
         setColabCount(response.data.colabCount);
         setDoneTasksCount(response.data.doneTasksCount);
         setTeamsCount(response.data.teamCount);
         setRoundGraph(response.data.graphs.roundGraph);
         setTeams(response.data.graphs.burndown);
+
         setLocalStorage("@Scrunner:token", response.data.token);
         setLoading(false);
         setUserName(user.name);
@@ -77,32 +78,22 @@ export default function DashboardLeader() {
   }, [history]);
 
   const handleSelectTime = (team) => {
+    console.log(team);
     setTaskBoards(team.task_boards);
   };
 
   const handleBoard = (board) => {
-    const createdAt = board.created_at;
-    const dateRange = board.date_range;
-    let totalTaskPoints = board.total_task_points;
-    const decrease = totalTaskPoints / dateRange;
-
-    const dateRangeInDays = [0];
-
-    for (let i = 0; i < dateRange; i++) {
-      dateRangeInDays.push(moment(createdAt).add(i, "days").format("DD/MM"));
-    }
-
-    const planned = dateRangeInDays.map((_, index) => {
+    const dateRange = board.date_range.map((date, index) => {
       if (index !== 0) {
-        totalTaskPoints = totalTaskPoints - decrease;
+        return moment(date).format("DD/MM");
       }
 
-      return totalTaskPoints.toFixed(0);
+      return date;
     });
-    
-    setReportDate(dateRangeInDays);
-    setReportCompleted(board.completed_tasks);
-    setReportPlanned(planned);
+
+    setReportDate(dateRange);
+    setReportCompleted(board.remaining_points);
+    setReportPlanned(board.planned_points);
   };
 
   const removeUserTeam = async (collaboratorId, teamId) => {
@@ -191,7 +182,6 @@ export default function DashboardLeader() {
             />
           </div>
           <div className="colab-area">
-            
             <UsersList
               collaboratorsData={collaborators}
               removeUserTeam={removeUserTeam}
