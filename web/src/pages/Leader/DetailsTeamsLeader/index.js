@@ -219,7 +219,7 @@ export default function DetailsTeamsLeader() {
                 <CardInformation
                   crown
                   cardTitle="O time possui"
-                  subTitle={team.users?.length > 1 ? "Membros" : "Membro"}
+                  subTitle={team.users?.length - 1 > 1 ? "Membros" : "Membro"}
                   number={team.users?.length - 1}
                   buttonText="Visualize os membros do time abaixo."
                 />

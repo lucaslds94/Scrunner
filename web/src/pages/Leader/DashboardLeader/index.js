@@ -154,10 +154,14 @@ export default function DashboardLeader() {
               />
               <CardInformation
                 crown
-                cardTitle="Possuem"
+                cardTitle={colabCount > 1 ? "Existem" : "Existe"}
                 subTitle={colabCount > 1 ? "Colaboradores" : "Colaborador"}
                 number={colabCount}
-                buttonText="Cadastrados em seus times"
+                buttonText={
+                  colabCount > 1
+                    ? "Cadastrados em seus times"
+                    : "Cadastrado em seus times"
+                }
               />
               <CardInformation
                 cardTitle="Foram completadas"

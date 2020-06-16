@@ -6,7 +6,7 @@
   padding: 0 20px;
   height: 90px;
   width: 100%;
-  position: sticky;
+  position: fixed;
   top: 0px;
   z-index: 12;
 }

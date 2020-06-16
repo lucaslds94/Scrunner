@@ -1,3 +1,10 @@
+.container-aside {
+  width: 130px;
+  height: 100vh;
+  position: fixed;
+  background: #f8f8f8;
+}
+
 .menuLateral {
   position: fixed;
   width: 130px;

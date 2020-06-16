@@ -3,6 +3,7 @@
   width: calc(100% - 130px);
   margin: 0 0 0 auto;
   overflow: hidden;
+  padding-top: 90px;
 }
 
 .container-margin {
