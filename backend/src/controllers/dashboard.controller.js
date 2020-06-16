@@ -242,7 +242,10 @@ module.exports = {
       colabCount,
       doneTasksCount,
       graphs: {
-        roundGraph: ((doneTasksCount / tasksCount) * 100).toFixed(0),
+        roundGraph:
+          doneTasksCount > 0 || tasksCount > 0
+            ? ((doneTasksCount / tasksCount) * 100).toFixed(0)
+            : 0,
         burndown,
       },
       usersInTeam,
@@ -330,6 +333,7 @@ module.exports = {
         fn("sum", col("task_points")),
         "task_board_id",
       ],
+      order: [["updated_at", "ASC"]],
       group: ["updated_at", "task_board_id"],
       raw: true,
       where: {
@@ -381,20 +385,20 @@ module.exports = {
           return totalTaskPoints.toFixed(0);
         });
 
-        board.doneTasksOfTheDay.map((doneTask) => {
-          const formatted_date = moment(doneTask.updated_at).format(
-            "MM/DD/YYYY"
-          );
+        for (let i = 0; i < dateRange.length; i++) {
+          if (dateRange[i] <= current_date) {
+            for (let j = 0; j < board.doneTasksOfTheDay.length; j++) {
+              const formatted_date = moment(
+                board.doneTasksOfTheDay[j].updated_at
+              ).format("MM/DD/YYYY");
 
-          remainingPoints = dateRange.map((date) => {
-            if (date <= current_date) {
-              if (date == formatted_date) {
-                total_tasks -= doneTask.sum;
+              if (formatted_date == dateRange[i]) {
+                total_tasks -= board.doneTasksOfTheDay[j].sum
               }
-              return total_tasks;
             }
-          });
-        });
+            remainingPoints.push(total_tasks)
+          }
+        }
 
         if (remainingPoints.length === 0) {
           dateRange.map((date) => {
