@@ -86,7 +86,7 @@ describe("Users routes", () => {
   });
 
   it("Should be able to update data user without changing the password", async () => {
-    const USER_ID = 3;
+    const USER_ID = 4;
 
     const response = await request(app)
       .put(`/user/update/${USER_ID}`)

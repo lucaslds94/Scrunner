@@ -90,7 +90,7 @@ module.exports = {
         try {
           await unlink(path.resolve(__dirname, "..", "..", "uploads", image));
         } catch (error) {
-          return res.status(500).json({ err: "Internal server error 1" });
+          return res.status(500).json({ err: "Internal server error" });
         }
 
         return res.status(401).json({ err: "Incorrect password combination" });
@@ -115,7 +115,7 @@ module.exports = {
           path.resolve(__dirname, "..", "..", "uploads", user.image)
         );
       } catch (error) {
-        return res.status(500).json({ err: "Internal server error 2" });
+        return res.status(500).json({ err: "Internal server error" });
       }
     }
 
