@@ -8,7 +8,7 @@ const Task = require("../models/Task");
 
 const { createToken } = require("../utils/createToken");
 
-const serializedArray = require("../utils/serializedImage");
+const { serializedArray } = require("../utils/serializedImage");
 
 const { Op } = require("sequelize");
 
@@ -41,8 +41,8 @@ module.exports = {
     });
 
     teams = teams.map((team) => {
-      let users = team.dataValues.team.dataValues.users
-      
+      let users = team.dataValues.team.dataValues.users;
+
       users = users.map((user) => {
         return user.dataValues;
       });
@@ -51,7 +51,7 @@ module.exports = {
 
       return {
         ...team.dataValues,
-       users
+        users,
       };
     });
 

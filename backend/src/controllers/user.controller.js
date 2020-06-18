@@ -1,6 +1,14 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
 
+const { createToken } = require("../utils/createToken");
+const { serializedObject } = require("../utils/serializedImage");
+
+const path = require("path");
+const fs = require("fs");
+const { promisify } = require("util");
+const unlink = promisify(fs.unlink);
+
 module.exports = {
   async store(req, res) {
     let { email, password, name, is_owner } = req.body;
@@ -8,16 +16,15 @@ module.exports = {
     let user = await User.findOne({ where: { email } });
 
     if (!user) {
-      
       const defaultImages = [
         "noimage1.svg",
         "noimage2.svg",
         "noimage3.svg",
         "noimage4.svg",
       ];
-      
+
       const randomIndex = Math.round(Math.random() * defaultImages.length - 1);
-      
+
       password = bcrypt.hashSync(password, 10);
 
       user = await User.create({
@@ -59,17 +66,39 @@ module.exports = {
     let { name, oldPassword, password } = req.body;
     const image = req.file.filename;
 
-    const user = await User.findByPk(userId);
+    let user = await User.findByPk(userId);
 
-    const comparedPass = bcrypt.compareSync(oldPassword, user.password);
+    if (oldPassword.length >= 8) {
+      const comparedPass = bcrypt.compareSync(oldPassword, user.password);
 
-    if (comparedPass) {
-      password = bcrypt.hashSync(password, 10);
+      if (comparedPass) {
+        password = bcrypt.hashSync(password, 10);
 
+        await User.update(
+          {
+            name,
+            password,
+            image,
+          },
+          {
+            where: {
+              id: userId,
+            },
+          }
+        );
+      } else {
+        try {
+          await unlink(path.resolve(__dirname, "..", "..", "uploads", image));
+        } catch (error) {
+          return res.status(500).json({ err: "Internal server error 1" });
+        }
+
+        return res.status(401).json({ err: "Incorrect password combination" });
+      }
+    } else {
       await User.update(
         {
           name,
-          password,
           image,
         },
         {
@@ -78,10 +107,20 @@ module.exports = {
           },
         }
       );
-
-      return res.status(204).send();
     }
 
-    return res.status(401).json({ err: "Incorrect password " });
+    try {
+      await unlink(path.resolve(__dirname, "..", "..", "uploads", user.image));
+    } catch (error) {
+      return res.status(500).json({ err: "Internal server error 2" });
+    }
+
+    user = await User.findByPk(userId);
+
+    user = serializedObject(user.dataValues);
+
+    const token = createToken(userId);
+
+    return res.json({ user, token });
   },
 };

@@ -4,6 +4,7 @@ const DailyBoard = require("../models/DailyBoard");
 const DailyContent = require("../models/DailyContent");
 
 const { createToken } = require("../utils/createToken");
+const { serializedObject } = require("../utils/serializedImage");
 
 const { Op } = require("sequelize");
 
@@ -112,14 +113,13 @@ module.exports = {
     });
 
     dailyContents = dailyContents.map((objectContent) => {
-      const user = {
-        id: objectContent.dataValues.user.dataValues.id,
-        name: objectContent.dataValues.user.dataValues.name,
-        email: objectContent.dataValues.user.dataValues.email,
-        image: objectContent.dataValues.user.dataValues.image,
-        is_leader:
-          objectContent.dataValues.user.dataValues.user_isLeader[0].is_leader,
-      };
+    
+     const user = serializedObject(objectContent.dataValues.user.dataValues);
+
+     
+     user.is_leader = objectContent.dataValues.user.dataValues.user_isLeader[0].is_leader;
+
+     delete user.user_isLeader; 
 
       return {
         ...objectContent.dataValues,
@@ -133,7 +133,7 @@ module.exports = {
   },
 
   async storeContent(req, res) {
-    const { userId, boardId, teamId } = req.params;
+    const { userId, boardId } = req.params;
     const { did_yesterday, do_today, problems } = req.body;
 
     const content = await DailyContent.create({

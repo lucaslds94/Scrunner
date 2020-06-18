@@ -8,4 +8,14 @@ const serializedArray = (users = []) => {
   });
 };
 
-module.exports = serializedArray;
+const serializedObject = (user) => {
+  return {
+    ...user,
+    image_url: `http://localhost:3333/uploads/${user.image}`,
+  };
+};
+
+module.exports = { 
+  serializedArray,
+  serializedObject
+}

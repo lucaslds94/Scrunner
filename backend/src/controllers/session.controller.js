@@ -2,11 +2,12 @@ const bcrypt = require("bcrypt");
 const User = require("../models/User");
 
 const { createToken } = require("../utils/createToken");
+const { serializedObject } = require("../utils/serializedImage");
 
 module.exports = {
   async login(req, res) {
     const { email, password } = req.body;
-
+    
     let user = await User.findOne({ where: { email } });
 
     if (!user) {
@@ -26,6 +27,8 @@ module.exports = {
     }
 
     delete user.dataValues.password;
+
+    user = serializedObject(user.dataValues);
 
     const token = createToken(user.id);
 

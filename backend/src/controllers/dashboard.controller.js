@@ -7,7 +7,7 @@ const DailyContent = require("../models/DailyContent");
 
 const moment = require("moment");
 
-const serializedArray = require("../utils/serializedImage");
+const { serializedArray } = require("../utils/serializedImage");
 
 const { createToken } = require("../utils/createToken");
 
@@ -39,7 +39,7 @@ module.exports = {
         },
       },
     });
-    
+
     let boardTasksIds = await TaskBoard.findAll({
       attributes: ["id"],
       where: {
@@ -69,7 +69,7 @@ module.exports = {
     });
 
     let usersInTeam = await User.findAll({
-      attributes: ["id", "name"],
+      attributes: ["id", "name", "image"],
       where: {
         [Op.or]: colabs,
       },
@@ -105,6 +105,7 @@ module.exports = {
       return {
         id: user.id,
         name: user.name,
+        image: user.image,
         teams,
       };
     });
