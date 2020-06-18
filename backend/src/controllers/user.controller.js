@@ -9,6 +9,13 @@ const fs = require("fs");
 const { promisify } = require("util");
 const unlink = promisify(fs.unlink);
 
+const defaultImages = [
+  "noimage1.svg",
+  "noimage2.svg",
+  "noimage3.svg",
+  "noimage4.svg",
+];
+
 module.exports = {
   async store(req, res) {
     let { email, password, name, is_owner } = req.body;
@@ -16,13 +23,6 @@ module.exports = {
     let user = await User.findOne({ where: { email } });
 
     if (!user) {
-      const defaultImages = [
-        "noimage1.svg",
-        "noimage2.svg",
-        "noimage3.svg",
-        "noimage4.svg",
-      ];
-
       const randomIndex = Math.round(Math.random() * defaultImages.length - 1);
 
       password = bcrypt.hashSync(password, 10);
@@ -109,10 +109,14 @@ module.exports = {
       );
     }
 
-    try {
-      await unlink(path.resolve(__dirname, "..", "..", "uploads", user.image));
-    } catch (error) {
-      return res.status(500).json({ err: "Internal server error 2" });
+    if (!defaultImages.includes(user.image)) {
+      try {
+        await unlink(
+          path.resolve(__dirname, "..", "..", "uploads", user.image)
+        );
+      } catch (error) {
+        return res.status(500).json({ err: "Internal server error 2" });
+      }
     }
 
     user = await User.findByPk(userId);
