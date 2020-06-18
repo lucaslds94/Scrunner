@@ -8,12 +8,23 @@ module.exports = {
     let user = await User.findOne({ where: { email } });
 
     if (!user) {
+      
+      const defaultImages = [
+        "noimage1.svg",
+        "noimage2.svg",
+        "noimage3.svg",
+        "noimage4.svg",
+      ];
+      
+      const randomIndex = Math.round(Math.random() * defaultImages.length - 1);
+      
       password = bcrypt.hashSync(password, 10);
 
       user = await User.create({
         email,
         password,
         name,
+        image: defaultImages[randomIndex],
         is_owner,
         is_active: true,
       });
@@ -41,5 +52,36 @@ module.exports = {
     );
 
     return res.status(204).send();
+  },
+
+  async update(req, res) {
+    const { userId } = req.params;
+    let { name, oldPassword, password } = req.body;
+    const image = req.file.filename;
+
+    const user = await User.findByPk(userId);
+
+    const comparedPass = bcrypt.compareSync(oldPassword, user.password);
+
+    if (comparedPass) {
+      password = bcrypt.hashSync(password, 10);
+
+      await User.update(
+        {
+          name,
+          password,
+          image,
+        },
+        {
+          where: {
+            id: userId,
+          },
+        }
+      );
+
+      return res.status(204).send();
+    }
+
+    return res.status(401).json({ err: "Incorrect password " });
   },
 };

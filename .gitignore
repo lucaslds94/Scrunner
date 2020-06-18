@@ -23,3 +23,7 @@ backend/.env
 
 #Sqlite
 backend/__tests__/database.sqlite
+
+#Uploads
+*/uploads/*
+!*/uploads/*.svg

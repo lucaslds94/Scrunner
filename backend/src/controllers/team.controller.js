@@ -8,13 +8,15 @@ const Task = require("../models/Task");
 
 const { createToken } = require("../utils/createToken");
 
+const serializedArray = require("../utils/serializedImage");
+
 const { Op } = require("sequelize");
 
 module.exports = {
   async index(req, res) {
     const { userId } = req.params;
 
-    const teams = await UserTeam.findAll({
+    let teams = await UserTeam.findAll({
       attributes: ["id"],
       where: {
         user_id: userId,
@@ -38,6 +40,21 @@ module.exports = {
       ],
     });
 
+    teams = teams.map((team) => {
+      let users = team.dataValues.team.dataValues.users
+      
+      users = users.map((user) => {
+        return user.dataValues;
+      });
+
+      users = serializedArray(users);
+
+      return {
+        ...team.dataValues,
+       users
+      };
+    });
+
     const token = createToken(userId);
 
     res.json({ teams, token });
@@ -55,7 +72,7 @@ module.exports = {
         {
           model: User,
           as: "users",
-          attributes: ["id", "name", "is_owner"],
+          attributes: ["id", "name", "is_owner", "image"],
           through: {
             attributes: [],
           },
@@ -80,6 +97,7 @@ module.exports = {
           id: user.dataValues.id,
           name: user.dataValues.name,
           is_owner: user.dataValues.is_owner,
+          image: user.dataValues.image,
           is_leader: user.dataValues.user_isLeader[0].is_leader,
         };
       });
@@ -89,6 +107,8 @@ module.exports = {
         users,
       };
     });
+
+    team.users = serializedArray(team.users);
 
     let boardTasksIds = await TaskBoard.findAll({
       attributes: ["id"],

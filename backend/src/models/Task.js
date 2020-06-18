@@ -1,5 +1,4 @@
 const { Model, DataTypes } = require("sequelize");
-const moment = require('moment');
 
 class Task extends Model {
   static init(sequelize) {
@@ -43,9 +42,6 @@ class Task extends Model {
         },
         updated_at: {
           type: DataTypes.DATE,
-          get: function () {
-            return moment(this.getDataValue("updated_at")).format("DD.MM.YYYY");
-          },
         },
       },
       {

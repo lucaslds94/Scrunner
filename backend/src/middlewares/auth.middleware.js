@@ -12,7 +12,7 @@ module.exports = {
     const [, token] = authHeader.split(" ");
 
     try {
-      const decoded = verify(token, jwt.secret);
+      verify(token, jwt.secret);
 
       next();
     } catch {

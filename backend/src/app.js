@@ -14,6 +14,7 @@ const teamsRoutes = require("./routes/teams.routes");
 const dashboardRoutes = require("./routes/dashboard.routes");
 const dailysRoutes = require("./routes/dailys.routes");
 const tasksRoutes = require("./routes/tasks.routes");
+const uploadsRoutes = require("./routes/uploads.routes");
 
 app.use(cors());
 app.use(express.json());
@@ -24,5 +25,6 @@ app.use(teamsRoutes);
 app.use(dashboardRoutes);
 app.use(dailysRoutes);
 app.use(tasksRoutes);
+app.use("/uploads", uploadsRoutes);
 
 module.exports = app;

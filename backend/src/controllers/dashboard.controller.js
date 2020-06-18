@@ -7,6 +7,8 @@ const DailyContent = require("../models/DailyContent");
 
 const moment = require("moment");
 
+const serializedArray = require("../utils/serializedImage");
+
 const { createToken } = require("../utils/createToken");
 
 const { Op, fn, col } = require("sequelize");
@@ -37,7 +39,7 @@ module.exports = {
         },
       },
     });
-
+    
     let boardTasksIds = await TaskBoard.findAll({
       attributes: ["id"],
       where: {
@@ -106,6 +108,8 @@ module.exports = {
         teams,
       };
     });
+
+    usersInTeam = serializedArray(usersInTeam);
 
     let [{ teams: burndown = [] }] = await User.findAll({
       where: {
@@ -393,10 +397,10 @@ module.exports = {
               ).format("MM/DD/YYYY");
 
               if (formatted_date == dateRange[i]) {
-                total_tasks -= board.doneTasksOfTheDay[j].sum
+                total_tasks -= board.doneTasksOfTheDay[j].sum;
               }
             }
-            remainingPoints.push(total_tasks)
+            remainingPoints.push(total_tasks);
           }
         }
 
