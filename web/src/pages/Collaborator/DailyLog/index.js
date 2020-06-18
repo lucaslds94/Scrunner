@@ -218,6 +218,7 @@ export default function DailyLog() {
                   doToday={leaderContent.do_today}
                   problems={leaderContent.problems}
                   name={leaderContent.user.name}
+                  image_url={leaderContent.user.image_url}
                   deleteDailyLog={() => deleteDailyLog(leaderContent.id, true)}
                   isMyDaily={leaderContent.user_id === user.id}
                 />
@@ -241,6 +242,7 @@ export default function DailyLog() {
                   doToday={content.do_today}
                   problems={content.problems}
                   name={content.user.name}
+                  image_url={content.user.image_url}
                   deleteDailyLog={() => deleteDailyLog(content.id, false)}
                   isMyDaily={content.user_id === user.id}
                 />

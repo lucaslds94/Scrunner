@@ -69,7 +69,9 @@ export default function TeamMembersList({ collaborators = [], removeUserTeam }) 
                   return (
                     <ul key={collaborator.id}>
                       <li>
-                        <div className="userAvatar"></div>
+                        <div className="userAvatar">
+                          <img src={collaborator.image_url} alt={collaborator.name} />
+                        </div>
                         {collaborator.name}
                       </li>
                       <li>{collaborator.is_leader ? "Sim" : "Não"}</li>

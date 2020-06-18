@@ -28,7 +28,7 @@
   justify-content: space-between;
   width: 100%;
   margin: 30px 0 10px 0px;
-  color: #737FF3;
+  color: #737ff3;
 }
 
 .titleContainer p {
@@ -45,7 +45,7 @@
   width: 100%;
   overflow-y: auto;
 }
-.listRow{
+.listRow {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -67,15 +67,23 @@
   align-items: center;
   padding-bottom: 5px;
   margin-bottom: 5px;
-  border-bottom:2px solid rgba(0, 0, 0, 0.17);
-  color:#898989;
-  
+  border-bottom: 2px solid rgba(0, 0, 0, 0.17);
+  color: #898989;
 }
 
 .userAvatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 40px;
   height: 40px;
-  background-color: royalblue;
   border-radius: 50%;
   margin-right: 10px;
+  border: 2px solid #737ff3;
+}
+
+.userAvatar img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
 }

@@ -4,7 +4,6 @@ import { v4 as uuid } from "uuid";
 import "./styles.css";
 
 export default function MembersList({ users = [] }) {
-
   const removeOwnerFromUsers = () => {
     return users.filter((user) => !user.is_owner);
   };
@@ -24,7 +23,9 @@ export default function MembersList({ users = [] }) {
             {removeOwnerFromUsers().map((user) => (
               <div key={uuid()} className="list-item">
                 <li>
-                  <div className="user-image" />
+                  <div className="user-image">
+                    <img src={user.image_url} alt={user.name} />
+                  </div>
                   {user.name}
                 </li>
                 <li>{user.is_leader ? "Sim" : "Não"}</li>

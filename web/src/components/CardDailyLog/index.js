@@ -12,6 +12,7 @@ export default function CardDailyLog({
   doToday = "",
   problems = "",
   name = "",
+  image_url,
   deleteDailyLog,
   isMyDaily = false,
 }) {
@@ -32,7 +33,9 @@ export default function CardDailyLog({
       )}
       <div className="cardDailyLog-container">
         <div className="dailyLog-header">
-          <div className="userAvatar avatarLog"></div>
+          <div className="userAvatar avatarLog">
+            <img src={image_url} alt={name} />
+          </div>
           <p> {name} </p>
           {leader && (
             <span className="LeaderCrown">

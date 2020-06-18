@@ -59,7 +59,16 @@ export default function UsersList({ collaboratorsData = [], removeUserTeam }) {
                   ? collaboratorsData.map((collaborator) => {
                       return collaborator.teams.map((team) => (
                         <ul key={uuid()}>
-                          <li>{collaborator.name}</li>
+                          <li>
+                            <div className="userAvatar">
+                              <img
+                                src={collaborator.image_url}
+                                alt={collaborator.name}
+                              />
+                            </div>
+                            {collaborator.name}
+                          </li>
+
                           <li>{team.name}</li>
                           <li>{team.isLeader ? "Sim" : "Não"}</li>
                           <li>

@@ -1,5 +1,5 @@
 .dashboardHeader {
-  background-color: #F8F8F8;
+  background-color: #f8f8f8;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -21,28 +21,35 @@
 }
 
 .logoContainer {
-  display:flex;
+  display: flex;
   align-items: center;
 }
 
 .logoContainer img {
-  height:40px;
+  height: 40px;
 }
 
 .logoContainer span {
-  color: #737FF3;
+  color: #737ff3;
   font-size: 20px;
   font-weight: 500;
   margin-left: 10px;
 }
 
-.header-avatar{
+.header-avatar {
   display: flex;
   justify-content: center;
-  align-items: center; 
-  width: 40px;
-  height: 40px;
-  background-color: royalblue;
+  align-items: center;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   margin-right: 10px;
+  background: #737ff3;
+  border: 2px solid #737ff3;
+}
+
+.header-avatar img {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
 }

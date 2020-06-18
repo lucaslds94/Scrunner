@@ -19,11 +19,11 @@ export default function BurndownGraph({
   const OPTIONS_GRAPH = {
     series: [
       {
-        name: "Pontos planejados",
+        name: "Pontos médios ideais",
         data: planned,
       },
       {
-        name: "Pontos restantes",
+        name: "Pontos a serem realizados",
         data: complete,
       },
     ],

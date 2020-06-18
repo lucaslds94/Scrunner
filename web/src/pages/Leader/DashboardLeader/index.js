@@ -78,7 +78,6 @@ export default function DashboardLeader() {
   }, [history]);
 
   const handleSelectTime = (team) => {
-    console.log(team);
     setTaskBoards(team.task_boards);
   };
 
