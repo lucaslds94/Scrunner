@@ -38,6 +38,10 @@ export default function DetailsTeamsLeader() {
   const history = useHistory();
 
   useEffect(() => {
+    if (!!history.location?.state === false) {
+      return history.push("/times");
+    }
+
     const fetchTeam = async () => {
       try {
         const user = getLocalStorage("@Scrunner:user");
@@ -68,7 +72,7 @@ export default function DetailsTeamsLeader() {
     };
 
     fetchTeam();
-  }, [history.location.state.teamId, history]);
+  }, [history]);
 
   const getLeaderName = () => {
     if (!loading && team.users) {

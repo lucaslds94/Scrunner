@@ -30,9 +30,14 @@ export default function DailyColab() {
   const [loading, setLoading] = useState(true);
 
   const history = useHistory();
-  const { teamId, teamName, users } = history.location.state;
 
   useEffect(() => {
+    if (!!history.location?.state === false) {
+      return history.push("/times");
+    }
+
+    const { teamId, users } = history.location.state;
+
     const fetchBoards = async () => {
       const user = getLocalStorage("@Scrunner:user");
       const token = getLocalStorage("@Scrunner:token");
@@ -53,17 +58,20 @@ export default function DailyColab() {
     };
 
     fetchBoards();
-  }, [history, teamId, users]);
+  }, [history]);
 
   const toDetailsTeamPage = () => {
+    const { teamId, teamName } = history.location.state;
     history.push(`/times/detalhes/${teamName}`, { teamId });
   };
 
   const toTasksPage = () => {
+    const { teamId, teamName, users } = history.location.state;
     history.push(`/times/tarefas/${teamName}`, { teamId, users, teamName });
   };
 
   const handleCreateBoard = async () => {
+    const { teamId } = history.location.state;
     const user = getLocalStorage("@Scrunner:user");
     const token = getLocalStorage("@Scrunner:token");
 
@@ -90,6 +98,7 @@ export default function DailyColab() {
   };
 
   const deleteDailyBoard = async (boardId) => {
+    const { teamId } = history.location.state;
     const user = getLocalStorage("@Scrunner:user");
     const token = getLocalStorage("@Scrunner:token");
 
@@ -113,6 +122,7 @@ export default function DailyColab() {
   };
 
   const toDailyLogPage = (boardId, boardDate) => {
+    const { teamId, teamName, users } = history.location.state;
     history.push(`/times/dailylog/${teamName}`, {
       teamId,
       teamName,
@@ -131,7 +141,9 @@ export default function DailyColab() {
         <div className="header-times-daily">
           <div className="header-titles">
             <h2>Dailys</h2>
-            <span onClick={toDetailsTeamPage}>{teamName}</span>
+            <span onClick={toDetailsTeamPage}>
+              {history.location?.state?.teamName}
+            </span>
           </div>
           <div className="header-buttons">
             <ButtonChangeScreen titleButton={"Dailys"} active />
@@ -150,7 +162,7 @@ export default function DailyColab() {
             </div>
 
             <div className="container-boards">
-              {users && leader && (
+              {history.location?.state?.users && leader && (
                 <CreateBoard handleCreateBoard={handleCreateBoard} />
               )}
               {!leader && dailyBoards.length === 0 && (

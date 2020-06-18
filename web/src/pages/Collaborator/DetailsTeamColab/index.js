@@ -38,6 +38,10 @@ export default function DetailsTeamColab() {
   const history = useHistory();
 
   useEffect(() => {
+    if (!!history.location?.state === false) {
+      return history.push("/times");
+    }
+
     const user = getLocalStorage("@Scrunner:user");
     const token = getLocalStorage("@Scrunner:token");
     const teamId = history.location.state.teamId;
@@ -68,7 +72,7 @@ export default function DetailsTeamColab() {
     };
 
     fetchData();
-  }, [history.location.state.teamId, history]);
+  }, [history]);
 
   const handleCardClick = () => {
     let inputCopy = document.createElement("input");

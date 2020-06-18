@@ -38,9 +38,14 @@ export default function TasksColab() {
 
   const history = useHistory();
   const user = getLocalStorage("@Scrunner:user");
-  const { teamId, users, teamName } = history.location.state;
 
   useEffect(() => {
+    if (!!history.location?.state === false) {
+      return history.push("/times");
+    }
+
+    const { teamId, users } = history.location.state;
+
     const fetchBoards = async () => {
       const token = getLocalStorage("@Scrunner:token");
 
@@ -65,17 +70,20 @@ export default function TasksColab() {
     };
 
     fetchBoards();
-  }, [history, teamId, user.id, users]);
+  }, [history, user.id]);
 
   const toDailyPage = () => {
+    const { teamId, users, teamName } = history.location.state;
     history.push(`/times/daily/${teamName}`, { teamId, users, teamName });
   };
 
   const toDetailsTeamPage = () => {
+    const { teamId, teamName } = history.location.state;
     history.push(`/times/detalhes/${teamName}`, { teamId });
   };
 
   const toKanbanPage = (boardId, boardName, boardDate) => {
+    const { teamId, users, teamName } = history.location.state;
     history.push(`/times/kanban/${teamName}/${boardName}/`, {
       teamId,
       boardId,
@@ -87,6 +95,7 @@ export default function TasksColab() {
   };
 
   const createBoard = async (data) => {
+    const { teamId } = history.location.state;
     const token = getLocalStorage("@Scrunner:token");
 
     try {
@@ -111,6 +120,7 @@ export default function TasksColab() {
   };
 
   const deleteBoard = async (boardId) => {
+    const { teamId } = history.location.state;
     const token = getLocalStorage("@Scrunner:token");
 
     try {
@@ -145,7 +155,9 @@ export default function TasksColab() {
             <div className="bloco-header-tarefa">
               <div className="bloco-header-titles">
                 <p>Tarefas</p>
-                <span onClick={toDetailsTeamPage}>{teamName}</span>
+                <span onClick={toDetailsTeamPage}>
+                  {history.location?.state?.teamName}
+                </span>
               </div>
               <div className="colaborador-header-buttons">
                 <ButtonChangeScreen
@@ -168,7 +180,7 @@ export default function TasksColab() {
                 <Loading />
               ) : (
                 <>
-                  {users && leader && (
+                  {history.location?.state?.users && leader && (
                     <CreateBoard
                       handleCreateBoard={() => setShowModalCreateTask(true)}
                     />

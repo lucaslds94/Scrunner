@@ -36,15 +36,14 @@ export default function DailyLog() {
 
   const user = getLocalStorage("@Scrunner:user");
   const history = useHistory();
-  const {
-    teamId,
-    teamName,
-    boardId,
-    boardDate,
-    users,
-  } = history.location.state;
 
   useEffect(() => {
+    if (!!history.location?.state === false) {
+      return history.push("/times");
+    }
+
+    const { teamId, boardId } = history.location.state;
+
     const token = getLocalStorage("@Scrunner:token");
 
     const fetchContent = async () => {
@@ -78,21 +77,34 @@ export default function DailyLog() {
     };
 
     fetchContent();
-  }, [users, boardId, teamId, user.id]);
+  }, [user.id, history]);
 
   const toTeamDailysPage = () => {
+    const { teamId, teamName, users } = history.location.state;
+
     history.push(`/times/daily/${teamName}`, { teamId, teamName, users });
   };
 
   const toDetailTeamPage = () => {
+    const { teamId, teamName } = history.location.state;
+
     history.push(`/times/detalhes/${teamName}`, { teamId });
   };
 
   const toTasksPage = () => {
+    const { teamId, teamName, users } = history.location.state;
+
     history.push(`/times/tarefas/${teamName}`, { teamId, teamName, users });
   };
 
   const createDailyContent = async ({ did_yesterday, do_today, problems }) => {
+    const {
+      teamId,
+
+      boardId,
+      users,
+    } = history.location.state;
+
     const token = getLocalStorage("@Scrunner:token");
     setLoading(true);
     try {
@@ -129,6 +141,8 @@ export default function DailyLog() {
   };
 
   const deleteDailyLog = async (contentId, isLeader) => {
+    const { teamId, boardId } = history.location.state;
+
     const token = getLocalStorage("@Scrunner:token");
     try {
       await api.delete(
@@ -175,7 +189,9 @@ export default function DailyLog() {
             <div className="header-times-daily">
               <div className="header-titles">
                 <h2>Dailys</h2>
-                <span onClick={toDetailTeamPage}>{teamName}</span>
+                <span onClick={toDetailTeamPage}>
+                  {history.location?.state?.teamName}
+                </span>
               </div>
               <div className="header-buttons">
                 <ButtonChangeScreen titleButton={"Dailys"} active />
@@ -193,7 +209,11 @@ export default function DailyLog() {
               </div>
 
               <div className="dailyLogInfo">
-                <h2>{moment(boardDate).format("DD/MM/YYYY")}</h2>
+                <h2>
+                  {moment(history.location?.state?.boardDate).format(
+                    "DD/MM/YYYY"
+                  )}
+                </h2>
                 <h4>{dailyCount} registros foram realizados</h4>
               </div>
             </div>
@@ -201,7 +221,7 @@ export default function DailyLog() {
 
           <div className="dailyLog-content">
             <div className="dailyLog-leadText">
-              {!registeredDaily && isLeader(users) && (
+              {!registeredDaily && isLeader(history.location?.state?.users) && (
                 <button
                   onClick={() => setShowModal(true)}
                   className="buttonAddDaily"
@@ -226,7 +246,7 @@ export default function DailyLog() {
             </div>
 
             <div className="dailyLog-colabText">
-              {!registeredDaily && !isLeader(users) && (
+              {!registeredDaily && !isLeader(history.location?.state?.users) && (
                 <button
                   onClick={() => setShowModal(true)}
                   className="buttonAddDaily"

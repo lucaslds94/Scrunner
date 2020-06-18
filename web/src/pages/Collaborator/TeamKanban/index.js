@@ -31,16 +31,13 @@ export default function TeamKanban() {
   const history = useHistory();
   const user = getLocalStorage("@Scrunner:user");
 
-  const {
-    teamId,
-    users,
-    teamName,
-    boardId,
-    boardName,
-    boardDate,
-  } = history.location.state;
-
   useEffect(() => {
+    if (!!history.location?.state === false) {
+      return history.push("/times");
+    }
+
+    const { teamId, boardId } = history.location.state;
+
     const fetchTasksColumns = async () => {
       const token = getLocalStorage("@Scrunner:token");
 
@@ -61,9 +58,10 @@ export default function TeamKanban() {
     };
 
     fetchTasksColumns();
-  }, [boardId, teamId, user.id, history]);
+  }, [user.id, history]);
 
   const deleteTask = async (taskId) => {
+    const { teamId, boardId } = history.location.state;
     const token = getLocalStorage("@Scrunner:token");
 
     try {
@@ -88,18 +86,23 @@ export default function TeamKanban() {
   };
 
   const toTasksColabPage = () => {
+    const { teamId, users, teamName } = history.location.state;
     history.push(`/times/tarefas/${teamName}`, { teamName, users, teamId });
   };
 
   const toDetailTeamPage = () => {
+    const { teamId, teamName } = history.location.state;
     history.push(`/times/detalhes/${teamName}`, { teamId });
   };
 
   const toDailysPage = () => {
+    const { teamId, users, teamName } = history.location.state;
+
     history.push(`/times/daily/${teamName}`, { teamId, users, teamName });
   };
 
   const createTask = async (data) => {
+    const { teamId, boardId } = history.location.state;
     const token = getLocalStorage("@Scrunner:token");
     try {
       const response = await api.post(
@@ -127,6 +130,8 @@ export default function TeamKanban() {
   };
 
   const moveTask = async (columnId, taskId) => {
+    const { teamId } = history.location.state;
+
     const token = getLocalStorage("@Scrunner:token");
     try {
       const response = await api.put(
@@ -152,7 +157,9 @@ export default function TeamKanban() {
           <div className="colaborador-cards-header">
             <div className="bloco-header-titles">
               <p>Tarefas</p>
-              <span onClick={toDetailTeamPage}>{teamName}</span>
+              <span onClick={toDetailTeamPage}>
+                {history.location?.state?.teamName}
+              </span>
             </div>
             <div className="colaborador-header-buttons">
               <ButtonChangeScreen
@@ -168,8 +175,13 @@ export default function TeamKanban() {
               <MdArrowBack size={30} color={"#737FF3"} /> Voltar
             </div>
             <div className="boardInfo">
-              <h2>{boardName}</h2>
-              <h4>Criado em {moment(boardDate).format("DD/MM/YYYY")}</h4>
+              <h2>{history.location?.state?.boardName}</h2>
+              <h4>
+                Criado em{" "}
+                {moment(history.location?.state?.boardDate).format(
+                  "DD/MM/YYYY"
+                )}
+              </h4>
             </div>
           </div>
           <Kanban

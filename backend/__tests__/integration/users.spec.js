@@ -81,5 +81,28 @@ describe("Users routes", () => {
     );
 
     expect(response.status).toEqual(200);
+    expect(response.body).toHaveProperty("user");
+    expect(response.body).toHaveProperty("token");
+  });
+
+  it("Should be able to update data user without changing the password", async () => {
+    const USER_ID = 3;
+
+    const response = await request(app)
+      .put(`/user/update/${USER_ID}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`)
+      .set("content-type", "multipart/form-data")
+      .field("name", "New Name")
+      .field("password", "")
+      .field("oldPassword", "")
+      .attach("image", path.resolve(__dirname, "..", "mock", "user.jpg"));
+
+    await unlink(
+      path.resolve(__dirname, "..", "..", "uploads", response.body.user.image)
+    );
+
+    expect(response.status).toEqual(200);
+    expect(response.body).toHaveProperty("user");
+    expect(response.body).toHaveProperty("token");
   });
 });
