@@ -23,7 +23,9 @@ module.exports = {
     let user = await User.findOne({ where: { email } });
 
     if (!user) {
-      const randomIndex = Math.round(Math.random() * defaultImages.length - 1);
+      const randomIndex = Math.round(
+        Math.random() * (defaultImages.length - 1)
+      );
 
       password = bcrypt.hashSync(password, 10);
 

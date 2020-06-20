@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import PrivateRoute from './routes/PrivateRoute';
+import PrivateRoute from "./routes/PrivateRoute";
 
 import LandingPage from "./pages/LandingPage";
 
@@ -15,6 +15,7 @@ import DailyColab from "./pages/Collaborator/DailyColab";
 import DailyLog from "./pages/Collaborator/DailyLog";
 import TasksColab from "./pages/Collaborator/TasksColab";
 import TeamKanban from "./pages/Collaborator/TeamKanban";
+import Profile from "./pages/Profile";
 
 export default function Routes() {
   return (
@@ -24,10 +25,11 @@ export default function Routes() {
         <PrivateRoute
           path="/dashboard"
           componentOwner={DashboardLeader}
-          componentColab={DashboardColab} />
+          componentColab={DashboardColab}
+        />
         <PrivateRoute
-          path="/times" 
-          componentOwner={TeamsLeader} 
+          path="/times"
+          componentOwner={TeamsLeader}
           componentColab={TeamsColab}
           exact
         />
@@ -38,31 +40,36 @@ export default function Routes() {
           exact
         />
 
-        <PrivateRoute 
-          path="/times/daily/:name" 
+        <PrivateRoute
+          path="/times/daily/:name"
           componentColab={DailyColab}
-          componentOwner={() => <h1>Você não tem acesso a essa página</h1>} 
+          componentOwner={() => <h1>Você não tem acesso a essa página</h1>}
           exact
         />
         <PrivateRoute
           path="/times/dailylog/:name"
           componentColab={DailyLog}
-          componentOwner={() => <h1>Você não tem acesso a essa página</h1>} 
+          componentOwner={() => <h1>Você não tem acesso a essa página</h1>}
           exact
         />
-        <PrivateRoute 
-          path="/times/tarefas/:name" 
+        <PrivateRoute
+          path="/times/tarefas/:name"
           componentColab={TasksColab}
-          componentOwner={() => <h1>Você não tem acesso a essa página</h1>} 
-          exact 
+          componentOwner={() => <h1>Você não tem acesso a essa página</h1>}
+          exact
         />
         <PrivateRoute
           path="/times/kanban/:name/:boardTitle"
           componentColab={TeamKanban}
-          componentOwner={() => <h1>Você não tem acesso a essa página</h1>} 
-          exact 
+          componentOwner={() => <h1>Você não tem acesso a essa página</h1>}
+          exact
         />
-        <Route path="*" component={() => <h1>Page not found 404</h1>} /> 
+        <PrivateRoute
+          path="/perfil"
+          componentColab={Profile}
+          componentOwner={Profile}
+        />
+        <Route path="*" component={() => <h1>Page not found 404</h1>} />
       </Switch>
     </BrowserRouter>
   );

@@ -8,7 +8,7 @@ import { TiGroup } from "react-icons/ti";
 
 import "./styles.css";
 
-export default function MenuLateral({ homeActive = true }) {
+export default function MenuLateral({ homeActive = true, isProfile = false }) {
   const history = useHistory();
 
   const handleLogOff = () => {
@@ -21,13 +21,13 @@ export default function MenuLateral({ homeActive = true }) {
       <aside className="menuLateral">
         <Link
           to={"/dashboard"}
-          className={`btnMenuLateral ${homeActive && "active"}`}
+          className={`btnMenuLateral ${!isProfile && homeActive && "active"}`}
         >
           <FaHome className="iconMenuLateral" size={22} /> Início
         </Link>
         <Link
           to={"/times"}
-          className={`btnMenuLateral ${!homeActive && "active"}`}
+          className={`btnMenuLateral ${!isProfile && !homeActive && "active"}`}
         >
           <TiGroup className="iconMenuLateral" size={22} />
           Times

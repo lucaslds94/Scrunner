@@ -1,0 +1,146 @@
+.profile {
+  background: #f8f8f8;
+  min-height: 100vh;
+  height: 100%;
+}
+
+.profile-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 60px 60px;
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  margin: 15px 0;
+  border-radius: 10px;
+}
+
+.profile-divider {
+    height: 400px;
+    width: 1px;
+    background-color: #E4E4E4;
+    position: relative
+}
+
+.profile-dropzone {
+  outline: none;
+}
+
+.profile-picture {
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.profile-picture img {
+  border-radius: 50%;
+  width: 220px;
+  overflow: hidden;
+  height: 220px;
+  object-fit: cover;
+  border: 3px solid #737ff3;
+  cursor: pointer;
+}
+
+.profile-picture img:hover {
+    box-shadow: 0px 0px;
+}
+
+.picture-camera {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 50px;
+  position: absolute;
+  right: 30px;
+  bottom: 80px;
+  box-shadow: 0px 0px 6px rgba(0,0,0, 0.10);
+}
+
+.picture-camera svg {
+  margin-left: 1px;
+}
+
+.profile-picture h3 {
+  margin: 16px 0;
+  font-size: 22px;
+  color: #898989;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+
+.profile-input-container h4 {
+  font-size: 20px;
+  color: #737ff3;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.profile-input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.profile-input label {
+  margin: 6px 0;
+  color: #898989;
+  font-size: 14px;
+}
+
+.profile-input input {
+  height: 40px;
+  border-radius: 4px;
+  width: 300px;
+  font-size: 17px;
+  padding: 0 10px;
+  color: #595959;
+  border: 1px solid #898989;
+  margin-bottom: 5px;
+  font-weight: 400;
+}
+
+.profile-input button {
+  position: absolute;
+  right: 8px;
+  bottom: 12px;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.profile-input button svg {
+  background: none;
+}
+
+
+.button-save-info {
+    background: none;
+    position: relative;
+    border: none;
+    padding: 7px 28px;
+    color: #737ff3;
+    border: 2px solid #737ff3;
+    border-radius: 25px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.4s;
+    margin-left: auto;
+    display: flex;
+    margin-top: 20px;
+  }
+  
+.button-save-info:hover {
+    background-color: #737ff3;
+    color: white;
+}
