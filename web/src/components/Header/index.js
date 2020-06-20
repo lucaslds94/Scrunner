@@ -9,15 +9,18 @@ import "./styles.css";
 
 import logoRoxo from "../../assets/logo_roxo_100.png";
 
-export default function Header() {
+export default function Header({ userData }) {
   const [user, setUser] = useState({});
   const [showDropdownModal, setShowDropdownModal] = useState(false);
 
   useEffect(() => {
-    const user = getLocalStorage("@Scrunner:user");
+    if (!userData) {
+      const user = getLocalStorage("@Scrunner:user");
+      return setUser(user);
+    }
 
-    setUser(user);
-  }, []);
+    setUser(userData);
+  }, [userData]);
 
   return (
     <>

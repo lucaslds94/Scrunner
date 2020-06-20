@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import { clearLocalStorage } from "../../utils/localStorage";
 import { useHistory } from "react-router-dom";
 
-import { FaHome, FaPowerOff } from "react-icons/fa";
+import { FaHome } from "react-icons/fa";
+import { RiLogoutBoxLine } from "react-icons/ri";
+
 import { TiGroup } from "react-icons/ti";
 
 import "./styles.css";
@@ -33,7 +35,8 @@ export default function MenuLateral({ homeActive = true, isProfile = false }) {
           Times
         </Link>
         <button className="logoff-button" onClick={handleLogOff}>
-          <FaPowerOff size={24} color={"#FFF"} />
+          <RiLogoutBoxLine size={28} color={"#FFF"} />
+          <span>Sair</span>
         </button>
       </aside>
     </div>

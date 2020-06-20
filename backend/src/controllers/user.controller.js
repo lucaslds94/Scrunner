@@ -66,9 +66,13 @@ module.exports = {
   async update(req, res) {
     const { userId } = req.params;
     let { name, oldPassword, password } = req.body;
-    const image = req.file.filename;
+    const image = req.file ? req.file.filename : false;
 
     let user = await User.findByPk(userId);
+
+    const objUserToUpdate = {};
+
+    objUserToUpdate.name = name;
 
     if (oldPassword.length >= 8) {
       const comparedPass = bcrypt.compareSync(oldPassword, user.password);
@@ -76,18 +80,7 @@ module.exports = {
       if (comparedPass) {
         password = bcrypt.hashSync(password, 10);
 
-        await User.update(
-          {
-            name,
-            password,
-            image,
-          },
-          {
-            where: {
-              id: userId,
-            },
-          }
-        );
+        objUserToUpdate.password = password;
       } else {
         try {
           await unlink(path.resolve(__dirname, "..", "..", "uploads", image));
@@ -97,21 +90,19 @@ module.exports = {
 
         return res.status(401).json({ err: "Incorrect password combination" });
       }
-    } else {
-      await User.update(
-        {
-          name,
-          image,
-        },
-        {
-          where: {
-            id: userId,
-          },
-        }
-      );
     }
 
-    if (!defaultImages.includes(user.image)) {
+    if (image) {
+      objUserToUpdate.image = image;
+    }
+
+    await User.update(objUserToUpdate, {
+      where: {
+        id: userId,
+      },
+    });
+
+    if (!defaultImages.includes(user.image) && image) {
       try {
         await unlink(
           path.resolve(__dirname, "..", "..", "uploads", user.image)

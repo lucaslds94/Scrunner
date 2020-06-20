@@ -17,13 +17,12 @@
   cursor: pointer;
   height: 80%;
   padding: 0 20px;
-  transition: all .2s;
+  transition: all 0.2s;
 }
 
-/* .headerUserName:hover {
-  background-color: #f0f0f0;
-  border-radius: 4px;
-} */
+.headerUserName:hover svg {
+  color: #737ff3 !important;
+}
 
 .headerUserName p {
   margin: 0 5px;
