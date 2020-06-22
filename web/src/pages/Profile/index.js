@@ -10,10 +10,7 @@ import Header from "../../components/Header";
 import Container from "../../components/Container";
 import Tooltip from "../../components/ToolTip";
 
-import {
-  getLocalStorage,
-  setLocalStorage,
-} from "../../utils/localStorage";
+import { getLocalStorage, setLocalStorage } from "../../utils/localStorage";
 
 import { toast, ToastContainer } from "react-toastify";
 
@@ -65,26 +62,36 @@ const Profile = () => {
 
     userData.append("name", formData.name);
     userData.append("oldPassword", formData.oldPassword);
-    userData.append("password", formData.newPassword);
+    userData.append("password", formData.password);
     userData.append("image", imageFile);
 
-    const response = await api.put(`/user/update/${user.id}`, userData, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    try {
+      const response = await api.put(`/user/update/${user.id}`, userData, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-    setFormData({
-      ...formData,
-      name: response.data.user.name,
-      password: "",
-      oldPassword: "",
-      confirmPassword: "",
-    });
+      setFormData({
+        ...formData,
+        name: response.data.user.name,
+        password: "",
+        oldPassword: "",
+        confirmPassword: "",
+      });
 
-    setUserData(response.data.user);
-    setSelectedFileUrl(response.data.user.image_url);
+      setUserData(response.data.user);
+      setSelectedFileUrl(response.data.user.image_url);
 
-    setLocalStorage("@Scrunner:user", response.data.user);
-    setLocalStorage("@Scrunner:token", response.data.token);
+      setLocalStorage("@Scrunner:user", response.data.user);
+      setLocalStorage("@Scrunner:token", response.data.token);
+
+      toast.success("Informações atualizadas com sucesso");
+    } catch (err) {
+      if (err?.response.status === 401) {
+        return toast.error("Senha atual está incorreta");
+      } else {
+        return toast.error("Ocorreu um erro inesperado.");
+      }
+    }
   };
 
   const handleUpdateUser = () => {
@@ -121,7 +128,6 @@ const Profile = () => {
       }
 
       updateUser();
-      toast.success("Informações atualizadas com sucesso");
     }
   };
 
@@ -177,6 +183,7 @@ const Profile = () => {
               />
               <button
                 type="button"
+                tabIndex="-1"
                 onClick={() => setShowCurrentPass(!showCurrentPass)}
               >
                 {showCurrentPass && <FaEyeSlash size={20} color={"#737FF3"} />}
@@ -193,6 +200,7 @@ const Profile = () => {
               />
               <button
                 type="button"
+                tabIndex="-1"
                 onClick={() => setShowNewPass(!showNewPass)}
               >
                 {showNewPass && <FaEyeSlash size={20} color={"#737FF3"} />}
@@ -209,6 +217,7 @@ const Profile = () => {
               />
               <button
                 type="button"
+                tabIndex="-1"
                 onClick={() => setShowConfirmPass(!showConfirmPass)}
               >
                 {showConfirmPass && <FaEyeSlash size={20} color={"#737FF3"} />}

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 
 import api from "../../../services/api";
 
+import {toast, ToastContainer} from 'react-toastify';
+
 import "./styles.css";
 
 import {
@@ -41,6 +43,10 @@ export default function DashboardColab() {
   const history = useHistory();
 
   useEffect(() => {
+    if(history.location?.state?.afterRegister){
+      toast.success("Cadastro realizado com sucesso!");
+    }
+
     const user = getLocalStorage("@Scrunner:user");
     const token = getLocalStorage("@Scrunner:token");
 
@@ -140,6 +146,7 @@ export default function DashboardColab() {
           </div>
         </Container>
       )}
+      <ToastContainer />
     </div>
   );
 }

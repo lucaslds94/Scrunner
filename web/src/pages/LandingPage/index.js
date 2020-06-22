@@ -92,7 +92,7 @@ export default function LandingPage() {
     try {
       await api.post("/user", companyModel);
 
-      toast.success("Cadastro realizado com sucesso!");
+      login(companyModel, true);
     } catch (error) {
       if (error.response.data.err) {
         return toast.error("Email já cadastrado como empresa!");
@@ -115,7 +115,7 @@ export default function LandingPage() {
     try {
       await api.post("/user", colabModel);
 
-      toast.success("Cadastro realizado com sucesso!");
+      login(colabModel, true);
     } catch (error) {
       if (error.response.data.err) {
         return toast.error("Email já cadastrado como colaborador!");
@@ -125,7 +125,7 @@ export default function LandingPage() {
     }
   };
 
-  const login = async (dataLogin) => {
+  const login = async (dataLogin, afterRegister = false) => {
     try {
       const modelUserLogin = {
         email: dataLogin.email.toLowerCase().trim(),
@@ -138,6 +138,10 @@ export default function LandingPage() {
 
       setLocalStorage("@Scrunner:user", response.data.user);
       setLocalStorage("@Scrunner:token", response.data.token);
+
+      if (afterRegister) {
+        return history.push("/dashboard", { afterRegister: true });
+      }
 
       history.push("/dashboard");
     } catch (error) {
@@ -569,7 +573,7 @@ export default function LandingPage() {
           <p>Todos os direitos reservados 2020 &copy; | Scrunner</p>
         </div>
       </footer>
-      <ToastContainer limit={3}/>
+      <ToastContainer limit={3} />
     </>
   );
 }

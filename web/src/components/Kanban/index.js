@@ -7,15 +7,17 @@ import { FaPlus } from "react-icons/fa";
 import ModalCofirmAction from "../ModalConfirmAction";
 import ModalCreateTask from "../ModalCreateTask";
 
+import moment from "moment";
+import "moment/locale/pt-br";
+
 import "./styles.css";
 
-function Kanban({ tasksColumns = [], deleteTask, createTask, moveTask}) {
+function Kanban({ tasksColumns = [], deleteTask, createTask, moveTask }) {
   const [columns, setColumns] = useState({});
   const [showModalConfirmDel, setShowModalConfirmDel] = useState(false);
   const [showModalCreateTask, setShowModalCreateTask] = useState(false);
   const [idTaskToDelete, setIdTaskToDelete] = useState("");
   const [taskColumn, setTaskColumn] = useState(0);
-  
 
   useEffect(() => {
     const kanbanColumns = {
@@ -66,8 +68,6 @@ function Kanban({ tasksColumns = [], deleteTask, createTask, moveTask}) {
           tasks: destItems,
         },
       });
-
-    
     } else {
       const column = columns[source.droppableId];
 
@@ -103,16 +103,13 @@ function Kanban({ tasksColumns = [], deleteTask, createTask, moveTask}) {
   };
 
   const handleCreateTask = (data) => {
-
     const dataObj = {
       task_column: taskColumn,
       ...data,
-    }
+    };
     createTask(dataObj);
-  }
+  };
 
-  
-  
   return (
     <>
       {showModalConfirmDel && (
@@ -181,8 +178,19 @@ function Kanban({ tasksColumns = [], deleteTask, createTask, moveTask}) {
                                       >
                                         <BsTrash size={22} color={"#BBB"} />
                                       </button>
-                                      <h3>{task.title}</h3>
-                                      <p>{task.description}</p>
+                                      <div className="task-information">
+                                        <span>
+                                          Criado em:{" "}
+                                          {moment(task.createdAt).format(
+                                            "DD/MM/YYYY"
+                                          )}
+                                        </span>
+                                        <span>Pontos:{task.task_points}</span>
+                                      </div>
+                                      <div className="task-content">
+                                        <h3>{task.title}</h3>
+                                        <p>{task.description}</p>
+                                      </div>
                                     </div>
                                   );
                                 }}

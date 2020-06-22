@@ -90,3 +90,10 @@
   border-radius: 50%;
   margin-right: 10px;
 }
+
+.user-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
