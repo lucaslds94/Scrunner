@@ -4,7 +4,6 @@
     border-radius: 25px;
     background: linear-gradient( to right, #9EA8FF, #737FF3);
     border: none;
-    outline-color: #737FF3;
     color: white;
     font-size: 16px;
     display: flex;
@@ -14,6 +13,7 @@
     align-items: center;
     transition: transform .3s;
     cursor: pointer;
+    outline: none;
 }
 
 

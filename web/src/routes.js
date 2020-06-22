@@ -17,6 +17,8 @@ import TasksColab from "./pages/Collaborator/TasksColab";
 import TeamKanban from "./pages/Collaborator/TeamKanban";
 import Profile from "./pages/Profile";
 
+import NotFound from "./pages/NotFound";
+
 export default function Routes() {
   return (
     <BrowserRouter>
@@ -69,7 +71,7 @@ export default function Routes() {
           componentColab={Profile}
           componentOwner={Profile}
         />
-        <Route path="*" component={() => <h1>Page not found 404</h1>} />
+        <Route path="*" component={NotFound} />
       </Switch>
     </BrowserRouter>
   );
