@@ -201,20 +201,20 @@ module.exports = {
           return totalTaskPoints.toFixed(0);
         });
 
-        board.doneTasksOfTheDay.map((doneTask) => {
-          const formatted_date = moment(doneTask.updated_at).format(
-            "MM/DD/YYYY"
-          );
+        for (let i = 0; i < dateRange.length; i++) {
+          if (dateRange[i] <= current_date) {
+            for (let j = 0; j < board.doneTasksOfTheDay.length; j++) {
+              const formatted_date = moment(
+                board.doneTasksOfTheDay[j].updated_at
+              ).format("MM/DD/YYYY");
 
-          remainingPoints = dateRange.map((date) => {
-            if (date <= current_date) {
-              if (date == formatted_date) {
-                total_tasks -= doneTask.sum;
+              if (formatted_date == dateRange[i]) {
+                total_tasks -= board.doneTasksOfTheDay[j].sum;
               }
-              return total_tasks;
             }
-          });
-        });
+            remainingPoints.push(total_tasks);
+          }
+        }
 
         if (remainingPoints.length === 0) {
           remainingPoints.push(board.total_task_points);

@@ -82,12 +82,14 @@ module.exports = {
 
         objUserToUpdate.password = password;
       } else {
-        try {
-          await unlink(path.resolve(__dirname, "..", "..", "uploads", image));
-        } catch (error) {
-          return res.status(500).json({ err: "Internal server error" });
+        if(image){
+          try {
+            await unlink(path.resolve(__dirname, "..", "..", "uploads", image));
+          } catch (error) {
+            return res.status(500).json({ err: "Internal server error" });
+          }
         }
-
+        
         return res.status(401).json({ err: "Incorrect password combination" });
       }
     }
