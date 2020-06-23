@@ -47,8 +47,6 @@ export default function TeamKanban() {
           { headers: { Authorization: `Bearer ${token}` } }
         );
 
-        console.log(response.data);
-
         setLocalStorage("@Scrunner:token", response.data.token);
 
         setTasksColumns(response.data.tasks);

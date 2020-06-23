@@ -313,7 +313,7 @@ module.exports = {
         {
           model: User,
           as: "users",
-          attributes: ["id", "name", "is_owner"],
+          attributes: ["id", "name", "is_owner", "image"],
           through: {
             attributes: [],
           },
@@ -337,6 +337,7 @@ module.exports = {
         return {
           id: user.dataValues.id,
           name: user.dataValues.name,
+          image: user.dataValues.image,
           is_owner: user.dataValues.is_owner,
           is_leader: user.dataValues.user_isLeader[0].is_leader,
         };
@@ -347,6 +348,8 @@ module.exports = {
         users,
       };
     });
+
+    team.users = serializedArray(team.users);
 
     const token = createToken(user_id);
 

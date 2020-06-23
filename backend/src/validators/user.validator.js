@@ -20,6 +20,8 @@ const updateUserValidator = celebrate(
       name: Joi.string().required(),
       oldPassword: Joi.string().allow("", null),
       password: Joi.string().allow("", null),
+      image: Joi.string().allow("", null),
+
     }),
   },
   {

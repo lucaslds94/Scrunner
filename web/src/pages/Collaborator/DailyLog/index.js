@@ -118,6 +118,7 @@ export default function DailyLog() {
         ...response.data.content,
         user: {
           name: user.name,
+          image_url: user.image_url
         },
       };
 

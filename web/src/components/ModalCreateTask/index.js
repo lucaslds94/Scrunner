@@ -22,9 +22,14 @@ export default function ModalCreateTask({
     if (description.trim().length === 0) {
       return toast.error("Insira uma descrição válida");
     }
-    if (taskPoints < 1 || taskPoints > 100 || taskPoints.length === 0) {
+    if (
+      taskPoints < 1 ||
+      taskPoints > 100 ||
+      taskPoints.length === 0 ||
+      !Number.isInteger(Number(taskPoints))
+    ) {
       return toast.error(
-        "Os pontos devem estar dentro do intervalo de 1 a 100"
+        "Os pontos devem ser inteiros e estar dentro do intervalo de 1 a 100"
       );
     }
 
@@ -86,7 +91,9 @@ export default function ModalCreateTask({
 
               <ToolTip
                 width={"200px"}
-                title={"Pontos que se referem ao grau de dificuldade da tarefa."}
+                title={
+                  "Pontos que se referem ao grau de dificuldade da tarefa."
+                }
               >
                 <FiAlertCircle size={20} />
               </ToolTip>
