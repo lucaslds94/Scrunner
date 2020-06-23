@@ -10,7 +10,7 @@ const MOCK_USER = {
   name: "Example",
   email: "example@email.com",
   password: "12345678",
-  is_owner: 1,
+  is_owner: true,
 };
 
 const USER_DB = {
@@ -24,13 +24,20 @@ let MOCK_USER_TO_DELETE = {
   name: "Example",
   email: "accounttest@test.com",
   password: "12345678",
-  is_owner: 1,
+  is_owner: true,
 };
 
 describe("Users routes", () => {
   beforeAll(async () => {
-    const response = await request(app).post("/user").send(MOCK_USER_TO_DELETE);
+    let MOCK_USER_DELETE = {
+      name: "Example",
+      email: "accounttest@test.com",
+      password: "12345678",
+      is_owner: true,
+    };
 
+    const response = await request(app).post("/user").send(MOCK_USER_DELETE);
+    
     MOCK_USER_TO_DELETE.id = response.body.id;
 
     const responseLogin = await request(app).post("/login").send(USER_DB);

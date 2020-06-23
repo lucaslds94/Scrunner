@@ -1,4 +1,5 @@
 const { Router } = require("express");
+
 const { auth } = require("../middlewares/auth.middleware");
 const { user } = require("../middlewares/user.middleware");
 const { team } = require("../middlewares/team.middleware");
@@ -7,6 +8,11 @@ const { isCollaborator } = require("../middlewares/isCollaborator.middleware");
 const { isOwner } = require("../middlewares/isOwner.middleware");
 
 const teamController = require("../controllers/team.controller");
+const {
+  entryTeamValidator,
+  storeTeamValidator,
+  updateTeamValidator,
+} = require("../validators/team.validator");
 
 const routes = Router();
 
@@ -21,10 +27,17 @@ routes.get(
   teamController.details
 );
 
-routes.post("/teams/create/:userId", auth, user, teamController.store);
+routes.post(
+  "/teams/create/:userId",
+  storeTeamValidator,
+  auth,
+  user,
+  teamController.store
+);
 
 routes.post(
   "/teams/entry/:userId",
+  entryTeamValidator,
   auth,
   user,
   isCollaborator,
@@ -33,6 +46,7 @@ routes.post(
 
 routes.put(
   "/teams/update/:teamId/:userId",
+  updateTeamValidator,
   auth,
   user,
   team,

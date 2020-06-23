@@ -6,7 +6,7 @@ const MOCK_USER = {
   name: "Example",
   email: "example_2@email.com",
   password: "12345678",
-  is_owner: 1,
+  is_owner: true,
 };
 
 let USER_DB = {
@@ -18,7 +18,14 @@ let USER_DB = {
 
 describe("Sessions routes", () => {
   beforeAll(async () => {
-    const response = await request(app).post("/user").send(MOCK_USER);
+    let MOCK_USER_TO_DISABLE = {
+      name: "Example",
+      email: "example_2@email.com",
+      password: "12345678",
+      is_owner: true,
+    };
+
+    const response = await request(app).post("/user").send(MOCK_USER_TO_DISABLE);
 
     MOCK_USER.id = response.body.id;
 

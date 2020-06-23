@@ -1,25 +1,28 @@
 const { Router } = require("express");
+const multer = require("multer");
+
 const { auth } = require("../middlewares/auth.middleware");
 const { user } = require("../middlewares/user.middleware");
-
-const multer = require("multer");
+const userController = require("../controllers/user.controller");
+const {
+  storeUserValidator,
+  updateUserValidator,
+} = require("../validators/user.validator");
 const multerConfig = require("../config/multer");
 
 const upload = multer(multerConfig);
-
 const routes = Router();
 
-const userController = require("../controllers/user.controller");
-
-routes.post("/user", userController.store);
+routes.post("/user",  storeUserValidator, userController.store);
 
 routes.put("/user/:userId", user, userController.disable);
 
 routes.put(
   "/user/update/:userId",
+  upload.single("image"),
+  updateUserValidator,
   auth,
   user,
-  upload.single("image"),
   userController.update
 );
 

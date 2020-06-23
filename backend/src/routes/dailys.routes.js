@@ -9,6 +9,8 @@ const { isLeader } = require("../middlewares/isLeader.middleware");
 const { isCollaborator } = require("../middlewares/isCollaborator.middleware");
 const { dailyContent } = require("../middlewares/dailyContent.middleware");
 
+const { storeContentValidator } = require("../validators/daily.validator");
+
 const routes = Router();
 
 const dailyController = require("../controllers/daily.controller");
@@ -34,9 +36,9 @@ routes.get(
   dailyController.indexContent
 );
 
-
 routes.post(
   "/dailys/boards/contents/:teamId/:boardId/:userId",
+  storeContentValidator,
   auth,
   user,
   team,

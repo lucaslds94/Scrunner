@@ -6,6 +6,7 @@ require("./database/");
 
 const express = require("express");
 const cors = require("cors");
+const { errors } = require("celebrate");
 const app = express();
 
 const usersRoutes = require("./routes/users.routes");
@@ -26,5 +27,7 @@ app.use(dashboardRoutes);
 app.use(dailysRoutes);
 app.use(tasksRoutes);
 app.use("/uploads", uploadsRoutes);
+
+app.use(errors());
 
 module.exports = app;

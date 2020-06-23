@@ -29,18 +29,23 @@ describe("Tasks", () => {
 
     USER_DB.token = response.body.token;
 
+    const MOCK_BOARD = {
+      name: "Task board to delete",
+      days: "15",
+    }
+
     const resBoard = await request(app)
       .post(`/tasks/boards/${TASK_BOARD_TO_DELETE.team_id}/${USER_DB.id}`)
       .set("Authorization", `Bearer ${USER_DB.token}`)
-      .send(TASK_BOARD_TO_DELETE);
+      .send(MOCK_BOARD);
 
     TASK_BOARD_TO_DELETE.id = resBoard.body.board.id;
 
     const NEW_TASK_TO_DELETE = {
       title: "New title",
       description: "No description",
-      task_points: 10,
-      task_column: 1,
+      task_points: "10",
+      task_column: "1",
     };
 
     const resContent = await request(app)
@@ -118,8 +123,8 @@ describe("Tasks", () => {
     const NEW_TASK = {
       title: "New title",
       description: "No description",
-      task_points: 10,
-      task_column: 1,
+      task_points: "10",
+      task_column: "1",
     };
 
     const response = await request(app)
@@ -156,7 +161,7 @@ describe("Tasks", () => {
 
   it("Should be able to change a task column ", async () => {
     const TASK_ID = 1;
-    const columnId = 2;
+    const columnId = '2';
 
     const response = await request(app)
       .put(`/tasks/contents/${TEAM_ID}/${TASK_ID}/${USER_DB.id}`)

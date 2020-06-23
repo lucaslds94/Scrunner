@@ -9,6 +9,12 @@ const { isCollaborator } = require("../middlewares/isCollaborator.middleware");
 const { taskBoard } = require("../middlewares/taskBoard.middlware");
 const { taskContent } = require("../middlewares/taskContent.middleware");
 
+const {
+  storeBoardValidator,
+  updateContentValidator,
+  storeContentValidator,
+} = require("../validators/task.validator");
+
 const taskController = require("../controllers/task.controller");
 
 const routes = Router();
@@ -36,6 +42,7 @@ routes.get(
 
 routes.post(
   "/tasks/boards/:teamId/:userId",
+  storeBoardValidator,
   auth,
   user,
   team,
@@ -44,9 +51,10 @@ routes.post(
   isLeader,
   taskController.storeBoard
 );
- 
+
 routes.post(
   "/tasks/contents/:teamId/:boardId/:userId",
+  storeContentValidator,
   auth,
   user,
   team,
@@ -82,6 +90,7 @@ routes.delete(
 
 routes.put(
   "/tasks/contents/:teamId/:contentId/:userId",
+  updateContentValidator,
   auth,
   user,
   team,

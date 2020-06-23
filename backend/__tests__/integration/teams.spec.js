@@ -20,10 +20,15 @@ describe("Teams Routes", () => {
 
     USER_DB.token = response.body.token;
 
+    const MOCK_TEAM = {
+      name: "Test team",
+      category: "Test",
+    }
+
     const responseTeam = await request(app)
       .post(`/teams/create/${USER_DB.id}`)
       .set("Authorization", `Bearer ${USER_DB.token}`)
-      .send(MOCK_TEAM_TO_DELETE);
+      .send(MOCK_TEAM);
 
     MOCK_TEAM_TO_DELETE.id = responseTeam.body.team.id;
   });
