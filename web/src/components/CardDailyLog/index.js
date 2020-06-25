@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import { FaCrown } from "react-icons/fa";
 import { BsTrash } from "react-icons/bs";
+import { FiEdit } from "react-icons/fi";
 import "./styles.css";
 
 import ModalConfirmAction from "../ModalConfirmAction";
@@ -15,6 +16,7 @@ export default function CardDailyLog({
   image_url,
   deleteDailyLog,
   isMyDaily = false,
+  handleEditDaily,
 }) {
   const [modalConfirmAction, setModalConfirmAction] = useState(false);
 
@@ -36,11 +38,23 @@ export default function CardDailyLog({
           <div className="userAvatar avatarLog">
             <img src={image_url} alt={name} />
           </div>
-          <p> {name} </p>
-          {leader && (
-            <span className="LeaderCrown">
-              <FaCrown size={20} color={"#B2B2B2"} />
-            </span>
+          <p>
+            {" "}
+            {name}{" "}
+            {leader && (
+              <span className="LeaderCrown">
+                <FaCrown size={20} color={"#B2B2B2"} />
+              </span>
+            )}
+          </p>
+
+          {isMyDaily && (
+            <div
+              onClick={() => handleEditDaily()}
+              className="dailylog-edit-button"
+            >
+              <FiEdit size={20} color={"#BBB"} />
+            </div>
           )}
         </div>
 
@@ -51,7 +65,9 @@ export default function CardDailyLog({
               {didYesterday.trim().length > 1 ? (
                 <p> {didYesterday} </p>
               ) : (
-                <span className="default-daily-text">Registro não realizado.</span>
+                <span className="default-daily-text">
+                  Registro não realizado.
+                </span>
               )}
             </div>
 
@@ -60,7 +76,9 @@ export default function CardDailyLog({
               {doToday.trim().length > 1 ? (
                 <p> {doToday} </p>
               ) : (
-                <span className="default-daily-text">Registro não realizado.</span>
+                <span className="default-daily-text">
+                  Registro não realizado.
+                </span>
               )}
             </div>
 
@@ -69,7 +87,9 @@ export default function CardDailyLog({
               {problems.trim().length > 1 ? (
                 <p> {problems} </p>
               ) : (
-                <span className="default-daily-text">Registro não realizado.</span>
+                <span className="default-daily-text">
+                  Registro não realizado.
+                </span>
               )}
             </div>
           </div>

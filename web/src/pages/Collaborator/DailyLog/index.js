@@ -33,6 +33,8 @@ export default function DailyLog() {
   const [leaderContent, setLeaderContent] = useState({});
   const [collaboratorContent, setCollaboratorContent] = useState([]);
   const [registeredDaily, setRegisteredDaily] = useState(false);
+  const [userDailyContent, setUserDailyContent] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
 
   const user = getLocalStorage("@Scrunner:user");
   const history = useHistory();
@@ -70,6 +72,7 @@ export default function DailyLog() {
 
       setLeaderContent(leaderContent);
       setRegisteredDaily(!!registeredDaily);
+      setUserDailyContent(registeredDaily);
       setCollaboratorContent(collaboratorContent);
       setDailyCount(response.data.dailyContents.length);
       setLocalStorage("@Scrunner:token", response.data.token);
@@ -118,7 +121,7 @@ export default function DailyLog() {
         ...response.data.content,
         user: {
           name: user.name,
-          image_url: user.image_url
+          image_url: user.image_url,
         },
       };
 
@@ -127,7 +130,7 @@ export default function DailyLog() {
       );
 
       !isLeader
-        ? setCollaboratorContent([...collaboratorContent, newContent])
+        ? setCollaboratorContent([newContent, ...collaboratorContent])
         : setLeaderContent(newContent);
 
       setLocalStorage("@Scrunner:token", response.data.token);
@@ -164,6 +167,8 @@ export default function DailyLog() {
       }
 
       setRegisteredDaily(false);
+      setUserDailyContent(" ");
+      setIsUpdating(false);
       setDailyCount(dailyCount - 1);
 
       toast.info(" Daily excluída com sucesso.");
@@ -172,12 +177,76 @@ export default function DailyLog() {
     }
   };
 
+  const handleEditDaily = async () => {
+    const { teamId, boardId } = history.location.state;
+    const token = getLocalStorage("@Scrunner:token");
+
+    const response = await api.get(
+      `/dailys/boards/contents/${teamId}/${boardId}/${user.id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const userDaily = response.data.dailyContents.find(
+      (daily) => daily.user.id === user.id
+    );
+
+    setUserDailyContent(userDaily);
+    setIsUpdating(true);
+    setShowModal(true);
+  };
+
+  const updateDailyContent = async ({ did_yesterday, do_today, problems }) => {
+    const { boardId, users } = history.location.state;
+
+    const token = getLocalStorage("@Scrunner:token");
+    setLoading(true);
+
+    try {
+      const response = await api.put(
+        `/dailys/boards/contents/update/${boardId}/${user.id}`,
+        { did_yesterday, do_today, problems },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      const newContent = {
+        ...response.data.newContent,
+        user: {
+          name: user.name,
+          image_url: user.image_url,
+        },
+      };
+
+      const isLeader = users.find(
+        (colab) => colab.id === user.id && colab.is_leader
+      );
+
+      !isLeader
+        ? setCollaboratorContent([newContent, ...collaboratorContent])
+        : setLeaderContent(newContent);
+
+      setLocalStorage("@Scrunner:token", response.data.token);
+
+      toast.success("Daily atualizada com sucesso.");
+    } catch (error) {
+      toast.error("Ocorreu um erro ao atualizar a daily.");
+    }
+
+    setLoading(false);
+  };
+
   return (
     <div className="dailyLog">
       {showModal && (
         <ModalCriarDaily
-          handleModalCreateDaily={() => setShowModal(false)}
+          handleCloseModalDailyContent={() => setShowModal(false)}
           createDailyContent={createDailyContent}
+          updateDailyContent={updateDailyContent}
+          isUpdating={isUpdating}
+          userDailyContent={userDailyContent}
         />
       )}
       <Header />
@@ -242,6 +311,7 @@ export default function DailyLog() {
                   image_url={leaderContent.user.image_url}
                   deleteDailyLog={() => deleteDailyLog(leaderContent.id, true)}
                   isMyDaily={leaderContent.user_id === user.id}
+                  handleEditDaily={handleEditDaily}
                 />
               )}
             </div>
@@ -266,6 +336,7 @@ export default function DailyLog() {
                   image_url={content.user.image_url}
                   deleteDailyLog={() => deleteDailyLog(content.id, false)}
                   isMyDaily={content.user_id === user.id}
+                  handleEditDaily={handleEditDaily}
                 />
               ))}
             </div>

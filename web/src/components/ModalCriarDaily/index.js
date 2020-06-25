@@ -4,33 +4,49 @@ import "./styles.css";
 import { useState } from "react";
 
 export default function ModalCriarDaily({
-  handleModalCreateDaily,
+  handleCloseModalDailyContent,
   createDailyContent,
+  updateDailyContent,
+  isUpdating,
+  userDailyContent,
 }) {
-  const [didYesterday, setDidYesterday] = useState("");
-  const [doToday, setDoToday] = useState("");
-  const [problems, setProblems] = useState("");
+  const [didYesterday, setDidYesterday] = useState(
+    userDailyContent?.did_yesterday || " "
+  );
+  const [doToday, setDoToday] = useState(userDailyContent?.do_today || " ");
+  const [problems, setProblems] = useState(userDailyContent?.problems || " ");
 
-  const handleCreateDailyContent = () => {
-    createDailyContent({
-      did_yesterday: didYesterday,
-      do_today: doToday,
-      problems,
-    });
-    handleModalCreateDaily();
+  console.log(userDailyContent);
+
+  const handleSaveDailyContent = () => {
+    if (isUpdating) {
+      updateDailyContent({
+        did_yesterday: didYesterday,
+        do_today: doToday,
+        problems,
+      });
+    } else {
+      createDailyContent({
+        did_yesterday: didYesterday,
+        do_today: doToday,
+        problems,
+      });
+    }
+
+    handleCloseModalDailyContent();
   };
 
   return (
     <div className="modal-createDaily">
       <div className="modal-fade">
-        <button onClick={handleModalCreateDaily}></button>
+        <button onClick={handleCloseModalDailyContent}></button>
       </div>
       <div className="modalContainer-createDaily">
         <div className="containerCenter-createDaily">
           <button
             id="closeModal"
             type="button"
-            onClick={handleModalCreateDaily}
+            onClick={handleCloseModalDailyContent}
           >
             <FaTimes size={20} color={"#737FF3"} />
           </button>
@@ -45,6 +61,7 @@ export default function ModalCriarDaily({
               type="input"
               name="did_yesterday"
               className="text-daily-content"
+              value= {didYesterday}
               onChange={(e) => setDidYesterday(e.target.value)}
             />
           </div>
@@ -56,6 +73,7 @@ export default function ModalCriarDaily({
               type="input"
               name="do_today"
               className="text-daily-content"
+              value= {doToday}
               onChange={(e) => setDoToday(e.target.value)}
             />
           </div>
@@ -69,15 +87,13 @@ export default function ModalCriarDaily({
               type="input"
               name="problems"
               className="text-daily-content"
+              value= {problems}
               onChange={(e) => setProblems(e.target.value)}
             />
           </div>
 
           <div className="divBotao">
-            <button
-              className="btnCriarDaily"
-              onClick={handleCreateDailyContent}
-            >
+            <button className="btnCriarDaily" onClick={handleSaveDailyContent}>
               <FaCheck />
               Salvar
             </button>
