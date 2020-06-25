@@ -160,21 +160,19 @@ describe("Dashboard", () => {
   it("Should be able to create a daily content", async () => {
     const BOARD_ID = 1;
     const CONTENT_DATA = {
-      did_yesterday: 'Making Tests',
-      do_today: 'Do Tests again',
-      problems: 'Tests'
-    }
-    
+      did_yesterday: "Making Tests",
+      do_today: "Do Tests again",
+      problems: "Tests",
+    };
+
     const response = await request(app)
-      .post(
-        `/dailys/boards/contents/${TEAM_ID}/${BOARD_ID}/${USER_DB.id}`
-      )
+      .post(`/dailys/boards/contents/${TEAM_ID}/${BOARD_ID}/${USER_DB.id}`)
       .send(CONTENT_DATA)
       .set("Authorization", `Bearer ${USER_DB.token}`);
 
     expect(response.status).toEqual(200);
-    expect(response.body).toHaveProperty('content');
-    expect(response.body).toHaveProperty('token');
+    expect(response.body).toHaveProperty("content");
+    expect(response.body).toHaveProperty("token");
   });
 
   it("Should be able to delete a daily content", async () => {
@@ -199,9 +197,9 @@ describe("Dashboard", () => {
       .set("Authorization", `Bearer ${USER_DB.token}`);
 
     expect(response.status).toEqual(400);
-    expect(response.body).toHaveProperty('err');
+    expect(response.body).toHaveProperty("err");
   });
-  
+
   it("Should not be able to delete a daily content that the user is not the author", async () => {
     const BOARD_ID = 1;
     const NOT_MY_DAILY_CONTENT = 3;
@@ -213,6 +211,40 @@ describe("Dashboard", () => {
       .set("Authorization", `Bearer ${USER_DB.token}`);
 
     expect(response.status).toEqual(403);
-    expect(response.body).toHaveProperty('err');
+    expect(response.body).toHaveProperty("err");
   });
+
+  it("Should be able to update a daily content", async () => {
+    const BOARD_ID = 1;
+    const NEW_CONTENT = {
+      did_yesterday: "Fiz algo ontem.",
+      do_today: "Estou fazendo algo hoje.",
+      problems: "Muitos problemas.",
+    };
+    const response = await request(app)
+      .put(`/dailys/boards/contents/update/${BOARD_ID}/${USER_DB.id}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`)
+      .send(NEW_CONTENT);
+
+    expect(response.status).toEqual(200);
+    expect(response.body).toHaveProperty("newContent");
+    expect(response.body).toHaveProperty("token");
+  });
+
+  it("Should not be able to update a daily content from another user", async () => {
+    const BOARD_ID = 2;
+    const NEW_CONTENT = {
+      did_yesterday: "Fiz algo ontem.",
+      do_today: "Estou fazendo algo hoje.",
+      problems: "Muitos problemas.",
+    };
+    const response = await request(app)
+      .put(`/dailys/boards/contents/update/${BOARD_ID}/${USER_DB.id}`)
+      .set("Authorization", `Bearer ${USER_DB.token}`)
+      .send(NEW_CONTENT);
+
+    expect(response.status).toEqual(403);
+    expect(response.body).toHaveProperty("err");
+  });
+  
 });

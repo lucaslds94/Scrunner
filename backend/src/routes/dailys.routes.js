@@ -58,6 +58,15 @@ routes.post(
   dailyController.store
 );
 
+routes.put(
+  "/dailys/boards/contents/update/:boardId/:userId",
+  storeContentValidator,
+  auth,
+  user,
+  board,
+  dailyController.updateContent
+);
+
 routes.delete(
   "/dailys/boards/:teamId/:boardId/:userId",
   auth,

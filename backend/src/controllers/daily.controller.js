@@ -7,6 +7,7 @@ const { createToken } = require("../utils/createToken");
 const { serializedObject } = require("../utils/serializedImage");
 
 const { Op } = require("sequelize");
+const { options } = require("../routes/teams.routes");
 
 module.exports = {
   async index(req, res) {
@@ -113,13 +114,12 @@ module.exports = {
     });
 
     dailyContents = dailyContents.map((objectContent) => {
-    
-     const user = serializedObject(objectContent.dataValues.user.dataValues);
+      const user = serializedObject(objectContent.dataValues.user.dataValues);
 
-     
-     user.is_leader = objectContent.dataValues.user.dataValues.user_isLeader[0].is_leader;
+      user.is_leader =
+        objectContent.dataValues.user.dataValues.user_isLeader[0].is_leader;
 
-     delete user.user_isLeader; 
+      delete user.user_isLeader;
 
       return {
         ...objectContent.dataValues,
@@ -188,6 +188,44 @@ module.exports = {
     const token = createToken(userId);
 
     return res.json({ board, token });
+  },
+
+  async updateContent(req, res) {
+    const { boardId, userId } = req.params;
+    const { did_yesterday, do_today, problems } = req.body;
+
+    const contentInBoard = await DailyContent.findOne({
+      where: {
+        user_id: userId,
+        daily_board_id: boardId,
+      },
+    });
+
+    if (!contentInBoard) {
+      return res
+        .status(403)
+        .json({ err: "User not allowed to update this board" });
+    }
+
+    const [, newContent] = await DailyContent.update(
+      {
+        did_yesterday,
+        do_today,
+        problems,
+      },
+      {
+        where: {
+          user_id: userId,
+          daily_board_id: boardId,
+        },
+        returning: true,
+        plain: true,
+      }
+    );
+
+    const token = createToken(userId);
+
+    return res.json({ newContent, token });
   },
 
   async deleteBoard(req, res) {
