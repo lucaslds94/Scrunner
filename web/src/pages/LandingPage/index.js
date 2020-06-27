@@ -441,13 +441,13 @@ export default function LandingPage() {
 
             <p id="textoClaro">Nossas redes sociais:</p>
             <div className="redesSociais">
-              <a href="http://facebook.com">
+              <a target="_blank" rel="noopener noreferrer" href="http://facebook.com">
                 <img src={facebook_icon} alt="Logo Facebook" />
               </a>
-              <a href="http://linkedin.com">
+              <a target="_blank"  rel="noopener noreferrer" href="http://linkedin.com">
                 <img src={linkedin_icon} alt="Logo linkedin" />
               </a>
-              <a href="http://instagram.com">
+              <a target="_blank" rel="noopener noreferrer" href="http://instagram.com">
                 <img src={instagram_icon} alt="Logo instagram" />
               </a>
             </div>
@@ -459,11 +459,20 @@ export default function LandingPage() {
             <p className="textoNegrito">Nos envie uma mensagem</p>
             <br />
             <div className="dadosUsuario">
-              <input type="text" name="nome" placeholder="Nome" required />
+              <label className="label-form" htmlFor="nome">
+                Nome
+              </label>
+              <input type="text" name="nome" id="nome" placeholder="Jhon Doe" required />
               <br />
-              <input type="email" name="email" placeholder="Email" required />
+              <label className="label-form" htmlFor="email-adress">
+                Email
+              </label>
+              <input type="email" name="email" id="email-adress" placeholder="jhondoe@mail.com" required />
               <br />
-              <input type="tel" name="tel" placeholder="Telefone" required />
+              <label className="label-form" htmlFor="tel">
+                Telefone
+              </label>
+              <input type="tel" name="tel" id="tel" placeholder="99-99999999" required />
               <br />
             </div>
             <div>
@@ -471,24 +480,14 @@ export default function LandingPage() {
               <br />
               <ul className="preferences-choice">
                 <li className="preference">
-                  <input
-                    type="radio"
-                    name="prefComunic"
-                    id="prefTel"
-                    value="prefTel"
-                  />
+                  <input type="radio" name="prefTel" id="prefTel" />
                   <label className="textoCinza" htmlFor="prefTel">
                     Telefone
                   </label>
                 </li>
 
                 <li className="preference">
-                  <input
-                    type="radio"
-                    name="prefComunic"
-                    id="prefEmail"
-                    value="prefEmail"
-                  />
+                  <input type="radio" name="prefEmail" id="prefEmail" />
                   <label className="textoCinza" htmlFor="prefEmail">
                     Email
                   </label>
@@ -499,11 +498,16 @@ export default function LandingPage() {
               <br />
             </div>
             <div className="textoForm">
-              <label className="textoCinza" htmlFor=" formMsg">
+              <label className="textoCinza" htmlFor="formMsg">
                 Como podemos ajudar?
               </label>
               <br />
-              <textarea name="" id="formMsg" cols="30" rows="3"></textarea>
+              <textarea
+                name="formMsg"
+                id="formMsg"
+                cols="30"
+                rows="3"
+              ></textarea>
             </div>
             <br />
             <div className="containerBtn">

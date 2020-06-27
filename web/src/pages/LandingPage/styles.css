@@ -581,11 +581,19 @@ main {
   font-weight: 750;
   font-size: 1.25em;
 }
+
+
 .textoCinza {
   color: rgb(136, 136, 136);
 }
+
+.label-form{
+  color: rgb(136, 136, 136);
+  font-size: 14px;
+}
+
 .dadosUsuario {
-  margin: 20px 0 20px;
+  margin: 5px 0 5px;
   display: flex;
   flex-direction: column;
 }
@@ -609,7 +617,7 @@ main {
 .textoForm {
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 .textoForm textarea {
   resize: none;

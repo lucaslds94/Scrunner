@@ -88,6 +88,7 @@
   font-size: 14px;
   font-weight: bold;
   transition: box-shadow 0.3s;
+  margin-top: 20px;
 }
 
 .email>input{
@@ -107,6 +108,7 @@
   font-size: 14px;
   font-weight: bold;
   position: relative;
+  margin-top: 10px;
 }
 
 .senha>input{

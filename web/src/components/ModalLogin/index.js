@@ -76,20 +76,6 @@ export default function ModalLogin({ handleModalLogin, login }) {
                 {!showPass && <FaEye size={20} color={"#c3c3c3"} />}
               </button>
             </div>
-            <div className="checkBox">
-              <div className="connect-choice">
-                <input
-                  value="1"
-                  type="checkbox"
-                  name="manterConec"
-                  id="manterConec"
-                />
-                <label htmlFor="manterConec">Manter conectado</label>
-              </div>
-              <button type="button" id="esqSenha">
-                Esqueceu a senha?
-              </button>
-            </div>
           </form>
           <button onClick={handleLogin} className="btn-continue-login">
             Continuar
