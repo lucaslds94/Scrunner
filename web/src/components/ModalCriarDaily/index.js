@@ -16,7 +16,7 @@ export default function ModalCriarDaily({
   const [doToday, setDoToday] = useState(userDailyContent?.do_today || " ");
   const [problems, setProblems] = useState(userDailyContent?.problems || " ");
 
-  console.log(userDailyContent);
+
 
   const handleSaveDailyContent = () => {
     if (isUpdating) {

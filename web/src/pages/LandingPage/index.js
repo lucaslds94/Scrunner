@@ -186,7 +186,10 @@ export default function LandingPage() {
 
       <header>
         <nav>
-          <BurgerMenu />
+          <BurgerMenu
+            handleModalEscolha={handleModalEscolha}
+            handleModalLogin={handleModalLogin}
+          />
           <div>
             <button className="linkLogo" onClick={scrollToTop}>
               <img className="logoNav" src={LogoV2} alt="Logo Scrunner" />
@@ -441,13 +444,25 @@ export default function LandingPage() {
 
             <p id="textoClaro">Nossas redes sociais:</p>
             <div className="redesSociais">
-              <a target="_blank" rel="noopener noreferrer" href="http://facebook.com">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="http://facebook.com"
+              >
                 <img src={facebook_icon} alt="Logo Facebook" />
               </a>
-              <a target="_blank"  rel="noopener noreferrer" href="http://linkedin.com">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="http://linkedin.com"
+              >
                 <img src={linkedin_icon} alt="Logo linkedin" />
               </a>
-              <a target="_blank" rel="noopener noreferrer" href="http://instagram.com">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="http://instagram.com"
+              >
                 <img src={instagram_icon} alt="Logo instagram" />
               </a>
             </div>
@@ -462,17 +477,35 @@ export default function LandingPage() {
               <label className="label-form" htmlFor="nome">
                 Nome
               </label>
-              <input type="text" name="nome" id="nome" placeholder="Jhon Doe" required />
+              <input
+                type="text"
+                name="nome"
+                id="nome"
+                placeholder="Jhon Doe"
+                required
+              />
               <br />
               <label className="label-form" htmlFor="email-adress">
                 Email
               </label>
-              <input type="email" name="email" id="email-adress" placeholder="jhondoe@mail.com" required />
+              <input
+                type="email"
+                name="email"
+                id="email-adress"
+                placeholder="jhondoe@mail.com"
+                required
+              />
               <br />
               <label className="label-form" htmlFor="tel">
                 Telefone
               </label>
-              <input type="tel" name="tel" id="tel" placeholder="99-99999999" required />
+              <input
+                type="tel"
+                name="tel"
+                id="tel"
+                placeholder="99-99999999"
+                required
+              />
               <br />
             </div>
             <div>

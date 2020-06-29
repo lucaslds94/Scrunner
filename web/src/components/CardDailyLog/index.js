@@ -42,7 +42,7 @@ export default function CardDailyLog({
             {" "}
             {name}{" "}
             {leader && (
-              <span className="LeaderCrown">
+              <span className="LeaderCrown" title="Líder do time">
                 <FaCrown size={20} color={"#B2B2B2"} />
               </span>
             )}
@@ -52,7 +52,9 @@ export default function CardDailyLog({
             <div
               onClick={() => handleEditDaily()}
               className="dailylog-edit-button"
+              title="Editar"
             >
+              
               <FiEdit size={20} color={"#BBB"} />
             </div>
           )}
@@ -97,6 +99,7 @@ export default function CardDailyLog({
             <div
               onClick={() => setModalConfirmAction(true)}
               className="dailylog-trash-button"
+              title="Excluir"
             >
               <BsTrash size={25} color={"#BBB"} />
             </div>

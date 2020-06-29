@@ -4,7 +4,7 @@ import { Link } from "react-scroll";
 
 import "./styles.css";
 
-export default function BurgerMenu() {
+export default function BurgerMenu({ handleModalEscolha, handleModalLogin }) {
   const [showBurger, setShowBurger] = useState(false);
 
   const handleClickOption = () => {
@@ -79,6 +79,32 @@ export default function BurgerMenu() {
             </Link>
           </li>
         </ul>
+        <div className="burger-login-opt">
+            <li>
+              <button
+                type="button"
+                className="burger-logon"
+                onClick={() => {
+                  handleModalEscolha();
+                  setShowBurger(false);
+                }}
+              >
+                Cadastrar-se
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                className="burger-login "
+                onClick={() => {
+                  handleModalLogin();
+                  setShowBurger(false);
+                }}
+              >
+                Fazer Login
+              </button>
+            </li>
+          </div>
       </div>
     </>
   );

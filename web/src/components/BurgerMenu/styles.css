@@ -17,9 +17,15 @@
   position: absolute;
   top: 60px;
   left: -100vw;
-  height: 100vh;
+  height: calc(100vh - 60px);
   width: 70%;
   transition: left 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  background-color: #737ff3;
+  justify-content: flex-start;
+
+  padding: 60px 40px;
 }
 
 .active-burger {
@@ -29,19 +35,13 @@
 .menu-list {
   display: flex;
   flex-direction: column;
-  background-color: #737ff3;
-
   width: 100%;
-  padding-top: 50px;
-
   z-index: 11;
 }
 
 .menu-list a {
   height: 80px;
   width: 100%;
-
-  padding-left: 45px;
 }
 
 .burger-fade {
@@ -59,6 +59,52 @@
   height: 100%;
   background-color: transparent;
   border: none;
+}
+
+
+.burger-login-opt {
+  display:flex;
+  justify-content: space-evenly;
+  margin-top: 30px;
+}
+
+.burger-logon {
+background-color: white;
+color: #737ff3;
+font-weight: bold;
+border-radius: 50px;
+transition: all 0.2s;
+padding: 8px 17px;
+border: none;
+cursor: pointer;
+margin-right: 10px;
+outline: none;
+
+border: 1.5px solid transparent;
+}
+
+.burger-logon:hover {
+background-color: rgb(76, 86, 179);
+color: #fff;
+border: 1.5px solid #fff;
+}
+
+.burger-login {
+font-weight: bold;
+color: #fff;
+border: none;
+background: transparent;
+cursor: pointer;
+padding: 8px 17px;
+outline: none;
+transition: all 0.2s;
+border: 1.5px solid transparent;
+margin-right: 10px;
+}
+.burger-login:hover {
+border-radius: 50px;
+background-color: rgb(76, 86, 179);
+border: 1.5px solid #fff;
 }
 
 @media (max-width: 970px) {

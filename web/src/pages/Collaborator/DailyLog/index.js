@@ -144,7 +144,6 @@ export default function DailyLog() {
     setLoading(false);
   };
 
-  
   const handleEditDaily = async () => {
     const { teamId, boardId } = history.location.state;
     const token = getLocalStorage("@Scrunner:token");
@@ -196,14 +195,14 @@ export default function DailyLog() {
         (content) => content.user_id !== user.id
       );
 
-      toast.success("Daily atualizada com sucesso.");
       !isLeader
         ? setCollaboratorContent([...filteredContent, newContent])
         : setLeaderContent(newContent);
 
+      toast.success("Daily atualizada com sucesso");
       setLocalStorage("@Scrunner:token", response.data.token);
     } catch (error) {
-      toast.error("Ocorreu um erro ao atualizar a daily.");
+      toast.error("Ocorreu um erro ao atualizar a daily");
     }
 
     setLoading(false);
@@ -241,7 +240,6 @@ export default function DailyLog() {
       toast.error("Ocorreu um erro inesperado.");
     }
   };
-
 
   return (
     <div className="dailyLog">

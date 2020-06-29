@@ -71,7 +71,7 @@
   font-size: 17px;
   font-weight: normal;
   color: #505050;
-  margin: 10px 0 20px 0;
+  margin: 10px 0 30px 0;
 }
 
 .containerRight>form{
@@ -88,7 +88,6 @@
   font-size: 14px;
   font-weight: bold;
   transition: box-shadow 0.3s;
-  margin-top: 20px;
 }
 
 .email>input{
@@ -108,7 +107,6 @@
   font-size: 14px;
   font-weight: bold;
   position: relative;
-  margin-top: 10px;
 }
 
 .senha>input{
@@ -219,7 +217,7 @@
   align-items: center;
   width: 100%;
   height: 40px;
-  margin-top: 70px;
+  margin-top: 60px;
   border: 0;
   border-radius: 5px;
   background:#737FF3;

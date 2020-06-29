@@ -1,16 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
 
-*{
+* {
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   margin: 0;
-  padding:0;
-  outline-color: #737FF3;
- 
+  padding: 0;
+  outline-color: transparent;
+  outline-width: 0px;
 }
 
 html {
-  scroll-behavior: smooth;    
+  scroll-behavior: smooth;
 }
 
 ::-webkit-scrollbar {
@@ -18,7 +18,7 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background: #f1f1f1;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -26,13 +26,17 @@ html {
 }
 
 body {
-  -webkit-font-smoothing: antialiased; 
+  -webkit-font-smoothing: antialiased;
+}
+
+input {
+  outline-width: 1px;
+  outline-color: #737ff3;
 }
 
 .Toastify__toast--info {
-  background: #332a58 ;
+  background: #332a58;
   border-radius: 4px;
-
 }
 .Toastify__toast--success {
   background: #7178ca;
