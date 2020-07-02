@@ -92,10 +92,15 @@ export default function LandingPage() {
     try {
       await api.post("/user", companyModel);
 
-      login(companyModel, true);
+      toast.success(
+        "Conta criada com sucesso, verifique seu email para validar sua conta!",
+        {
+          autoClose: false,
+        }
+      );
     } catch (error) {
       if (error.response.data.err) {
-        return toast.error("Email já cadastrado como empresa!");
+        return toast.error("Email já cadastrado!");
       }
 
       toast.error("Ocorreu um erro inesperado.");
@@ -115,17 +120,22 @@ export default function LandingPage() {
     try {
       await api.post("/user", colabModel);
 
-      login(colabModel, true);
+      toast.success(
+        "Conta criada com sucesso, verifique seu email para validar sua conta!",
+        {
+          autoClose: false,
+        }
+      );
     } catch (error) {
       if (error.response.data.err) {
-        return toast.error("Email já cadastrado como colaborador!");
+        return toast.error("Email já cadastrado!");
       }
 
       toast.error("Ocorreu um erro inesperado.");
     }
   };
 
-  const login = async (dataLogin, afterRegister = false) => {
+  const login = async (dataLogin) => {
     try {
       const modelUserLogin = {
         email: dataLogin.email.toLowerCase().trim(),
@@ -139,14 +149,12 @@ export default function LandingPage() {
       setLocalStorage("@Scrunner:user", response.data.user);
       setLocalStorage("@Scrunner:token", response.data.token);
 
-      if (afterRegister) {
-        return history.push("/dashboard", { afterRegister: true });
-      }
-
       history.push("/dashboard");
     } catch (error) {
       if (error.response && error.response.status === 403) {
-        return toast.error("Sua conta está desativada.");
+        return toast.error(
+          "Sua conta não está ativa, verifique seu email para ativa-la."
+        );
       }
 
       if (error.response && error.response.data.err) {
