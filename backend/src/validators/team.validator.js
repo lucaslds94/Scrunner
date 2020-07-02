@@ -28,7 +28,7 @@ const updateTeamValidator = celebrate(
     [Segments.BODY]: Joi.object().keys({
       name: Joi.string().required(),
       category: Joi.string().required(),
-      leader_id: Joi.number(),
+      leader_id: Joi.number().allow("", null),
     }),
   },
   {

@@ -5,17 +5,17 @@ import { MdKeyboardBackspace } from "react-icons/md";
 
 import bubbleA from "../../assets/bubbleA.svg";
 import bubbleB from "../../assets/bubbleB.svg";
-import notfound from "../../assets/notfound.svg";
+import unauthorized from "../../assets/unauthorized.svg";
 import logo from "../../assets/LogoScrunnerHorizontal.svg";
-
 import BackButton from "../../components/ButtonAction";
 
 import "./styles.css";
 
-const NotFound = () => {
+const Unauthorized = () => {
   const history = useHistory();
+
   const handleRedirect = () => {
-    history.push("/dashboard");
+    history.goBack();
   };
 
   return (
@@ -24,9 +24,8 @@ const NotFound = () => {
       <img src={bubbleB} className="bolhaB" alt="Bolha B" />
       <div className="notfound-content">
         <img className="notfound-logo" src={logo} alt="Scrunner logo" />
-        <img className="notfound-hand" src={notfound} alt="Not found" />
-        <p>Parece que esta página não existe.</p>
-
+        <img className="notfound-hand" src={unauthorized} alt="Not found" />
+        <p>Você não está autorizado a fazer isso.</p>
         <BackButton
           ButtonText="Voltar"
           ButtonIcon={MdKeyboardBackspace}
@@ -38,4 +37,4 @@ const NotFound = () => {
   );
 };
 
-export default NotFound;
+export default Unauthorized;

@@ -105,6 +105,7 @@ module.exports = {
             {
               model: UserTeam,
               as: "user_isLeader",
+              required: false,
               where: { team_id: teamId },
               attributes: ["is_leader"],
             },
@@ -117,7 +118,10 @@ module.exports = {
       const user = serializedObject(objectContent.dataValues.user.dataValues);
 
       user.is_leader =
-        objectContent.dataValues.user.dataValues.user_isLeader[0].is_leader;
+        (objectContent.dataValues.user.dataValues.user_isLeader[0] &&
+          objectContent.dataValues.user.dataValues.user_isLeader[0]
+            .is_leader) ||
+        false;
 
       delete user.user_isLeader;
 

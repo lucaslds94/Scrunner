@@ -18,6 +18,7 @@ import TeamKanban from "./pages/Collaborator/TeamKanban";
 import Profile from "./pages/Profile";
 
 import NotFound from "./pages/NotFound";
+import Unauthorized from "./pages/Unauthorized";
 
 export default function Routes() {
   return (
@@ -45,25 +46,25 @@ export default function Routes() {
         <PrivateRoute
           path="/times/daily/:name"
           componentColab={DailyColab}
-          componentOwner={() => <h1>Você não tem acesso a essa página</h1>}
+          componentOwner={Unauthorized}
           exact
         />
         <PrivateRoute
           path="/times/dailylog/:name"
           componentColab={DailyLog}
-          componentOwner={() => <h1>Você não tem acesso a essa página</h1>}
+          componentOwner={Unauthorized}
           exact
         />
         <PrivateRoute
           path="/times/tarefas/:name"
           componentColab={TasksColab}
-          componentOwner={() => <h1>Você não tem acesso a essa página</h1>}
+          componentOwner={Unauthorized}
           exact
         />
         <PrivateRoute
           path="/times/kanban/:name/:boardTitle"
           componentColab={TeamKanban}
-          componentOwner={() => <h1>Você não tem acesso a essa página</h1>}
+          componentOwner={Unauthorized}
           exact
         />
         <PrivateRoute
