@@ -1,12 +1,17 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
 
+const { jwt } = require("../config/auth");
+const { verify, decode } = require("jsonwebtoken");
+
 const { createToken } = require("../utils/createToken");
 const { serializedObject } = require("../utils/serializedImage");
+const { sendEmail } = require("../utils/sendEmail");
 
 const path = require("path");
 const fs = require("fs");
 const { promisify } = require("util");
+
 const unlink = promisify(fs.unlink);
 
 const defaultImages = [
@@ -35,12 +40,20 @@ module.exports = {
         name,
         image: defaultImages[randomIndex],
         is_owner,
-        is_active: true,
+        is_active: false,
       });
 
-      delete user.dataValues.password;
+      try {
+        if (process.env.NODE_ENV !== "test") {
+          sendEmail(user.dataValues);
+        }
 
-      return res.json(user.dataValues);
+        delete user.dataValues.password;
+
+        return res.json(user.dataValues);
+      } catch (error) {
+        return res.status(500).json({ err: "Error sending the e-mail" });
+      }
     }
 
     return res.status(409).json({ err: "Email is already in use" });
@@ -82,14 +95,14 @@ module.exports = {
 
         objUserToUpdate.password = password;
       } else {
-        if(image){
+        if (image) {
           try {
             await unlink(path.resolve(__dirname, "..", "..", "uploads", image));
           } catch (error) {
             return res.status(500).json({ err: "Internal server error" });
           }
         }
-        
+
         return res.status(401).json({ err: "Incorrect password combination" });
       }
     }
@@ -121,5 +134,53 @@ module.exports = {
     const token = createToken(userId);
 
     return res.json({ user, token });
+  },
+
+  async validate(req, res) {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader) {
+      return res.status(401).json({ err: "JWT token is missing" });
+    }
+
+    const [, token] = authHeader.split(" ");
+
+    try {
+      verify(token, jwt.secret);
+
+      let { sub } = decode(token);
+
+      sub = JSON.parse(sub);
+
+      let user = await User.findOne({
+        where: {
+          id: sub.id,
+        },
+        raw: true,
+      });
+
+      if (!user) {
+        return res.status(400).json({ err: "User not found" });
+      }
+
+      if (user.is_active) {
+        return res.status(412).json({ err: "Account already active" });
+      }
+
+      user = await User.update(
+        {
+          is_active: true,
+        },
+        {
+          where: {
+            id: sub.id,
+          },
+        }
+      );
+
+      return res.status(204).send();
+    } catch {
+      return res.status(401).json({ err: "Invalid JWT token" });
+    }
   },
 };

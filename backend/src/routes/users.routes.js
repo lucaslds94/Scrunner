@@ -15,6 +15,8 @@ const routes = Router();
 
 routes.post("/user",  storeUserValidator, userController.store);
 
+routes.put("/user/validate", userController.validate);
+
 routes.put("/user/:userId", user, userController.disable);
 
 routes.put(
@@ -25,5 +27,7 @@ routes.put(
   user,
   userController.update
 );
+
+
 
 module.exports = routes;
