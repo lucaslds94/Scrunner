@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import PrivateRoute from "./routes/PrivateRoute";
 
 import LandingPage from "./pages/LandingPage";
+import Validate from "./pages/Validate";
 
 import DashboardLeader from "./pages/Leader/DashboardLeader";
 import TeamsLeader from "./pages/Leader/TeamsLeader";
@@ -25,6 +26,7 @@ export default function Routes() {
     <BrowserRouter>
       <Switch>
         <Route path="/" component={LandingPage} exact />
+        <Route path="/validate/:token" component={Validate} exact />
         <PrivateRoute
           path="/dashboard"
           componentOwner={DashboardLeader}

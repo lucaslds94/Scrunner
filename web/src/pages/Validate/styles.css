@@ -1,0 +1,81 @@
+.validate-container {
+  width: 100%;
+  height: 100vh;
+  background-color: #f4f4f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.validate-content  {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.validate-content .validate-logo { 
+    width: 200px;
+    margin-bottom: 10px;
+}
+
+.validate-image{
+  width: 100%;
+  height: 100%;
+  max-width: 500px;
+}
+
+.bolhaBValidate {
+  top: -15px;
+  left: 0;
+  width: 32%;
+  position: absolute;
+  animation: rotate 12s infinite ;
+}
+.bolhaAValidate {
+  position: absolute;
+  width: 50%;
+  bottom: 0;
+  right: -15px;
+  animation: rotate 14s infinite ;
+}
+
+
+.validate-content p {
+  font-size: 25px;
+  font-weight: 500;
+  color: #363c73;
+  padding-bottom: 20px;
+  padding-top: 5px;
+}
+
+.validate-content .validate-text{
+  font-size: 20px;
+  padding-bottom: 100px;
+  padding-top: 10px;
+}
+
+
+
+
+@keyframes rotate {
+  0% {
+      transform: rotateZ(5deg);
+  }
+  25% {
+      transform: rotateZ(0deg);
+  }
+  50% {
+      transform: rotateZ(5deg);
+  }
+  75% {
+      transform: rotateZ(0deg);
+  }
+  100%{
+      transform: rotateZ(5deg);
+  }
+}
