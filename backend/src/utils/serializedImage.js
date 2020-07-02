@@ -1,9 +1,8 @@
 const serializedArray = (users = []) => {
-  
   return users.map((user) => {
     return {
       ...user,
-      image_url: `http://localhost:3333/uploads/${user.image}`,
+      image_url: `${process.env.API_URL}${process.env.API_PORT}/uploads/${user.image}`,
     };
   });
 };
@@ -11,11 +10,11 @@ const serializedArray = (users = []) => {
 const serializedObject = (user) => {
   return {
     ...user,
-    image_url: `http://localhost:3333/uploads/${user.image}`,
+    image_url: `${process.env.API_URL}${process.env.API_PORT}/uploads/${user.image}`,
   };
 };
 
-module.exports = { 
+module.exports = {
   serializedArray,
-  serializedObject
-}
+  serializedObject,
+};
