@@ -18,7 +18,14 @@ module.exports = {
           category: 'Desenvolvimento',
           created_at: new Date(),
           updated_at: new Date()
-        }
+        },
+        {
+          name: 'Scrunner',
+          code: 'SFLBLEND',
+          category: 'Desenvolvimento',
+          created_at: new Date('04-08-2020'),
+          updated_at: new Date('04-08-2020'),
+        },
       ], 
       {});
     

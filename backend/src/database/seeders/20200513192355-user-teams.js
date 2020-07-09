@@ -74,7 +74,56 @@ module.exports = {
         updated_at: new Date(),
         user_id: 10,
         team_id: 2,
-      }
+      },
+      {
+        is_leader: true,
+        created_at: new Date('04-08-2020'),
+        updated_at: new Date('04-08-2020'),
+        user_id: 11,
+        team_id: 3,
+      },
+      {
+        is_leader: false,
+        created_at: new Date('04-08-2020'),
+        updated_at: new Date('04-08-2020'),
+        user_id: 12,
+        team_id: 3,
+      },
+      {
+        is_leader: false,
+        created_at: new Date('04-08-2020'),
+        updated_at: new Date('04-08-2020'),
+        user_id: 13,
+        team_id: 3,
+      },
+      {
+        is_leader: false,
+        created_at: new Date('04-08-2020'),
+        updated_at: new Date('04-08-2020'),
+        user_id: 14,
+        team_id: 3,
+      },
+      {
+        is_leader: false,
+        created_at: new Date('04-08-2020'),
+        updated_at: new Date('04-08-2020'),
+        user_id: 15,
+        team_id: 3,
+      },
+      {
+        is_leader: false,
+        created_at: new Date('04-08-2020'),
+        updated_at: new Date('04-08-2020'),
+        user_id: 16,
+        team_id: 3,
+      },
+      {
+        is_leader: true,
+        created_at: new Date('04-08-2020'),
+        updated_at: new Date('04-08-2020'),
+        user_id: 17,
+        team_id: 3,
+      },
   ]);
   },
 
