@@ -144,8 +144,8 @@ export default function DashboardLeader() {
             <div className="divider" />
             <div className="cards-area">
               <CardInformation
-                cardTitle="Foram Criados"
-                subTitle={teamsCount > 1 ? "Tarefas" : "Tarefa"}
+                cardTitle="Foram criados"
+                subTitle={teamsCount > 1 ? "Times" : "Time"}
                 number={teamsCount}
                 buttonText="Clique para visulizar os times"
                 toPage={"/times"}

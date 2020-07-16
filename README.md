@@ -90,19 +90,19 @@ O Scrunner tem como objetivo incentivar e facilitar a utilização de metodologi
 ## 💜 Preview
 
 <p  align="center">
-<img  alt="Landing Page"  src=".github/preview_landing.png"  width="100%">
+<img  alt="Landing Page"  src=".github/landing.gif"  width="100%">
 </p>
 
 <p  align="center">
-<img  alt="Dashboard Leader"  src=".github/preview_leader_1.png"  width="100%">
+<img  alt="Time"  src=".github/time.gif"  width="100%">
 </p>
 
 <p  align="center">
-<img  alt="Dashboard Colab"  src=".github/preview_colab_1.png"  width="100%">
+<img  alt="Kanban"  src=".github/kanban.gif"  width="100%">
 </p>
 
 <p  align="center">
-<img  alt="Kanbam Colab"  src=".github/preview_colab_2.png"  width="100%">
+<img  alt="Daily"  src=".github/daily.gif"  width="100%">
 </p>
 
 ## 🤠 Getting Started
@@ -115,7 +115,7 @@ Você precisa clonar o repositório digitando em seu terminal `$ git clone https
 
 - Logo após clonar o repositório, navegue até a pasta backend `$ cd backend/` e execute o comando `yarn install` ou `npm install`.
 
-- Dentro da pasta backend, abra o arquivo `example.env` e substitua seus valores pelas informações correspondentes ao seu banco de dados. Logo após, renomeie o arquivo para `.env`.
+- Dentro da pasta backend, abra o arquivo `example.env` e substitua seus valores pelas informações correspondentes ao seu banco de dados e ao e-mail que enviará a confirmação de conta. Logo após, renomeie o arquivo para `.env`.
 
 - Após as dependências terminarem de ser instaladas, execute `$ yarn dbCreate` ou `$ npm run dbCreate`. Isso irá executar a criação do banco, então, após seu término, execute `$ yarn dbMigrate` ou `$ npm run dbMigrate`, pelo qual serão executadas as migrations e as seeders necessárias para o banco de dados.
 

@@ -115,7 +115,7 @@ export default function DailyColab() {
 
       setDailyBoards(newBoards);
 
-      toast.info("Quadro deletado com sucesso");
+      toast.info("Quadro removido com sucesso");
     } catch (error) {
       toast.error("Ocorreu um erro inesperado");
     }

@@ -57,7 +57,7 @@ export default function TeamsLeader() {
     };
 
     if (history.location.state && history.location.state.delete) {
-      toast.info("Time deletado com sucesso.");
+      toast.info("Time removido com sucesso.");
     }
 
     fetchTeams();

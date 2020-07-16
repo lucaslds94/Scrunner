@@ -132,7 +132,7 @@ export default function TasksColab() {
 
       setTaskBoards(filteredBoards);
 
-      toast.success("Quadro deletado com sucesso.");
+      toast.success("Quadro removido com sucesso.");
     } catch (error) {
       toast.error("Algum erro interno ocorreu.");
     }
