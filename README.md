@@ -93,17 +93,31 @@ O Scrunner tem como objetivo incentivar e facilitar a utilização de metodologi
 <img  alt="Landing Page"  src=".github/landing.gif"  width="100%">
 </p>
 
+<br>
+
 <p  align="center">
 <img  alt="Time"  src=".github/time.gif"  width="100%">
 </p>
+
+<br>
 
 <p  align="center">
 <img  alt="Kanban"  src=".github/kanban.gif"  width="100%">
 </p>
 
+<br>
+
+<p  align="center">
+<img  alt="Burndown"  src=".github/burndown.gif"  width="100%">
+</p>
+
+<br>
+
 <p  align="center">
 <img  alt="Daily"  src=".github/daily.gif"  width="100%">
 </p>
+
+<br>
 
 ## 🤠 Getting Started
 
