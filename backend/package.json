@@ -13,7 +13,7 @@
     "posttest": "NODE_ENV=test sequelize db:migrate:undo:all"
   },
   "dependencies": {
-    "bcrypt": "^4.0.1",
+    "bcrypt": "^5.0.0",
     "celebrate": "^12.1.1",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
